@@ -81,7 +81,7 @@ h3{font-size:28px;margin:1.8em 0 .7em}h4{font-size:22px;margin:1.2em 0 .6em}h5,h
 button{font-size:var(--ui-size);padding:7px 12px;min-height:38px;word-break:keep-all;overflow-wrap:normal}
 .topbar{height:64px;padding:0 24px}.brand{gap:10px;letter-spacing:.04em}.brand-mark{width:46px;height:34px;font-size:17px}.brand-title{font-size:17px}.top-actions button{font-size:15px;padding:6px 10px;min-height:36px}
 .sidebar{display:block;left:max(20px,calc((100vw - 1520px)/2));top:88px;bottom:20px;width:224px;font-size:15px;padding-right:8px}
-.sidebar nav a{padding:7px 8px;gap:9px;line-height:1.6}.sidebar nav a span{font-size:13px;flex:0 0 20px}.sidebar .nav-label,.sidebar .sidebar-note{font-size:14px!important}.sidebar-note{margin:18px 8px;line-height:1.8}.search-box input,#search,#search-results{font-size:14px}.menu-button{display:none}
+.sidebar nav a{padding:7px 8px;gap:9px;line-height:1.6}.sidebar nav a span{font-size:13px;flex:0 0 20px}.toc-item{margin:0}.toc-item.current>a{color:var(--accent)}.toc-sub{list-style:none;display:none;margin:2px 0 10px 11px;padding:0 0 0 8px;border-left:1px solid var(--line)}.toc-item.open>.toc-sub{display:block}.toc-sub a{padding:4px 8px;font-size:.93em;line-height:1.5}.sidebar .nav-label,.sidebar .sidebar-note{font-size:14px!important}.sidebar-note{margin:18px 8px;line-height:1.8}.search-box input,#search,#search-results{font-size:14px}.menu-button{display:none}
 .page{margin-left:max(264px,calc((100vw - 1520px)/2 + 244px));max-width:1240px;padding:0 40px 0 24px}
 .hero{padding:46px 0 32px;max-width:1100px}.hero h1{font-size:clamp(38px,3.5vw,54px);line-height:1.22}.eyebrow{margin-bottom:16px}.hero-deck{font-size:22px;line-height:1.65;margin:20px 0 14px;max-width:880px}.hero-intro{max-width:880px}.hero-meta{font-size:14px;gap:8px 12px;margin-top:22px}.hero-meta span{padding:3px 9px}.read-actions{gap:10px;margin:20px 0}.action-link,.experiment-link{padding:7px 12px}.intro{margin-top:32px}.intro h2{font-size:27px;margin-bottom:18px}
 .provenance-key{display:flex;flex-wrap:wrap;gap:10px 22px;padding:12px 0 16px}.dot{width:9px;height:9px}.ref{padding:1px 6px;margin:2px 4px 2px 0}.wide-map{padding:24px;margin:36px 0 20px;max-width:1100px}.wide-map h2{font-size:26px}.dep-lane,.dep-lane.second{gap:12px}.lane-label,.dep-lane a,.dep-lane b,.dep-lane small,.dep-bridge{font-size:var(--ui-size)}.dep-lane a{padding:12px}.dep-lane b{margin:4px 0}.dep-bridge{margin:16px 0}.dependency{padding-top:20px}
@@ -1933,7 +1933,24 @@ window.COVERAGE=[{"source": "H", "slug": "home", "level": 1, "anchor": "design-a
                 dialog.close();
         } });
     }
+    /* Each directory row carries its own subsection list; only the chapter being read stays open. */
+    function buildTocTree() { const nav = $('#toc');
+        if (!nav)
+            return;
+        for (const a of [...nav.querySelectorAll(':scope > a')]) {
+            const target = $(a.getAttribute('href')), subs = target ? $$('h3[id]', target) : [], item = document.createElement('div');
+            item.className = 'toc-item';
+            a.before(item);
+            item.append(a);
+            if (subs.length) {
+                const list = document.createElement('ul');
+                list.className = 'toc-sub';
+                list.innerHTML = subs.map(h => `<li><a href="#${h.id}">${esc(h.textContent.trim())}</a></li>`).join('');
+                item.append(list);
+            }
+        } }
     function initReading() {
+        buildTocTree();
         const body = document.body, menu = $('#menu-toggle');
         menu.addEventListener('click', () => { const on = body.classList.toggle('menu-open'); menu.setAttribute('aria-expanded', String(on)); });
         $$('#toc a,.dependency a').forEach(a => a.addEventListener('click', () => { body.classList.remove('menu-open'); menu.setAttribute('aria-expanded', 'false'); }));
@@ -1949,10 +1966,12 @@ window.COVERAGE=[{"source": "H", "slug": "home", "level": 1, "anchor": "design-a
         const links = $$('#toc a'), sections = links.map(a => $(a.getAttribute('href')));
         let ticking = false;
         function progress() { ticking = false; const d = document.documentElement, ratio = scrollY / Math.max(1, d.scrollHeight - innerHeight); $('#reading-progress').style.width = Math.max(0, Math.min(100, 100 * ratio)) + '%'; let current = sections[0]; sections.forEach(s => { if (s && s.getBoundingClientRect().top < 180)
-            current = s; }); links.forEach(a => { const on = a.hash === '#' + current.id; a.classList.toggle('active', on); if (on)
-            a.setAttribute('aria-current', 'location');
-        else
-            a.removeAttribute('aria-current'); }); }
+            current = s; }); const active = links.find(a => a.hash === '#' + current.id) || links[0], item = active && active.closest('.toc-item');
+            links.forEach(a => { const on = a === active; a.classList.toggle('active', on); if (on)
+                a.setAttribute('aria-current', 'location');
+            else
+                a.removeAttribute('aria-current'); });
+            $$('.toc-item').forEach(i => { i.classList.toggle('current', i === item); i.classList.toggle('open', i === item); }); }
         addEventListener('scroll', () => { if (!ticking) {
             requestAnimationFrame(progress);
             ticking = true;

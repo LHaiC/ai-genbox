@@ -553,7 +553,24 @@
                 dialog.close();
         } });
     }
+    /* Each directory row carries its own subsection list; only the chapter being read stays open. */
+    function buildTocTree() { const nav = $('#toc');
+        if (!nav)
+            return;
+        for (const a of [...nav.querySelectorAll(':scope > a')]) {
+            const target = $(a.getAttribute('href')), subs = target ? $$('h3[id]', target) : [], item = document.createElement('div');
+            item.className = 'toc-item';
+            a.before(item);
+            item.append(a);
+            if (subs.length) {
+                const list = document.createElement('ul');
+                list.className = 'toc-sub';
+                list.innerHTML = subs.map(h => `<li><a href="#${h.id}">${esc(h.textContent.trim())}</a></li>`).join('');
+                item.append(list);
+            }
+        } }
     function initReading() {
+        buildTocTree();
         const body = document.body, menu = $('#menu-toggle');
         menu.addEventListener('click', () => { const on = body.classList.toggle('menu-open'); menu.setAttribute('aria-expanded', String(on)); });
         $$('#toc a,.dependency a').forEach(a => a.addEventListener('click', () => { body.classList.remove('menu-open'); menu.setAttribute('aria-expanded', 'false'); }));
@@ -569,10 +586,12 @@
         const links = $$('#toc a'), sections = links.map(a => $(a.getAttribute('href')));
         let ticking = false;
         function progress() { ticking = false; const d = document.documentElement, ratio = scrollY / Math.max(1, d.scrollHeight - innerHeight); $('#reading-progress').style.width = Math.max(0, Math.min(100, 100 * ratio)) + '%'; let current = sections[0]; sections.forEach(s => { if (s && s.getBoundingClientRect().top < 180)
-            current = s; }); links.forEach(a => { const on = a.hash === '#' + current.id; a.classList.toggle('active', on); if (on)
-            a.setAttribute('aria-current', 'location');
-        else
-            a.removeAttribute('aria-current'); }); }
+            current = s; }); const active = links.find(a => a.hash === '#' + current.id) || links[0], item = active && active.closest('.toc-item');
+            links.forEach(a => { const on = a === active; a.classList.toggle('active', on); if (on)
+                a.setAttribute('aria-current', 'location');
+            else
+                a.removeAttribute('aria-current'); });
+            $$('.toc-item').forEach(i => { i.classList.toggle('current', i === item); i.classList.toggle('open', i === item); }); }
         addEventListener('scroll', () => { if (!ticking) {
             requestAnimationFrame(progress);
             ticking = true;
