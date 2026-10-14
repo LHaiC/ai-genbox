@@ -3,6 +3,7 @@ from pathlib import Path
 import json,hashlib,html,base64
 from datetime import datetime,timezone
 R=Path(__file__).resolve().parents[1];D=R/'reports';esc=html.escape
+D.mkdir(parents=True,exist_ok=True)
 files=[('数学与算法回归','math-results.json'),('新增图解与Quiz核验','intuition-results.json'),('浏览器交互回归','browser-results.json'),('大字/动画/Quiz浏览器验收','revision-browser-results.json'),('原始出处与覆盖审计','source-results.json')]
 reports=[(title,json.loads((D/file).read_text(encoding='utf-8'))) for title,file in files]
 fingerprint=hashlib.sha256((R/'EDA_交互讲义.html').read_bytes()).hexdigest()

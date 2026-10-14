@@ -43,7 +43,7 @@ with sync_playwright() as pw:
  def slider(id,value):page.locator('#'+id).evaluate('(e,v)=>{e.value=v;e.dispatchEvent(new Event("input",{bubbles:true}));}',str(value))
  def click(sel):page.locator(sel).click()
  def snapshot(name,selector=None):
-  file='screenshots/'+name+'.png';(ROOT/'reports/screenshots').mkdir(exist_ok=True)
+  file='screenshots/'+name+'.png';(ROOT/'reports/screenshots').mkdir(parents=True,exist_ok=True)
   if selector:
    page.locator(selector).evaluate('(e)=>e.scrollIntoView({block:"start",behavior:"instant"})');page.evaluate('scrollBy(0,-85)')
   else:page.evaluate('scrollTo(0,0)')
