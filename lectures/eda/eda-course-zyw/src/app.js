@@ -38,8 +38,34 @@
         }
         frag.append(document.createTextNode(text.slice(last)));
         n.replaceWith(frag);
-    } }
+    } scheduleMathAlign(); }
     window.renderCourseMath = renderMath;
+    /* Inline math keeps visible overflow so its baseline is the text baseline. Formulas wider than their
+       column need a scroll container, whose baseline is its bottom edge, so those get that lift measured
+       back out. Runs after rendering, resizing and font-size changes. */
+    function alignWideMath(root = document) { for (const s of root.querySelectorAll('.inline-math-wrap,span[data-math]:not(.equation)')) {
+        if (s.scrollWidth <= s.clientWidth + 1) {
+            if (s.classList.contains('math-wide')) {
+                s.classList.remove('math-wide');
+                s.style.verticalAlign = '';
+            }
+            continue;
+        }
+        s.classList.add('math-wide');
+        const katex = s.querySelector('.katex');
+        if (!katex)
+            continue;
+        const probe = document.createElement('span');
+        probe.style.cssText = 'display:inline-block;width:0;height:0;vertical-align:baseline';
+        katex.after(probe);
+        const drop = s.getBoundingClientRect().bottom - probe.getBoundingClientRect().bottom;
+        probe.remove();
+        s.style.verticalAlign = `${-drop.toFixed(2)}px`;
+    } }
+    var mathFrame = 0;
+    function scheduleMathAlign() { cancelAnimationFrame(mathFrame);
+        mathFrame = requestAnimationFrame(() => alignWideMath()); }
+    addEventListener('resize', scheduleMathAlign, { passive: true });
     function svg(inner, w = 520, h = 320, title = '计算可视化') { return `<div class="diagram-scroll" tabindex="0" role="region" aria-label="${esc(title)}；窄屏可横向移动"><svg style="width:${w+64}px;min-width:${w+64}px" viewBox="-32 -32 ${w+64} ${h+64}" role="img" aria-label="${esc(title)}"><title>${esc(title)}</title>${inner}</svg></div>`; }
     function line(x1, y1, x2, y2, cls = 'edge', extra = '') { return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" class="${cls}" ${extra}/>`; }
     function circle(x, y, r = 17, cls = 'point', extra = '') { return `<circle cx="${x}" cy="${y}" r="${r}" class="${cls}" ${extra}/>`; }
@@ -535,7 +561,7 @@
         function pref() {}
         function getPref() { return null; }
         function setTheme(on) { body.classList.toggle('dark', on); theme.setAttribute('aria-pressed', String(on)); theme.textContent = on ? '日读' : '夜读'; pref('theme', String(on)); }
-        function setFont(on) { body.classList.toggle('large-type', on); font.setAttribute('aria-pressed', String(on)); font.textContent=on?'标准字号':'放大字号'; pref('font', String(on)); }
+        function setFont(on) { body.classList.toggle('large-type', on); font.setAttribute('aria-pressed', String(on)); font.textContent=on?'标准字号':'放大字号'; pref('font', String(on)); scheduleMathAlign(); }
         theme.addEventListener('click', () => setTheme(!body.classList.contains('dark')));
         font.addEventListener('click', () => setFont(!body.classList.contains('large-type')));
         setTheme(getPref('theme') === 'true');

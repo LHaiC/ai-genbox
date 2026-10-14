@@ -58,10 +58,13 @@ h3{font-size:34px;margin:2.3em 0 1em}h4{font-size:28px;margin:1.4em 0 .6em}.lab 
 /* Preserve intrinsic diagram/table width without growing prose grid tracks. */
 .lab-split,.lab-split.two,.lab-split.three{grid-template-columns:minmax(0,1fr)!important}
 .lab-split>*,.lab-display>*,.bool-display>*,.lab-ui>*{min-width:0;max-width:100%}
-span[data-math]:not(.equation){display:inline-block;max-width:100%;overflow-x:auto;overflow-y:hidden;vertical-align:middle;padding:4px 0}
+span[data-math]:not(.equation){display:inline-block;max-width:100%;vertical-align:baseline;padding:0}
 span[data-math] .katex{white-space:nowrap}
 
-.inline-math-wrap{display:inline-block;max-width:100%;overflow-x:auto;overflow-y:hidden;vertical-align:middle;padding:4px 0}
+/* A non-visible overflow makes an inline-block's baseline its bottom margin edge, which lifts every
+   formula by the line's descent; inline math keeps visible overflow so it sits on the text baseline. */
+.inline-math-wrap{display:inline-block;max-width:100%;vertical-align:baseline;padding:0}
+.inline-math-wrap.math-wide,span[data-math].math-wide{overflow-x:auto;overflow-y:hidden}
 .display-math-wrap{display:block;max-width:100%;overflow-x:auto;padding:6px 0}
 
 h5,h6,.source-body h5,.source-body h6{font-size:var(--ui-size,22px);line-height:1.6;margin:1.5em 0 .6em}
@@ -86,7 +89,7 @@ button{font-size:var(--ui-size);padding:7px 12px;min-height:38px;word-break:keep
 .lab{max-width:1160px;margin:28px 0 38px}.lab figcaption{padding:20px 24px 16px}.lab figcaption>span{font-size:14px}.lab figcaption h4{font-size:24px}.lab figcaption p{margin-top:8px}.lab-ui{padding:22px 24px}.lab-split{gap:18px}.controls{gap:16px 22px;margin-bottom:18px}.control{min-width:180px;flex:1 1 180px}.control.compact{min-width:140px;flex:1 1 140px}.control label{gap:6px;align-items:baseline}.control select{min-height:42px}.control input[type=range]{height:28px}.control input[type=number],.control input[type=text]{font-size:var(--ui-size)}.check-control input{width:20px;height:20px}.stepper{gap:8px;margin-top:16px;padding-top:12px}.stepper button{padding:7px 12px}.stepper .counter{padding:6px}.metrics{gap:12px}.metrics.three{grid-template-columns:repeat(3,minmax(0,1fr))}.metric{padding:14px}.metric b,.metrics.three .metric b{font-size:24px;letter-spacing:0;overflow-wrap:normal;word-break:normal}.lab-note{margin-top:16px}.status{overflow-wrap:normal}
 .viz{padding:14px}.diagram-scroll{padding:10px 0}.diagram-hint{font-size:14px}.viz svg text,svg text,svg .label,svg .small-label{font-size:22px!important}/* SVG coordinates and labels remain at their authored scale. */
 table{font-size:var(--ui-size);min-width:0;line-height:1.65}th,td,.lab th,.lab td{padding:9px 12px}.table-scroll{margin:20px 0}.min-table table{min-width:520px}.pipeline-chart table{min-width:760px}.source-body table,.formula-walk table{min-width:520px}.thread{padding:16px}.thread li{padding:7px 10px;overflow-wrap:normal}.thread code,.pipeline-stage span{overflow-wrap:normal;word-break:normal}.pipeline-stages{min-width:650px;gap:10px}.pipeline-stage{padding:12px 8px}.registers span{min-width:76px;padding:9px}.cache-line{padding:10px;min-width:110px}.address-fields{gap:10px}.maze-cell{min-height:48px;font-size:18px}.maze-cell small{font-size:16px!important}.time-strip{height:40px}
-.equation{padding:16px 18px;font-size:20px!important;line-height:1.65;margin:20px 0}.equation math{font-size:20px}.katex math :is(msub,msup,msubsup,munder,mover,munderover)>:not(:first-child),.katex math mfrac>*{font-size:inherit!important;math-depth:auto}.large-type .equation,.large-type .equation math{font-size:24px!important}.large-type .katex math :is(msub,msup,msubsup)>:not(:first-child),.large-type .katex math mfrac>*{font-size:inherit!important}.inline-math-wrap,span[data-math]:not(.equation){padding:0;vertical-align:baseline}.display-math-wrap{padding:3px 0}
+.equation{padding:16px 18px;font-size:20px!important;line-height:1.65;margin:20px 0}.equation math{font-size:20px}.katex math :is(msub,msup,msubsup,munder,mover,munderover)>:not(:first-child),.katex math mfrac>*{font-size:inherit!important;math-depth:auto}.large-type .equation,.large-type .equation math{font-size:24px!important}.large-type .katex math :is(msub,msup,msubsup)>:not(:first-child),.large-type .katex math mfrac>*{font-size:inherit!important}.display-math-wrap{padding:3px 0}
 code{overflow-wrap:normal;word-break:normal}pre{font-size:var(--ui-size)}.code-block{padding:16px 18px}.formula-walk{padding:22px 0 6px;margin:40px 0}.formula-walk h4{margin-top:24px}.quiz-bank{margin:44px 0}.quiz-card{padding:24px;margin:20px 0 30px;scroll-margin-top:82px}.quiz-label{font-size:14px;margin-bottom:14px}.quiz-question{font-size:20px;line-height:1.8}.quiz-source{font-size:var(--ui-size);padding:14px 0;gap:12px}.quiz-takeaway{font-size:22px;margin-bottom:16px}.quiz-answer{padding-top:20px}.quiz-index-card,.formula-index-group,.coverage-group{padding:20px;margin:18px 0}.index-links,.formula-entry .fragment-number{font-size:var(--ui-size)}.formula-index-group summary,.coverage-group summary{font-size:20px}.index-entry{padding:12px 0}
 .scene-toolbar,.autoplay-toolbar{padding:14px 22px;gap:10px}.autoplay-toolbar label,.autoplay-toolbar select,.autoplay-status,.scene-chip{font-size:var(--ui-size)}.autoplay-toolbar select{min-height:38px}.intuition-guide{padding:18px;margin-bottom:20px}.intuition-guide h5,.intuition-guide p,.scene-message{font-size:var(--body-size)}.scene-message{padding:16px}.guide-tabs{gap:8px;margin-bottom:12px}.scene-chip{padding:8px 12px}.source-card{padding:20px}.source-card h4{font-size:22px}.source-card details{font-size:var(--body-size)}.source-body{font-size:var(--body-size);padding:24px;line-height:1.8}.source-url{font-size:var(--ui-size)}.source-body h1{font-size:32px}.source-body h2{font-size:28px}.source-body h3{font-size:24px}.dialog-head{padding:18px 24px}.dialog-head h2{font-size:24px}.dialog-head p,.dialog-head button{font-size:var(--ui-size)}.colophon,.colophon p{font-size:var(--ui-size)}.colophon{margin:40px 0;padding:24px 0}
 /* Only URLs, hashes and unbroken user-entered tokens may break inside a word. */
@@ -1412,8 +1415,34 @@ window.COVERAGE=[{"source": "H", "slug": "home", "level": 1, "anchor": "design-a
         }
         frag.append(document.createTextNode(text.slice(last)));
         n.replaceWith(frag);
-    } }
+    } scheduleMathAlign(); }
     window.renderCourseMath = renderMath;
+    /* Inline math keeps visible overflow so its baseline is the text baseline. Formulas wider than their
+       column need a scroll container, whose baseline is its bottom edge, so those get that lift measured
+       back out. Runs after rendering, resizing and font-size changes. */
+    function alignWideMath(root = document) { for (const s of root.querySelectorAll('.inline-math-wrap,span[data-math]:not(.equation)')) {
+        if (s.scrollWidth <= s.clientWidth + 1) {
+            if (s.classList.contains('math-wide')) {
+                s.classList.remove('math-wide');
+                s.style.verticalAlign = '';
+            }
+            continue;
+        }
+        s.classList.add('math-wide');
+        const katex = s.querySelector('.katex');
+        if (!katex)
+            continue;
+        const probe = document.createElement('span');
+        probe.style.cssText = 'display:inline-block;width:0;height:0;vertical-align:baseline';
+        katex.after(probe);
+        const drop = s.getBoundingClientRect().bottom - probe.getBoundingClientRect().bottom;
+        probe.remove();
+        s.style.verticalAlign = `${-drop.toFixed(2)}px`;
+    } }
+    var mathFrame = 0;
+    function scheduleMathAlign() { cancelAnimationFrame(mathFrame);
+        mathFrame = requestAnimationFrame(() => alignWideMath()); }
+    addEventListener('resize', scheduleMathAlign, { passive: true });
     function svg(inner, w = 520, h = 320, title = '计算可视化') { return `<div class="diagram-scroll" tabindex="0" role="region" aria-label="${esc(title)}；窄屏可横向移动"><svg style="width:${w+64}px;min-width:${w+64}px" viewBox="-32 -32 ${w+64} ${h+64}" role="img" aria-label="${esc(title)}"><title>${esc(title)}</title>${inner}</svg></div>`; }
     function line(x1, y1, x2, y2, cls = 'edge', extra = '') { return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" class="${cls}" ${extra}/>`; }
     function circle(x, y, r = 17, cls = 'point', extra = '') { return `<circle cx="${x}" cy="${y}" r="${r}" class="${cls}" ${extra}/>`; }
@@ -1909,7 +1938,7 @@ window.COVERAGE=[{"source": "H", "slug": "home", "level": 1, "anchor": "design-a
         function pref() {}
         function getPref() { return null; }
         function setTheme(on) { body.classList.toggle('dark', on); theme.setAttribute('aria-pressed', String(on)); theme.textContent = on ? '日读' : '夜读'; pref('theme', String(on)); }
-        function setFont(on) { body.classList.toggle('large-type', on); font.setAttribute('aria-pressed', String(on)); font.textContent=on?'标准字号':'放大字号'; pref('font', String(on)); }
+        function setFont(on) { body.classList.toggle('large-type', on); font.setAttribute('aria-pressed', String(on)); font.textContent=on?'标准字号':'放大字号'; pref('font', String(on)); scheduleMathAlign(); }
         theme.addEventListener('click', () => setTheme(!body.classList.contains('dark')));
         font.addEventListener('click', () => setFont(!body.classList.contains('large-type')));
         setTheme(getPref('theme') === 'true');
