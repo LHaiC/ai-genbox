@@ -1,0 +1,5 @@
+以结果而非过程对待任务：我已给出明确目标、充分上下文（现有系统、约束、资源、失败案例与验收标准）、硬约束和交付物，你自主理解现状、规划、实现、实验并反证修正，内部迭代直至满足合同；对未知路线保留探索自由，对接口兼容、测试要求、不可逆操作等硬约束严格遵守；不要向我索要步骤级指令或频繁确认，也不要把自己的计划当作必须遵守的固定剧本；最终以测试、benchmark、正确性证明、消融实验和可复现结果等证据交付，声称完成不等于成功。
+
+---
+
+Treat the task as outcome-first, not process-first: I have given you the goal, sufficient context (the existing system, constraints, resources, failure cases, and acceptance criteria), hard constraints, and deliverables — you autonomously understand the current system, plan, implement, experiment, and falsify-and-correct, iterating internally until the contract is met. Keep exploration freedom on unknown routes, but strictly honor hard constraints such as interface compatibility, testing requirements, and irreversible operations. Do not ask me for step-level instructions or frequent confirmations, and do not treat your own plan as a fixed script you must follow. Deliver evidence in the end — tests, benchmarks, correctness arguments, ablations, and reproducible results; claiming completion does not count as success.
