@@ -1,0 +1,76 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>计算机体系结构</title><link rel="canonical" href="https://eda.youwei.xyz/lectures/computer-architecture/"><style>body{font:24px/1.9 system-ui,sans-serif;max-width:1100px;margin:40px auto;padding:24px;color:#20332f;background:#f7f7f2}h5,h6,small,code,pre,td{font-size:22px}pre{overflow:auto}img{max-width:100%}a{overflow-wrap:anywhere}</style><body><a href="https://eda.youwei.xyz/lectures/computer-architecture/">原始出处</a>
+<h1 data-block="C-001">Computer Architecture</h1>
+<h2 id="_1">性能公式</h2>
+<ul data-block="C-003">
+<li>CPU 时间 (CPU Time) = 指令数 (Instruction Count) × 指令平均周期数（CPI，Cycle Per Instruction）× 时钟周期 (Clock Cycle)</li>
+</ul>
+<p data-block="C-004">下面表格用「有/无」标出不同层次是否会影响性能公式中的三项，并给出一个直观例子：</p>
+<table data-block="C-005">
+<thead>
+<tr>
+<th>层次</th>
+<th>指令数</th>
+<th>CPI</th>
+<th>时钟周期</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>算法 (Algorithms)</td>
+<td>有</td>
+<td>有</td>
+<td>无</td>
+<td>冒泡 vs 快排：指令数差很多；顺序 vs 随机访问：cache miss 多，CPI 更高</td>
+</tr>
+<tr>
+<td>编程语言 (Programming Language)</td>
+<td>有</td>
+<td>有</td>
+<td>无</td>
+<td>Python/Java vs C：运行时/抽象开销带来更多指令；GC/动态派发/边界检查增加停顿</td>
+</tr>
+<tr>
+<td>编译器 (Compiler)</td>
+<td>有</td>
+<td>有</td>
+<td>无</td>
+<td><code>-O0</code> vs <code>-O3</code>：优化减少指令并降低停顿；但编译器不能改变硬件频率/周期</td>
+</tr>
+<tr>
+<td>指令集 ISA (ISA)</td>
+<td>有</td>
+<td>有</td>
+<td>有</td>
+<td>SIMD/FMA 让同样工作更少指令；可变长/复杂解码可能拉长关键路径限制最高频率</td>
+</tr>
+<tr>
+<td>处理器组织/微架构 (Processor Organization)</td>
+<td>无</td>
+<td>有</td>
+<td>有</td>
+<td>乱序/预测/缓存影响停顿→CPI；流水线级数/关键路径决定频率→周期</td>
+</tr>
+<tr>
+<td>器件与工艺 (Device &amp; Technology)</td>
+<td>无</td>
+<td>有</td>
+<td>有</td>
+<td>更先进工艺可提高频率→周期更小；更慢的存储器/互连会让访存停顿（以周期计）更大</td>
+</tr>
+</tbody>
+</table>
+<h3 id="quiz">Quiz</h3>
+<ol data-block="C-007">
+<li>xxx 是否会影响 xxx？为什么？举例说明。</li>
+</ol>
+<h2 id="cpu">流水线 CPU</h2>
+<p data-block="C-009">请参考 ppt。</p>
+<h3 id="quiz_1">Quiz</h3>
+<ol data-block="C-011">
+<li>什么是结构冒险 (Structural Hazard)？</li>
+<li>什么是数据冒险 (Data Hazard)？</li>
+<li>什么是控制冒险 (Control Hazard)？</li>
+<li>单周期 CPU 和 多周期 CPU 哪个 CPI 更高？为什么？</li>
+</ol>
+</body></html>

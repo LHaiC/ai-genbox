@@ -1,0 +1,22 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>存储器体系结构</title><link rel="canonical" href="https://eda.youwei.xyz/lectures/memory-architecture/"><style>body{font:24px/1.9 system-ui,sans-serif;max-width:1100px;margin:40px auto;padding:24px;color:#20332f;background:#f7f7f2}h5,h6,small,code,pre,td{font-size:22px}pre{overflow:auto}img{max-width:100%}a{overflow-wrap:anywhere}</style><body><a href="https://eda.youwei.xyz/lectures/memory-architecture/">原始出处</a>
+<h1 data-block="M-001">Memory Architecture</h1>
+<h2 id="_1">存储器层次结构</h2>
+<p data-block="M-003">L1 - L2 - L3 - 主存 (DRAM) - 二级存储</p>
+<h3 id="quiz">Quiz</h3>
+<ol data-block="M-005">
+<li>什么是 memory wall？</li>
+<li>为什么要设计存储器层次结构？</li>
+<li>什么是 locality？有哪些类型的 locality？</li>
+</ol>
+<h2 id="cache">Cache</h2>
+<ul data-block="M-007">
+<li>Cache Hit</li>
+<li>Cache Miss</li>
+<li>CPU 时间 = 指令数 (Instruction Count, IC) × （CPI_ideal + Memory-stall cycles) × 时钟周期</li>
+<li>Memory-stall cycles = Memory_Access per Instruction × Miss Rate × Miss Penalty</li>
+</ul>
+<h3 id="quiz_1">Quiz</h3>
+<ol data-block="M-009">
+<li>熟练掌握上述公式，并理解各个参数的含义。</li>
+</ol>
+</body></html>

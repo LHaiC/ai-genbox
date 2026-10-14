@@ -1,0 +1,124 @@
+Logic Synthesis
+逻辑综合
+RTL
+=> Technology-Independent Synthesis
+=> Technology Mapping
+=> netlist
+两级逻辑化简
+SOP (Sum of Products)：第一层为多个与门，第二层为一个或门。
+POS (Product of Sums)：第一层为多个或门，第二层为一个与门。
+优化目标：最小化变量出现的次数（literal count）。
+化简方法：精确方法（如 QM）和启发式方法（如 ESPRESSO）。
+Caution
+随着输入增加，表达式呈指数级增长，不适合大规模设计。
+Quiz
+判断下列布尔函数是 SOP 还是 POS 形式，并计算 literal count：
+\(F(a,b,c) = ab + \overline{a}c + bc\)
+\(F(a,b,c) = (a + b)(\overline{a} + c)\)
+多级逻辑化简
+Technology-Independent Synthesis
+目标：将 RTL 转换为技术无关的逻辑网络。
+布尔逻辑网络 (Boolean Logic Network)：节点为两级逻辑 (SOP 形式) 的图。
+优化目标：最小化变量出现的次数（literal count，与面积相关）。
+化简方法：
+化简节点内部逻辑函数 (两级逻辑化简)
+删除节点：把小的节点和后续节点合并。
+增加节点：提取公因式，把大的节点分解成更小的节点。
+Technology mapping
+目标：将技术无关的逻辑网络映射为技术相关的网表。
+工艺库（technology library）：包含各种门的集合，每个门有其功能和成本（cost）。
+网表（netlist）：节点为工艺库中的门的图。
+优化目标：最小化总成本（total cost，比如面积，延迟等）。
+Quiz
+上面的例子中，假设 AND2，OR2，OA21 的 cost 分别为 3，3，4，两种 mapping 的总 cost 分别是多少？
+算法
+将工艺库中的门转换为 NAND 和 NOT 门组成的网络（pattern）。
+将逻辑网络中的 SOP 节点转换为 NAND 和 NOT 门组成的网络（subject）。
+使用 pattern matching 算法。
+为什么使用 Tree Covering？
+DAG covering：对 DGA 进行最优的匹配无法高效解决（NP-hard 问题）。
+Tree covering：可以用动态规划解决。可以将 DAG 分解为多棵树，然后对每棵树进行匹配。
+例子
+Pattern Tree
+NOT
+o
+    |
+    □
+NAND
+•
+   / \
+  □   □
+AND
+o
+    |
+    •
+   / \
+  □   □
+NOR
+o
+    |
+    •
+   / \
+  •   •
+  |   |
+  □   □
+OR2
+o
+   / \
+  •   •
+  |   |
+  □   □
+AOI21
+•
+        |
+        o
+    / \
+    o   •
+    |   |
+    □   □
+•
+        |
+        o
+    / \
+    •  o
+    |  |
+    □  □
+Important
+不对称的模式（如 AIO21）需要尝试旋转匹配所有可能。
+AOI22
+•
+    |
+    o
+   / \
+  o   o
+  |   |
+  □   □
+Subject Tree
+z
+         |
+         •
+         | t
+         o
+    r  /   \ s
+      o     •
+   p / \ q  |
+    •   o   d
+    |  / \
+    a  b  c
+Matching
+Match(z) = {NOT, AND2, AOI21}
+Match(z, NOT) = Match(t)
+Match(z, AND2) = {Match(r), Match(s)}
+Match(z, AOI21) = {Match(p), Match(q)}
+Cost(z)
+    = min(
+        Cost(z, NOT) + Cost(NOT),
+        Cost(z, AND2) + Cost(AND2),
+        Cost(z, AOI21) + Cost(AOI21))
+    = min(
+        Cost(t) + Cost(NOT),
+        Cost(r) + Cost(s) + Cost(AND2),
+        Cost(p) + Cost(q) + Cost(AOI21))
+Quiz
+如果交换上面 subject tree 中节点 r 和 s 的位置，Cost(z) 会改变吗？为什么？
+假设工艺库中只有 NOT 和 AND2 两种门，计算上面 subject tree 的最小成本。

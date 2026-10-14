@@ -1,0 +1,100 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>并行与互斥</title><link rel="canonical" href="https://eda.youwei.xyz/lectures/mutual-exclusion/"><style>body{font:24px/1.9 system-ui,sans-serif;max-width:1100px;margin:40px auto;padding:24px;color:#20332f;background:#f7f7f2}h5,h6,small,code,pre,td{font-size:22px}pre{overflow:auto}img{max-width:100%}a{overflow-wrap:anywhere}</style><body><a href="https://eda.youwei.xyz/lectures/mutual-exclusion/">原始出处</a>
+<h1 data-block="X-001">Mutual Exclusion</h1>
+<h2 id="_1">阿姆达尔定律</h2>
+<ul data-block="X-003">
+<li>阿姆达尔定律（Amdahl's Law）：并行系统的加速比受限于其串行部分。</li>
+<li>公式： <span class="arithmatex">\(S = \frac{1}{(1 - P) + \frac{P}{N}}\)</span><ul>
+<li><span class="arithmatex">\(S\)</span>：加速比</li>
+<li><span class="arithmatex">\(P\)</span>：可并行化的程序部分比例</li>
+<li><span class="arithmatex">\(N\)</span>：处理器数量</li>
+</ul>
+</li>
+<li>公式理解：当 <span class="arithmatex">\(N\)</span> 趋近于无穷大时，最大加速比为 <span class="arithmatex">\(\frac{1}{1 - P}\)</span>。</li>
+</ul>
+<h3 id="quiz">Quiz</h3>
+<p data-block="X-005">假设你的程序中 90% 的部分可以完美并行化。</p>
+<ol data-block="X-006">
+<li>使用 10 个处理器时，理论上的最大加速比是多少？</li>
+<li>如果你想达到 5 倍的加速比，至少需要多少个处理器？</li>
+<li>如果并行部分也有 10% 的额外同步开销，公式会如何变化？</li>
+</ol>
+<h2 id="_2">互斥</h2>
+<h3 id="_3">概念</h3>
+<ul data-block="X-009">
+<li>条件竞争（race condition）：多个线程同时访问共享资源，导致结果不可预测。</li>
+<li>互斥（mutual exclusion）：多个线程在同一时间只能有一个访问共享资源。</li>
+<li>临界区（critical section）：访问共享资源的代码片段。</li>
+<li>死锁（deadlock）：多个线程互相等待对方释放资源。</li>
+<li>饥饿（starvation）：某个线程长时间无法获得资源。</li>
+</ul>
+<h3 id="_4">互斥的三个属性</h3>
+<ul data-block="X-011">
+<li><strong>Safety</strong><ul>
+<li>定义：任一时刻，只有一个线程可以进入临界区。</li>
+<li>本质：坏事永远不发生。</li>
+</ul>
+</li>
+<li><strong>Liveness</strong> (Deadlock-free)<ul>
+<li>定义：如果有线程想进入临界区，最终总有一个线程能进入。</li>
+<li>本质：好事总会发生。</li>
+</ul>
+</li>
+<li><strong>Fairness</strong> (Starvation-free)<ul>
+<li>定义：如果有线程想进入临界区，这个线程最终一定能进入。</li>
+<li>说明：无饥饿 ⇒ 无死锁；反之不成立。</li>
+</ul>
+</li>
+</ul>
+<h3 id="quiz_1">Quiz</h3>
+<p data-block="X-013">有 5 位哲学家，他们的一生都在思考和吃饭中度过。他们围坐在一张圆桌旁，桌子中间有一大盘米饭。然而，桌上只有 5 根筷子，摆放在每位哲学家之间。哲学家平时在思考。当一位哲学家饿了时，他会坐下来，试图拿起离他最近的两根筷子（左手一根，右手一根）。只有当他同时拿到两根筷子时，才能开始吃饭。吃完后，他放下筷子，继续思考。</p>
+<ol data-block="X-014">
+<li>请说明这个问题中存在哪些共享资源和临界区。</li>
+<li>如果每位哲学家都先拿起左手边的筷子，会发生什么情况？这是否满足互斥的三个属性？</li>
+<li>思考：如何设计一个解决哲学家就餐问题的算法，以避免死锁和饥饿？</li>
+</ol>
+<h2 id="_5">双线程互斥算法</h2>
+<p data-block="X-016">我们假设线程 ID 为 0 和 1。当前线程为 i，对方为 j = 1-i。</p>
+<h3 id="lockone">LockOne</h3>
+<p data-block="X-018"><div class="highlight"><pre><span></span><code><span class="c1">// Thread i's code</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">lock</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">flag</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w">       </span><span class="c1">// 举手 (I'm interested)</span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">flag</span><span class="o">[</span><span class="n">j</span><span class="o">]</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w">    </span><span class="c1">// 等待 (Wait if the other is interested)</span>
+<span class="p">}</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">unlock</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">flag</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w">      </span><span class="c1">// 放下手</span>
+<span class="p">}</span>
+</code></pre></div>
+缺陷：满足 Safety，但不满足 Liveness 和 Fairness。如果两人同时举手，都在等对方放下，导致死锁。</p>
+<h3 id="locktwo">LockTwo</h3>
+<p data-block="X-020"><div class="highlight"><pre><span></span><code><span class="c1">// Thread i's code</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">lock</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">victim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w">           </span><span class="c1">// 谦让 (I'll wait)</span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">victim</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">i</span><span class="p">){}</span><span class="w"> </span><span class="c1">// 等待 (Wait if the other is the victim)</span>
+<span class="p">}</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">unlock</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// 什么都不做</span>
+<span class="p">}</span>
+</code></pre></div>
+缺陷：满足 Safety，但不满足 Liveness 和 Fairness。如果只有一个线程，它会自己把自己锁住，等待一个不存在的线程来修改 victim，导致死锁。</p>
+<h3 id="petersons-algorithm">Peterson's Algorithm</h3>
+<div class="highlight" data-block="X-022"><pre><span></span><code><span class="c1">// Thread i's code</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">lock</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">flag</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w">       </span><span class="c1">// Step 1: 举手 (I'm interested)</span>
+<span class="w">  </span><span class="n">victim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w">           </span><span class="c1">// Step 2: 谦让 (I'll wait if necessary)</span>
+
+<span class="w">  </span><span class="c1">// 只有当两个条件同时满足时，我才等待：</span>
+<span class="w">  </span><span class="c1">// 1. flag[j] == true: 对方也想进</span>
+<span class="w">  </span><span class="c1">// 2. victim == i:     我是那个最后进门导致冲突的“倒霉蛋”</span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">flag</span><span class="o">[</span><span class="n">j</span><span class="o">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">victim</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{};</span>
+<span class="p">}</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">unlock</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">flag</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w">      </span><span class="c1">// 放下手</span>
+<span class="p">}</span>
+</code></pre></div>
+<p data-block="X-023">证明：反证法。如果 A 进去了，说明要么 flag[B] 是 false（B 不感兴趣），要么 victim 是 B（B 后让步了）。</p>
+<h3 id="quiz_2">Quiz</h3>
+<ol data-block="X-025">
+<li>在 LockOne 算法中，如果我们将 <code>flag[i] = true</code> 移到 <code>while</code> 循环之后，会违反什么属性？</li>
+<li>如果两个线程几乎同时执行 Peterson 算法的 <code>lock()</code>，谁会进入临界区？</li>
+</ol>
+</body></html>

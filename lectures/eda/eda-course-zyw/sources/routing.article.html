@@ -1,0 +1,121 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>布线</title><link rel="canonical" href="https://eda.youwei.xyz/lectures/routing/"><style>body{font:24px/1.9 system-ui,sans-serif;max-width:1100px;margin:40px auto;padding:24px;color:#20332f;background:#f7f7f2}h5,h6,small,code,pre,td{font-size:22px}pre{overflow:auto}img{max-width:100%}a{overflow-wrap:anywhere}</style><body><a href="https://eda.youwei.xyz/lectures/routing/">原始出处</a>
+<h1 data-block="R-001">Routing</h1>
+<h2 id="_1">布线</h2>
+<ul data-block="R-003">
+<li>布线 (Routing)：在布局完成后，为网表中的组件确定之间的连线。</li>
+<li>输入：布局结果，网表，引脚位置，障碍物，时序约束等。</li>
+<li>输出：连线路径。</li>
+<li>目标：<ul>
+<li>最小化总线长，过孔数（vias）等。</li>
+<li>满足时序和设计规则。</li>
+</ul>
+</li>
+</ul>
+<h2 id="steiner">Steiner 树</h2>
+<ul data-block="R-005">
+<li>Steiner 树：允许添加额外节点（Steiner 点）接所有节点的树。</li>
+<li>Rectilinear Steiner 树：仅允许水平和垂直边。</li>
+<li>最小 Steneiner 树问题是 NP 难问题。</li>
+</ul>
+<h2 id="flute">FLUTE 算法</h2>
+<ul data-block="R-007">
+<li>核心思想：利用预计算的查找表，将大规模问题分解为 7 个节点以内的小问题。</li>
+<li>Hannan 网格：通过所有节点的水平和垂直线段构成的网格。</li>
+<li>线长向量（WV）：线长可以被表示为网格中线段的线性组合。每个 WV 对应了一种 Steiner 树结构。</li>
+<li>潜在最优线长向量（POWV）：为了找到最优线长，可以枚举所有可能的线长向量。但是，大多数 WV 不是最优的。</li>
+<li>算法步骤：<ol>
+<li>将大规模问题分解为多个 7 个节点以内的小问题。</li>
+<li>对每个小问题，根据节点间的相对位置关系，使用查找表找到对应的 POWV 集合。</li>
+<li>计算每个 POWV 的实际线长，选择最小的。</li>
+</ol>
+</li>
+</ul>
+<div class="admonition note" data-block="R-008">
+<p class="admonition-title">Note</p>
+<p>FLUTE 不关心具体坐标数值，只关心相对位置关系。它跳过了尝试在哪里增加 Steiner 点的过程，直接根据形状特征从查找表中取出答案。</p>
+</div>
+<h2 id="_2">迷宫布线</h2>
+<h2 id="lees-algorithm">Lee's Algorithm</h2>
+<ul data-block="R-011">
+<li>就是 BFS。</li>
+</ul>
+<h3 id="_3">例子</h3>
+<ul data-block="R-013">
+<li>S (起点): (0, 0)</li>
+<li>T (终点): (4, 2)</li>
+<li>X (障碍物)</li>
+</ul>
+<h4 id="wave-propagation">阶段一：波浪传播 (Wave Propagation)</h4>
+<p data-block="R-015"><strong>初始状态：</strong></p>
+<p data-block="R-016"><strong>第 1-2 步：</strong>
+<div class="highlight"><pre><span></span><code>S 1 2 3
+1 2 3 X
+X 3 . .
+. . . T
+</code></pre></div></p>
+<p data-block="R-017"><strong>第 3-5 步 (绕过障碍)：</strong></p>
+<div class="highlight" data-block="R-018"><pre><span></span><code>S 1 2 3
+1 2 3 X
+X 3 . .
+. . . T
+</code></pre></div>
+<p data-block="R-019"><strong>第 6 步 (到达终点)：</strong>
+T 的位置被标上了 <strong>6</strong>。这说明最短路径长度为 6。
+<div class="highlight"><pre><span></span><code>0 1 2 3 4
+1 X X X 5
+2 3 4 5 6(T)
+3 4 5 6 .
+4 5 6 . .
+</code></pre></div></p>
+<h4 id="2-retrace">阶段 2：回溯 (Retrace)</h4>
+<p data-block="R-021">从终点 T (标号 6) 开始，找标号为 <code>当前-1</code> 的邻居，直到回到 S (0)。</p>
+<ol data-block="R-022">
+<li><strong>Start at T(6)</strong> -&gt; 找邻居 5</li>
+<li><strong>At 5</strong> -&gt; 找邻居 4</li>
+<li><strong>At 4</strong> -&gt; 找邻居 3 (注意：这里可能有多个 3，选哪走哪，或根据规则选拐弯最少的)
+...
+6 -&gt; 5 -&gt; 4 -&gt; 3 -&gt; 2 -&gt; 1 -&gt; 0</li>
+</ol>
+<p data-block="R-023"><strong>最终路径 (Path)：</strong>
+<div class="highlight"><pre><span></span><code>S &gt; &gt; &gt; v
+. X X X v
+. . . . T
+. . . . .
+. . . . .
+</code></pre></div>
+<em>(路径：S -&gt; (0,1) -&gt; (0,2) -&gt; (0,3) -&gt; (0,4) -&gt; (1,4) -&gt; T)</em></p>
+<h3 id="quiz">Quiz</h3>
+<ol data-block="R-025">
+<li>如果将 S 和 T 的位置互换，最短路径长度会改变吗？为什么？</li>
+<li>如果将 S 和 T 的位置互换，算法执行的时间会改变吗？为什么？</li>
+</ol>
+<h2 id="akers-coding">Akers' Coding</h2>
+<ul data-block="R-027">
+<li>目标：减少内存使用。</li>
+<li>思路：我们不需要知道确切的距离，只需要知道回溯的方向。只需 1 bit 或 2 bits 的循环序列即可区分前后邻居。</li>
+</ul>
+<h3 id="_4">例子</h3>
+<p data-block="R-029"><strong>初始状态：</strong></p>
+<div class="highlight" data-block="R-030"><pre><span></span><code>S . . .
+. . . X
+X . . .
+. . . T
+</code></pre></div>
+<p data-block="R-031"><strong>第 1-2 步：</strong>
+<div class="highlight"><pre><span></span><code>S 0 1 .
+0 1 . X
+X . . .
+. . . T
+</code></pre></div></p>
+<p data-block="R-032"><strong>第 3-5 步：</strong></p>
+<div class="highlight" data-block="R-033"><pre><span></span><code>S 0 1 0
+0 1 0 X
+X 0 1 0
+0 1 0 T
+</code></pre></div>
+<h3 id="quiz_1">Quiz</h3>
+<ol data-block="R-035">
+<li>使用 Akers' Coding 后，内存使用量相比 Lee's Algorithm 有何变化？</li>
+<li>Akers' Coding 是否会影响找到的路径长度？为什么？</li>
+</ol>
+</body></html>

@@ -1,0 +1,642 @@
+[
+  {
+    "id": "H",
+    "slug": "home",
+    "title": "课程首页",
+    "target": "overview",
+    "url": "https://eda.youwei.xyz/",
+    "sha256": "061245fc134fa4d16aa145835087a85fe51754741011477ca99104ab001422c9",
+    "page_note": "原课程网页无页码；以原始标题锚点定位。",
+    "headings": [
+      {
+        "level": 1,
+        "anchor": "design-automation-and-computing-systems",
+        "title": "Design Automation and Computing Systems"
+      },
+      {
+        "level": 2,
+        "anchor": "announcements",
+        "title": "Announcements"
+      },
+      {
+        "level": 2,
+        "anchor": "overview",
+        "title": "Overview"
+      },
+      {
+        "level": 2,
+        "anchor": "learning-outcomes",
+        "title": "Learning Outcomes"
+      },
+      {
+        "level": 2,
+        "anchor": "prerequisites",
+        "title": "Prerequisites"
+      },
+      {
+        "level": 2,
+        "anchor": "textbooks",
+        "title": "Textbooks"
+      },
+      {
+        "level": 2,
+        "anchor": "grading",
+        "title": "Grading"
+      },
+      {
+        "level": 2,
+        "anchor": "communication",
+        "title": "Communication"
+      }
+    ],
+    "text": "Design Automation and Computing Systems\nWelcome! This site hosts the course information and lecture notes.\nAnnouncements\nAdd your first announcement here (date, summary, optional link).\nOverview\nTerm: 2025 Fall\nInstructor: Youwei Zhuo\nTeaching Assistants:\nNames (emails)\nMeeting Times/Location: 13:00-16:00, Wednesday / Room 203\nLearning Outcomes\nElectronic Design Automation\nDigital Logic Synthesis\nPhysical Design Automation\nTiming Analysis and Optimization\nComputing Systems\nCompute Architecture\nMemory Systems\nParralel Programming\nPrerequisites\ndigital logic\nalgorithms\nTextbooks\nElectronic Design Automation for IC Implementation, Circuit Design, and Process Technology by Luciano Lavagno et.al.\nComputer Architecture: A quantitative approach by David Patterson et.al.\nThe Art of Multiprocessor Programming\nGrading\nHomework: 20%\nProject: 30%\nExam(s): 30%\nParticipation: 20%\nCommunication\nPrimary contact:\nemail or forum link\nOffice hours:\ntime / location / virtual link",
+    "html": "\n<h1 id=\"design-automation-and-computing-systems\">Design Automation and Computing Systems</h1>\n<p data-block=\"H-002\">Welcome! This site hosts the course information and lecture notes.</p>\n<h2 id=\"announcements\">Announcements</h2>\n<ul data-block=\"H-004\">\n<li><em>Add your first announcement here (date, summary, optional link).</em></li>\n</ul>\n<h2 id=\"overview\">Overview</h2>\n<ul data-block=\"H-006\">\n<li>Term: 2025 Fall</li>\n<li>Instructor: Youwei Zhuo</li>\n<li>Teaching Assistants: <em>Names (emails)</em></li>\n<li>Meeting Times/Location: 13:00-16:00, Wednesday / Room 203</li>\n</ul>\n<h2 id=\"learning-outcomes\">Learning Outcomes</h2>\n<ul data-block=\"H-008\">\n<li>Electronic Design Automation</li>\n<li>Digital Logic Synthesis</li>\n<li>Physical Design Automation</li>\n<li>Timing Analysis and Optimization</li>\n<li>Computing Systems</li>\n<li>Compute Architecture</li>\n<li>Memory Systems</li>\n<li>Parralel Programming</li>\n</ul>\n<h2 id=\"prerequisites\">Prerequisites</h2>\n<ul data-block=\"H-010\">\n<li>digital logic</li>\n<li>algorithms</li>\n</ul>\n<h2 id=\"textbooks\">Textbooks</h2>\n<ul data-block=\"H-012\">\n<li>Electronic Design Automation for IC Implementation, Circuit Design, and Process Technology by Luciano Lavagno et.al.</li>\n<li>Computer Architecture: A quantitative approach by David Patterson et.al.</li>\n<li>The Art of Multiprocessor Programming</li>\n</ul>\n<h2 id=\"grading\">Grading</h2>\n<ul data-block=\"H-014\">\n<li>Homework: 20%</li>\n<li>Project: 30%</li>\n<li>Exam(s): 30%</li>\n<li>Participation: 20%</li>\n</ul>\n<h2 id=\"communication\">Communication</h2>\n<ul data-block=\"H-016\">\n<li>Primary contact: <em>email or forum link</em></li>\n<li>Office hours: <em>time / location / virtual link</em></li>\n</ul>\n"
+  },
+  {
+    "id": "B",
+    "slug": "boolean-algebra",
+    "title": "布尔代数",
+    "target": "ch-boolean",
+    "url": "https://eda.youwei.xyz/lectures/boolean-algebra/",
+    "sha256": "1c3aa449acaceb27dfc05820b01748440665ebaf79a99ec9bbcc2af8971b86e4",
+    "page_note": "原课程网页无页码；以原始标题锚点定位。",
+    "headings": [
+      {
+        "level": 1,
+        "anchor": "",
+        "title": "Boolean Algebra"
+      },
+      {
+        "level": 2,
+        "anchor": "_1",
+        "title": "香农展开"
+      },
+      {
+        "level": 3,
+        "anchor": "_2",
+        "title": "定义"
+      },
+      {
+        "level": 3,
+        "anchor": "_3",
+        "title": "性质"
+      },
+      {
+        "level": 3,
+        "anchor": "quiz",
+        "title": "Quiz"
+      },
+      {
+        "level": 2,
+        "anchor": "_4",
+        "title": "布尔差分"
+      },
+      {
+        "level": 3,
+        "anchor": "_5",
+        "title": "定义"
+      },
+      {
+        "level": 3,
+        "anchor": "_6",
+        "title": "性质"
+      },
+      {
+        "level": 3,
+        "anchor": "_7",
+        "title": "例子"
+      },
+      {
+        "level": 3,
+        "anchor": "quiz_1",
+        "title": "Quiz"
+      },
+      {
+        "level": 2,
+        "anchor": "_8",
+        "title": "量词"
+      },
+      {
+        "level": 3,
+        "anchor": "_9",
+        "title": "定义"
+      },
+      {
+        "level": 3,
+        "anchor": "_10",
+        "title": "例子"
+      },
+      {
+        "level": 2,
+        "anchor": "_11",
+        "title": "应用：网络修复"
+      },
+      {
+        "level": 3,
+        "anchor": "_12",
+        "title": "问题描述"
+      },
+      {
+        "level": 3,
+        "anchor": "_13",
+        "title": "修复方法"
+      },
+      {
+        "level": 3,
+        "anchor": "quiz_2",
+        "title": "Quiz"
+      }
+    ],
+    "text": "Boolean Algebra\n香农展开\n定义\n布尔函数（Boolean Function）：\n\\(F: \\{0,1\\}^n \\to \\{0,1\\}\\)\n，输入为\n\\(n\\)\n个布尔变量，输出为一个布尔值。\n子函数（Cofactor）：\n\\(F\\)\n在\n\\(x_i=1\\)\n时的子函数：\n\\(F_{x_i}=F_{x_i=1} = F(x_1, \\ldots, x_{i-1}, 1, x_{i+1}, \\ldots, x_n)\\)\n\\(F\\)\n在\n\\(x_i=0\\)\n时的子函数：\n\\(F_{\\bar{x_i}}=F_{x_i=0} = F(x_1, \\ldots, x_{i-1}, 0, x_{i+1}, \\ldots, x_n)\\)\nImportant\n子函数不是一个值，而是关于剩余变量的布尔函数。\n香农展开（Shannon Expansion）：将布尔函数分解为变量的正负两种情况的子函数之和。\n\\[\nF(x_1, x_2, \\ldots, x_n) = x_i F_{x_i=1} + \\overline{x_i} F_{x_i=0}\n\\]\n性质\nNote\n会用定义验证即可，不用记。\n多变量展开：可以递归地对子函数继续应用香农展开，直到所有变量都被展开。\n\\[\nF(x,y,z,w)=xF_{x=1}+\\overline{x} F_{x=0}\n\\]\n\\[\nF_{x=1}=yF_{x=1,y=1}+\\overline{y}F_{x=1,y=0}\n\\]\n\\[\nF_{x=0}=yF_{x=0,y=1}+\\overline{y}F_{x=0,y=0}\n\\]\n\\[\nF(x,y,z,w)=xyF_{x=1,y=1}+x\\overline{y}F_{x=1,y=0}+\\overline{x}yF_{x=0,y=1}+\\overline{x}\\overline{y}F_{x=0,y=0}\n\\]\n多变量顺序无关：对任意变量顺序应用香农展开，结果相同。\n二元运算保持：对于布尔函数\n\\(F\\)\n和\n\\(G\\)\n，以及二元运算\n\\(\\odot \\in \\{+, \\cdot, \\oplus\\}\\)\n, 有\n\\[\n\\left(F \\odot G\\right)_{x_i} = F_{x_i} \\odot G_{x_i}\n\\]\nQuiz\n给定布尔函数\n\\(F(a,b,c) = ab + \\overline{a}c\\)\n，使用香农展开对变量\n\\(a\\)\n进行展开，写出结果。\n给定布尔函数\n\\(F(a,b,c) = ab + \\overline{a}c\\)\n，使用香农展开对变量\n\\(a\\)\n和\n\\(b\\)\n进行展开，写出结果。\n布尔差分\n定义\n布尔差分（Boolean Difference）：\n\\[\n\\frac{\\partial F}{\\partial x_i} = F_{x_i=1} \\oplus F_{x_i=0}\n\\]\n其中\n\\(\\oplus\\)\n表示异或运算。\n意义：布尔差分表示当变量\n\\(x_i\\)\n取值变化时，布尔函数\n\\(F\\)\n的输出是否发生变化。\n如果\n\\(\\frac{\\partial F}{\\partial x_i} = 1\\)\n，则表示\n\\(F\\)\n对\n\\(x_i\\)\n敏感；如果\n\\(\\frac{\\partial F}{\\partial x_i} = 0\\)\n，则表示\n\\(F\\)\n对\n\\(x_i\\)\n不敏感。\n性质\nNote\n会用定义验证即可，不用记。\n顺序无关：对任意变量顺序计算布尔差分，结果相同。\n\\[\n\\frac{\\partial}{\\partial x_j}\\left(\\frac{\\partial F}{\\partial x_i}\\right) = \\frac{\\partial}{\\partial x_i}\\left(\\frac{\\partial F}{\\partial x_j}\\right)\n\\]\n对异或保持：对于布尔函数\n\\(F\\)\n和\n\\(G\\)\n，有\n\\[\n\\frac{\\partial}{\\partial x_i}(F \\oplus G) = \\frac{\\partial F}{\\partial x_i} \\oplus \\frac{\\partial G}{\\partial x_i}\n\\]\n对与或非的计算规则：用定义推导。\n对复合函数的链式法则：用定义推导。\n例子\n非门：\n\\(F = \\overline{x}\\)\n\\[\nF_{x=1} = \\overline{1} = 0\n\\]\n\\[\nF_{x=0} = \\overline{0} = 1\n\\]\n\\[\n\\frac{\\partial F}{\\partial x} = F_{x=1} \\oplus F_{x=0} = 0 \\oplus 1 = 1\n\\]\n与门：\n\\(F = xy\\)\n\\[\nF_{x=1} = 1 \\cdot y = y\n\\]\n\\[\nF_{x=0} = 0 \\cdot y = 0\n\\]\n\\[\n\\frac{\\partial F}{\\partial x} = F_{x=1} \\oplus F_{x=0} = y \\oplus 0 = y\n\\]\n或门：\n\\(F = x + y\\)\n\\[\nF_{x=1} = 1 + y = 1\n\\]\n\\[\nF_{x=0} = 0 + y = y\n\\]\n\\[\n\\frac{\\partial F}{\\partial x} = F_{x=1} \\oplus F_{x=0} = 1 \\oplus y = \\overline{y}\n\\]\n异或门：\n\\(F = x \\oplus y\\)\n\\[\nF_{x=1} = 1 \\oplus y = \\overline{y}\n\\]\n\\[\nF_{x=0} = 0 \\oplus y = y\n\\]\n\\[\n\\frac{\\partial F}{\\partial x} = F_{x=1} \\oplus F_{x=0} = \\overline{y} \\oplus y = 1\n\\]\nQuiz\n给定布尔函数\n\\(F(a,b) = ab + \\overline{a}\\)\n，计算\n\\(\\frac{\\partial F}{\\partial a}\\)\n和\n\\(\\frac{\\partial F}{\\partial b}\\)\n。\n证明布尔差分对异或运算保持。\n布尔差分为 1 有什么含义？\n量词\n定义\n存在量词（Existential Quantification）：\n\\[\n\\exists x_i F = F_{x_i=0} + F_{x_i=1}\n\\]\n含义：\n\\(\\exists x_i F\\)\n是一个与\n\\(x_i\\)\n无关的布尔函数。当存在某个\n\\(x_i\\)\n的取值使得\n\\(F\\)\n为真时，\n\\(\\exists x_i F\\)\n为真。\n全称量词（Universal Quantification）：\n\\[\n\\forall x_i F = F_{x_i=0} \\cdot F_{x_i=1}\n\\]\n含义：\n\\(\\forall x_i F\\)\n是一个与\n\\(x_i\\)\n无关的布尔函数。当对于所有\n\\(x_i\\)\n的取值，\n\\(F\\)\n都为真时，\n\\(\\forall x_i F\\)\n为真。\nImportant\n量词是关于剩余变量的布尔函数。\n例子\n非门：\n\\(F = \\overline{x}\\)\n\\[\n\\exists x F = F_{x=0} + F_{x=1} = \\overline{0} + \\overline{1} = 1 + 0 = 1\n\\]\n\\[\n\\forall x F = F_{x=0} \\cdot F_{x=1} = \\overline{0} \\cdot \\overline{1} = 1 \\cdot 0 = 0\n\\]\n与门：\n\\(F = xy\\)\n\\[\n\\exists x F = F_{x=0} + F_{x=1} = 0 \\cdot y + 1 \\cdot y = 0 + y   = y\n\\]\n\\[\n\\forall x F = F_{x=0} \\cdot F_{x=1} = 0 \\cdot y \\cdot 1 \\cdot y = 0\n\\]\n或门：\n\\(F = x + y\\)\n\\[\n\\exists x F = F_{x=0} + F_{x=1} = 0 + 1 = 1\n\\]\n\\[\n\\forall x F = F_{x=0} \\cdot F_{x=1} = y \\cdot 1 = y\n\\]\n异或门：\n\\(F = x \\oplus y\\)\n\\[\n\\exists x F = F_{x=0} + F_{x=1} = 0 \\oplus y + 1 \\oplus y = y + \\overline{y} = 1\n\\]\n\\[\n\\forall x F = F_{x=0} \\cdot F_{x=1} = (0 \\oplus y) \\cdot (1 \\oplus y) = y \\cdot \\overline{y} = 0\n\\]\n应用：网络修复\n问题描述\n假设我们需要实现一个逻辑模块\n\\(f(a,b)=ab+\\overline{b}\\)\n，但是实现中有一个门是错误的。\n修复方法\n替换\n：\n    将可疑的门（这里以 + 为例）替换为一个控制线为\n\\(d_0, d_1, d_2, d_3\\)\n，选择线为\n\\(s_0=ab\\)\n和\n\\(s_1=\\overline{b}\\)\n的多路选择器（MUX）（可以实现任意 2 变量函数）。\n构建等价函数\n：\n    设修复后的电路函数为\n\\(G(a,b,d_0, \\dots, d_3)\\)\n。我们需要\n\\(G\\)\n与\n\\(f\\)\n等价。\n    定义函数\n\\(z\\)\n为\n\\(G\\)\n与\n\\(f\\)\n的同或（XNOR）：\n\\[\nz(a,b,d_0, \\dots, d_3) = \\overline{G(a,b,d_0, \\dots, d_3) \\oplus f(a,b)}\n\\]\n当且仅当\n\\(G=f\\)\n时，\n\\(z=1\\)\n。\n全称量词\n：\n    我们需要找到一组\n\\(d_0, \\dots, d_3\\)\n，使得对于所有可能的输入\n\\(a, b\\)\n，电路输出都正确。\n    这可以通过对\n\\(a, b\\)\n进行全称量化来表示：\n\\[\n\\forall a,b \\ z = 1\n\\]\nQuiz\n给定布尔函数\n\\(F(a,b) = ab + \\overline{a}\\)\n，计算\n\\(\\exists a F\\)\n和\n\\(\\forall a F\\)\n。\n全称量词为 1 有什么含义？\n存在量词为 1 有什么含义？",
+    "html": "\n<h1 data-block=\"B-001\">Boolean Algebra</h1>\n<h2 id=\"_1\">香农展开</h2>\n<h3 id=\"_2\">定义</h3>\n<ul data-block=\"B-004\">\n<li>布尔函数（Boolean Function）：<span class=\"arithmatex\">\\(F: \\{0,1\\}^n \\to \\{0,1\\}\\)</span>，输入为 <span class=\"arithmatex\">\\(n\\)</span> 个布尔变量，输出为一个布尔值。</li>\n<li>子函数（Cofactor）：<ul>\n<li><span class=\"arithmatex\">\\(F\\)</span> 在 <span class=\"arithmatex\">\\(x_i=1\\)</span> 时的子函数：<span class=\"arithmatex\">\\(F_{x_i}=F_{x_i=1} = F(x_1, \\ldots, x_{i-1}, 1, x_{i+1}, \\ldots, x_n)\\)</span></li>\n<li><span class=\"arithmatex\">\\(F\\)</span> 在 <span class=\"arithmatex\">\\(x_i=0\\)</span> 时的子函数：<span class=\"arithmatex\">\\(F_{\\bar{x_i}}=F_{x_i=0} = F(x_1, \\ldots, x_{i-1}, 0, x_{i+1}, \\ldots, x_n)\\)</span></li>\n</ul>\n</li>\n</ul>\n<div class=\"admonition important\" data-block=\"B-005\">\n<p class=\"admonition-title\">Important</p>\n<p>子函数不是一个值，而是关于剩余变量的布尔函数。</p>\n</div>\n<ul data-block=\"B-006\">\n<li>香农展开（Shannon Expansion）：将布尔函数分解为变量的正负两种情况的子函数之和。</li>\n</ul>\n<div class=\"arithmatex\" data-block=\"B-007\">\\[\nF(x_1, x_2, \\ldots, x_n) = x_i F_{x_i=1} + \\overline{x_i} F_{x_i=0}\n\\]</div>\n<h3 id=\"_3\">性质</h3>\n<div class=\"admonition note\" data-block=\"B-009\">\n<p class=\"admonition-title\">Note</p>\n<p>会用定义验证即可，不用记。</p>\n</div>\n<ul data-block=\"B-010\">\n<li>多变量展开：可以递归地对子函数继续应用香农展开，直到所有变量都被展开。</li>\n</ul>\n<div class=\"arithmatex\" data-block=\"B-011\">\\[\nF(x,y,z,w)=xF_{x=1}+\\overline{x} F_{x=0}\n\\]</div>\n<div class=\"arithmatex\" data-block=\"B-012\">\\[\nF_{x=1}=yF_{x=1,y=1}+\\overline{y}F_{x=1,y=0}\n\\]</div>\n<div class=\"arithmatex\" data-block=\"B-013\">\\[\nF_{x=0}=yF_{x=0,y=1}+\\overline{y}F_{x=0,y=0}\n\\]</div>\n<div class=\"arithmatex\" data-block=\"B-014\">\\[\nF(x,y,z,w)=xyF_{x=1,y=1}+x\\overline{y}F_{x=1,y=0}+\\overline{x}yF_{x=0,y=1}+\\overline{x}\\overline{y}F_{x=0,y=0}\n\\]</div>\n<ul data-block=\"B-015\">\n<li>多变量顺序无关：对任意变量顺序应用香农展开，结果相同。</li>\n<li>二元运算保持：对于布尔函数 <span class=\"arithmatex\">\\(F\\)</span> 和 <span class=\"arithmatex\">\\(G\\)</span>，以及二元运算 <span class=\"arithmatex\">\\(\\odot \\in \\{+, \\cdot, \\oplus\\}\\)</span>, 有</li>\n</ul>\n<div class=\"arithmatex\" data-block=\"B-016\">\\[\n\\left(F \\odot G\\right)_{x_i} = F_{x_i} \\odot G_{x_i}\n\\]</div>\n<h3 id=\"quiz\">Quiz</h3>\n<ol data-block=\"B-018\">\n<li>给定布尔函数 <span class=\"arithmatex\">\\(F(a,b,c) = ab + \\overline{a}c\\)</span>，使用香农展开对变量 <span class=\"arithmatex\">\\(a\\)</span> 进行展开，写出结果。</li>\n<li>给定布尔函数 <span class=\"arithmatex\">\\(F(a,b,c) = ab + \\overline{a}c\\)</span>，使用香农展开对变量 <span class=\"arithmatex\">\\(a\\)</span> 和 <span class=\"arithmatex\">\\(b\\)</span> 进行展开，写出结果。</li>\n</ol>\n<h2 id=\"_4\">布尔差分</h2>\n<h3 id=\"_5\">定义</h3>\n<ul data-block=\"B-021\">\n<li>\n<p>布尔差分（Boolean Difference）：</p>\n<div class=\"arithmatex\">\\[\n\\frac{\\partial F}{\\partial x_i} = F_{x_i=1} \\oplus F_{x_i=0}\n\\]</div>\n<p>其中 <span class=\"arithmatex\">\\(\\oplus\\)</span> 表示异或运算。</p>\n</li>\n<li>\n<p>意义：布尔差分表示当变量 <span class=\"arithmatex\">\\(x_i\\)</span> 取值变化时，布尔函数 <span class=\"arithmatex\">\\(F\\)</span> 的输出是否发生变化。</p>\n<p>如果 <span class=\"arithmatex\">\\(\\frac{\\partial F}{\\partial x_i} = 1\\)</span>，则表示 <span class=\"arithmatex\">\\(F\\)</span> 对 <span class=\"arithmatex\">\\(x_i\\)</span> 敏感；如果 <span class=\"arithmatex\">\\(\\frac{\\partial F}{\\partial x_i} = 0\\)</span>，则表示 <span class=\"arithmatex\">\\(F\\)</span> 对 <span class=\"arithmatex\">\\(x_i\\)</span> 不敏感。</p>\n</li>\n</ul>\n<h3 id=\"_6\">性质</h3>\n<div class=\"admonition note\" data-block=\"B-023\">\n<p class=\"admonition-title\">Note</p>\n<p>会用定义验证即可，不用记。</p>\n</div>\n<ul data-block=\"B-024\">\n<li>顺序无关：对任意变量顺序计算布尔差分，结果相同。</li>\n</ul>\n<div class=\"arithmatex\" data-block=\"B-025\">\\[\n\\frac{\\partial}{\\partial x_j}\\left(\\frac{\\partial F}{\\partial x_i}\\right) = \\frac{\\partial}{\\partial x_i}\\left(\\frac{\\partial F}{\\partial x_j}\\right)\n\\]</div>\n<ul data-block=\"B-026\">\n<li>对异或保持：对于布尔函数 <span class=\"arithmatex\">\\(F\\)</span> 和 <span class=\"arithmatex\">\\(G\\)</span>，有</li>\n</ul>\n<div class=\"arithmatex\" data-block=\"B-027\">\\[\n\\frac{\\partial}{\\partial x_i}(F \\oplus G) = \\frac{\\partial F}{\\partial x_i} \\oplus \\frac{\\partial G}{\\partial x_i}\n\\]</div>\n<ul data-block=\"B-028\">\n<li>对与或非的计算规则：用定义推导。</li>\n<li>对复合函数的链式法则：用定义推导。</li>\n</ul>\n<h3 id=\"_7\">例子</h3>\n<ul data-block=\"B-030\">\n<li>非门：<span class=\"arithmatex\">\\(F = \\overline{x}\\)</span></li>\n</ul>\n<div class=\"arithmatex\" data-block=\"B-031\">\\[\nF_{x=1} = \\overline{1} = 0\n\\]</div>\n<div class=\"arithmatex\" data-block=\"B-032\">\\[\nF_{x=0} = \\overline{0} = 1\n\\]</div>\n<div class=\"arithmatex\" data-block=\"B-033\">\\[\n\\frac{\\partial F}{\\partial x} = F_{x=1} \\oplus F_{x=0} = 0 \\oplus 1 = 1\n\\]</div>\n<ul data-block=\"B-034\">\n<li>与门：<span class=\"arithmatex\">\\(F = xy\\)</span></li>\n</ul>\n<div class=\"arithmatex\" data-block=\"B-035\">\\[\nF_{x=1} = 1 \\cdot y = y\n\\]</div>\n<div class=\"arithmatex\" data-block=\"B-036\">\\[\nF_{x=0} = 0 \\cdot y = 0\n\\]</div>\n<div class=\"arithmatex\" data-block=\"B-037\">\\[\n\\frac{\\partial F}{\\partial x} = F_{x=1} \\oplus F_{x=0} = y \\oplus 0 = y\n\\]</div>\n<ul data-block=\"B-038\">\n<li>或门：<span class=\"arithmatex\">\\(F = x + y\\)</span></li>\n</ul>\n<div class=\"arithmatex\" data-block=\"B-039\">\\[\nF_{x=1} = 1 + y = 1\n\\]</div>\n<div class=\"arithmatex\" data-block=\"B-040\">\\[\nF_{x=0} = 0 + y = y\n\\]</div>\n<div class=\"arithmatex\" data-block=\"B-041\">\\[\n\\frac{\\partial F}{\\partial x} = F_{x=1} \\oplus F_{x=0} = 1 \\oplus y = \\overline{y}\n\\]</div>\n<ul data-block=\"B-042\">\n<li>异或门：<span class=\"arithmatex\">\\(F = x \\oplus y\\)</span></li>\n</ul>\n<div class=\"arithmatex\" data-block=\"B-043\">\\[\nF_{x=1} = 1 \\oplus y = \\overline{y}\n\\]</div>\n<div class=\"arithmatex\" data-block=\"B-044\">\\[\nF_{x=0} = 0 \\oplus y = y\n\\]</div>\n<div class=\"arithmatex\" data-block=\"B-045\">\\[\n\\frac{\\partial F}{\\partial x} = F_{x=1} \\oplus F_{x=0} = \\overline{y} \\oplus y = 1\n\\]</div>\n<h3 id=\"quiz_1\">Quiz</h3>\n<ol data-block=\"B-047\">\n<li>给定布尔函数 <span class=\"arithmatex\">\\(F(a,b) = ab + \\overline{a}\\)</span>，计算 <span class=\"arithmatex\">\\(\\frac{\\partial F}{\\partial a}\\)</span> 和 <span class=\"arithmatex\">\\(\\frac{\\partial F}{\\partial b}\\)</span>。</li>\n<li>证明布尔差分对异或运算保持。</li>\n<li>布尔差分为 1 有什么含义？</li>\n</ol>\n<h2 id=\"_8\">量词</h2>\n<h3 id=\"_9\">定义</h3>\n<ul data-block=\"B-050\">\n<li>\n<p>存在量词（Existential Quantification）：</p>\n<div class=\"arithmatex\">\\[\n\\exists x_i F = F_{x_i=0} + F_{x_i=1}\n\\]</div>\n<p>含义：<span class=\"arithmatex\">\\(\\exists x_i F\\)</span> 是一个与 <span class=\"arithmatex\">\\(x_i\\)</span> 无关的布尔函数。当存在某个 <span class=\"arithmatex\">\\(x_i\\)</span> 的取值使得 <span class=\"arithmatex\">\\(F\\)</span> 为真时，<span class=\"arithmatex\">\\(\\exists x_i F\\)</span> 为真。</p>\n</li>\n<li>\n<p>全称量词（Universal Quantification）：</p>\n<div class=\"arithmatex\">\\[\n\\forall x_i F = F_{x_i=0} \\cdot F_{x_i=1}\n\\]</div>\n<p>含义：<span class=\"arithmatex\">\\(\\forall x_i F\\)</span> 是一个与 <span class=\"arithmatex\">\\(x_i\\)</span> 无关的布尔函数。当对于所有 <span class=\"arithmatex\">\\(x_i\\)</span> 的取值，<span class=\"arithmatex\">\\(F\\)</span> 都为真时，<span class=\"arithmatex\">\\(\\forall x_i F\\)</span> 为真。</p>\n</li>\n</ul>\n<div class=\"admonition important\" data-block=\"B-051\">\n<p class=\"admonition-title\">Important</p>\n<p>量词是关于剩余变量的布尔函数。</p>\n</div>\n<h3 id=\"_10\">例子</h3>\n<ul data-block=\"B-053\">\n<li>非门：<span class=\"arithmatex\">\\(F = \\overline{x}\\)</span></li>\n</ul>\n<div class=\"arithmatex\" data-block=\"B-054\">\\[\n\\exists x F = F_{x=0} + F_{x=1} = \\overline{0} + \\overline{1} = 1 + 0 = 1\n\\]</div>\n<div class=\"arithmatex\" data-block=\"B-055\">\\[\n\\forall x F = F_{x=0} \\cdot F_{x=1} = \\overline{0} \\cdot \\overline{1} = 1 \\cdot 0 = 0\n\\]</div>\n<ul data-block=\"B-056\">\n<li>与门：<span class=\"arithmatex\">\\(F = xy\\)</span></li>\n</ul>\n<div class=\"arithmatex\" data-block=\"B-057\">\\[\n\\exists x F = F_{x=0} + F_{x=1} = 0 \\cdot y + 1 \\cdot y = 0 + y   = y\n\\]</div>\n<div class=\"arithmatex\" data-block=\"B-058\">\\[\n\\forall x F = F_{x=0} \\cdot F_{x=1} = 0 \\cdot y \\cdot 1 \\cdot y = 0\n\\]</div>\n<ul data-block=\"B-059\">\n<li>或门：<span class=\"arithmatex\">\\(F = x + y\\)</span></li>\n</ul>\n<div class=\"arithmatex\" data-block=\"B-060\">\\[\n\\exists x F = F_{x=0} + F_{x=1} = 0 + 1 = 1\n\\]</div>\n<div class=\"arithmatex\" data-block=\"B-061\">\\[\n\\forall x F = F_{x=0} \\cdot F_{x=1} = y \\cdot 1 = y\n\\]</div>\n<ul data-block=\"B-062\">\n<li>异或门：<span class=\"arithmatex\">\\(F = x \\oplus y\\)</span></li>\n</ul>\n<div class=\"arithmatex\" data-block=\"B-063\">\\[\n\\exists x F = F_{x=0} + F_{x=1} = 0 \\oplus y + 1 \\oplus y = y + \\overline{y} = 1\n\\]</div>\n<div class=\"arithmatex\" data-block=\"B-064\">\\[\n\\forall x F = F_{x=0} \\cdot F_{x=1} = (0 \\oplus y) \\cdot (1 \\oplus y) = y \\cdot \\overline{y} = 0\n\\]</div>\n<h2 id=\"_11\">应用：网络修复</h2>\n<h3 id=\"_12\">问题描述</h3>\n<p data-block=\"B-067\">假设我们需要实现一个逻辑模块 <span class=\"arithmatex\">\\(f(a,b)=ab+\\overline{b}\\)</span>，但是实现中有一个门是错误的。</p>\n<h3 id=\"_13\">修复方法</h3>\n<ol data-block=\"B-069\">\n<li>\n<p><strong>替换</strong>：\n    将可疑的门（这里以 + 为例）替换为一个控制线为 <span class=\"arithmatex\">\\(d_0, d_1, d_2, d_3\\)</span>，选择线为 <span class=\"arithmatex\">\\(s_0=ab\\)</span> 和 <span class=\"arithmatex\">\\(s_1=\\overline{b}\\)</span>的多路选择器（MUX）（可以实现任意 2 变量函数）。</p>\n</li>\n<li>\n<p><strong>构建等价函数</strong>：\n    设修复后的电路函数为 <span class=\"arithmatex\">\\(G(a,b,d_0, \\dots, d_3)\\)</span>。我们需要 <span class=\"arithmatex\">\\(G\\)</span> 与 <span class=\"arithmatex\">\\(f\\)</span> 等价。\n    定义函数 <span class=\"arithmatex\">\\(z\\)</span> 为 <span class=\"arithmatex\">\\(G\\)</span> 与 <span class=\"arithmatex\">\\(f\\)</span> 的同或（XNOR）：</p>\n<div class=\"arithmatex\">\\[\nz(a,b,d_0, \\dots, d_3) = \\overline{G(a,b,d_0, \\dots, d_3) \\oplus f(a,b)}\n\\]</div>\n<p>当且仅当 <span class=\"arithmatex\">\\(G=f\\)</span> 时，<span class=\"arithmatex\">\\(z=1\\)</span>。</p>\n</li>\n<li>\n<p><strong>全称量词</strong>：\n    我们需要找到一组 <span class=\"arithmatex\">\\(d_0, \\dots, d_3\\)</span>，使得对于所有可能的输入 <span class=\"arithmatex\">\\(a, b\\)</span>，电路输出都正确。\n    这可以通过对 <span class=\"arithmatex\">\\(a, b\\)</span> 进行全称量化来表示：</p>\n<div class=\"arithmatex\">\\[\n\\forall a,b \\ z = 1\n\\]</div>\n</li>\n</ol>\n<h3 id=\"quiz_2\">Quiz</h3>\n<ol data-block=\"B-071\">\n<li>给定布尔函数 <span class=\"arithmatex\">\\(F(a,b) = ab + \\overline{a}\\)</span>，计算 <span class=\"arithmatex\">\\(\\exists a F\\)</span> 和 <span class=\"arithmatex\">\\(\\forall a F\\)</span>。</li>\n<li>全称量词为 1 有什么含义？</li>\n<li>存在量词为 1 有什么含义？</li>\n</ol>\n"
+  },
+  {
+    "id": "C",
+    "slug": "computer-architecture",
+    "title": "计算机体系结构",
+    "target": "ch-compute",
+    "url": "https://eda.youwei.xyz/lectures/computer-architecture/",
+    "sha256": "fa4603c34445ba34415f7a4400a058a5071529ed5154d82ef31215601ace84b2",
+    "page_note": "原课程网页无页码；以原始标题锚点定位。",
+    "headings": [
+      {
+        "level": 1,
+        "anchor": "",
+        "title": "Computer Architecture"
+      },
+      {
+        "level": 2,
+        "anchor": "_1",
+        "title": "性能公式"
+      },
+      {
+        "level": 3,
+        "anchor": "quiz",
+        "title": "Quiz"
+      },
+      {
+        "level": 2,
+        "anchor": "cpu",
+        "title": "流水线 CPU"
+      },
+      {
+        "level": 3,
+        "anchor": "quiz_1",
+        "title": "Quiz"
+      }
+    ],
+    "text": "Computer Architecture\n性能公式\nCPU 时间 (CPU Time) = 指令数 (Instruction Count) × 指令平均周期数（CPI，Cycle Per Instruction）× 时钟周期 (Clock Cycle)\n下面表格用「有/无」标出不同层次是否会影响性能公式中的三项，并给出一个直观例子：\n层次\n指令数\nCPI\n时钟周期\n例子\n算法 (Algorithms)\n有\n有\n无\n冒泡 vs 快排：指令数差很多；顺序 vs 随机访问：cache miss 多，CPI 更高\n编程语言 (Programming Language)\n有\n有\n无\nPython/Java vs C：运行时/抽象开销带来更多指令；GC/动态派发/边界检查增加停顿\n编译器 (Compiler)\n有\n有\n无\n-O0\nvs\n-O3\n：优化减少指令并降低停顿；但编译器不能改变硬件频率/周期\n指令集 ISA (ISA)\n有\n有\n有\nSIMD/FMA 让同样工作更少指令；可变长/复杂解码可能拉长关键路径限制最高频率\n处理器组织/微架构 (Processor Organization)\n无\n有\n有\n乱序/预测/缓存影响停顿→CPI；流水线级数/关键路径决定频率→周期\n器件与工艺 (Device & Technology)\n无\n有\n有\n更先进工艺可提高频率→周期更小；更慢的存储器/互连会让访存停顿（以周期计）更大\nQuiz\nxxx 是否会影响 xxx？为什么？举例说明。\n流水线 CPU\n请参考 ppt。\nQuiz\n什么是结构冒险 (Structural Hazard)？\n什么是数据冒险 (Data Hazard)？\n什么是控制冒险 (Control Hazard)？\n单周期 CPU 和 多周期 CPU 哪个 CPI 更高？为什么？",
+    "html": "\n<h1 data-block=\"C-001\">Computer Architecture</h1>\n<h2 id=\"_1\">性能公式</h2>\n<ul data-block=\"C-003\">\n<li>CPU 时间 (CPU Time) = 指令数 (Instruction Count) × 指令平均周期数（CPI，Cycle Per Instruction）× 时钟周期 (Clock Cycle)</li>\n</ul>\n<p data-block=\"C-004\">下面表格用「有/无」标出不同层次是否会影响性能公式中的三项，并给出一个直观例子：</p>\n<table data-block=\"C-005\">\n<thead>\n<tr>\n<th>层次</th>\n<th>指令数</th>\n<th>CPI</th>\n<th>时钟周期</th>\n<th>例子</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>算法 (Algorithms)</td>\n<td>有</td>\n<td>有</td>\n<td>无</td>\n<td>冒泡 vs 快排：指令数差很多；顺序 vs 随机访问：cache miss 多，CPI 更高</td>\n</tr>\n<tr>\n<td>编程语言 (Programming Language)</td>\n<td>有</td>\n<td>有</td>\n<td>无</td>\n<td>Python/Java vs C：运行时/抽象开销带来更多指令；GC/动态派发/边界检查增加停顿</td>\n</tr>\n<tr>\n<td>编译器 (Compiler)</td>\n<td>有</td>\n<td>有</td>\n<td>无</td>\n<td><code>-O0</code> vs <code>-O3</code>：优化减少指令并降低停顿；但编译器不能改变硬件频率/周期</td>\n</tr>\n<tr>\n<td>指令集 ISA (ISA)</td>\n<td>有</td>\n<td>有</td>\n<td>有</td>\n<td>SIMD/FMA 让同样工作更少指令；可变长/复杂解码可能拉长关键路径限制最高频率</td>\n</tr>\n<tr>\n<td>处理器组织/微架构 (Processor Organization)</td>\n<td>无</td>\n<td>有</td>\n<td>有</td>\n<td>乱序/预测/缓存影响停顿→CPI；流水线级数/关键路径决定频率→周期</td>\n</tr>\n<tr>\n<td>器件与工艺 (Device &amp; Technology)</td>\n<td>无</td>\n<td>有</td>\n<td>有</td>\n<td>更先进工艺可提高频率→周期更小；更慢的存储器/互连会让访存停顿（以周期计）更大</td>\n</tr>\n</tbody>\n</table>\n<h3 id=\"quiz\">Quiz</h3>\n<ol data-block=\"C-007\">\n<li>xxx 是否会影响 xxx？为什么？举例说明。</li>\n</ol>\n<h2 id=\"cpu\">流水线 CPU</h2>\n<p data-block=\"C-009\">请参考 ppt。</p>\n<h3 id=\"quiz_1\">Quiz</h3>\n<ol data-block=\"C-011\">\n<li>什么是结构冒险 (Structural Hazard)？</li>\n<li>什么是数据冒险 (Data Hazard)？</li>\n<li>什么是控制冒险 (Control Hazard)？</li>\n<li>单周期 CPU 和 多周期 CPU 哪个 CPI 更高？为什么？</li>\n</ol>\n"
+  },
+  {
+    "id": "S",
+    "slug": "logic-synthesis",
+    "title": "逻辑综合",
+    "target": "ch-synthesis",
+    "url": "https://eda.youwei.xyz/lectures/logic-synthesis/",
+    "sha256": "ef5b4f343f192aa28f2cb7789dd2f5b81698b6699f5c84824495049f594f8309",
+    "page_note": "原课程网页无页码；以原始标题锚点定位。",
+    "headings": [
+      {
+        "level": 1,
+        "anchor": "",
+        "title": "Logic Synthesis"
+      },
+      {
+        "level": 2,
+        "anchor": "_1",
+        "title": "逻辑综合"
+      },
+      {
+        "level": 2,
+        "anchor": "_2",
+        "title": "两级逻辑化简"
+      },
+      {
+        "level": 3,
+        "anchor": "quiz",
+        "title": "Quiz"
+      },
+      {
+        "level": 2,
+        "anchor": "_3",
+        "title": "多级逻辑化简"
+      },
+      {
+        "level": 3,
+        "anchor": "technology-independent-synthesis",
+        "title": "Technology-Independent Synthesis"
+      },
+      {
+        "level": 3,
+        "anchor": "technology-mapping",
+        "title": "Technology mapping"
+      },
+      {
+        "level": 3,
+        "anchor": "quiz_1",
+        "title": "Quiz"
+      },
+      {
+        "level": 2,
+        "anchor": "_4",
+        "title": "算法"
+      },
+      {
+        "level": 3,
+        "anchor": "tree-covering",
+        "title": "为什么使用 Tree Covering？"
+      },
+      {
+        "level": 3,
+        "anchor": "_5",
+        "title": "例子"
+      },
+      {
+        "level": 4,
+        "anchor": "pattern-tree",
+        "title": "Pattern Tree"
+      },
+      {
+        "level": 5,
+        "anchor": "not",
+        "title": "NOT"
+      },
+      {
+        "level": 5,
+        "anchor": "nand",
+        "title": "NAND"
+      },
+      {
+        "level": 5,
+        "anchor": "and",
+        "title": "AND"
+      },
+      {
+        "level": 5,
+        "anchor": "nor",
+        "title": "NOR"
+      },
+      {
+        "level": 5,
+        "anchor": "or2",
+        "title": "OR2"
+      },
+      {
+        "level": 5,
+        "anchor": "aoi21",
+        "title": "AOI21"
+      },
+      {
+        "level": 5,
+        "anchor": "aoi22",
+        "title": "AOI22"
+      },
+      {
+        "level": 4,
+        "anchor": "subject-tree",
+        "title": "Subject Tree"
+      },
+      {
+        "level": 4,
+        "anchor": "matching",
+        "title": "Matching"
+      },
+      {
+        "level": 3,
+        "anchor": "quiz_2",
+        "title": "Quiz"
+      }
+    ],
+    "text": "Logic Synthesis\n逻辑综合\nRTL\n=> Technology-Independent Synthesis\n=> Technology Mapping\n=> netlist\n两级逻辑化简\nSOP (Sum of Products)：第一层为多个与门，第二层为一个或门。\nPOS (Product of Sums)：第一层为多个或门，第二层为一个与门。\n优化目标：最小化变量出现的次数（literal count）。\n化简方法：精确方法（如 QM）和启发式方法（如 ESPRESSO）。\nCaution\n随着输入增加，表达式呈指数级增长，不适合大规模设计。\nQuiz\n判断下列布尔函数是 SOP 还是 POS 形式，并计算 literal count：\n\\(F(a,b,c) = ab + \\overline{a}c + bc\\)\n\\(F(a,b,c) = (a + b)(\\overline{a} + c)\\)\n多级逻辑化简\nTechnology-Independent Synthesis\n目标：将 RTL 转换为技术无关的逻辑网络。\n布尔逻辑网络 (Boolean Logic Network)：节点为两级逻辑 (SOP 形式) 的图。\n优化目标：最小化变量出现的次数（literal count，与面积相关）。\n化简方法：\n化简节点内部逻辑函数 (两级逻辑化简)\n删除节点：把小的节点和后续节点合并。\n增加节点：提取公因式，把大的节点分解成更小的节点。\nTechnology mapping\n目标：将技术无关的逻辑网络映射为技术相关的网表。\n工艺库（technology library）：包含各种门的集合，每个门有其功能和成本（cost）。\n网表（netlist）：节点为工艺库中的门的图。\n优化目标：最小化总成本（total cost，比如面积，延迟等）。\nQuiz\n上面的例子中，假设 AND2，OR2，OA21 的 cost 分别为 3，3，4，两种 mapping 的总 cost 分别是多少？\n算法\n将工艺库中的门转换为 NAND 和 NOT 门组成的网络（pattern）。\n将逻辑网络中的 SOP 节点转换为 NAND 和 NOT 门组成的网络（subject）。\n使用 pattern matching 算法。\n为什么使用 Tree Covering？\nDAG covering：对 DGA 进行最优的匹配无法高效解决（NP-hard 问题）。\nTree covering：可以用动态规划解决。可以将 DAG 分解为多棵树，然后对每棵树进行匹配。\n例子\nPattern Tree\nNOT\no\n    |\n    □\nNAND\n•\n   / \\\n  □   □\nAND\no\n    |\n    •\n   / \\\n  □   □\nNOR\no\n    |\n    •\n   / \\\n  •   •\n  |   |\n  □   □\nOR2\no\n   / \\\n  •   •\n  |   |\n  □   □\nAOI21\n•\n        |\n        o\n    / \\\n    o   •\n    |   |\n    □   □\n•\n        |\n        o\n    / \\\n    •  o\n    |  |\n    □  □\nImportant\n不对称的模式（如 AIO21）需要尝试旋转匹配所有可能。\nAOI22\n•\n    |\n    o\n   / \\\n  o   o\n  |   |\n  □   □\nSubject Tree\nz\n         |\n         •\n         | t\n         o\n    r  /   \\ s\n      o     •\n   p / \\ q  |\n    •   o   d\n    |  / \\\n    a  b  c\nMatching\nMatch(z) = {NOT, AND2, AOI21}\nMatch(z, NOT) = Match(t)\nMatch(z, AND2) = {Match(r), Match(s)}\nMatch(z, AOI21) = {Match(p), Match(q)}\nCost(z)\n    = min(\n        Cost(z, NOT) + Cost(NOT),\n        Cost(z, AND2) + Cost(AND2),\n        Cost(z, AOI21) + Cost(AOI21))\n    = min(\n        Cost(t) + Cost(NOT),\n        Cost(r) + Cost(s) + Cost(AND2),\n        Cost(p) + Cost(q) + Cost(AOI21))\nQuiz\n如果交换上面 subject tree 中节点 r 和 s 的位置，Cost(z) 会改变吗？为什么？\n假设工艺库中只有 NOT 和 AND2 两种门，计算上面 subject tree 的最小成本。",
+    "html": "\n<h1 data-block=\"S-001\">Logic Synthesis</h1>\n<h2 id=\"_1\">逻辑综合</h2>\n<p data-block=\"S-003\">RTL\n=&gt; Technology-Independent Synthesis\n=&gt; Technology Mapping\n=&gt; netlist</p>\n<h2 id=\"_2\">两级逻辑化简</h2>\n<ul data-block=\"S-005\">\n<li>SOP (Sum of Products)：第一层为多个与门，第二层为一个或门。</li>\n<li>POS (Product of Sums)：第一层为多个或门，第二层为一个与门。</li>\n<li>优化目标：最小化变量出现的次数（literal count）。</li>\n<li>化简方法：精确方法（如 QM）和启发式方法（如 ESPRESSO）。</li>\n</ul>\n<div class=\"admonition danger\" data-block=\"S-006\">\n<p class=\"admonition-title\">Caution</p>\n<p>随着输入增加，表达式呈指数级增长，不适合大规模设计。</p>\n</div>\n<h3 id=\"quiz\">Quiz</h3>\n<ol data-block=\"S-008\">\n<li>判断下列布尔函数是 SOP 还是 POS 形式，并计算 literal count：<ul>\n<li><span class=\"arithmatex\">\\(F(a,b,c) = ab + \\overline{a}c + bc\\)</span></li>\n<li><span class=\"arithmatex\">\\(F(a,b,c) = (a + b)(\\overline{a} + c)\\)</span></li>\n</ul>\n</li>\n</ol>\n<h2 id=\"_3\">多级逻辑化简</h2>\n<h3 id=\"technology-independent-synthesis\">Technology-Independent Synthesis</h3>\n<ul data-block=\"S-011\">\n<li>目标：将 RTL 转换为技术无关的逻辑网络。</li>\n<li>布尔逻辑网络 (Boolean Logic Network)：节点为两级逻辑 (SOP 形式) 的图。</li>\n<li>优化目标：最小化变量出现的次数（literal count，与面积相关）。</li>\n<li>化简方法：<ul>\n<li>化简节点内部逻辑函数 (两级逻辑化简)</li>\n<li>删除节点：把小的节点和后续节点合并。</li>\n<li>增加节点：提取公因式，把大的节点分解成更小的节点。</li>\n</ul>\n</li>\n</ul>\n<h3 id=\"technology-mapping\">Technology mapping</h3>\n<ul data-block=\"S-013\">\n<li>目标：将技术无关的逻辑网络映射为技术相关的网表。</li>\n<li>工艺库（technology library）：包含各种门的集合，每个门有其功能和成本（cost）。</li>\n<li>网表（netlist）：节点为工艺库中的门的图。</li>\n<li>优化目标：最小化总成本（total cost，比如面积，延迟等）。</li>\n</ul>\n<p data-block=\"S-014\"><img alt=\"原课程技术映射示意：共享 OR2 与复制 OA21 两种实现\" src=\"assets/tech-mapping.png\"/></p>\n<h3 id=\"quiz_1\">Quiz</h3>\n<ol data-block=\"S-016\">\n<li>上面的例子中，假设 AND2，OR2，OA21 的 cost 分别为 3，3，4，两种 mapping 的总 cost 分别是多少？</li>\n</ol>\n<h2 id=\"_4\">算法</h2>\n<ol data-block=\"S-018\">\n<li>将工艺库中的门转换为 NAND 和 NOT 门组成的网络（pattern）。</li>\n<li>将逻辑网络中的 SOP 节点转换为 NAND 和 NOT 门组成的网络（subject）。</li>\n<li>使用 pattern matching 算法。</li>\n</ol>\n<h3 id=\"tree-covering\">为什么使用 Tree Covering？</h3>\n<ul data-block=\"S-020\">\n<li>DAG covering：对 DGA 进行最优的匹配无法高效解决（NP-hard 问题）。</li>\n<li>Tree covering：可以用动态规划解决。可以将 DAG 分解为多棵树，然后对每棵树进行匹配。</li>\n</ul>\n<h3 id=\"_5\">例子</h3>\n<h4 id=\"pattern-tree\">Pattern Tree</h4>\n<h5 id=\"not\">NOT</h5>\n<div class=\"highlight\" data-block=\"S-024\"><pre><span></span><code>    o\n    |\n    □\n</code></pre></div>\n<h5 id=\"nand\">NAND</h5>\n<div class=\"highlight\" data-block=\"S-026\"><pre><span></span><code>    •\n   / \\\n  □   □\n</code></pre></div>\n<h5 id=\"and\">AND</h5>\n<div class=\"highlight\" data-block=\"S-028\"><pre><span></span><code>    o\n    |\n    •\n   / \\\n  □   □\n</code></pre></div>\n<h5 id=\"nor\">NOR</h5>\n<div class=\"highlight\" data-block=\"S-030\"><pre><span></span><code>    o\n    |\n    •\n   / \\\n  •   •\n  |   |\n  □   □\n</code></pre></div>\n<h5 id=\"or2\">OR2</h5>\n<div class=\"highlight\" data-block=\"S-032\"><pre><span></span><code>    o\n   / \\\n  •   •\n  |   |\n  □   □\n</code></pre></div>\n<h5 id=\"aoi21\">AOI21</h5>\n<div class=\"highlight\" data-block=\"S-034\"><pre><span></span><code>        •\n        |\n        o\n    / \\\n    o   •\n    |   |\n    □   □\n</code></pre></div>\n<div class=\"highlight\" data-block=\"S-035\"><pre><span></span><code>        •\n        |\n        o\n    / \\\n    •  o\n    |  |\n    □  □\n</code></pre></div>\n<div class=\"admonition important\" data-block=\"S-036\">\n<p class=\"admonition-title\">Important</p>\n<p>不对称的模式（如 AIO21）需要尝试旋转匹配所有可能。</p>\n</div>\n<h5 id=\"aoi22\">AOI22</h5>\n<div class=\"highlight\" data-block=\"S-038\"><pre><span></span><code>    •\n    |\n    o\n   / \\\n  o   o\n  |   |\n  □   □\n</code></pre></div>\n<h4 id=\"subject-tree\">Subject Tree</h4>\n<div class=\"highlight\" data-block=\"S-040\"><pre><span></span><code>         z\n         |\n         •\n         | t\n         o\n    r  /   \\ s\n      o     •\n   p / \\ q  |\n    •   o   d\n    |  / \\\n    a  b  c\n</code></pre></div>\n<h4 id=\"matching\">Matching</h4>\n<p data-block=\"S-042\"><div class=\"highlight\"><pre><span></span><code>Match(z) = {NOT, AND2, AOI21}\nMatch(z, NOT) = Match(t)\nMatch(z, AND2) = {Match(r), Match(s)}\nMatch(z, AOI21) = {Match(p), Match(q)}\n</code></pre></div>\n<div class=\"highlight\"><pre><span></span><code>Cost(z)\n    = min(\n        Cost(z, NOT) + Cost(NOT),\n        Cost(z, AND2) + Cost(AND2),\n        Cost(z, AOI21) + Cost(AOI21))\n    = min(\n        Cost(t) + Cost(NOT),\n        Cost(r) + Cost(s) + Cost(AND2),\n        Cost(p) + Cost(q) + Cost(AOI21))\n</code></pre></div></p>\n<h3 id=\"quiz_2\">Quiz</h3>\n<ol data-block=\"S-044\">\n<li>如果交换上面 subject tree 中节点 r 和 s 的位置，Cost(z) 会改变吗？为什么？</li>\n<li>假设工艺库中只有 NOT 和 AND2 两种门，计算上面 subject tree 的最小成本。</li>\n</ol>\n"
+  },
+  {
+    "id": "M",
+    "slug": "memory-architecture",
+    "title": "存储器体系结构",
+    "target": "ch-memory",
+    "url": "https://eda.youwei.xyz/lectures/memory-architecture/",
+    "sha256": "ca4654377463d243dc35f68885c04317d19d0feeea2fc1c0ea63ee3e6eda5511",
+    "page_note": "原课程网页无页码；以原始标题锚点定位。",
+    "headings": [
+      {
+        "level": 1,
+        "anchor": "",
+        "title": "Memory Architecture"
+      },
+      {
+        "level": 2,
+        "anchor": "_1",
+        "title": "存储器层次结构"
+      },
+      {
+        "level": 3,
+        "anchor": "quiz",
+        "title": "Quiz"
+      },
+      {
+        "level": 2,
+        "anchor": "cache",
+        "title": "Cache"
+      },
+      {
+        "level": 3,
+        "anchor": "quiz_1",
+        "title": "Quiz"
+      }
+    ],
+    "text": "Memory Architecture\n存储器层次结构\nL1 - L2 - L3 - 主存 (DRAM) - 二级存储\nQuiz\n什么是 memory wall？\n为什么要设计存储器层次结构？\n什么是 locality？有哪些类型的 locality？\nCache\nCache Hit\nCache Miss\nCPU 时间 = 指令数 (Instruction Count, IC) × （CPI_ideal + Memory-stall cycles) × 时钟周期\nMemory-stall cycles = Memory_Access per Instruction × Miss Rate × Miss Penalty\nQuiz\n熟练掌握上述公式，并理解各个参数的含义。",
+    "html": "\n<h1 data-block=\"M-001\">Memory Architecture</h1>\n<h2 id=\"_1\">存储器层次结构</h2>\n<p data-block=\"M-003\">L1 - L2 - L3 - 主存 (DRAM) - 二级存储</p>\n<h3 id=\"quiz\">Quiz</h3>\n<ol data-block=\"M-005\">\n<li>什么是 memory wall？</li>\n<li>为什么要设计存储器层次结构？</li>\n<li>什么是 locality？有哪些类型的 locality？</li>\n</ol>\n<h2 id=\"cache\">Cache</h2>\n<ul data-block=\"M-007\">\n<li>Cache Hit</li>\n<li>Cache Miss</li>\n<li>CPU 时间 = 指令数 (Instruction Count, IC) × （CPI_ideal + Memory-stall cycles) × 时钟周期</li>\n<li>Memory-stall cycles = Memory_Access per Instruction × Miss Rate × Miss Penalty</li>\n</ul>\n<h3 id=\"quiz_1\">Quiz</h3>\n<ol data-block=\"M-009\">\n<li>熟练掌握上述公式，并理解各个参数的含义。</li>\n</ol>\n"
+  },
+  {
+    "id": "X",
+    "slug": "mutual-exclusion",
+    "title": "并行与互斥",
+    "target": "ch-parallel",
+    "url": "https://eda.youwei.xyz/lectures/mutual-exclusion/",
+    "sha256": "fdae35d63e15f59aae71c269f2c31d19c692d657050671d1d14b1fd28f7ed0be",
+    "page_note": "原课程网页无页码；以原始标题锚点定位。",
+    "headings": [
+      {
+        "level": 1,
+        "anchor": "",
+        "title": "Mutual Exclusion"
+      },
+      {
+        "level": 2,
+        "anchor": "_1",
+        "title": "阿姆达尔定律"
+      },
+      {
+        "level": 3,
+        "anchor": "quiz",
+        "title": "Quiz"
+      },
+      {
+        "level": 2,
+        "anchor": "_2",
+        "title": "互斥"
+      },
+      {
+        "level": 3,
+        "anchor": "_3",
+        "title": "概念"
+      },
+      {
+        "level": 3,
+        "anchor": "_4",
+        "title": "互斥的三个属性"
+      },
+      {
+        "level": 3,
+        "anchor": "quiz_1",
+        "title": "Quiz"
+      },
+      {
+        "level": 2,
+        "anchor": "_5",
+        "title": "双线程互斥算法"
+      },
+      {
+        "level": 3,
+        "anchor": "lockone",
+        "title": "LockOne"
+      },
+      {
+        "level": 3,
+        "anchor": "locktwo",
+        "title": "LockTwo"
+      },
+      {
+        "level": 3,
+        "anchor": "petersons-algorithm",
+        "title": "Peterson's Algorithm"
+      },
+      {
+        "level": 3,
+        "anchor": "quiz_2",
+        "title": "Quiz"
+      }
+    ],
+    "text": "Mutual Exclusion\n阿姆达尔定律\n阿姆达尔定律（Amdahl's Law）：并行系统的加速比受限于其串行部分。\n公式：\n\\(S = \\frac{1}{(1 - P) + \\frac{P}{N}}\\)\n\\(S\\)\n：加速比\n\\(P\\)\n：可并行化的程序部分比例\n\\(N\\)\n：处理器数量\n公式理解：当\n\\(N\\)\n趋近于无穷大时，最大加速比为\n\\(\\frac{1}{1 - P}\\)\n。\nQuiz\n假设你的程序中 90% 的部分可以完美并行化。\n使用 10 个处理器时，理论上的最大加速比是多少？\n如果你想达到 5 倍的加速比，至少需要多少个处理器？\n如果并行部分也有 10% 的额外同步开销，公式会如何变化？\n互斥\n概念\n条件竞争（race condition）：多个线程同时访问共享资源，导致结果不可预测。\n互斥（mutual exclusion）：多个线程在同一时间只能有一个访问共享资源。\n临界区（critical section）：访问共享资源的代码片段。\n死锁（deadlock）：多个线程互相等待对方释放资源。\n饥饿（starvation）：某个线程长时间无法获得资源。\n互斥的三个属性\nSafety\n定义：任一时刻，只有一个线程可以进入临界区。\n本质：坏事永远不发生。\nLiveness\n(Deadlock-free)\n定义：如果有线程想进入临界区，最终总有一个线程能进入。\n本质：好事总会发生。\nFairness\n(Starvation-free)\n定义：如果有线程想进入临界区，这个线程最终一定能进入。\n说明：无饥饿 ⇒ 无死锁；反之不成立。\nQuiz\n有 5 位哲学家，他们的一生都在思考和吃饭中度过。他们围坐在一张圆桌旁，桌子中间有一大盘米饭。然而，桌上只有 5 根筷子，摆放在每位哲学家之间。哲学家平时在思考。当一位哲学家饿了时，他会坐下来，试图拿起离他最近的两根筷子（左手一根，右手一根）。只有当他同时拿到两根筷子时，才能开始吃饭。吃完后，他放下筷子，继续思考。\n请说明这个问题中存在哪些共享资源和临界区。\n如果每位哲学家都先拿起左手边的筷子，会发生什么情况？这是否满足互斥的三个属性？\n思考：如何设计一个解决哲学家就餐问题的算法，以避免死锁和饥饿？\n双线程互斥算法\n我们假设线程 ID 为 0 和 1。当前线程为 i，对方为 j = 1-i。\nLockOne\n// Thread i's code\npublic\nvoid\nlock\n()\n{\nflag\n[\ni\n]\n=\ntrue\n;\n// 举手 (I'm interested)\nwhile\n(\nflag\n[\nj\n]\n)\n{}\n// 等待 (Wait if the other is interested)\n}\npublic\nvoid\nunlock\n()\n{\nflag\n[\ni\n]\n=\nfalse\n;\n// 放下手\n}\n缺陷：满足 Safety，但不满足 Liveness 和 Fairness。如果两人同时举手，都在等对方放下，导致死锁。\nLockTwo\n// Thread i's code\npublic\nvoid\nlock\n()\n{\nvictim\n=\ni\n;\n// 谦让 (I'll wait)\nwhile\n(\nvictim\n==\ni\n){}\n// 等待 (Wait if the other is the victim)\n}\npublic\nvoid\nunlock\n()\n{\n// 什么都不做\n}\n缺陷：满足 Safety，但不满足 Liveness 和 Fairness。如果只有一个线程，它会自己把自己锁住，等待一个不存在的线程来修改 victim，导致死锁。\nPeterson's Algorithm\n// Thread i's code\npublic\nvoid\nlock\n()\n{\nflag\n[\ni\n]\n=\ntrue\n;\n// Step 1: 举手 (I'm interested)\nvictim\n=\ni\n;\n// Step 2: 谦让 (I'll wait if necessary)\n// 只有当两个条件同时满足时，我才等待：\n// 1. flag[j] == true: 对方也想进\n// 2. victim == i:     我是那个最后进门导致冲突的“倒霉蛋”\nwhile\n(\nflag\n[\nj\n]\n&&\nvictim\n==\ni\n)\n{};\n}\npublic\nvoid\nunlock\n()\n{\nflag\n[\ni\n]\n=\nfalse\n;\n// 放下手\n}\n证明：反证法。如果 A 进去了，说明要么 flag[B] 是 false（B 不感兴趣），要么 victim 是 B（B 后让步了）。\nQuiz\n在 LockOne 算法中，如果我们将\nflag[i] = true\n移到\nwhile\n循环之后，会违反什么属性？\n如果两个线程几乎同时执行 Peterson 算法的\nlock()\n，谁会进入临界区？",
+    "html": "\n<h1 data-block=\"X-001\">Mutual Exclusion</h1>\n<h2 id=\"_1\">阿姆达尔定律</h2>\n<ul data-block=\"X-003\">\n<li>阿姆达尔定律（Amdahl's Law）：并行系统的加速比受限于其串行部分。</li>\n<li>公式： <span class=\"arithmatex\">\\(S = \\frac{1}{(1 - P) + \\frac{P}{N}}\\)</span><ul>\n<li><span class=\"arithmatex\">\\(S\\)</span>：加速比</li>\n<li><span class=\"arithmatex\">\\(P\\)</span>：可并行化的程序部分比例</li>\n<li><span class=\"arithmatex\">\\(N\\)</span>：处理器数量</li>\n</ul>\n</li>\n<li>公式理解：当 <span class=\"arithmatex\">\\(N\\)</span> 趋近于无穷大时，最大加速比为 <span class=\"arithmatex\">\\(\\frac{1}{1 - P}\\)</span>。</li>\n</ul>\n<h3 id=\"quiz\">Quiz</h3>\n<p data-block=\"X-005\">假设你的程序中 90% 的部分可以完美并行化。</p>\n<ol data-block=\"X-006\">\n<li>使用 10 个处理器时，理论上的最大加速比是多少？</li>\n<li>如果你想达到 5 倍的加速比，至少需要多少个处理器？</li>\n<li>如果并行部分也有 10% 的额外同步开销，公式会如何变化？</li>\n</ol>\n<h2 id=\"_2\">互斥</h2>\n<h3 id=\"_3\">概念</h3>\n<ul data-block=\"X-009\">\n<li>条件竞争（race condition）：多个线程同时访问共享资源，导致结果不可预测。</li>\n<li>互斥（mutual exclusion）：多个线程在同一时间只能有一个访问共享资源。</li>\n<li>临界区（critical section）：访问共享资源的代码片段。</li>\n<li>死锁（deadlock）：多个线程互相等待对方释放资源。</li>\n<li>饥饿（starvation）：某个线程长时间无法获得资源。</li>\n</ul>\n<h3 id=\"_4\">互斥的三个属性</h3>\n<ul data-block=\"X-011\">\n<li><strong>Safety</strong><ul>\n<li>定义：任一时刻，只有一个线程可以进入临界区。</li>\n<li>本质：坏事永远不发生。</li>\n</ul>\n</li>\n<li><strong>Liveness</strong> (Deadlock-free)<ul>\n<li>定义：如果有线程想进入临界区，最终总有一个线程能进入。</li>\n<li>本质：好事总会发生。</li>\n</ul>\n</li>\n<li><strong>Fairness</strong> (Starvation-free)<ul>\n<li>定义：如果有线程想进入临界区，这个线程最终一定能进入。</li>\n<li>说明：无饥饿 ⇒ 无死锁；反之不成立。</li>\n</ul>\n</li>\n</ul>\n<h3 id=\"quiz_1\">Quiz</h3>\n<p data-block=\"X-013\">有 5 位哲学家，他们的一生都在思考和吃饭中度过。他们围坐在一张圆桌旁，桌子中间有一大盘米饭。然而，桌上只有 5 根筷子，摆放在每位哲学家之间。哲学家平时在思考。当一位哲学家饿了时，他会坐下来，试图拿起离他最近的两根筷子（左手一根，右手一根）。只有当他同时拿到两根筷子时，才能开始吃饭。吃完后，他放下筷子，继续思考。</p>\n<ol data-block=\"X-014\">\n<li>请说明这个问题中存在哪些共享资源和临界区。</li>\n<li>如果每位哲学家都先拿起左手边的筷子，会发生什么情况？这是否满足互斥的三个属性？</li>\n<li>思考：如何设计一个解决哲学家就餐问题的算法，以避免死锁和饥饿？</li>\n</ol>\n<h2 id=\"_5\">双线程互斥算法</h2>\n<p data-block=\"X-016\">我们假设线程 ID 为 0 和 1。当前线程为 i，对方为 j = 1-i。</p>\n<h3 id=\"lockone\">LockOne</h3>\n<p data-block=\"X-018\"><div class=\"highlight\"><pre><span></span><code><span class=\"c1\">// Thread i's code</span>\n<span class=\"kd\">public</span><span class=\"w\"> </span><span class=\"kt\">void</span><span class=\"w\"> </span><span class=\"nf\">lock</span><span class=\"p\">()</span><span class=\"w\"> </span><span class=\"p\">{</span>\n<span class=\"w\">  </span><span class=\"n\">flag</span><span class=\"o\">[</span><span class=\"n\">i</span><span class=\"o\">]</span><span class=\"w\"> </span><span class=\"o\">=</span><span class=\"w\"> </span><span class=\"kc\">true</span><span class=\"p\">;</span><span class=\"w\">       </span><span class=\"c1\">// 举手 (I'm interested)</span>\n<span class=\"w\">  </span><span class=\"k\">while</span><span class=\"w\"> </span><span class=\"p\">(</span><span class=\"n\">flag</span><span class=\"o\">[</span><span class=\"n\">j</span><span class=\"o\">]</span><span class=\"p\">)</span><span class=\"w\"> </span><span class=\"p\">{}</span><span class=\"w\">    </span><span class=\"c1\">// 等待 (Wait if the other is interested)</span>\n<span class=\"p\">}</span>\n<span class=\"kd\">public</span><span class=\"w\"> </span><span class=\"kt\">void</span><span class=\"w\"> </span><span class=\"nf\">unlock</span><span class=\"p\">()</span><span class=\"w\"> </span><span class=\"p\">{</span>\n<span class=\"w\">  </span><span class=\"n\">flag</span><span class=\"o\">[</span><span class=\"n\">i</span><span class=\"o\">]</span><span class=\"w\"> </span><span class=\"o\">=</span><span class=\"w\"> </span><span class=\"kc\">false</span><span class=\"p\">;</span><span class=\"w\">      </span><span class=\"c1\">// 放下手</span>\n<span class=\"p\">}</span>\n</code></pre></div>\n缺陷：满足 Safety，但不满足 Liveness 和 Fairness。如果两人同时举手，都在等对方放下，导致死锁。</p>\n<h3 id=\"locktwo\">LockTwo</h3>\n<p data-block=\"X-020\"><div class=\"highlight\"><pre><span></span><code><span class=\"c1\">// Thread i's code</span>\n<span class=\"kd\">public</span><span class=\"w\"> </span><span class=\"kt\">void</span><span class=\"w\"> </span><span class=\"nf\">lock</span><span class=\"p\">()</span><span class=\"w\"> </span><span class=\"p\">{</span>\n<span class=\"w\">  </span><span class=\"n\">victim</span><span class=\"w\"> </span><span class=\"o\">=</span><span class=\"w\"> </span><span class=\"n\">i</span><span class=\"p\">;</span><span class=\"w\">           </span><span class=\"c1\">// 谦让 (I'll wait)</span>\n<span class=\"w\">  </span><span class=\"k\">while</span><span class=\"w\"> </span><span class=\"p\">(</span><span class=\"n\">victim</span><span class=\"w\"> </span><span class=\"o\">==</span><span class=\"w\"> </span><span class=\"n\">i</span><span class=\"p\">){}</span><span class=\"w\"> </span><span class=\"c1\">// 等待 (Wait if the other is the victim)</span>\n<span class=\"p\">}</span>\n<span class=\"kd\">public</span><span class=\"w\"> </span><span class=\"kt\">void</span><span class=\"w\"> </span><span class=\"nf\">unlock</span><span class=\"p\">()</span><span class=\"w\"> </span><span class=\"p\">{</span>\n<span class=\"w\">  </span><span class=\"c1\">// 什么都不做</span>\n<span class=\"p\">}</span>\n</code></pre></div>\n缺陷：满足 Safety，但不满足 Liveness 和 Fairness。如果只有一个线程，它会自己把自己锁住，等待一个不存在的线程来修改 victim，导致死锁。</p>\n<h3 id=\"petersons-algorithm\">Peterson's Algorithm</h3>\n<div class=\"highlight\" data-block=\"X-022\"><pre><span></span><code><span class=\"c1\">// Thread i's code</span>\n<span class=\"kd\">public</span><span class=\"w\"> </span><span class=\"kt\">void</span><span class=\"w\"> </span><span class=\"nf\">lock</span><span class=\"p\">()</span><span class=\"w\"> </span><span class=\"p\">{</span>\n<span class=\"w\">  </span><span class=\"n\">flag</span><span class=\"o\">[</span><span class=\"n\">i</span><span class=\"o\">]</span><span class=\"w\"> </span><span class=\"o\">=</span><span class=\"w\"> </span><span class=\"kc\">true</span><span class=\"p\">;</span><span class=\"w\">       </span><span class=\"c1\">// Step 1: 举手 (I'm interested)</span>\n<span class=\"w\">  </span><span class=\"n\">victim</span><span class=\"w\"> </span><span class=\"o\">=</span><span class=\"w\"> </span><span class=\"n\">i</span><span class=\"p\">;</span><span class=\"w\">           </span><span class=\"c1\">// Step 2: 谦让 (I'll wait if necessary)</span>\n\n<span class=\"w\">  </span><span class=\"c1\">// 只有当两个条件同时满足时，我才等待：</span>\n<span class=\"w\">  </span><span class=\"c1\">// 1. flag[j] == true: 对方也想进</span>\n<span class=\"w\">  </span><span class=\"c1\">// 2. victim == i:     我是那个最后进门导致冲突的“倒霉蛋”</span>\n<span class=\"w\">  </span><span class=\"k\">while</span><span class=\"w\"> </span><span class=\"p\">(</span><span class=\"n\">flag</span><span class=\"o\">[</span><span class=\"n\">j</span><span class=\"o\">]</span><span class=\"w\"> </span><span class=\"o\">&amp;&amp;</span><span class=\"w\"> </span><span class=\"n\">victim</span><span class=\"w\"> </span><span class=\"o\">==</span><span class=\"w\"> </span><span class=\"n\">i</span><span class=\"p\">)</span><span class=\"w\"> </span><span class=\"p\">{};</span>\n<span class=\"p\">}</span>\n<span class=\"kd\">public</span><span class=\"w\"> </span><span class=\"kt\">void</span><span class=\"w\"> </span><span class=\"nf\">unlock</span><span class=\"p\">()</span><span class=\"w\"> </span><span class=\"p\">{</span>\n<span class=\"w\">  </span><span class=\"n\">flag</span><span class=\"o\">[</span><span class=\"n\">i</span><span class=\"o\">]</span><span class=\"w\"> </span><span class=\"o\">=</span><span class=\"w\"> </span><span class=\"kc\">false</span><span class=\"p\">;</span><span class=\"w\">      </span><span class=\"c1\">// 放下手</span>\n<span class=\"p\">}</span>\n</code></pre></div>\n<p data-block=\"X-023\">证明：反证法。如果 A 进去了，说明要么 flag[B] 是 false（B 不感兴趣），要么 victim 是 B（B 后让步了）。</p>\n<h3 id=\"quiz_2\">Quiz</h3>\n<ol data-block=\"X-025\">\n<li>在 LockOne 算法中，如果我们将 <code>flag[i] = true</code> 移到 <code>while</code> 循环之后，会违反什么属性？</li>\n<li>如果两个线程几乎同时执行 Peterson 算法的 <code>lock()</code>，谁会进入临界区？</li>\n</ol>\n"
+  },
+  {
+    "id": "P",
+    "slug": "placement",
+    "title": "布局",
+    "target": "ch-placement",
+    "url": "https://eda.youwei.xyz/lectures/placement/",
+    "sha256": "b14c144c32c6465eefb35e2269f1cad1da58e18053279d703db9744c42e99cf2",
+    "page_note": "原课程网页无页码；以原始标题锚点定位。",
+    "headings": [
+      {
+        "level": 1,
+        "anchor": "",
+        "title": "Placement"
+      },
+      {
+        "level": 2,
+        "anchor": "_1",
+        "title": "布局"
+      },
+      {
+        "level": 2,
+        "anchor": "_2",
+        "title": "全局布局"
+      },
+      {
+        "level": 2,
+        "anchor": "_3",
+        "title": "模拟退火"
+      },
+      {
+        "level": 3,
+        "anchor": "quiz",
+        "title": "Quiz"
+      },
+      {
+        "level": 2,
+        "anchor": "_4",
+        "title": "划分"
+      },
+      {
+        "level": 3,
+        "anchor": "quiz_1",
+        "title": "Quiz"
+      },
+      {
+        "level": 2,
+        "anchor": "analytic-placement",
+        "title": "解析式布局 Analytic placement"
+      },
+      {
+        "level": 2,
+        "anchor": "_5",
+        "title": "线长的估计方法"
+      },
+      {
+        "level": 3,
+        "anchor": "_6",
+        "title": "例子"
+      },
+      {
+        "level": 3,
+        "anchor": "quiz_2",
+        "title": "Quiz"
+      },
+      {
+        "level": 2,
+        "anchor": "quadratic-placement",
+        "title": "Quadratic placement"
+      },
+      {
+        "level": 3,
+        "anchor": "quiz_3",
+        "title": "Quiz"
+      },
+      {
+        "level": 2,
+        "anchor": "nonlinear-placement",
+        "title": "Nonlinear placement"
+      },
+      {
+        "level": 3,
+        "anchor": "quiz_4",
+        "title": "Quiz"
+      }
+    ],
+    "text": "Placement\n布局\n布局 (Placement)：将逻辑单元映射到芯片上的物理位置。\n输入：网表，单元形状，pin 位置。\n输出：单元的物理位置。单元之间没有重叠。\n目标：最小化连线长度 (wirelength)，时序 (timing)，可绕线性 (routability) 等。\n全局布局\n模拟退火\n基本思想：通过模拟物理退火过程，逐步降低系统温度，寻找最优或近优解。\n关键设计：\n移动策略：如何生成新状态\n成本函数：如何评估状态质量\nTimberWolf：\n成本函数：\n\\(C = C_1 + C_2 + C_3\\)\n线长估算 (半周长法)：\n\\(C_1 = \\sum {HPWL}\\)\n重叠惩罚：\n\\(C_2 = \\sum(O(i, j) + \\alpha)^2\\)\n,\n\\(O(i, j)\\)\n为单元\n\\(i\\)\n和\n\\(j\\)\n的重叠面积。允许移动时的临时重叠，通过惩罚逐渐消除。\n行长平衡：\n\\(C_3 = \\sum|l(r) - d(r)|^2\\)\n，其中\n\\(l(r)\\)\n为实际行长度，\n\\(d(r)\\)\n为目标行长度。每行单元总宽度应接近行长度，避免某些行过满而其他行稀疏。\n移动策略：\nM1: 选择一个单元，移动到一个新位置。\nM2: 选择两个单元，交换位置。\nM3: 选择一个单元，旋转方向。\nDragon2000\n优化思路：多级优化。将电路划分成多层的粗粒度的格子（bins），在格子之间使用模拟退火算法，加速超大规模电路的布局收敛。\nQuiz\n模拟退火算法中温度 T 的作用是什么？(单选)\n控制成本函数的权重\n控制算法运行时间\n控制接受较差解的概率\n控制单元移动的距离\n为什么在移动时允许单元重叠？\n为什么多级优化可以加速模拟退火收敛？\n划分\n基本思想：将连接紧密的单元聚集在一起，反复地将电路划分为多个分区。\n关键设计：\n目标函数：最小化分区间连线数 (cut size)，保持分区平衡 (balance)。\n划分算法\n划分线（cutline）选择\nQuiz\n划分算法中，为什么要保持分区平衡？\n解析式布局 Analytic placement\n基本思想：将布局问题转化为数学优化问题，通过求解优化问题得到单元位置。\n关键设计：\n目标函数\n约束条件\n优化方法\n线长的估计方法\n模型\n描述\n距离度量\n精度\n平滑度\n特点\nMin. Steiner Tree (MST)\n最小斯坦纳树\n曼哈顿\n⭐⭐⭐⭐⭐\n⭐\n金标准\n，最接近实际布线长度，但计算极其复杂且不可导。\nClique Model\n团模型 (全连接)\n曼哈顿/欧氏\n⭐\n⭐⭐ / ⭐⭐⭐⭐⭐\n悲观估计\n。将\n\\(k\\)\n个引脚两两相连。由于边数随\n\\(k^2\\)\n增长，会严重高估长度。\nHPWL\n半周长导线长度\n曼哈顿\n⭐⭐⭐⭐\n⭐⭐\n常用\n。计算包围所有引脚的最小矩形。对于 2-3 个引脚完全准确，对多引脚属于\n乐观估计\n。\nStar Model\n星型模型\n欧氏\n⭐⭐⭐\n⭐⭐⭐⭐⭐\n添加一个虚拟中心点，所有引脚连向中心。由于其高度平滑（\n\\(C^\\infty\\)\n连续），常用于\n解析式布局器\n。\n例子\n假设一个 Net 包含 4 个引脚，分别位于正方形的顶点：\n\\(A(0,1), B(1,1), C(0,0), D(1,0)\\)\n。\nHPWL (最快): 计算 Bounding Box。\n\\(X_{span} = 1, Y_{span} = 1\\)\n\\(HPWL = 1 + 1 = \\mathbf{2}\\)\nClique Model (最悲观): 连接所有组合（AB, AC, AD, BC, BD, CD）。\n边数 =\n\\(k(k-1)/2 = 6\\)\n条边。长度总和远超 2，会产生巨大的“引力”将单元拉向一点。\nStar Model (最平滑): 在中心\n\\((0.5, 0.5)\\)\n增加一个虚拟点\n\\(S\\)\n。\n连接\n\\(SA, SB, SC, SD\\)\n。这种模型没有拐点，在数学优化（梯度下降）中表现极佳。\nQuiz\n举例说明，为什么 HPWL 是一种乐观估计？\n举例说明，为什么 Clique Model 是一种悲观估计？\n为什么 Star Model 适合用于解析式布局器？\nQuadratic placement\n核心思想：将导线视为弹簧，通过最小化总能量（平方距离之和）来确定单元位置。\n目标函数：最小化所有连线的平方距离加权和。（线长模型可以选择 HPWL 或 Clique Model 或 Star Model）\n优点：形式简单，易于求解。适合大规模电路。\n缺点：单元重叠严重（所有单元倾向于挤在中心）。\n解决方法：\n去除重叠（Rough legalization）：通过线性映射，将\n循环迭代：优化目标->满足约束->优化目标->满足约束...\nQuiz\n为什么 Quadratic placement 会导致单元重叠？\n为什么在去除重叠后需要重新优化目标函数？\nNonlinear placement\n核心思想：将布线长度和单元密度同时放入一个连续可微的函数中。\n目标函数：\n\\(C = \\min_{x,y} WL(x,y) + \\lambda D(x,y)\\)\nWL: 平滑的线长估计\nD: 利用类似静电场的函数替代离散的重叠计算。\nQuiz\n为什么要将单元密度作为目标函数的一部分？\n在 Nonlinear placement 中，如果参数 λ 过大，布局结果会发生什么变化？",
+    "html": "\n<h1 data-block=\"P-001\">Placement</h1>\n<h2 id=\"_1\">布局</h2>\n<ul data-block=\"P-003\">\n<li>布局 (Placement)：将逻辑单元映射到芯片上的物理位置。</li>\n<li>输入：网表，单元形状，pin 位置。</li>\n<li>输出：单元的物理位置。单元之间没有重叠。</li>\n<li>目标：最小化连线长度 (wirelength)，时序 (timing)，可绕线性 (routability) 等。</li>\n</ul>\n<h2 id=\"_2\">全局布局</h2>\n<h2 id=\"_3\">模拟退火</h2>\n<ul data-block=\"P-006\">\n<li>基本思想：通过模拟物理退火过程，逐步降低系统温度，寻找最优或近优解。</li>\n<li>关键设计：<ul>\n<li>移动策略：如何生成新状态</li>\n<li>成本函数：如何评估状态质量</li>\n</ul>\n</li>\n<li>TimberWolf：<ul>\n<li>成本函数：<span class=\"arithmatex\">\\(C = C_1 + C_2 + C_3\\)</span><ul>\n<li>线长估算 (半周长法)：<span class=\"arithmatex\">\\(C_1 = \\sum {HPWL}\\)</span></li>\n<li>重叠惩罚：<span class=\"arithmatex\">\\(C_2 = \\sum(O(i, j) + \\alpha)^2\\)</span>, <span class=\"arithmatex\">\\(O(i, j)\\)</span> 为单元 <span class=\"arithmatex\">\\(i\\)</span> 和 <span class=\"arithmatex\">\\(j\\)</span> 的重叠面积。允许移动时的临时重叠，通过惩罚逐渐消除。</li>\n<li>行长平衡：<span class=\"arithmatex\">\\(C_3 = \\sum|l(r) - d(r)|^2\\)</span>，其中 <span class=\"arithmatex\">\\(l(r)\\)</span> 为实际行长度，<span class=\"arithmatex\">\\(d(r)\\)</span> 为目标行长度。每行单元总宽度应接近行长度，避免某些行过满而其他行稀疏。</li>\n</ul>\n</li>\n<li>移动策略：<ul>\n<li>M1: 选择一个单元，移动到一个新位置。</li>\n<li>M2: 选择两个单元，交换位置。</li>\n<li>M3: 选择一个单元，旋转方向。</li>\n</ul>\n</li>\n</ul>\n</li>\n<li>Dragon2000<ul>\n<li>优化思路：多级优化。将电路划分成多层的粗粒度的格子（bins），在格子之间使用模拟退火算法，加速超大规模电路的布局收敛。</li>\n</ul>\n</li>\n</ul>\n<h3 id=\"quiz\">Quiz</h3>\n<ol data-block=\"P-008\">\n<li>模拟退火算法中温度 T 的作用是什么？(单选)<ol>\n<li>控制成本函数的权重</li>\n<li>控制算法运行时间</li>\n<li>控制接受较差解的概率</li>\n<li>控制单元移动的距离</li>\n</ol>\n</li>\n<li>为什么在移动时允许单元重叠？</li>\n<li>为什么多级优化可以加速模拟退火收敛？</li>\n</ol>\n<h2 id=\"_4\">划分</h2>\n<ul data-block=\"P-010\">\n<li>基本思想：将连接紧密的单元聚集在一起，反复地将电路划分为多个分区。</li>\n<li>关键设计：<ul>\n<li>目标函数：最小化分区间连线数 (cut size)，保持分区平衡 (balance)。</li>\n<li>划分算法</li>\n<li>划分线（cutline）选择</li>\n</ul>\n</li>\n</ul>\n<h3 id=\"quiz_1\">Quiz</h3>\n<ol data-block=\"P-012\">\n<li>划分算法中，为什么要保持分区平衡？</li>\n</ol>\n<h2 id=\"analytic-placement\">解析式布局 Analytic placement</h2>\n<ul data-block=\"P-014\">\n<li>基本思想：将布局问题转化为数学优化问题，通过求解优化问题得到单元位置。</li>\n<li>关键设计：<ul>\n<li>目标函数</li>\n<li>约束条件</li>\n<li>优化方法</li>\n</ul>\n</li>\n</ul>\n<h2 id=\"_5\">线长的估计方法</h2>\n<table data-block=\"P-016\">\n<thead>\n<tr>\n<th>模型</th>\n<th>描述</th>\n<th>距离度量</th>\n<th>精度</th>\n<th>平滑度</th>\n<th>特点</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Min. Steiner Tree (MST)</strong></td>\n<td>最小斯坦纳树</td>\n<td>曼哈顿</td>\n<td>⭐⭐⭐⭐⭐</td>\n<td>⭐</td>\n<td><strong>金标准</strong>，最接近实际布线长度，但计算极其复杂且不可导。</td>\n</tr>\n<tr>\n<td><strong>Clique Model</strong></td>\n<td>团模型 (全连接)</td>\n<td>曼哈顿/欧氏</td>\n<td>⭐</td>\n<td>⭐⭐ / ⭐⭐⭐⭐⭐</td>\n<td><strong>悲观估计</strong>。将 <span class=\"arithmatex\">\\(k\\)</span> 个引脚两两相连。由于边数随 <span class=\"arithmatex\">\\(k^2\\)</span> 增长，会严重高估长度。</td>\n</tr>\n<tr>\n<td><strong>HPWL</strong></td>\n<td>半周长导线长度</td>\n<td>曼哈顿</td>\n<td>⭐⭐⭐⭐</td>\n<td>⭐⭐</td>\n<td><strong>常用</strong>。计算包围所有引脚的最小矩形。对于 2-3 个引脚完全准确，对多引脚属于<strong>乐观估计</strong>。</td>\n</tr>\n<tr>\n<td><strong>Star Model</strong></td>\n<td>星型模型</td>\n<td>欧氏</td>\n<td>⭐⭐⭐</td>\n<td>⭐⭐⭐⭐⭐</td>\n<td>添加一个虚拟中心点，所有引脚连向中心。由于其高度平滑（<span class=\"arithmatex\">\\(C^\\infty\\)</span> 连续），常用于<strong>解析式布局器</strong>。</td>\n</tr>\n</tbody>\n</table>\n<h3 id=\"_6\">例子</h3>\n<p data-block=\"P-018\">假设一个 Net 包含 4 个引脚，分别位于正方形的顶点：<span class=\"arithmatex\">\\(A(0,1), B(1,1), C(0,0), D(1,0)\\)</span>。</p>\n<ul data-block=\"P-019\">\n<li>HPWL (最快): 计算 Bounding Box。</li>\n</ul>\n<p data-block=\"P-020\"><span class=\"arithmatex\">\\(X_{span} = 1, Y_{span} = 1\\)</span>\n<span class=\"arithmatex\">\\(HPWL = 1 + 1 = \\mathbf{2}\\)</span></p>\n<ul data-block=\"P-021\">\n<li>Clique Model (最悲观): 连接所有组合（AB, AC, AD, BC, BD, CD）。</li>\n</ul>\n<p data-block=\"P-022\">边数 = <span class=\"arithmatex\">\\(k(k-1)/2 = 6\\)</span> 条边。长度总和远超 2，会产生巨大的“引力”将单元拉向一点。</p>\n<ul data-block=\"P-023\">\n<li>Star Model (最平滑): 在中心 <span class=\"arithmatex\">\\((0.5, 0.5)\\)</span> 增加一个虚拟点 <span class=\"arithmatex\">\\(S\\)</span>。</li>\n</ul>\n<p data-block=\"P-024\">连接 <span class=\"arithmatex\">\\(SA, SB, SC, SD\\)</span>。这种模型没有拐点，在数学优化（梯度下降）中表现极佳。</p>\n<h3 id=\"quiz_2\">Quiz</h3>\n<ol data-block=\"P-026\">\n<li>举例说明，为什么 HPWL 是一种乐观估计？</li>\n<li>举例说明，为什么 Clique Model 是一种悲观估计？</li>\n<li>为什么 Star Model 适合用于解析式布局器？</li>\n</ol>\n<h2 id=\"quadratic-placement\">Quadratic placement</h2>\n<ul data-block=\"P-028\">\n<li>核心思想：将导线视为弹簧，通过最小化总能量（平方距离之和）来确定单元位置。</li>\n<li>目标函数：最小化所有连线的平方距离加权和。（线长模型可以选择 HPWL 或 Clique Model 或 Star Model）</li>\n<li>优点：形式简单，易于求解。适合大规模电路。</li>\n<li>缺点：单元重叠严重（所有单元倾向于挤在中心）。</li>\n<li>解决方法：<ul>\n<li>去除重叠（Rough legalization）：通过线性映射，将</li>\n<li>循环迭代：优化目标-&gt;满足约束-&gt;优化目标-&gt;满足约束...</li>\n</ul>\n</li>\n</ul>\n<h3 id=\"quiz_3\">Quiz</h3>\n<ol data-block=\"P-030\">\n<li>为什么 Quadratic placement 会导致单元重叠？</li>\n<li>为什么在去除重叠后需要重新优化目标函数？</li>\n</ol>\n<h2 id=\"nonlinear-placement\">Nonlinear placement</h2>\n<ul data-block=\"P-032\">\n<li>核心思想：将布线长度和单元密度同时放入一个连续可微的函数中。</li>\n<li>目标函数：<span class=\"arithmatex\">\\(C = \\min_{x,y} WL(x,y) + \\lambda D(x,y)\\)</span><ul>\n<li>WL: 平滑的线长估计</li>\n<li>D: 利用类似静电场的函数替代离散的重叠计算。</li>\n</ul>\n</li>\n</ul>\n<h3 id=\"quiz_4\">Quiz</h3>\n<ol data-block=\"P-034\">\n<li>为什么要将单元密度作为目标函数的一部分？</li>\n<li>在 Nonlinear placement 中，如果参数 λ 过大，布局结果会发生什么变化？</li>\n</ol>\n"
+  },
+  {
+    "id": "R",
+    "slug": "routing",
+    "title": "布线",
+    "target": "ch-routing",
+    "url": "https://eda.youwei.xyz/lectures/routing/",
+    "sha256": "14684ae878a87f01bc450a0032e692a480dbdf09661a52f8e85424a54374c511",
+    "page_note": "原课程网页无页码；以原始标题锚点定位。",
+    "headings": [
+      {
+        "level": 1,
+        "anchor": "",
+        "title": "Routing"
+      },
+      {
+        "level": 2,
+        "anchor": "_1",
+        "title": "布线"
+      },
+      {
+        "level": 2,
+        "anchor": "steiner",
+        "title": "Steiner 树"
+      },
+      {
+        "level": 2,
+        "anchor": "flute",
+        "title": "FLUTE 算法"
+      },
+      {
+        "level": 2,
+        "anchor": "_2",
+        "title": "迷宫布线"
+      },
+      {
+        "level": 2,
+        "anchor": "lees-algorithm",
+        "title": "Lee's Algorithm"
+      },
+      {
+        "level": 3,
+        "anchor": "_3",
+        "title": "例子"
+      },
+      {
+        "level": 4,
+        "anchor": "wave-propagation",
+        "title": "阶段一：波浪传播 (Wave Propagation)"
+      },
+      {
+        "level": 4,
+        "anchor": "2-retrace",
+        "title": "阶段 2：回溯 (Retrace)"
+      },
+      {
+        "level": 3,
+        "anchor": "quiz",
+        "title": "Quiz"
+      },
+      {
+        "level": 2,
+        "anchor": "akers-coding",
+        "title": "Akers' Coding"
+      },
+      {
+        "level": 3,
+        "anchor": "_4",
+        "title": "例子"
+      },
+      {
+        "level": 3,
+        "anchor": "quiz_1",
+        "title": "Quiz"
+      }
+    ],
+    "text": "Routing\n布线\n布线 (Routing)：在布局完成后，为网表中的组件确定之间的连线。\n输入：布局结果，网表，引脚位置，障碍物，时序约束等。\n输出：连线路径。\n目标：\n最小化总线长，过孔数（vias）等。\n满足时序和设计规则。\nSteiner 树\nSteiner 树：允许添加额外节点（Steiner 点）接所有节点的树。\nRectilinear Steiner 树：仅允许水平和垂直边。\n最小 Steneiner 树问题是 NP 难问题。\nFLUTE 算法\n核心思想：利用预计算的查找表，将大规模问题分解为 7 个节点以内的小问题。\nHannan 网格：通过所有节点的水平和垂直线段构成的网格。\n线长向量（WV）：线长可以被表示为网格中线段的线性组合。每个 WV 对应了一种 Steiner 树结构。\n潜在最优线长向量（POWV）：为了找到最优线长，可以枚举所有可能的线长向量。但是，大多数 WV 不是最优的。\n算法步骤：\n将大规模问题分解为多个 7 个节点以内的小问题。\n对每个小问题，根据节点间的相对位置关系，使用查找表找到对应的 POWV 集合。\n计算每个 POWV 的实际线长，选择最小的。\nNote\nFLUTE 不关心具体坐标数值，只关心相对位置关系。它跳过了尝试在哪里增加 Steiner 点的过程，直接根据形状特征从查找表中取出答案。\n迷宫布线\nLee's Algorithm\n就是 BFS。\n例子\nS (起点): (0, 0)\nT (终点): (4, 2)\nX (障碍物)\n阶段一：波浪传播 (Wave Propagation)\n初始状态：\n第 1-2 步：\nS 1 2 3\n1 2 3 X\nX 3 . .\n. . . T\n第 3-5 步 (绕过障碍)：\nS 1 2 3\n1 2 3 X\nX 3 . .\n. . . T\n第 6 步 (到达终点)：\nT 的位置被标上了\n6\n。这说明最短路径长度为 6。\n0 1 2 3 4\n1 X X X 5\n2 3 4 5 6(T)\n3 4 5 6 .\n4 5 6 . .\n阶段 2：回溯 (Retrace)\n从终点 T (标号 6) 开始，找标号为\n当前-1\n的邻居，直到回到 S (0)。\nStart at T(6)\n-> 找邻居 5\nAt 5\n-> 找邻居 4\nAt 4\n-> 找邻居 3 (注意：这里可能有多个 3，选哪走哪，或根据规则选拐弯最少的)\n...\n6 -> 5 -> 4 -> 3 -> 2 -> 1 -> 0\n最终路径 (Path)：\nS > > > v\n. X X X v\n. . . . T\n. . . . .\n. . . . .\n(路径：S -> (0,1) -> (0,2) -> (0,3) -> (0,4) -> (1,4) -> T)\nQuiz\n如果将 S 和 T 的位置互换，最短路径长度会改变吗？为什么？\n如果将 S 和 T 的位置互换，算法执行的时间会改变吗？为什么？\nAkers' Coding\n目标：减少内存使用。\n思路：我们不需要知道确切的距离，只需要知道回溯的方向。只需 1 bit 或 2 bits 的循环序列即可区分前后邻居。\n例子\n初始状态：\nS . . .\n. . . X\nX . . .\n. . . T\n第 1-2 步：\nS 0 1 .\n0 1 . X\nX . . .\n. . . T\n第 3-5 步：\nS 0 1 0\n0 1 0 X\nX 0 1 0\n0 1 0 T\nQuiz\n使用 Akers' Coding 后，内存使用量相比 Lee's Algorithm 有何变化？\nAkers' Coding 是否会影响找到的路径长度？为什么？",
+    "html": "\n<h1 data-block=\"R-001\">Routing</h1>\n<h2 id=\"_1\">布线</h2>\n<ul data-block=\"R-003\">\n<li>布线 (Routing)：在布局完成后，为网表中的组件确定之间的连线。</li>\n<li>输入：布局结果，网表，引脚位置，障碍物，时序约束等。</li>\n<li>输出：连线路径。</li>\n<li>目标：<ul>\n<li>最小化总线长，过孔数（vias）等。</li>\n<li>满足时序和设计规则。</li>\n</ul>\n</li>\n</ul>\n<h2 id=\"steiner\">Steiner 树</h2>\n<ul data-block=\"R-005\">\n<li>Steiner 树：允许添加额外节点（Steiner 点）接所有节点的树。</li>\n<li>Rectilinear Steiner 树：仅允许水平和垂直边。</li>\n<li>最小 Steneiner 树问题是 NP 难问题。</li>\n</ul>\n<h2 id=\"flute\">FLUTE 算法</h2>\n<ul data-block=\"R-007\">\n<li>核心思想：利用预计算的查找表，将大规模问题分解为 7 个节点以内的小问题。</li>\n<li>Hannan 网格：通过所有节点的水平和垂直线段构成的网格。</li>\n<li>线长向量（WV）：线长可以被表示为网格中线段的线性组合。每个 WV 对应了一种 Steiner 树结构。</li>\n<li>潜在最优线长向量（POWV）：为了找到最优线长，可以枚举所有可能的线长向量。但是，大多数 WV 不是最优的。</li>\n<li>算法步骤：<ol>\n<li>将大规模问题分解为多个 7 个节点以内的小问题。</li>\n<li>对每个小问题，根据节点间的相对位置关系，使用查找表找到对应的 POWV 集合。</li>\n<li>计算每个 POWV 的实际线长，选择最小的。</li>\n</ol>\n</li>\n</ul>\n<div class=\"admonition note\" data-block=\"R-008\">\n<p class=\"admonition-title\">Note</p>\n<p>FLUTE 不关心具体坐标数值，只关心相对位置关系。它跳过了尝试在哪里增加 Steiner 点的过程，直接根据形状特征从查找表中取出答案。</p>\n</div>\n<h2 id=\"_2\">迷宫布线</h2>\n<h2 id=\"lees-algorithm\">Lee's Algorithm</h2>\n<ul data-block=\"R-011\">\n<li>就是 BFS。</li>\n</ul>\n<h3 id=\"_3\">例子</h3>\n<ul data-block=\"R-013\">\n<li>S (起点): (0, 0)</li>\n<li>T (终点): (4, 2)</li>\n<li>X (障碍物)</li>\n</ul>\n<h4 id=\"wave-propagation\">阶段一：波浪传播 (Wave Propagation)</h4>\n<p data-block=\"R-015\"><strong>初始状态：</strong></p>\n<p data-block=\"R-016\"><strong>第 1-2 步：</strong>\n<div class=\"highlight\"><pre><span></span><code>S 1 2 3\n1 2 3 X\nX 3 . .\n. . . T\n</code></pre></div></p>\n<p data-block=\"R-017\"><strong>第 3-5 步 (绕过障碍)：</strong></p>\n<div class=\"highlight\" data-block=\"R-018\"><pre><span></span><code>S 1 2 3\n1 2 3 X\nX 3 . .\n. . . T\n</code></pre></div>\n<p data-block=\"R-019\"><strong>第 6 步 (到达终点)：</strong>\nT 的位置被标上了 <strong>6</strong>。这说明最短路径长度为 6。\n<div class=\"highlight\"><pre><span></span><code>0 1 2 3 4\n1 X X X 5\n2 3 4 5 6(T)\n3 4 5 6 .\n4 5 6 . .\n</code></pre></div></p>\n<h4 id=\"2-retrace\">阶段 2：回溯 (Retrace)</h4>\n<p data-block=\"R-021\">从终点 T (标号 6) 开始，找标号为 <code>当前-1</code> 的邻居，直到回到 S (0)。</p>\n<ol data-block=\"R-022\">\n<li><strong>Start at T(6)</strong> -&gt; 找邻居 5</li>\n<li><strong>At 5</strong> -&gt; 找邻居 4</li>\n<li><strong>At 4</strong> -&gt; 找邻居 3 (注意：这里可能有多个 3，选哪走哪，或根据规则选拐弯最少的)\n...\n6 -&gt; 5 -&gt; 4 -&gt; 3 -&gt; 2 -&gt; 1 -&gt; 0</li>\n</ol>\n<p data-block=\"R-023\"><strong>最终路径 (Path)：</strong>\n<div class=\"highlight\"><pre><span></span><code>S &gt; &gt; &gt; v\n. X X X v\n. . . . T\n. . . . .\n. . . . .\n</code></pre></div>\n<em>(路径：S -&gt; (0,1) -&gt; (0,2) -&gt; (0,3) -&gt; (0,4) -&gt; (1,4) -&gt; T)</em></p>\n<h3 id=\"quiz\">Quiz</h3>\n<ol data-block=\"R-025\">\n<li>如果将 S 和 T 的位置互换，最短路径长度会改变吗？为什么？</li>\n<li>如果将 S 和 T 的位置互换，算法执行的时间会改变吗？为什么？</li>\n</ol>\n<h2 id=\"akers-coding\">Akers' Coding</h2>\n<ul data-block=\"R-027\">\n<li>目标：减少内存使用。</li>\n<li>思路：我们不需要知道确切的距离，只需要知道回溯的方向。只需 1 bit 或 2 bits 的循环序列即可区分前后邻居。</li>\n</ul>\n<h3 id=\"_4\">例子</h3>\n<p data-block=\"R-029\"><strong>初始状态：</strong></p>\n<div class=\"highlight\" data-block=\"R-030\"><pre><span></span><code>S . . .\n. . . X\nX . . .\n. . . T\n</code></pre></div>\n<p data-block=\"R-031\"><strong>第 1-2 步：</strong>\n<div class=\"highlight\"><pre><span></span><code>S 0 1 .\n0 1 . X\nX . . .\n. . . T\n</code></pre></div></p>\n<p data-block=\"R-032\"><strong>第 3-5 步：</strong></p>\n<div class=\"highlight\" data-block=\"R-033\"><pre><span></span><code>S 0 1 0\n0 1 0 X\nX 0 1 0\n0 1 0 T\n</code></pre></div>\n<h3 id=\"quiz_1\">Quiz</h3>\n<ol data-block=\"R-035\">\n<li>使用 Akers' Coding 后，内存使用量相比 Lee's Algorithm 有何变化？</li>\n<li>Akers' Coding 是否会影响找到的路径长度？为什么？</li>\n</ol>\n"
+  },
+  {
+    "id": "T",
+    "slug": "static-timing-analysis",
+    "title": "静态时序分析",
+    "target": "ch-timing",
+    "url": "https://eda.youwei.xyz/lectures/static-timing-analysis/",
+    "sha256": "b2bdefeff8a1190d6c8874ef5d01e89dacdd7156500c04a8dafe1fe33f83d5da",
+    "page_note": "原课程网页无页码；以原始标题锚点定位。",
+    "headings": [
+      {
+        "level": 1,
+        "anchor": "",
+        "title": "Staic Timing Analysis"
+      },
+      {
+        "level": 2,
+        "anchor": "_1",
+        "title": "静态时序分析"
+      },
+      {
+        "level": 2,
+        "anchor": "_2",
+        "title": "时序约束"
+      },
+      {
+        "level": 3,
+        "anchor": "quiz",
+        "title": "Quiz"
+      }
+    ],
+    "text": "Staic Timing Analysis\n静态时序分析\n静态时序分析 (Static Timing Analysis, STA)：在不需要输入向量的情况下，通过电路结构和元件参数验证电路时序\n时序弧 (Timing Arc)：\n单元延迟 (Cell Arc): 逻辑门内部输入到输出的延迟。\n连线延迟 (Net Arc): 逻辑门之间连线引起的延迟。\n时序图（Timing Graph）：由引脚（节点）和时序弧（边）构成的有向无环图 (DAG)。\n时序约束\n建立时间 (Setup Time)：在时钟沿之前，数据必须稳定的最短时间。\n修复方法：\n减小数据路径延迟（优化组合逻辑）\n增加时钟周期（降低频率）\n保持时间 (Hold Time)：在时钟沿之后，数据必须稳定的最短时间。\n修复方法：\n增加数据路径延迟（插入缓冲器）\n注意：降频无法解决保持时间违例！\n到达时间（Arrival Time, AT）：信号到达某节点的时间。\n计算规则：按拓扑顺序遍历，取最大值。\n要求到达时间 (Required Arrival Time, RAT)：为满足时序约束，信号必须在何时到达该节点。\n计算规则：反向拓扑遍历，取最小值。\n松弛度（Slack）：RAT - AT\n正松弛度：时序满足\n负松弛度：时序违例\nQuiz\n为什么降低频率不能解决保持时间违例？",
+    "html": "\n<h1 data-block=\"T-001\">Staic Timing Analysis</h1>\n<h2 id=\"_1\">静态时序分析</h2>\n<ul data-block=\"T-003\">\n<li>静态时序分析 (Static Timing Analysis, STA)：在不需要输入向量的情况下，通过电路结构和元件参数验证电路时序</li>\n<li>时序弧 (Timing Arc)：<ul>\n<li>单元延迟 (Cell Arc): 逻辑门内部输入到输出的延迟。</li>\n<li>连线延迟 (Net Arc): 逻辑门之间连线引起的延迟。</li>\n</ul>\n</li>\n<li>时序图（Timing Graph）：由引脚（节点）和时序弧（边）构成的有向无环图 (DAG)。</li>\n</ul>\n<h2 id=\"_2\">时序约束</h2>\n<ul data-block=\"T-005\">\n<li>建立时间 (Setup Time)：在时钟沿之前，数据必须稳定的最短时间。</li>\n<li>修复方法：<ul>\n<li>减小数据路径延迟（优化组合逻辑）</li>\n<li>增加时钟周期（降低频率）</li>\n</ul>\n</li>\n<li>保持时间 (Hold Time)：在时钟沿之后，数据必须稳定的最短时间。</li>\n<li>修复方法：<ul>\n<li>增加数据路径延迟（插入缓冲器）</li>\n<li>注意：降频无法解决保持时间违例！</li>\n</ul>\n</li>\n<li>到达时间（Arrival Time, AT）：信号到达某节点的时间。</li>\n<li>计算规则：按拓扑顺序遍历，取最大值。</li>\n<li>要求到达时间 (Required Arrival Time, RAT)：为满足时序约束，信号必须在何时到达该节点。</li>\n<li>计算规则：反向拓扑遍历，取最小值。</li>\n<li>松弛度（Slack）：RAT - AT<ul>\n<li>正松弛度：时序满足</li>\n<li>负松弛度：时序违例</li>\n</ul>\n</li>\n</ul>\n<h3 id=\"quiz\">Quiz</h3>\n<ol data-block=\"T-007\">\n<li>为什么降低频率不能解决保持时间违例？</li>\n</ol>\n"
+  },
+  {
+    "id": "G",
+    "slug": "schedule",
+    "title": "教学安排",
+    "target": "overview",
+    "url": "https://eda.youwei.xyz/schedule/",
+    "sha256": "dbeb33b5af9267856e94bccb4b238b96ead7385e0095b0dcdc9003071edea4c3",
+    "page_note": "原课程网页无页码；以原始标题锚点定位。",
+    "headings": [
+      {
+        "level": 1,
+        "anchor": "schedule",
+        "title": "Schedule / 课程安排"
+      }
+    ],
+    "text": "Schedule / 课程安排\nWeek\nDates\nTopic\nReadings\nNotes\n1-3\nYYYY-MM-DD\nIntroduction\nlinks\nLecture 1\n2\nYYYY-MM-DD\nTBD\nlinks\nTBD\n3\nYYYY-MM-DD\nTBD\nlinks\nTBD",
+    "html": "\n<h1 id=\"schedule\">Schedule / 课程安排</h1>\n<table data-block=\"G-002\">\n<thead>\n<tr>\n<th>Week</th>\n<th>Dates</th>\n<th>Topic</th>\n<th>Readings</th>\n<th>Notes</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1-3</td>\n<td>YYYY-MM-DD</td>\n<td>Introduction</td>\n<td><em>links</em></td>\n<td><a href=\"../lectures/mutual-exclusion/index.html\">Lecture 1</a></td>\n</tr>\n<tr>\n<td>2</td>\n<td>YYYY-MM-DD</td>\n<td><em>TBD</em></td>\n<td><em>links</em></td>\n<td><em>TBD</em></td>\n</tr>\n<tr>\n<td>3</td>\n<td>YYYY-MM-DD</td>\n<td><em>TBD</em></td>\n<td><em>links</em></td>\n<td><em>TBD</em></td>\n</tr>\n</tbody>\n</table>\n"
+  }
+]

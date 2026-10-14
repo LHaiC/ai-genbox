@@ -1,0 +1,238 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>布尔代数</title><link rel="canonical" href="https://eda.youwei.xyz/lectures/boolean-algebra/"><style>body{font:24px/1.9 system-ui,sans-serif;max-width:1100px;margin:40px auto;padding:24px;color:#20332f;background:#f7f7f2}h5,h6,small,code,pre,td{font-size:22px}pre{overflow:auto}img{max-width:100%}a{overflow-wrap:anywhere}</style><body><a href="https://eda.youwei.xyz/lectures/boolean-algebra/">原始出处</a>
+<h1 data-block="B-001">Boolean Algebra</h1>
+<h2 id="_1">香农展开</h2>
+<h3 id="_2">定义</h3>
+<ul data-block="B-004">
+<li>布尔函数（Boolean Function）：<span class="arithmatex">\(F: \{0,1\}^n \to \{0,1\}\)</span>，输入为 <span class="arithmatex">\(n\)</span> 个布尔变量，输出为一个布尔值。</li>
+<li>子函数（Cofactor）：<ul>
+<li><span class="arithmatex">\(F\)</span> 在 <span class="arithmatex">\(x_i=1\)</span> 时的子函数：<span class="arithmatex">\(F_{x_i}=F_{x_i=1} = F(x_1, \ldots, x_{i-1}, 1, x_{i+1}, \ldots, x_n)\)</span></li>
+<li><span class="arithmatex">\(F\)</span> 在 <span class="arithmatex">\(x_i=0\)</span> 时的子函数：<span class="arithmatex">\(F_{\bar{x_i}}=F_{x_i=0} = F(x_1, \ldots, x_{i-1}, 0, x_{i+1}, \ldots, x_n)\)</span></li>
+</ul>
+</li>
+</ul>
+<div class="admonition important" data-block="B-005">
+<p class="admonition-title">Important</p>
+<p>子函数不是一个值，而是关于剩余变量的布尔函数。</p>
+</div>
+<ul data-block="B-006">
+<li>香农展开（Shannon Expansion）：将布尔函数分解为变量的正负两种情况的子函数之和。</li>
+</ul>
+<div class="arithmatex" data-block="B-007">\[
+F(x_1, x_2, \ldots, x_n) = x_i F_{x_i=1} + \overline{x_i} F_{x_i=0}
+\]</div>
+<h3 id="_3">性质</h3>
+<div class="admonition note" data-block="B-009">
+<p class="admonition-title">Note</p>
+<p>会用定义验证即可，不用记。</p>
+</div>
+<ul data-block="B-010">
+<li>多变量展开：可以递归地对子函数继续应用香农展开，直到所有变量都被展开。</li>
+</ul>
+<div class="arithmatex" data-block="B-011">\[
+F(x,y,z,w)=xF_{x=1}+\overline{x} F_{x=0}
+\]</div>
+<div class="arithmatex" data-block="B-012">\[
+F_{x=1}=yF_{x=1,y=1}+\overline{y}F_{x=1,y=0}
+\]</div>
+<div class="arithmatex" data-block="B-013">\[
+F_{x=0}=yF_{x=0,y=1}+\overline{y}F_{x=0,y=0}
+\]</div>
+<div class="arithmatex" data-block="B-014">\[
+F(x,y,z,w)=xyF_{x=1,y=1}+x\overline{y}F_{x=1,y=0}+\overline{x}yF_{x=0,y=1}+\overline{x}\overline{y}F_{x=0,y=0}
+\]</div>
+<ul data-block="B-015">
+<li>多变量顺序无关：对任意变量顺序应用香农展开，结果相同。</li>
+<li>二元运算保持：对于布尔函数 <span class="arithmatex">\(F\)</span> 和 <span class="arithmatex">\(G\)</span>，以及二元运算 <span class="arithmatex">\(\odot \in \{+, \cdot, \oplus\}\)</span>, 有</li>
+</ul>
+<div class="arithmatex" data-block="B-016">\[
+\left(F \odot G\right)_{x_i} = F_{x_i} \odot G_{x_i}
+\]</div>
+<h3 id="quiz">Quiz</h3>
+<ol data-block="B-018">
+<li>给定布尔函数 <span class="arithmatex">\(F(a,b,c) = ab + \overline{a}c\)</span>，使用香农展开对变量 <span class="arithmatex">\(a\)</span> 进行展开，写出结果。</li>
+<li>给定布尔函数 <span class="arithmatex">\(F(a,b,c) = ab + \overline{a}c\)</span>，使用香农展开对变量 <span class="arithmatex">\(a\)</span> 和 <span class="arithmatex">\(b\)</span> 进行展开，写出结果。</li>
+</ol>
+<h2 id="_4">布尔差分</h2>
+<h3 id="_5">定义</h3>
+<ul data-block="B-021">
+<li>
+<p>布尔差分（Boolean Difference）：</p>
+<div class="arithmatex">\[
+\frac{\partial F}{\partial x_i} = F_{x_i=1} \oplus F_{x_i=0}
+\]</div>
+<p>其中 <span class="arithmatex">\(\oplus\)</span> 表示异或运算。</p>
+</li>
+<li>
+<p>意义：布尔差分表示当变量 <span class="arithmatex">\(x_i\)</span> 取值变化时，布尔函数 <span class="arithmatex">\(F\)</span> 的输出是否发生变化。</p>
+<p>如果 <span class="arithmatex">\(\frac{\partial F}{\partial x_i} = 1\)</span>，则表示 <span class="arithmatex">\(F\)</span> 对 <span class="arithmatex">\(x_i\)</span> 敏感；如果 <span class="arithmatex">\(\frac{\partial F}{\partial x_i} = 0\)</span>，则表示 <span class="arithmatex">\(F\)</span> 对 <span class="arithmatex">\(x_i\)</span> 不敏感。</p>
+</li>
+</ul>
+<h3 id="_6">性质</h3>
+<div class="admonition note" data-block="B-023">
+<p class="admonition-title">Note</p>
+<p>会用定义验证即可，不用记。</p>
+</div>
+<ul data-block="B-024">
+<li>顺序无关：对任意变量顺序计算布尔差分，结果相同。</li>
+</ul>
+<div class="arithmatex" data-block="B-025">\[
+\frac{\partial}{\partial x_j}\left(\frac{\partial F}{\partial x_i}\right) = \frac{\partial}{\partial x_i}\left(\frac{\partial F}{\partial x_j}\right)
+\]</div>
+<ul data-block="B-026">
+<li>对异或保持：对于布尔函数 <span class="arithmatex">\(F\)</span> 和 <span class="arithmatex">\(G\)</span>，有</li>
+</ul>
+<div class="arithmatex" data-block="B-027">\[
+\frac{\partial}{\partial x_i}(F \oplus G) = \frac{\partial F}{\partial x_i} \oplus \frac{\partial G}{\partial x_i}
+\]</div>
+<ul data-block="B-028">
+<li>对与或非的计算规则：用定义推导。</li>
+<li>对复合函数的链式法则：用定义推导。</li>
+</ul>
+<h3 id="_7">例子</h3>
+<ul data-block="B-030">
+<li>非门：<span class="arithmatex">\(F = \overline{x}\)</span></li>
+</ul>
+<div class="arithmatex" data-block="B-031">\[
+F_{x=1} = \overline{1} = 0
+\]</div>
+<div class="arithmatex" data-block="B-032">\[
+F_{x=0} = \overline{0} = 1
+\]</div>
+<div class="arithmatex" data-block="B-033">\[
+\frac{\partial F}{\partial x} = F_{x=1} \oplus F_{x=0} = 0 \oplus 1 = 1
+\]</div>
+<ul data-block="B-034">
+<li>与门：<span class="arithmatex">\(F = xy\)</span></li>
+</ul>
+<div class="arithmatex" data-block="B-035">\[
+F_{x=1} = 1 \cdot y = y
+\]</div>
+<div class="arithmatex" data-block="B-036">\[
+F_{x=0} = 0 \cdot y = 0
+\]</div>
+<div class="arithmatex" data-block="B-037">\[
+\frac{\partial F}{\partial x} = F_{x=1} \oplus F_{x=0} = y \oplus 0 = y
+\]</div>
+<ul data-block="B-038">
+<li>或门：<span class="arithmatex">\(F = x + y\)</span></li>
+</ul>
+<div class="arithmatex" data-block="B-039">\[
+F_{x=1} = 1 + y = 1
+\]</div>
+<div class="arithmatex" data-block="B-040">\[
+F_{x=0} = 0 + y = y
+\]</div>
+<div class="arithmatex" data-block="B-041">\[
+\frac{\partial F}{\partial x} = F_{x=1} \oplus F_{x=0} = 1 \oplus y = \overline{y}
+\]</div>
+<ul data-block="B-042">
+<li>异或门：<span class="arithmatex">\(F = x \oplus y\)</span></li>
+</ul>
+<div class="arithmatex" data-block="B-043">\[
+F_{x=1} = 1 \oplus y = \overline{y}
+\]</div>
+<div class="arithmatex" data-block="B-044">\[
+F_{x=0} = 0 \oplus y = y
+\]</div>
+<div class="arithmatex" data-block="B-045">\[
+\frac{\partial F}{\partial x} = F_{x=1} \oplus F_{x=0} = \overline{y} \oplus y = 1
+\]</div>
+<h3 id="quiz_1">Quiz</h3>
+<ol data-block="B-047">
+<li>给定布尔函数 <span class="arithmatex">\(F(a,b) = ab + \overline{a}\)</span>，计算 <span class="arithmatex">\(\frac{\partial F}{\partial a}\)</span> 和 <span class="arithmatex">\(\frac{\partial F}{\partial b}\)</span>。</li>
+<li>证明布尔差分对异或运算保持。</li>
+<li>布尔差分为 1 有什么含义？</li>
+</ol>
+<h2 id="_8">量词</h2>
+<h3 id="_9">定义</h3>
+<ul data-block="B-050">
+<li>
+<p>存在量词（Existential Quantification）：</p>
+<div class="arithmatex">\[
+\exists x_i F = F_{x_i=0} + F_{x_i=1}
+\]</div>
+<p>含义：<span class="arithmatex">\(\exists x_i F\)</span> 是一个与 <span class="arithmatex">\(x_i\)</span> 无关的布尔函数。当存在某个 <span class="arithmatex">\(x_i\)</span> 的取值使得 <span class="arithmatex">\(F\)</span> 为真时，<span class="arithmatex">\(\exists x_i F\)</span> 为真。</p>
+</li>
+<li>
+<p>全称量词（Universal Quantification）：</p>
+<div class="arithmatex">\[
+\forall x_i F = F_{x_i=0} \cdot F_{x_i=1}
+\]</div>
+<p>含义：<span class="arithmatex">\(\forall x_i F\)</span> 是一个与 <span class="arithmatex">\(x_i\)</span> 无关的布尔函数。当对于所有 <span class="arithmatex">\(x_i\)</span> 的取值，<span class="arithmatex">\(F\)</span> 都为真时，<span class="arithmatex">\(\forall x_i F\)</span> 为真。</p>
+</li>
+</ul>
+<div class="admonition important" data-block="B-051">
+<p class="admonition-title">Important</p>
+<p>量词是关于剩余变量的布尔函数。</p>
+</div>
+<h3 id="_10">例子</h3>
+<ul data-block="B-053">
+<li>非门：<span class="arithmatex">\(F = \overline{x}\)</span></li>
+</ul>
+<div class="arithmatex" data-block="B-054">\[
+\exists x F = F_{x=0} + F_{x=1} = \overline{0} + \overline{1} = 1 + 0 = 1
+\]</div>
+<div class="arithmatex" data-block="B-055">\[
+\forall x F = F_{x=0} \cdot F_{x=1} = \overline{0} \cdot \overline{1} = 1 \cdot 0 = 0
+\]</div>
+<ul data-block="B-056">
+<li>与门：<span class="arithmatex">\(F = xy\)</span></li>
+</ul>
+<div class="arithmatex" data-block="B-057">\[
+\exists x F = F_{x=0} + F_{x=1} = 0 \cdot y + 1 \cdot y = 0 + y   = y
+\]</div>
+<div class="arithmatex" data-block="B-058">\[
+\forall x F = F_{x=0} \cdot F_{x=1} = 0 \cdot y \cdot 1 \cdot y = 0
+\]</div>
+<ul data-block="B-059">
+<li>或门：<span class="arithmatex">\(F = x + y\)</span></li>
+</ul>
+<div class="arithmatex" data-block="B-060">\[
+\exists x F = F_{x=0} + F_{x=1} = 0 + 1 = 1
+\]</div>
+<div class="arithmatex" data-block="B-061">\[
+\forall x F = F_{x=0} \cdot F_{x=1} = y \cdot 1 = y
+\]</div>
+<ul data-block="B-062">
+<li>异或门：<span class="arithmatex">\(F = x \oplus y\)</span></li>
+</ul>
+<div class="arithmatex" data-block="B-063">\[
+\exists x F = F_{x=0} + F_{x=1} = 0 \oplus y + 1 \oplus y = y + \overline{y} = 1
+\]</div>
+<div class="arithmatex" data-block="B-064">\[
+\forall x F = F_{x=0} \cdot F_{x=1} = (0 \oplus y) \cdot (1 \oplus y) = y \cdot \overline{y} = 0
+\]</div>
+<h2 id="_11">应用：网络修复</h2>
+<h3 id="_12">问题描述</h3>
+<p data-block="B-067">假设我们需要实现一个逻辑模块 <span class="arithmatex">\(f(a,b)=ab+\overline{b}\)</span>，但是实现中有一个门是错误的。</p>
+<h3 id="_13">修复方法</h3>
+<ol data-block="B-069">
+<li>
+<p><strong>替换</strong>：
+    将可疑的门（这里以 + 为例）替换为一个控制线为 <span class="arithmatex">\(d_0, d_1, d_2, d_3\)</span>，选择线为 <span class="arithmatex">\(s_0=ab\)</span> 和 <span class="arithmatex">\(s_1=\overline{b}\)</span>的多路选择器（MUX）（可以实现任意 2 变量函数）。</p>
+</li>
+<li>
+<p><strong>构建等价函数</strong>：
+    设修复后的电路函数为 <span class="arithmatex">\(G(a,b,d_0, \dots, d_3)\)</span>。我们需要 <span class="arithmatex">\(G\)</span> 与 <span class="arithmatex">\(f\)</span> 等价。
+    定义函数 <span class="arithmatex">\(z\)</span> 为 <span class="arithmatex">\(G\)</span> 与 <span class="arithmatex">\(f\)</span> 的同或（XNOR）：</p>
+<div class="arithmatex">\[
+z(a,b,d_0, \dots, d_3) = \overline{G(a,b,d_0, \dots, d_3) \oplus f(a,b)}
+\]</div>
+<p>当且仅当 <span class="arithmatex">\(G=f\)</span> 时，<span class="arithmatex">\(z=1\)</span>。</p>
+</li>
+<li>
+<p><strong>全称量词</strong>：
+    我们需要找到一组 <span class="arithmatex">\(d_0, \dots, d_3\)</span>，使得对于所有可能的输入 <span class="arithmatex">\(a, b\)</span>，电路输出都正确。
+    这可以通过对 <span class="arithmatex">\(a, b\)</span> 进行全称量化来表示：</p>
+<div class="arithmatex">\[
+\forall a,b \ z = 1
+\]</div>
+</li>
+</ol>
+<h3 id="quiz_2">Quiz</h3>
+<ol data-block="B-071">
+<li>给定布尔函数 <span class="arithmatex">\(F(a,b) = ab + \overline{a}\)</span>，计算 <span class="arithmatex">\(\exists a F\)</span> 和 <span class="arithmatex">\(\forall a F\)</span>。</li>
+<li>全称量词为 1 有什么含义？</li>
+<li>存在量词为 1 有什么含义？</li>
+</ol>
+</body></html>

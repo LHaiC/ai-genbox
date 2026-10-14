@@ -1,0 +1,2542 @@
+[
+  {
+    "source": "H",
+    "block_id": "design-automation-and-computing-systems",
+    "tag": "h1",
+    "source_anchor": "design-automation-and-computing-systems",
+    "original_url": "https://eda.youwei.xyz/#design-automation-and-computing-systems",
+    "lesson_anchor": "source-catalog",
+    "characters": 39,
+    "text_sha256": "a5f81669a4f02cedce7af0205772509dd665057754c7232decba7472fd77238a"
+  },
+  {
+    "source": "H",
+    "block_id": "H-002",
+    "tag": "p",
+    "source_anchor": "design-automation-and-computing-systems",
+    "original_url": "https://eda.youwei.xyz/#design-automation-and-computing-systems",
+    "lesson_anchor": "source-catalog",
+    "characters": 66,
+    "text_sha256": "248143ffba32e55275e27bfce746619974eef23016d09a0b5967dc908bb3b97e"
+  },
+  {
+    "source": "H",
+    "block_id": "announcements",
+    "tag": "h2",
+    "source_anchor": "announcements",
+    "original_url": "https://eda.youwei.xyz/#announcements",
+    "lesson_anchor": "source-catalog",
+    "characters": 13,
+    "text_sha256": "fe02680f247961a1369a66f681f990ec1e4a8708a2e84871019a93a7287ae7dd"
+  },
+  {
+    "source": "H",
+    "block_id": "H-004",
+    "tag": "ul",
+    "source_anchor": "announcements",
+    "original_url": "https://eda.youwei.xyz/#announcements",
+    "lesson_anchor": "source-catalog",
+    "characters": 64,
+    "text_sha256": "253e62881052326de788dd223b555344156909eb3c0e80dc2415656d1cd5fdaf"
+  },
+  {
+    "source": "H",
+    "block_id": "overview",
+    "tag": "h2",
+    "source_anchor": "overview",
+    "original_url": "https://eda.youwei.xyz/#overview",
+    "lesson_anchor": "source-catalog",
+    "characters": 8,
+    "text_sha256": "d4b1ea5708dd532930a85188b45aff6f0a3ed458500c7577e0127a538eb0d100"
+  },
+  {
+    "source": "H",
+    "block_id": "H-006",
+    "tag": "ul",
+    "source_anchor": "overview",
+    "original_url": "https://eda.youwei.xyz/#overview",
+    "lesson_anchor": "source-catalog",
+    "characters": 133,
+    "text_sha256": "ab6766f8821efc618c82aba1704110df087e9694e29e4ac818f387790eebfa72"
+  },
+  {
+    "source": "H",
+    "block_id": "learning-outcomes",
+    "tag": "h2",
+    "source_anchor": "learning-outcomes",
+    "original_url": "https://eda.youwei.xyz/#learning-outcomes",
+    "lesson_anchor": "source-catalog",
+    "characters": 17,
+    "text_sha256": "df64538d4cb15406638d33bc10a903267ba4734561a217a8afa4572652ca4c41"
+  },
+  {
+    "source": "H",
+    "block_id": "H-008",
+    "tag": "ul",
+    "source_anchor": "learning-outcomes",
+    "original_url": "https://eda.youwei.xyz/#learning-outcomes",
+    "lesson_anchor": "source-catalog",
+    "characters": 187,
+    "text_sha256": "01f7b84cd50608c3d83f1f012c7b54291cc78738ad2d6686e204218ee053c08f"
+  },
+  {
+    "source": "H",
+    "block_id": "prerequisites",
+    "tag": "h2",
+    "source_anchor": "prerequisites",
+    "original_url": "https://eda.youwei.xyz/#prerequisites",
+    "lesson_anchor": "source-catalog",
+    "characters": 13,
+    "text_sha256": "865514682d0132abd96594e2eff0ac8d379e16c60c7def0ee5c5f220ed3474ef"
+  },
+  {
+    "source": "H",
+    "block_id": "H-010",
+    "tag": "ul",
+    "source_anchor": "prerequisites",
+    "original_url": "https://eda.youwei.xyz/#prerequisites",
+    "lesson_anchor": "source-catalog",
+    "characters": 24,
+    "text_sha256": "464ed2f023a2f47ff1364dd4a75e6ce8e17949d7fde2ce79618a3b3f4b19a299"
+  },
+  {
+    "source": "H",
+    "block_id": "textbooks",
+    "tag": "h2",
+    "source_anchor": "textbooks",
+    "original_url": "https://eda.youwei.xyz/#textbooks",
+    "lesson_anchor": "source-catalog",
+    "characters": 9,
+    "text_sha256": "08ba040dd7d08e2833b5f4ac66a39d3e0b5ce94fe88c1f746b74357ddd5da10e"
+  },
+  {
+    "source": "H",
+    "block_id": "H-012",
+    "tag": "ul",
+    "source_anchor": "textbooks",
+    "original_url": "https://eda.youwei.xyz/#textbooks",
+    "lesson_anchor": "source-catalog",
+    "characters": 227,
+    "text_sha256": "61c4e46beea8ba1fb3f0eb0b1283ad389b3f88359d6202c69637c77006807067"
+  },
+  {
+    "source": "H",
+    "block_id": "grading",
+    "tag": "h2",
+    "source_anchor": "grading",
+    "original_url": "https://eda.youwei.xyz/#grading",
+    "lesson_anchor": "source-catalog",
+    "characters": 7,
+    "text_sha256": "64dc41e11b9c888b4d126d59bf9ee6c16d641c6018c3504f62ae64ce15878c13"
+  },
+  {
+    "source": "H",
+    "block_id": "H-014",
+    "tag": "ul",
+    "source_anchor": "grading",
+    "original_url": "https://eda.youwei.xyz/#grading",
+    "lesson_anchor": "source-catalog",
+    "characters": 58,
+    "text_sha256": "924994b87dbea059dc932d009cfa748f6a16dd54ed9022938642eaa8f5dfd5ff"
+  },
+  {
+    "source": "H",
+    "block_id": "communication",
+    "tag": "h2",
+    "source_anchor": "communication",
+    "original_url": "https://eda.youwei.xyz/#communication",
+    "lesson_anchor": "source-catalog",
+    "characters": 13,
+    "text_sha256": "3981a2b9c1ef7fce8dbf5e3d44fefc58746dee11b3de35655e166c25142612ba"
+  },
+  {
+    "source": "H",
+    "block_id": "H-016",
+    "tag": "ul",
+    "source_anchor": "communication",
+    "original_url": "https://eda.youwei.xyz/#communication",
+    "lesson_anchor": "source-catalog",
+    "characters": 81,
+    "text_sha256": "6de0fe46349171c150a02f45e370472520a8c2377c833b91ab796d750081b06d"
+  },
+  {
+    "source": "B",
+    "block_id": "B-001",
+    "tag": "h1",
+    "source_anchor": "",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/",
+    "lesson_anchor": "ch-boolean",
+    "characters": 15,
+    "text_sha256": "3efda256596ccac211f0854416d9d6fa24710ef9fa3b6d97b7131db6d3849a89"
+  },
+  {
+    "source": "B",
+    "block_id": "_1",
+    "tag": "h2",
+    "source_anchor": "_1",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_1",
+    "lesson_anchor": "cofactor",
+    "characters": 4,
+    "text_sha256": "fc34ecc0d81fdb8ad089d337b8dc6b0f7e590236ba042ef334bc0d6ee5eb7b0a"
+  },
+  {
+    "source": "B",
+    "block_id": "_2",
+    "tag": "h3",
+    "source_anchor": "_2",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_2",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 2,
+    "text_sha256": "b4d7d450f617bcaec4e5dc0d4dd308357ae13a6599e2f3851d45e265a092a4bb"
+  },
+  {
+    "source": "B",
+    "block_id": "B-004",
+    "tag": "ul",
+    "source_anchor": "_2",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_2",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 296,
+    "text_sha256": "fad299cbbae97b6039bce1fbda43efffec164f2e4b5ddf34a68f724854d4d9e6"
+  },
+  {
+    "source": "B",
+    "block_id": "B-005",
+    "tag": "div",
+    "source_anchor": "_2",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_2",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 33,
+    "text_sha256": "584a2e8186a5d34d00ada31bd305fc8894e06c0d0d631388736ae031477a03bf"
+  },
+  {
+    "source": "B",
+    "block_id": "B-006",
+    "tag": "ul",
+    "source_anchor": "_2",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_2",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 48,
+    "text_sha256": "4921c893fb7f76897721f1ff2797a8c807866f1ec47c908c7fe977c4398f95e5"
+  },
+  {
+    "source": "B",
+    "block_id": "B-007",
+    "tag": "div",
+    "source_anchor": "_2",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_2",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 73,
+    "text_sha256": "ae0861339b80a97bb1955b515e0f5042d3455c826960a1c9397b8e90ce58bfed"
+  },
+  {
+    "source": "B",
+    "block_id": "_3",
+    "tag": "h3",
+    "source_anchor": "_3",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_3",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 2,
+    "text_sha256": "68274da260384d4fbf52550aa88d7b91ca58b540afedc2a6dbafd868072deb75"
+  },
+  {
+    "source": "B",
+    "block_id": "B-009",
+    "tag": "div",
+    "source_anchor": "_3",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_3",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 18,
+    "text_sha256": "8791a3207b4bf6b269016fd8ae2cd18f0216e709d6d07d565fabff2643af3cc6"
+  },
+  {
+    "source": "B",
+    "block_id": "B-010",
+    "tag": "ul",
+    "source_anchor": "_3",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_3",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 35,
+    "text_sha256": "a2be6755345c7919b366ccc8aa881557538ca1efe4bacdd7b75f3f782273aced"
+  },
+  {
+    "source": "B",
+    "block_id": "B-011",
+    "tag": "div",
+    "source_anchor": "_3",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_3",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 46,
+    "text_sha256": "23a31cb42e1fb83dc08a51552f9b8686116463e4c3745f0d689b3ec6e494a7a5"
+  },
+  {
+    "source": "B",
+    "block_id": "B-012",
+    "tag": "div",
+    "source_anchor": "_3",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_3",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 50,
+    "text_sha256": "c6e32ef9b177564ffdd57312e94b65d297bc3d8275b154b187ae72503e75cee2"
+  },
+  {
+    "source": "B",
+    "block_id": "B-013",
+    "tag": "div",
+    "source_anchor": "_3",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_3",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 50,
+    "text_sha256": "aad81e4fe030e305ea2d5afdc173605bc025340fe71bb01f5bccce82714e3db2"
+  },
+  {
+    "source": "B",
+    "block_id": "B-014",
+    "tag": "div",
+    "source_anchor": "_3",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_3",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 116,
+    "text_sha256": "3c79727db1663ef5f08041b277515445439bd67bbf5d7df7cc2a9f33464f02e3"
+  },
+  {
+    "source": "B",
+    "block_id": "B-015",
+    "tag": "ul",
+    "source_anchor": "_3",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_3",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 102,
+    "text_sha256": "aba68b88f3f17f0f27a2819eb300fec34fef1e6fed28c6bd029c1e2f99656211"
+  },
+  {
+    "source": "B",
+    "block_id": "B-016",
+    "tag": "div",
+    "source_anchor": "_3",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_3",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 58,
+    "text_sha256": "04c28bb37d61d67ae2d10b5c1f68e9ca732daa51d3c0c008a16e37d21f611cce"
+  },
+  {
+    "source": "B",
+    "block_id": "quiz",
+    "tag": "h3",
+    "source_anchor": "quiz",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#quiz",
+    "lesson_anchor": "quiz-b-q-1",
+    "characters": 4,
+    "text_sha256": "03aa7dc16797a82b4892dcc79747011b78a071b5a1c1213b4d08ee8e8a0450ff"
+  },
+  {
+    "source": "B",
+    "block_id": "B-018",
+    "tag": "ol",
+    "source_anchor": "quiz",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#quiz",
+    "lesson_anchor": "quiz-b-q-1",
+    "characters": 145,
+    "text_sha256": "870cdc76d76e97d591b5d14dac94b6ce36e385efe20c1931aacab6677abbcfc7"
+  },
+  {
+    "source": "B",
+    "block_id": "_4",
+    "tag": "h2",
+    "source_anchor": "_4",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_4",
+    "lesson_anchor": "difference",
+    "characters": 4,
+    "text_sha256": "39ccc9abc7e8f139706c4261ee27fd3e5438ee10dd846f86bf0c95d063b75ea5"
+  },
+  {
+    "source": "B",
+    "block_id": "_5",
+    "tag": "h3",
+    "source_anchor": "_5",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_5",
+    "lesson_anchor": "difference",
+    "characters": 2,
+    "text_sha256": "b4d7d450f617bcaec4e5dc0d4dd308357ae13a6599e2f3851d45e265a092a4bb"
+  },
+  {
+    "source": "B",
+    "block_id": "B-021",
+    "tag": "ul",
+    "source_anchor": "_5",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_5",
+    "lesson_anchor": "difference",
+    "characters": 299,
+    "text_sha256": "53990ff67def32c108e1abdae85fa3a30e6d45b2ae29fa13218a821f273c5efe"
+  },
+  {
+    "source": "B",
+    "block_id": "_6",
+    "tag": "h3",
+    "source_anchor": "_6",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_6",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 2,
+    "text_sha256": "68274da260384d4fbf52550aa88d7b91ca58b540afedc2a6dbafd868072deb75"
+  },
+  {
+    "source": "B",
+    "block_id": "B-023",
+    "tag": "div",
+    "source_anchor": "_6",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_6",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 18,
+    "text_sha256": "8791a3207b4bf6b269016fd8ae2cd18f0216e709d6d07d565fabff2643af3cc6"
+  },
+  {
+    "source": "B",
+    "block_id": "B-024",
+    "tag": "ul",
+    "source_anchor": "_6",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_6",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 24,
+    "text_sha256": "7e792b4200aa6aec14113f453ed294e10c389aee304b184bec539340ff059227"
+  },
+  {
+    "source": "B",
+    "block_id": "B-025",
+    "tag": "div",
+    "source_anchor": "_6",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_6",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 155,
+    "text_sha256": "13b18e2200bad140440c0c41a1bab476b394f7ef5490842ef4d6875880aa3e27"
+  },
+  {
+    "source": "B",
+    "block_id": "B-026",
+    "tag": "ul",
+    "source_anchor": "_6",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_6",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 29,
+    "text_sha256": "7e38bf06fbcb585b08bedef39be9f5fb0cbda653bb2be9175bb311645348f589"
+  },
+  {
+    "source": "B",
+    "block_id": "B-027",
+    "tag": "div",
+    "source_anchor": "_6",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_6",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 120,
+    "text_sha256": "7838d6902482f690cca4617755f9c65bacce1d84c7e801224f2786b532258063"
+  },
+  {
+    "source": "B",
+    "block_id": "B-028",
+    "tag": "ul",
+    "source_anchor": "_6",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_6",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 34,
+    "text_sha256": "864cb7c946c59537dd7983e09d83fb1a1232b0429684dc5ab468a12edc53bdad"
+  },
+  {
+    "source": "B",
+    "block_id": "_7",
+    "tag": "h3",
+    "source_anchor": "_7",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_7",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 2,
+    "text_sha256": "283ba9f1bcbcf21ed82bc245fefa604d1601787a5a40e92df2b0d89645a8753b"
+  },
+  {
+    "source": "B",
+    "block_id": "B-030",
+    "tag": "ul",
+    "source_anchor": "_7",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_7",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 24,
+    "text_sha256": "bbfbec188cebd8ae0fa37f784a78f40f050cfe958d838973f5930c9d4870a426"
+  },
+  {
+    "source": "B",
+    "block_id": "B-031",
+    "tag": "div",
+    "source_anchor": "_7",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_7",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 32,
+    "text_sha256": "4094eae1d6a0f83dc0003e20b15bc7856ecbdb61b043af6295bd4fc124cc8485"
+  },
+  {
+    "source": "B",
+    "block_id": "B-032",
+    "tag": "div",
+    "source_anchor": "_7",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_7",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 32,
+    "text_sha256": "eb8cc6cd77dfcae529e0ec208c00699edc86856195c2fd70dc568f0b8b29f7e4"
+  },
+  {
+    "source": "B",
+    "block_id": "B-033",
+    "tag": "div",
+    "source_anchor": "_7",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_7",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 77,
+    "text_sha256": "108585dce43895de84f7f1e344b24380deb98a2bbcc246a820bc5699e902e972"
+  },
+  {
+    "source": "B",
+    "block_id": "B-034",
+    "tag": "ul",
+    "source_anchor": "_7",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_7",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 14,
+    "text_sha256": "7fc93b6fcfcacfcb059b209c537735f49f86906544a9281acc2974b05e08c879"
+  },
+  {
+    "source": "B",
+    "block_id": "B-035",
+    "tag": "div",
+    "source_anchor": "_7",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_7",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 29,
+    "text_sha256": "708f33b0f373888c37d552fd42913c02c78ad621ce3683158be45b0b27558446"
+  },
+  {
+    "source": "B",
+    "block_id": "B-036",
+    "tag": "div",
+    "source_anchor": "_7",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_7",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 29,
+    "text_sha256": "e846c09cf7ae75a17cf76a68e0115bf6c885bdbfc30a6ac87f6b70328de6d33b"
+  },
+  {
+    "source": "B",
+    "block_id": "B-037",
+    "tag": "div",
+    "source_anchor": "_7",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_7",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 77,
+    "text_sha256": "df28803b94861918fd9baf4324c48b4d2929d3a8461c4ecf8197cb9fa9d58340"
+  },
+  {
+    "source": "B",
+    "block_id": "B-038",
+    "tag": "ul",
+    "source_anchor": "_7",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_7",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 17,
+    "text_sha256": "41e78a0d45a256fdeb061a3db4ea3462453ed20b8b4d971d18eace10f5faf7e3"
+  },
+  {
+    "source": "B",
+    "block_id": "B-039",
+    "tag": "div",
+    "source_anchor": "_7",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_7",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 25,
+    "text_sha256": "57a2bf1e2d93af5722c613222d53b934af741eb51f497bcf6df6b08dcdad4e30"
+  },
+  {
+    "source": "B",
+    "block_id": "B-040",
+    "tag": "div",
+    "source_anchor": "_7",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_7",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 25,
+    "text_sha256": "b15a17f648ed92c2a3f9636a7e30724859114ba8b082a63fb67868b6d5b99423"
+  },
+  {
+    "source": "B",
+    "block_id": "B-041",
+    "tag": "div",
+    "source_anchor": "_7",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_7",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 88,
+    "text_sha256": "901f919de31b2c121e643a7a28f540360bab0813d8dbde0bbe8bbde697294486"
+  },
+  {
+    "source": "B",
+    "block_id": "B-042",
+    "tag": "ul",
+    "source_anchor": "_7",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_7",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 23,
+    "text_sha256": "0149e1dd9d9d095640f1ef746557f113394af299ae792ee7ed15022c3c686c77"
+  },
+  {
+    "source": "B",
+    "block_id": "B-043",
+    "tag": "div",
+    "source_anchor": "_7",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_7",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 41,
+    "text_sha256": "4da8b67aa69ce5b0ec3168a6b709d422f0207afd536dd14744a02a5668b7497f"
+  },
+  {
+    "source": "B",
+    "block_id": "B-044",
+    "tag": "div",
+    "source_anchor": "_7",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_7",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 30,
+    "text_sha256": "736e24dd5806cb61f41c44919c723a55654c6c41d6b31c41a0c5e080774a347f"
+  },
+  {
+    "source": "B",
+    "block_id": "B-045",
+    "tag": "div",
+    "source_anchor": "_7",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_7",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 88,
+    "text_sha256": "a513020f3756d1986a1f75ecab4e893713bfabeba81d72ed625371ec5b7bc726"
+  },
+  {
+    "source": "B",
+    "block_id": "quiz_1",
+    "tag": "h3",
+    "source_anchor": "quiz_1",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#quiz_1",
+    "lesson_anchor": "quiz-b-q_1-1",
+    "characters": 4,
+    "text_sha256": "03aa7dc16797a82b4892dcc79747011b78a071b5a1c1213b4d08ee8e8a0450ff"
+  },
+  {
+    "source": "B",
+    "block_id": "B-047",
+    "tag": "ol",
+    "source_anchor": "quiz_1",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#quiz_1",
+    "lesson_anchor": "quiz-b-q_1-1",
+    "characters": 143,
+    "text_sha256": "14a89a8cbe0b7e56eb39d8c5f45d7c30716431f0391a6d68529df881d68efc14"
+  },
+  {
+    "source": "B",
+    "block_id": "_8",
+    "tag": "h2",
+    "source_anchor": "_8",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_8",
+    "lesson_anchor": "difference",
+    "characters": 2,
+    "text_sha256": "93e0e959bcc7b1d31fbbeef52a441c286a0f969cf3c8cae164365c623d892f27"
+  },
+  {
+    "source": "B",
+    "block_id": "_9",
+    "tag": "h3",
+    "source_anchor": "_9",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_9",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 2,
+    "text_sha256": "b4d7d450f617bcaec4e5dc0d4dd308357ae13a6599e2f3851d45e265a092a4bb"
+  },
+  {
+    "source": "B",
+    "block_id": "B-050",
+    "tag": "ul",
+    "source_anchor": "_9",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_9",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 349,
+    "text_sha256": "d424a7f7804f42fc0f471d82e1a03becababcd3144e6dff2ceec525fb4ab7a88"
+  },
+  {
+    "source": "B",
+    "block_id": "B-051",
+    "tag": "div",
+    "source_anchor": "_9",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_9",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 25,
+    "text_sha256": "684b52e40c087fa38ab13bd059ee12f627f7ead946f00f0047629195ba453b8b"
+  },
+  {
+    "source": "B",
+    "block_id": "_10",
+    "tag": "h3",
+    "source_anchor": "_10",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_10",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 2,
+    "text_sha256": "283ba9f1bcbcf21ed82bc245fefa604d1601787a5a40e92df2b0d89645a8753b"
+  },
+  {
+    "source": "B",
+    "block_id": "B-053",
+    "tag": "ul",
+    "source_anchor": "_10",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_10",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 24,
+    "text_sha256": "bbfbec188cebd8ae0fa37f784a78f40f050cfe958d838973f5930c9d4870a426"
+  },
+  {
+    "source": "B",
+    "block_id": "B-054",
+    "tag": "div",
+    "source_anchor": "_10",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_10",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 79,
+    "text_sha256": "4f46a34c94d5ac3b71979dcf959ca58d4c7d5c7ae6ff67c52dde7f80e46fe945"
+  },
+  {
+    "source": "B",
+    "block_id": "B-055",
+    "tag": "div",
+    "source_anchor": "_10",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_10",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 91,
+    "text_sha256": "83ba8682ed10a9e5214e9c662c24f37bfbd88b7ff75ac35c2410b351cc57f142"
+  },
+  {
+    "source": "B",
+    "block_id": "B-056",
+    "tag": "ul",
+    "source_anchor": "_10",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_10",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 14,
+    "text_sha256": "7fc93b6fcfcacfcb059b209c537735f49f86906544a9281acc2974b05e08c879"
+  },
+  {
+    "source": "B",
+    "block_id": "B-057",
+    "tag": "div",
+    "source_anchor": "_10",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_10",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 75,
+    "text_sha256": "19e6d2d6256e835b5bfcfd9f00a931f4aaf466612baa18debcd112850051549c"
+  },
+  {
+    "source": "B",
+    "block_id": "B-058",
+    "tag": "div",
+    "source_anchor": "_10",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_10",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 73,
+    "text_sha256": "35d4f42728dde42fc49c3175261cf124db357824c4be378462cb61c2b1807296"
+  },
+  {
+    "source": "B",
+    "block_id": "B-059",
+    "tag": "ul",
+    "source_anchor": "_10",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_10",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 17,
+    "text_sha256": "41e78a0d45a256fdeb061a3db4ea3462453ed20b8b4d971d18eace10f5faf7e3"
+  },
+  {
+    "source": "B",
+    "block_id": "B-060",
+    "tag": "div",
+    "source_anchor": "_10",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_10",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 49,
+    "text_sha256": "13a86531fe716e87bff0d7c84f4e2c1a81d150c25474c2b6adf618833418193f"
+  },
+  {
+    "source": "B",
+    "block_id": "B-061",
+    "tag": "div",
+    "source_anchor": "_10",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_10",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 57,
+    "text_sha256": "2f9326179596df075d7d09f7e08c820238fa03ba5c3cdd6ac4235c362013c4bf"
+  },
+  {
+    "source": "B",
+    "block_id": "B-062",
+    "tag": "ul",
+    "source_anchor": "_10",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_10",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 23,
+    "text_sha256": "0149e1dd9d9d095640f1ef746557f113394af299ae792ee7ed15022c3c686c77"
+  },
+  {
+    "source": "B",
+    "block_id": "B-063",
+    "tag": "div",
+    "source_anchor": "_10",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_10",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 86,
+    "text_sha256": "39184bddd46964c9dc512fe359f147bd3ba8fb93e3bf5f1a0fb3a9534b3db8c1"
+  },
+  {
+    "source": "B",
+    "block_id": "B-064",
+    "tag": "div",
+    "source_anchor": "_10",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_10",
+    "lesson_anchor": "boolean-formulas",
+    "characters": 102,
+    "text_sha256": "b7df82da641a76d5e2ff327cac8dd6d4526b0677a07458453c8c78548e516325"
+  },
+  {
+    "source": "B",
+    "block_id": "_11",
+    "tag": "h2",
+    "source_anchor": "_11",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_11",
+    "lesson_anchor": "repair",
+    "characters": 7,
+    "text_sha256": "ebda41a7e7a3afd1a515139b8e49de5779a95854776eedb91c6ce6a5b94117d0"
+  },
+  {
+    "source": "B",
+    "block_id": "_12",
+    "tag": "h3",
+    "source_anchor": "_12",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_12",
+    "lesson_anchor": "repair",
+    "characters": 4,
+    "text_sha256": "6a11331de9003411d52b81dfd42fccc9f0a20177389f54775ced4835fc6a0c4b"
+  },
+  {
+    "source": "B",
+    "block_id": "B-067",
+    "tag": "p",
+    "source_anchor": "_12",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_12",
+    "lesson_anchor": "repair",
+    "characters": 57,
+    "text_sha256": "becdc22b1a7e95c136ba4649e9751c3280c38e22df0c12cb6f19acba4421cfdf"
+  },
+  {
+    "source": "B",
+    "block_id": "_13",
+    "tag": "h3",
+    "source_anchor": "_13",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_13",
+    "lesson_anchor": "repair-formulas",
+    "characters": 4,
+    "text_sha256": "f8bd762a9b8b1b5529b88272b94b84a8942429dd6d45bb0894cfb2c3a059266f"
+  },
+  {
+    "source": "B",
+    "block_id": "B-069",
+    "tag": "ol",
+    "source_anchor": "_13",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#_13",
+    "lesson_anchor": "repair-formulas",
+    "characters": 475,
+    "text_sha256": "f2b183338a77be24637ae6fed6aa06b1c0a9b1cffcca5a8c4a69871166b7f33c"
+  },
+  {
+    "source": "B",
+    "block_id": "quiz_2",
+    "tag": "h3",
+    "source_anchor": "quiz_2",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#quiz_2",
+    "lesson_anchor": "quiz-b-q_2-1",
+    "characters": 4,
+    "text_sha256": "03aa7dc16797a82b4892dcc79747011b78a071b5a1c1213b4d08ee8e8a0450ff"
+  },
+  {
+    "source": "B",
+    "block_id": "B-071",
+    "tag": "ol",
+    "source_anchor": "quiz_2",
+    "original_url": "https://eda.youwei.xyz/lectures/boolean-algebra/#quiz_2",
+    "lesson_anchor": "quiz-b-q_2-1",
+    "characters": 107,
+    "text_sha256": "3caab482cad8debea6875cf7f3d4d33d503f300958253df928b09072e6d08d91"
+  },
+  {
+    "source": "C",
+    "block_id": "C-001",
+    "tag": "h1",
+    "source_anchor": "",
+    "original_url": "https://eda.youwei.xyz/lectures/computer-architecture/",
+    "lesson_anchor": "ch-compute",
+    "characters": 21,
+    "text_sha256": "95a4955830d241bc0d2a6ec7d19fb1dc58be0b2757e5168681f7e2b7d5bf2711"
+  },
+  {
+    "source": "C",
+    "block_id": "_1",
+    "tag": "h2",
+    "source_anchor": "_1",
+    "original_url": "https://eda.youwei.xyz/lectures/computer-architecture/#_1",
+    "lesson_anchor": "compute-formulas",
+    "characters": 4,
+    "text_sha256": "a6043ed25f6afd0e21e96facd45fcd23863eea39023d373284acb8d44e34e1f4"
+  },
+  {
+    "source": "C",
+    "block_id": "C-003",
+    "tag": "ul",
+    "source_anchor": "_1",
+    "original_url": "https://eda.youwei.xyz/lectures/computer-architecture/#_1",
+    "lesson_anchor": "compute-formulas",
+    "characters": 100,
+    "text_sha256": "eca99fd73520602744cb4d9c4fab404db6cfeabeab57a16821dcf3b9b3188b30"
+  },
+  {
+    "source": "C",
+    "block_id": "C-004",
+    "tag": "p",
+    "source_anchor": "_1",
+    "original_url": "https://eda.youwei.xyz/lectures/computer-architecture/#_1",
+    "lesson_anchor": "compute-formulas",
+    "characters": 40,
+    "text_sha256": "034a38419eb384ad252f34c41e9d0c1e5bc58f040850fd06fee7e27c96a78df8"
+  },
+  {
+    "source": "C",
+    "block_id": "C-005",
+    "tag": "table",
+    "source_anchor": "_1",
+    "original_url": "https://eda.youwei.xyz/lectures/computer-architecture/#_1",
+    "lesson_anchor": "compute-formulas",
+    "characters": 443,
+    "text_sha256": "88d7c7b30b99dadb5b9accd131df1bfbb4998945e2e8d35c427e94096ae2e991"
+  },
+  {
+    "source": "C",
+    "block_id": "quiz",
+    "tag": "h3",
+    "source_anchor": "quiz",
+    "original_url": "https://eda.youwei.xyz/lectures/computer-architecture/#quiz",
+    "lesson_anchor": "quiz-c-q-1",
+    "characters": 4,
+    "text_sha256": "03aa7dc16797a82b4892dcc79747011b78a071b5a1c1213b4d08ee8e8a0450ff"
+  },
+  {
+    "source": "C",
+    "block_id": "C-007",
+    "tag": "ol",
+    "source_anchor": "quiz",
+    "original_url": "https://eda.youwei.xyz/lectures/computer-architecture/#quiz",
+    "lesson_anchor": "quiz-c-q-1",
+    "characters": 23,
+    "text_sha256": "a5821d4195303383009e0f6138ba9dd138adb5463701ce698b652e52c2b3321d"
+  },
+  {
+    "source": "C",
+    "block_id": "cpu",
+    "tag": "h2",
+    "source_anchor": "cpu",
+    "original_url": "https://eda.youwei.xyz/lectures/computer-architecture/#cpu",
+    "lesson_anchor": "pipeline",
+    "characters": 7,
+    "text_sha256": "9646697b58192c67ebdc60eab370fc6abe3657453c8c484371aef7a236e2f5d3"
+  },
+  {
+    "source": "C",
+    "block_id": "C-009",
+    "tag": "p",
+    "source_anchor": "cpu",
+    "original_url": "https://eda.youwei.xyz/lectures/computer-architecture/#cpu",
+    "lesson_anchor": "pipeline",
+    "characters": 8,
+    "text_sha256": "145549c7306ff39d7369bef5edee8b70b5ed8bc430bd6ddd8161ae1cde63669d"
+  },
+  {
+    "source": "C",
+    "block_id": "quiz_1",
+    "tag": "h3",
+    "source_anchor": "quiz_1",
+    "original_url": "https://eda.youwei.xyz/lectures/computer-architecture/#quiz_1",
+    "lesson_anchor": "quiz-c-q_1-1",
+    "characters": 4,
+    "text_sha256": "03aa7dc16797a82b4892dcc79747011b78a071b5a1c1213b4d08ee8e8a0450ff"
+  },
+  {
+    "source": "C",
+    "block_id": "C-011",
+    "tag": "ol",
+    "source_anchor": "quiz_1",
+    "original_url": "https://eda.youwei.xyz/lectures/computer-architecture/#quiz_1",
+    "lesson_anchor": "quiz-c-q_1-1",
+    "characters": 110,
+    "text_sha256": "afb245c70233438ba5bb15927411768a7276defb623dcefb44c7f283df87fd55"
+  },
+  {
+    "source": "S",
+    "block_id": "S-001",
+    "tag": "h1",
+    "source_anchor": "",
+    "original_url": "https://eda.youwei.xyz/lectures/logic-synthesis/",
+    "lesson_anchor": "ch-synthesis",
+    "characters": 15,
+    "text_sha256": "918130284f53efdb13be8e09435e76facfbc00997ea426ce3b9ceaa62159660f"
+  },
+  {
+    "source": "S",
+    "block_id": "_1",
+    "tag": "h2",
+    "source_anchor": "_1",
+    "original_url": "https://eda.youwei.xyz/lectures/logic-synthesis/#_1",
+    "lesson_anchor": "two-level",
+    "characters": 4,
+    "text_sha256": "e39fa349bfb2f8894259e19cbe2ab1463426a263c8ab505893bc9b21e1bbf910"
+  },
+  {
+    "source": "S",
+    "block_id": "S-003",
+    "tag": "p",
+    "source_anchor": "_1",
+    "original_url": "https://eda.youwei.xyz/lectures/logic-synthesis/#_1",
+    "lesson_anchor": "two-level",
+    "characters": 72,
+    "text_sha256": "88f23e3756db517715442a560962c4fae70b9c0df6b03feed0adb9b3ecf2c63a"
+  },
+  {
+    "source": "S",
+    "block_id": "_2",
+    "tag": "h2",
+    "source_anchor": "_2",
+    "original_url": "https://eda.youwei.xyz/lectures/logic-synthesis/#_2",
+    "lesson_anchor": "two-level",
+    "characters": 6,
+    "text_sha256": "b1bd2c76e015d60bb8f526181bb10fd4615762d3123d625203195f1031488ba8"
+  },
+  {
+    "source": "S",
+    "block_id": "S-005",
+    "tag": "ul",
+    "source_anchor": "_2",
+    "original_url": "https://eda.youwei.xyz/lectures/logic-synthesis/#_2",
+    "lesson_anchor": "two-level",
+    "characters": 148,
+    "text_sha256": "c64447ddfc9a8d081b42d73b0051348e445de0536b4fcb4200b48f7c421f9244"
+  },
+  {
+    "source": "S",
+    "block_id": "S-006",
+    "tag": "div",
+    "source_anchor": "_2",
+    "original_url": "https://eda.youwei.xyz/lectures/logic-synthesis/#_2",
+    "lesson_anchor": "two-level",
+    "characters": 34,
+    "text_sha256": "d78755baeb9528aa3bc3ba9cf816c105cfed32ff9cff74387ecc20716c9b8fa0"
+  },
+  {
+    "source": "S",
+    "block_id": "quiz",
+    "tag": "h3",
+    "source_anchor": "quiz",
+    "original_url": "https://eda.youwei.xyz/lectures/logic-synthesis/#quiz",
+    "lesson_anchor": "quiz-s-q-1",
+    "characters": 4,
+    "text_sha256": "03aa7dc16797a82b4892dcc79747011b78a071b5a1c1213b4d08ee8e8a0450ff"
+  },
+  {
+    "source": "S",
+    "block_id": "S-008",
+    "tag": "ol",
+    "source_anchor": "quiz",
+    "original_url": "https://eda.youwei.xyz/lectures/logic-synthesis/#quiz",
+    "lesson_anchor": "quiz-s-q-1",
+    "characters": 122,
+    "text_sha256": "fb01c71db1dbb75ff7c5b0d9a17c88c53b9ae9337535d9c4b9b31d89e24acddc"
+  },
+  {
+    "source": "S",
+    "block_id": "_3",
+    "tag": "h2",
+    "source_anchor": "_3",
+    "original_url": "https://eda.youwei.xyz/lectures/logic-synthesis/#_3",
+    "lesson_anchor": "synthesis-formulas",
+    "characters": 6,
+    "text_sha256": "2254e21485dda9933b54fb310ecdf0ab0ab93c64065b8d40d5e7d77d5c0e30f9"
+  },
+  {
+    "source": "S",
+    "block_id": "technology-independent-synthesis",
+    "tag": "h3",
+    "source_anchor": "technology-independent-synthesis",
+    "original_url": "https://eda.youwei.xyz/lectures/logic-synthesis/#technology-independent-synthesis",
+    "lesson_anchor": "synthesis-formulas",
+    "characters": 32,
+    "text_sha256": "2a565fe52c9657fdf46948fcec57fc9bde482f42af702966935de19c1bb52043"
+  },
+  {
+    "source": "S",
+    "block_id": "S-011",
+    "tag": "ul",
+    "source_anchor": "technology-independent-synthesis",
+    "original_url": "https://eda.youwei.xyz/lectures/logic-synthesis/#technology-independent-synthesis",
+    "lesson_anchor": "synthesis-formulas",
+    "characters": 183,
+    "text_sha256": "e03f9b6a24c88a1b59fef5240bff1b392628d279fe951601fc438a6f3c6ec927"
+  },
+  {
+    "source": "S",
+    "block_id": "technology-mapping",
+    "tag": "h3",
+    "source_anchor": "technology-mapping",
+    "original_url": "https://eda.youwei.xyz/lectures/logic-synthesis/#technology-mapping",
+    "lesson_anchor": "mapping",
+    "characters": 18,
+    "text_sha256": "1c17a6c85089cac18816575949b48e78e99a8877fa993aabb82710e7f0b9095b"
+  },
+  {
+    "source": "S",
+    "block_id": "S-013",
+    "tag": "ul",
+    "source_anchor": "technology-mapping",
+    "original_url": "https://eda.youwei.xyz/lectures/logic-synthesis/#technology-mapping",
+    "lesson_anchor": "mapping",
+    "characters": 134,
+    "text_sha256": "a91811b99c916bc117ed23b5ed90385a64d3577c7e96b62398a8cc16bb8191fd"
+  },
+  {
+    "source": "S",
+    "block_id": "S-014",
+    "tag": "p",
+    "source_anchor": "technology-mapping",
+    "original_url": "https://eda.youwei.xyz/lectures/logic-synthesis/#technology-mapping",
+    "lesson_anchor": "mapping",
+    "characters": 0,
+    "text_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "source": "S",
+    "block_id": "quiz_1",
+    "tag": "h3",
+    "source_anchor": "quiz_1",
+    "original_url": "https://eda.youwei.xyz/lectures/logic-synthesis/#quiz_1",
+    "lesson_anchor": "quiz-s-q_1-1",
+    "characters": 4,
+    "text_sha256": "03aa7dc16797a82b4892dcc79747011b78a071b5a1c1213b4d08ee8e8a0450ff"
+  },
+  {
+    "source": "S",
+    "block_id": "S-016",
+    "tag": "ol",
+    "source_anchor": "quiz_1",
+    "original_url": "https://eda.youwei.xyz/lectures/logic-synthesis/#quiz_1",
+    "lesson_anchor": "quiz-s-q_1-1",
+    "characters": 66,
+    "text_sha256": "11f073601b655b8833c8e60f6ad971259cceeb4b984308a2a6ba79b62e72dfc7"
+  },
+  {
+    "source": "S",
+    "block_id": "_4",
+    "tag": "h2",
+    "source_anchor": "_4",
+    "original_url": "https://eda.youwei.xyz/lectures/logic-synthesis/#_4",
+    "lesson_anchor": "synthesis-patterns",
+    "characters": 2,
+    "text_sha256": "af84cfb6c1bb0e98dd9dbcb240e44a1ee2f152b70bd8d7fd71d58d7e1f105dd5"
+  },
+  {
+    "source": "S",
+    "block_id": "S-018",
+    "tag": "ol",
+    "source_anchor": "_4",
+    "original_url": "https://eda.youwei.xyz/lectures/logic-synthesis/#_4",
+    "lesson_anchor": "synthesis-patterns",
+    "characters": 108,
+    "text_sha256": "814525cd2b5ee763c4e34d2f3259823f798dcb851f79f153dce84916deadd9e8"
+  },
+  {
+    "source": "S",
+    "block_id": "tree-covering",
+    "tag": "h3",
+    "source_anchor": "tree-covering",
+    "original_url": "https://eda.youwei.xyz/lectures/logic-synthesis/#tree-covering",
+    "lesson_anchor": "dag-sharing",
+    "characters": 20,
+    "text_sha256": "90c47f9a9c54d883f1a95ac8532d0ef46a83c2d01ef2d10e954fac9ccaf392d0"
+  },
+  {
+    "source": "S",
+    "block_id": "S-020",
+    "tag": "ul",
+    "source_anchor": "tree-covering",
+    "original_url": "https://eda.youwei.xyz/lectures/logic-synthesis/#tree-covering",
+    "lesson_anchor": "dag-sharing",
+    "characters": 96,
+    "text_sha256": "0c166d5d32ad084c65967637a5c5ee11115e4c74523bcd7ce87e5ba214599463"
+  },
+  {
+    "source": "S",
+    "block_id": "_5",
+    "tag": "h3",
+    "source_anchor": "_5",
+    "original_url": "https://eda.youwei.xyz/lectures/logic-synthesis/#_5",
+    "lesson_anchor": "synthesis-patterns",
+    "characters": 2,
+    "text_sha256": "283ba9f1bcbcf21ed82bc245fefa604d1601787a5a40e92df2b0d89645a8753b"
+  },
+  {
+    "source": "S",
+    "block_id": "pattern-tree",
+    "tag": "h4",
+    "source_anchor": "pattern-tree",
+    "original_url": "https://eda.youwei.xyz/lectures/logic-synthesis/#pattern-tree",
+    "lesson_anchor": "synthesis-patterns",
+    "characters": 12,
+    "text_sha256": "5e43d42daa3090ac5f4652a8c5922ad20d5ee3ef4ec0f247975f0d612831e6af"
+  },
+  {
+    "source": "S",
+    "block_id": "not",
+    "tag": "h5",
+    "source_anchor": "not",
+    "original_url": "https://eda.youwei.xyz/lectures/logic-synthesis/#not",
+    "lesson_anchor": "synthesis-patterns",
+    "characters": 3,
+    "text_sha256": "8be3365cabaa6a0f90d2e64f03fa78268c135fe0b0758b576b447e9b2068d75d"
+  },
+  {
+    "source": "S",
+    "block_id": "S-024",
+    "tag": "div",
+    "source_anchor": "not",
+    "original_url": "https://eda.youwei.xyz/lectures/logic-synthesis/#not",
+    "lesson_anchor": "synthesis-patterns",
+    "characters": 13,
+    "text_sha256": "6e4c5995e260d35b9cfa7b6f3c5871a6494363afa6e81acde732a3e741ad130b"
+  },
+  {
+    "source": "S",
+    "block_id": "nand",
+    "tag": "h5",
+    "source_anchor": "nand",
+    "original_url": "https://eda.youwei.xyz/lectures/logic-synthesis/#nand",
+    "lesson_anchor": "synthesis-patterns",
+    "characters": 4,
+    "text_sha256": "ce5015775f612493aacde83d5eb1ed214e8b2acf4e4f3b80fae8e5d2bed6c9cc"
+  },
+  {
+    "source": "S",
+    "block_id": "S-026",
+    "tag": "div",
+    "source_anchor": "nand",
+    "original_url": "https://eda.youwei.xyz/lectures/logic-synthesis/#nand",
+    "lesson_anchor": "synthesis-patterns",
+    "characters": 16,
+    "text_sha256": "8fd4b3d1d1f94f1a89cc6cc31a0581275dc165566fc61fd5ee0fcf1c5646c9ec"
+  },
+  {
+    "source": "S",
+    "block_id": "and",
+    "tag": "h5",
+    "source_anchor": "and",
+    "original_url": "https://eda.youwei.xyz/lectures/logic-synthesis/#and",
+    "lesson_anchor": "synthesis-patterns",
+    "characters": 3,
+    "text_sha256": "bd972cc4f15d8c175061381ba53c0b85cfb33c09637e55c2cf97721fbd1b3645"
+  },
+  {
+    "source": "S",
+    "block_id": "S-028",
+    "tag": "div",
+    "source_anchor": "and",
+    "original_url": "https://eda.youwei.xyz/lectures/logic-synthesis/#and",
+    "lesson_anchor": "synthesis-patterns",
+    "characters": 28,
+    "text_sha256": "276ba3c884a6a44cea725a2ac08822f54d954a090b40a3bf3b6c6c06933aa763"
+  },
+  {
+    "source": "S",
+    "block_id": "nor",
+    "tag": "h5",
+    "source_anchor": "nor",
+    "original_url": "https://eda.youwei.xyz/lectures/logic-synthesis/#nor",
+    "lesson_anchor": "synthesis-patterns",
+    "characters": 3,
+    "text_sha256": "d6607a20af7a411306654d9bee59bd3f653f2af948ba78bf98e6e1382e24cd19"
+  },
+  {
+    "source": "S",
+    "block_id": "S-030",
+    "tag": "div",
+    "source_anchor": "nor",
+    "original_url": "https://eda.youwei.xyz/lectures/logic-synthesis/#nor",
+    "lesson_anchor": "synthesis-patterns",
+    "characters": 44,
+    "text_sha256": "6ca7f12737cb29b4c067f50cc7ea312be90878ab53afa4c7036a45e2d745721b"
+  },
+  {
+    "source": "S",
+    "block_id": "or2",
+    "tag": "h5",
+    "source_anchor": "or2",
+    "original_url": "https://eda.youwei.xyz/lectures/logic-synthesis/#or2",
+    "lesson_anchor": "synthesis-patterns",
+    "characters": 3,
+    "text_sha256": "e8bef3533c581a568e81f8d916be4696ba69fbba1ce0cd4d62400969e61a7fe5"
+  },
+  {
+    "source": "S",
+    "block_id": "S-032",
+    "tag": "div",
+    "source_anchor": "or2",
+    "original_url": "https://eda.youwei.xyz/lectures/logic-synthesis/#or2",
+    "lesson_anchor": "synthesis-patterns",
+    "characters": 32,
+    "text_sha256": "e83dc6c91b4ab3dcca03ceb431b73732159c8f217f629ef9525641be07d9821b"
+  },
+  {
+    "source": "S",
+    "block_id": "aoi21",
+    "tag": "h5",
+    "source_anchor": "aoi21",
+    "original_url": "https://eda.youwei.xyz/lectures/logic-synthesis/#aoi21",
+    "lesson_anchor": "synthesis-patterns",
+    "characters": 5,
+    "text_sha256": "2766cddbbba12f7841da5972b25a8974d7a27a334060392988dea9cae3341aa3"
+  },
+  {
+    "source": "S",
+    "block_id": "S-034",
+    "tag": "div",
+    "source_anchor": "aoi21",
+    "original_url": "https://eda.youwei.xyz/lectures/logic-synthesis/#aoi21",
+    "lesson_anchor": "synthesis-patterns",
+    "characters": 59,
+    "text_sha256": "dcbbfec2da283570b0818303b75aa7518b3eb4efa1b2d2695ddcc55944bc1cbd"
+  },
+  {
+    "source": "S",
+    "block_id": "S-035",
+    "tag": "div",
+    "source_anchor": "aoi21",
+    "original_url": "https://eda.youwei.xyz/lectures/logic-synthesis/#aoi21",
+    "lesson_anchor": "synthesis-patterns",
+    "characters": 56,
+    "text_sha256": "3c2f37b3dbec64f34497d58bfb4b40698e1b32c576e2685570972eb8dd28245b"
+  },
+  {
+    "source": "S",
+    "block_id": "S-036",
+    "tag": "div",
+    "source_anchor": "aoi21",
+    "original_url": "https://eda.youwei.xyz/lectures/logic-synthesis/#aoi21",
+    "lesson_anchor": "synthesis-patterns",
+    "characters": 38,
+    "text_sha256": "482dda4f72ed050e62a59a6975870c3a774ad21f9a3bcfbff6dfb19e7c047ece"
+  },
+  {
+    "source": "S",
+    "block_id": "aoi22",
+    "tag": "h5",
+    "source_anchor": "aoi22",
+    "original_url": "https://eda.youwei.xyz/lectures/logic-synthesis/#aoi22",
+    "lesson_anchor": "synthesis-patterns",
+    "characters": 5,
+    "text_sha256": "917ab898075047c6e97431196d8dca3ba52090836ae2d96e196fce1ad0271367"
+  },
+  {
+    "source": "S",
+    "block_id": "S-038",
+    "tag": "div",
+    "source_anchor": "aoi22",
+    "original_url": "https://eda.youwei.xyz/lectures/logic-synthesis/#aoi22",
+    "lesson_anchor": "synthesis-patterns",
+    "characters": 44,
+    "text_sha256": "0888621fd7de6c7cedc764e44ba226dbf36c3ef585f82c67ba1cc8dbe4f33dcb"
+  },
+  {
+    "source": "S",
+    "block_id": "subject-tree",
+    "tag": "h4",
+    "source_anchor": "subject-tree",
+    "original_url": "https://eda.youwei.xyz/lectures/logic-synthesis/#subject-tree",
+    "lesson_anchor": "synthesis-patterns",
+    "characters": 12,
+    "text_sha256": "fd1b21d423ba9d978d62cf9a2d1e1d42018cec241b8a51605fd2a15a82506797"
+  },
+  {
+    "source": "S",
+    "block_id": "S-040",
+    "tag": "div",
+    "source_anchor": "subject-tree",
+    "original_url": "https://eda.youwei.xyz/lectures/logic-synthesis/#subject-tree",
+    "lesson_anchor": "synthesis-patterns",
+    "characters": 127,
+    "text_sha256": "6da1907fe823e7cf876524bcb674b2c003ce8cb171ea314bb50514e941898474"
+  },
+  {
+    "source": "S",
+    "block_id": "matching",
+    "tag": "h4",
+    "source_anchor": "matching",
+    "original_url": "https://eda.youwei.xyz/lectures/logic-synthesis/#matching",
+    "lesson_anchor": "synthesis-formulas",
+    "characters": 8,
+    "text_sha256": "f9b8704d3c81cb30f3831fb2bef4d6b20289d08a7e420f1ff17ead1508b194dc"
+  },
+  {
+    "source": "S",
+    "block_id": "S-042",
+    "tag": "p",
+    "source_anchor": "matching",
+    "original_url": "https://eda.youwei.xyz/lectures/logic-synthesis/#matching",
+    "lesson_anchor": "synthesis-formulas",
+    "characters": 379,
+    "text_sha256": "e10bd73b63d8d1930e0c5b181574fa349d2b82af7980473fb7705c0977a8ce17"
+  },
+  {
+    "source": "S",
+    "block_id": "quiz_2",
+    "tag": "h3",
+    "source_anchor": "quiz_2",
+    "original_url": "https://eda.youwei.xyz/lectures/logic-synthesis/#quiz_2",
+    "lesson_anchor": "quiz-s-q_2-1",
+    "characters": 4,
+    "text_sha256": "03aa7dc16797a82b4892dcc79747011b78a071b5a1c1213b4d08ee8e8a0450ff"
+  },
+  {
+    "source": "S",
+    "block_id": "S-044",
+    "tag": "ol",
+    "source_anchor": "quiz_2",
+    "original_url": "https://eda.youwei.xyz/lectures/logic-synthesis/#quiz_2",
+    "lesson_anchor": "quiz-s-q_2-1",
+    "characters": 100,
+    "text_sha256": "996a5b0313a93542b13a2127b5f91a9c99e09e26eac49a248b0f70e950467d4c"
+  },
+  {
+    "source": "M",
+    "block_id": "M-001",
+    "tag": "h1",
+    "source_anchor": "",
+    "original_url": "https://eda.youwei.xyz/lectures/memory-architecture/",
+    "lesson_anchor": "ch-memory",
+    "characters": 19,
+    "text_sha256": "304780c294282349ead5f73f49e8fefc4694cdf0ab4bba812b6248e6db12bfb5"
+  },
+  {
+    "source": "M",
+    "block_id": "_1",
+    "tag": "h2",
+    "source_anchor": "_1",
+    "original_url": "https://eda.youwei.xyz/lectures/memory-architecture/#_1",
+    "lesson_anchor": "locality",
+    "characters": 7,
+    "text_sha256": "907b6ad1f762acc8b8eb336811c8c9bee7a2e36894cddc75da3f81b0a85e35b4"
+  },
+  {
+    "source": "M",
+    "block_id": "M-003",
+    "tag": "p",
+    "source_anchor": "_1",
+    "original_url": "https://eda.youwei.xyz/lectures/memory-architecture/#_1",
+    "lesson_anchor": "locality",
+    "characters": 31,
+    "text_sha256": "431384422d03306919eca6c4877c7a6249a1e27575ae173f725cb2be30a25cd5"
+  },
+  {
+    "source": "M",
+    "block_id": "quiz",
+    "tag": "h3",
+    "source_anchor": "quiz",
+    "original_url": "https://eda.youwei.xyz/lectures/memory-architecture/#quiz",
+    "lesson_anchor": "quiz-m-q-1",
+    "characters": 4,
+    "text_sha256": "03aa7dc16797a82b4892dcc79747011b78a071b5a1c1213b4d08ee8e8a0450ff"
+  },
+  {
+    "source": "M",
+    "block_id": "M-005",
+    "tag": "ol",
+    "source_anchor": "quiz",
+    "original_url": "https://eda.youwei.xyz/lectures/memory-architecture/#quiz",
+    "lesson_anchor": "quiz-m-q-1",
+    "characters": 61,
+    "text_sha256": "518c1932f49b09768cb157b20114588c38b7ef149800fcbdf758ad47f3d53bc1"
+  },
+  {
+    "source": "M",
+    "block_id": "cache",
+    "tag": "h2",
+    "source_anchor": "cache",
+    "original_url": "https://eda.youwei.xyz/lectures/memory-architecture/#cache",
+    "lesson_anchor": "memory-stall",
+    "characters": 5,
+    "text_sha256": "a76ce82a974999d815b24e30286466c727c9bdbe92c88e676362ce22878ad12d"
+  },
+  {
+    "source": "M",
+    "block_id": "M-007",
+    "tag": "ul",
+    "source_anchor": "cache",
+    "original_url": "https://eda.youwei.xyz/lectures/memory-architecture/#cache",
+    "lesson_anchor": "memory-stall",
+    "characters": 179,
+    "text_sha256": "2f658744f6e766f171bf4384ca0b97f2b2ca6513c8d849a1faf99d6e5651a26d"
+  },
+  {
+    "source": "M",
+    "block_id": "quiz_1",
+    "tag": "h3",
+    "source_anchor": "quiz_1",
+    "original_url": "https://eda.youwei.xyz/lectures/memory-architecture/#quiz_1",
+    "lesson_anchor": "quiz-m-q_1-1",
+    "characters": 4,
+    "text_sha256": "03aa7dc16797a82b4892dcc79747011b78a071b5a1c1213b4d08ee8e8a0450ff"
+  },
+  {
+    "source": "M",
+    "block_id": "M-009",
+    "tag": "ol",
+    "source_anchor": "quiz_1",
+    "original_url": "https://eda.youwei.xyz/lectures/memory-architecture/#quiz_1",
+    "lesson_anchor": "quiz-m-q_1-1",
+    "characters": 20,
+    "text_sha256": "6132c659da1d1a5f95e708450486feb47a96c68f7ff7117859fd6f7970e514ac"
+  },
+  {
+    "source": "X",
+    "block_id": "X-001",
+    "tag": "h1",
+    "source_anchor": "",
+    "original_url": "https://eda.youwei.xyz/lectures/mutual-exclusion/",
+    "lesson_anchor": "ch-parallel",
+    "characters": 16,
+    "text_sha256": "ea142f762e4986479c45c47a8d7ef8bae4d22a827f86e9d2739a5adf9d661a4e"
+  },
+  {
+    "source": "X",
+    "block_id": "_1",
+    "tag": "h2",
+    "source_anchor": "_1",
+    "original_url": "https://eda.youwei.xyz/lectures/mutual-exclusion/#_1",
+    "lesson_anchor": "amdahl",
+    "characters": 6,
+    "text_sha256": "ebb70f160f694d105d152b0096f7f9e1ccb0c7e1c0c814b70148128aa3ed2605"
+  },
+  {
+    "source": "X",
+    "block_id": "X-003",
+    "tag": "ul",
+    "source_anchor": "_1",
+    "original_url": "https://eda.youwei.xyz/lectures/mutual-exclusion/#_1",
+    "lesson_anchor": "amdahl",
+    "characters": 175,
+    "text_sha256": "4de7d3b82a9931e61900a9219685711fbc3e16ab20ab1f1c6a63806deb5d4115"
+  },
+  {
+    "source": "X",
+    "block_id": "quiz",
+    "tag": "h3",
+    "source_anchor": "quiz",
+    "original_url": "https://eda.youwei.xyz/lectures/mutual-exclusion/#quiz",
+    "lesson_anchor": "quiz-x-q-1",
+    "characters": 4,
+    "text_sha256": "03aa7dc16797a82b4892dcc79747011b78a071b5a1c1213b4d08ee8e8a0450ff"
+  },
+  {
+    "source": "X",
+    "block_id": "X-005",
+    "tag": "p",
+    "source_anchor": "quiz",
+    "original_url": "https://eda.youwei.xyz/lectures/mutual-exclusion/#quiz",
+    "lesson_anchor": "quiz-x-q-1",
+    "characters": 23,
+    "text_sha256": "239105b72a37f64315a449f1fa9cb5aab07f01ca78f02d19b561906f8ef602bb"
+  },
+  {
+    "source": "X",
+    "block_id": "X-006",
+    "tag": "ol",
+    "source_anchor": "quiz",
+    "original_url": "https://eda.youwei.xyz/lectures/mutual-exclusion/#quiz",
+    "lesson_anchor": "quiz-x-q-1",
+    "characters": 82,
+    "text_sha256": "70c28bd10b9bce0d414fc4b6ab010c2cee123dbe703c9fe3f93de813bd91bdd6"
+  },
+  {
+    "source": "X",
+    "block_id": "_2",
+    "tag": "h2",
+    "source_anchor": "_2",
+    "original_url": "https://eda.youwei.xyz/lectures/mutual-exclusion/#_2",
+    "lesson_anchor": "safety-liveness",
+    "characters": 2,
+    "text_sha256": "d6ea0a52f268f082453f3ebf8faff659ee41a6ba062603423598f6a9bd30d8a0"
+  },
+  {
+    "source": "X",
+    "block_id": "_3",
+    "tag": "h3",
+    "source_anchor": "_3",
+    "original_url": "https://eda.youwei.xyz/lectures/mutual-exclusion/#_3",
+    "lesson_anchor": "safety-liveness",
+    "characters": 2,
+    "text_sha256": "170c2dbdb89327efa248d1e8d9befa0fcbe5bc05ce277272e939d90d5540d24d"
+  },
+  {
+    "source": "X",
+    "block_id": "X-009",
+    "tag": "ul",
+    "source_anchor": "_3",
+    "original_url": "https://eda.youwei.xyz/lectures/mutual-exclusion/#_3",
+    "lesson_anchor": "safety-liveness",
+    "characters": 180,
+    "text_sha256": "aa976d18d5ceb9da643ba0423ae85b81df03c31984590d038822b737468dab32"
+  },
+  {
+    "source": "X",
+    "block_id": "_4",
+    "tag": "h3",
+    "source_anchor": "_4",
+    "original_url": "https://eda.youwei.xyz/lectures/mutual-exclusion/#_4",
+    "lesson_anchor": "parallel-formulas",
+    "characters": 7,
+    "text_sha256": "dffb31facbecc0bd1b68255fa0e56941ea2a398565524d92378a92500e374a62"
+  },
+  {
+    "source": "X",
+    "block_id": "X-011",
+    "tag": "ul",
+    "source_anchor": "_4",
+    "original_url": "https://eda.youwei.xyz/lectures/mutual-exclusion/#_4",
+    "lesson_anchor": "parallel-formulas",
+    "characters": 180,
+    "text_sha256": "251b09bb968e9e1fee4ed7b8c96452ad765ce38322606df02df1994698285fac"
+  },
+  {
+    "source": "X",
+    "block_id": "quiz_1",
+    "tag": "h3",
+    "source_anchor": "quiz_1",
+    "original_url": "https://eda.youwei.xyz/lectures/mutual-exclusion/#quiz_1",
+    "lesson_anchor": "quiz-x-q_1-1",
+    "characters": 4,
+    "text_sha256": "03aa7dc16797a82b4892dcc79747011b78a071b5a1c1213b4d08ee8e8a0450ff"
+  },
+  {
+    "source": "X",
+    "block_id": "X-013",
+    "tag": "p",
+    "source_anchor": "quiz_1",
+    "original_url": "https://eda.youwei.xyz/lectures/mutual-exclusion/#quiz_1",
+    "lesson_anchor": "quiz-x-q_1-1",
+    "characters": 158,
+    "text_sha256": "5ebce202ecb206130354845ba8569e173fad1ee398a8eeeb0a5f2f07894b303c"
+  },
+  {
+    "source": "X",
+    "block_id": "X-014",
+    "tag": "ol",
+    "source_anchor": "quiz_1",
+    "original_url": "https://eda.youwei.xyz/lectures/mutual-exclusion/#quiz_1",
+    "lesson_anchor": "quiz-x-q_1-1",
+    "characters": 93,
+    "text_sha256": "9a43c138b2242918af065a89ee6e497de8eb82f7ea134b209d931789c03549c4"
+  },
+  {
+    "source": "X",
+    "block_id": "_5",
+    "tag": "h2",
+    "source_anchor": "_5",
+    "original_url": "https://eda.youwei.xyz/lectures/mutual-exclusion/#_5",
+    "lesson_anchor": "peterson",
+    "characters": 7,
+    "text_sha256": "3bbc94d187e7b9d3220f150458efb9c7ec939585ba4ed50ae687863bf13410ad"
+  },
+  {
+    "source": "X",
+    "block_id": "X-016",
+    "tag": "p",
+    "source_anchor": "_5",
+    "original_url": "https://eda.youwei.xyz/lectures/mutual-exclusion/#_5",
+    "lesson_anchor": "peterson",
+    "characters": 38,
+    "text_sha256": "485bf41e0267968ca4e90b17f8a17e67c8e342a670ddbefd7630d5f24d6e8043"
+  },
+  {
+    "source": "X",
+    "block_id": "lockone",
+    "tag": "h3",
+    "source_anchor": "lockone",
+    "original_url": "https://eda.youwei.xyz/lectures/mutual-exclusion/#lockone",
+    "lesson_anchor": "parallel-formulas",
+    "characters": 7,
+    "text_sha256": "c09110af99a006cf14d792c9bc3b9f481426930505703c714defd815c690206b"
+  },
+  {
+    "source": "X",
+    "block_id": "X-018",
+    "tag": "p",
+    "source_anchor": "lockone",
+    "original_url": "https://eda.youwei.xyz/lectures/mutual-exclusion/#lockone",
+    "lesson_anchor": "parallel-formulas",
+    "characters": 264,
+    "text_sha256": "0e0c2e1eabd4f0df5334c101d34318b9388f0d0c82ab6cbf54bdd39a46c3b17e"
+  },
+  {
+    "source": "X",
+    "block_id": "locktwo",
+    "tag": "h3",
+    "source_anchor": "locktwo",
+    "original_url": "https://eda.youwei.xyz/lectures/mutual-exclusion/#locktwo",
+    "lesson_anchor": "parallel-formulas",
+    "characters": 7,
+    "text_sha256": "d3832779552450652ceb571e6ec8c3a75a4a66e1cd9056000379ebe39451d156"
+  },
+  {
+    "source": "X",
+    "block_id": "X-020",
+    "tag": "p",
+    "source_anchor": "locktwo",
+    "original_url": "https://eda.youwei.xyz/lectures/mutual-exclusion/#locktwo",
+    "lesson_anchor": "parallel-formulas",
+    "characters": 256,
+    "text_sha256": "d99461555a230d9f5c6ea2de09574cee10b97b6c03c1513403a0b7867d4dada3"
+  },
+  {
+    "source": "X",
+    "block_id": "petersons-algorithm",
+    "tag": "h3",
+    "source_anchor": "petersons-algorithm",
+    "original_url": "https://eda.youwei.xyz/lectures/mutual-exclusion/#petersons-algorithm",
+    "lesson_anchor": "peterson",
+    "characters": 20,
+    "text_sha256": "91b8cafda02d8d787edbda770c7b45f60fce51a5727666c6829ea2c175bfe69b"
+  },
+  {
+    "source": "X",
+    "block_id": "X-022",
+    "tag": "div",
+    "source_anchor": "petersons-algorithm",
+    "original_url": "https://eda.youwei.xyz/lectures/mutual-exclusion/#petersons-algorithm",
+    "lesson_anchor": "peterson",
+    "characters": 332,
+    "text_sha256": "835ef0b146687e6aa99ecafe1ab28560cc21c54aa7971daa29d98a9a85212c70"
+  },
+  {
+    "source": "X",
+    "block_id": "X-023",
+    "tag": "p",
+    "source_anchor": "petersons-algorithm",
+    "original_url": "https://eda.youwei.xyz/lectures/mutual-exclusion/#petersons-algorithm",
+    "lesson_anchor": "peterson",
+    "characters": 67,
+    "text_sha256": "472a9aa4f90b6fad2cb4e91537ade55a0ffa067744c57437998a0cf28bd8e7ce"
+  },
+  {
+    "source": "X",
+    "block_id": "quiz_2",
+    "tag": "h3",
+    "source_anchor": "quiz_2",
+    "original_url": "https://eda.youwei.xyz/lectures/mutual-exclusion/#quiz_2",
+    "lesson_anchor": "quiz-x-q_2-1",
+    "characters": 4,
+    "text_sha256": "03aa7dc16797a82b4892dcc79747011b78a071b5a1c1213b4d08ee8e8a0450ff"
+  },
+  {
+    "source": "X",
+    "block_id": "X-025",
+    "tag": "ol",
+    "source_anchor": "quiz_2",
+    "original_url": "https://eda.youwei.xyz/lectures/mutual-exclusion/#quiz_2",
+    "lesson_anchor": "quiz-x-q_2-1",
+    "characters": 100,
+    "text_sha256": "882adba42b9d49d646f82298e97229a5738128b84187adc14fabfb9e5f9fa7fa"
+  },
+  {
+    "source": "P",
+    "block_id": "P-001",
+    "tag": "h1",
+    "source_anchor": "",
+    "original_url": "https://eda.youwei.xyz/lectures/placement/",
+    "lesson_anchor": "ch-placement",
+    "characters": 9,
+    "text_sha256": "4df9939944a7b324991dfbe49dcfc0813f1f474311eee2e207b53442495887e8"
+  },
+  {
+    "source": "P",
+    "block_id": "_1",
+    "tag": "h2",
+    "source_anchor": "_1",
+    "original_url": "https://eda.youwei.xyz/lectures/placement/#_1",
+    "lesson_anchor": "wirelength",
+    "characters": 2,
+    "text_sha256": "faa2f2ed6735784700e26da888d7c91d0acb6eac6166ffd4db6f8db41a93cc00"
+  },
+  {
+    "source": "P",
+    "block_id": "P-003",
+    "tag": "ul",
+    "source_anchor": "_1",
+    "original_url": "https://eda.youwei.xyz/lectures/placement/#_1",
+    "lesson_anchor": "wirelength",
+    "characters": 130,
+    "text_sha256": "0900406541ed26cca4dc21edc881f2ff5d68080a9ac6edbdcabfa3dcb0d5ef18"
+  },
+  {
+    "source": "P",
+    "block_id": "_2",
+    "tag": "h2",
+    "source_anchor": "_2",
+    "original_url": "https://eda.youwei.xyz/lectures/placement/#_2",
+    "lesson_anchor": "annealing",
+    "characters": 4,
+    "text_sha256": "3915c997de5abe7753aa46f739efd79959c52735ca7fa9a7d8d77cd71c66147e"
+  },
+  {
+    "source": "P",
+    "block_id": "_3",
+    "tag": "h2",
+    "source_anchor": "_3",
+    "original_url": "https://eda.youwei.xyz/lectures/placement/#_3",
+    "lesson_anchor": "placement-formulas",
+    "characters": 4,
+    "text_sha256": "25ab92252d22856ef43b8f13efc655e0aeae016ff5c43555e4ccd4476c37129a"
+  },
+  {
+    "source": "P",
+    "block_id": "P-006",
+    "tag": "ul",
+    "source_anchor": "_3",
+    "original_url": "https://eda.youwei.xyz/lectures/placement/#_3",
+    "lesson_anchor": "placement-formulas",
+    "characters": 479,
+    "text_sha256": "d213282c73babeb1db8ebd7a4eefe46b641d8d4daf2846bdf56fd67434eeed15"
+  },
+  {
+    "source": "P",
+    "block_id": "quiz",
+    "tag": "h3",
+    "source_anchor": "quiz",
+    "original_url": "https://eda.youwei.xyz/lectures/placement/#quiz",
+    "lesson_anchor": "quiz-p-q-1",
+    "characters": 4,
+    "text_sha256": "03aa7dc16797a82b4892dcc79747011b78a071b5a1c1213b4d08ee8e8a0450ff"
+  },
+  {
+    "source": "P",
+    "block_id": "P-008",
+    "tag": "ol",
+    "source_anchor": "quiz",
+    "original_url": "https://eda.youwei.xyz/lectures/placement/#quiz",
+    "lesson_anchor": "quiz-p-q-1",
+    "characters": 97,
+    "text_sha256": "af054f2478ce4f033fb5dbfb894231bec407c583fe6cf658ba8450be70e251aa"
+  },
+  {
+    "source": "P",
+    "block_id": "_4",
+    "tag": "h2",
+    "source_anchor": "_4",
+    "original_url": "https://eda.youwei.xyz/lectures/placement/#_4",
+    "lesson_anchor": "partition",
+    "characters": 2,
+    "text_sha256": "c857d8666cf87846a3d531688e83c47bb117e665fafb5099f73d7170e892f113"
+  },
+  {
+    "source": "P",
+    "block_id": "P-010",
+    "tag": "ul",
+    "source_anchor": "_4",
+    "original_url": "https://eda.youwei.xyz/lectures/placement/#_4",
+    "lesson_anchor": "partition",
+    "characters": 103,
+    "text_sha256": "08c28db7a89af628857785e1db904dbc428181721ceef26d4d6cc23eb39af7be"
+  },
+  {
+    "source": "P",
+    "block_id": "quiz_1",
+    "tag": "h3",
+    "source_anchor": "quiz_1",
+    "original_url": "https://eda.youwei.xyz/lectures/placement/#quiz_1",
+    "lesson_anchor": "quiz-p-q_1-1",
+    "characters": 4,
+    "text_sha256": "03aa7dc16797a82b4892dcc79747011b78a071b5a1c1213b4d08ee8e8a0450ff"
+  },
+  {
+    "source": "P",
+    "block_id": "P-012",
+    "tag": "ol",
+    "source_anchor": "quiz_1",
+    "original_url": "https://eda.youwei.xyz/lectures/placement/#quiz_1",
+    "lesson_anchor": "quiz-p-q_1-1",
+    "characters": 17,
+    "text_sha256": "764ad99e56dd6e0289e39fcea39df006ad08e16edc721dab29929bd0d104b4a5"
+  },
+  {
+    "source": "P",
+    "block_id": "analytic-placement",
+    "tag": "h2",
+    "source_anchor": "analytic-placement",
+    "original_url": "https://eda.youwei.xyz/lectures/placement/#analytic-placement",
+    "lesson_anchor": "quadratic",
+    "characters": 24,
+    "text_sha256": "f585d5fa41b6b154b8156ed7bef6024f0c9525d8a56765d9c4f176ea2eac7ee4"
+  },
+  {
+    "source": "P",
+    "block_id": "P-014",
+    "tag": "ul",
+    "source_anchor": "analytic-placement",
+    "original_url": "https://eda.youwei.xyz/lectures/placement/#analytic-placement",
+    "lesson_anchor": "quadratic",
+    "characters": 56,
+    "text_sha256": "d4d6b9d6f62001e75259eafcc2a730ac452e9fb8c5efd428969eb351f6d9dc5b"
+  },
+  {
+    "source": "P",
+    "block_id": "_5",
+    "tag": "h2",
+    "source_anchor": "_5",
+    "original_url": "https://eda.youwei.xyz/lectures/placement/#_5",
+    "lesson_anchor": "wirelength",
+    "characters": 7,
+    "text_sha256": "4cef982743422cc38158ff37e90585306ad310ce2c5754137c3157f10fb17489"
+  },
+  {
+    "source": "P",
+    "block_id": "P-016",
+    "tag": "table",
+    "source_anchor": "_5",
+    "original_url": "https://eda.youwei.xyz/lectures/placement/#_5",
+    "lesson_anchor": "wirelength",
+    "characters": 341,
+    "text_sha256": "e959843ec571c00b5fac5627f3c541710fa8f81eeab14729f1e55a0fce8f7fe1"
+  },
+  {
+    "source": "P",
+    "block_id": "_6",
+    "tag": "h3",
+    "source_anchor": "_6",
+    "original_url": "https://eda.youwei.xyz/lectures/placement/#_6",
+    "lesson_anchor": "lab-wire",
+    "characters": 2,
+    "text_sha256": "283ba9f1bcbcf21ed82bc245fefa604d1601787a5a40e92df2b0d89645a8753b"
+  },
+  {
+    "source": "P",
+    "block_id": "P-018",
+    "tag": "p",
+    "source_anchor": "_6",
+    "original_url": "https://eda.youwei.xyz/lectures/placement/#_6",
+    "lesson_anchor": "lab-wire",
+    "characters": 66,
+    "text_sha256": "73b603ea95597c0ccd784f0117279462de09237a40b79851f2b65abf5f9ef11e"
+  },
+  {
+    "source": "P",
+    "block_id": "P-019",
+    "tag": "ul",
+    "source_anchor": "_6",
+    "original_url": "https://eda.youwei.xyz/lectures/placement/#_6",
+    "lesson_anchor": "lab-wire",
+    "characters": 27,
+    "text_sha256": "cfe68eb34daa268c9220a0baffbddc4b45df70fb60518cf5eaaacdd0da281e96"
+  },
+  {
+    "source": "P",
+    "block_id": "P-020",
+    "tag": "p",
+    "source_anchor": "_6",
+    "original_url": "https://eda.youwei.xyz/lectures/placement/#_6",
+    "lesson_anchor": "lab-wire",
+    "characters": 60,
+    "text_sha256": "01d27613ba6f1299508ba15b1f4f381da6b74d25215942898aed52c6e4d78d78"
+  },
+  {
+    "source": "P",
+    "block_id": "P-021",
+    "tag": "ul",
+    "source_anchor": "_6",
+    "original_url": "https://eda.youwei.xyz/lectures/placement/#_6",
+    "lesson_anchor": "lab-wire",
+    "characters": 51,
+    "text_sha256": "41b67095e8f20ea8ba7e475fd186d5354a6eb915f058c4602a8c041bc146a299"
+  },
+  {
+    "source": "P",
+    "block_id": "P-022",
+    "tag": "p",
+    "source_anchor": "_6",
+    "original_url": "https://eda.youwei.xyz/lectures/placement/#_6",
+    "lesson_anchor": "lab-wire",
+    "characters": 52,
+    "text_sha256": "eb839ceb813b87f8241dd05f38dac2cee6cbc7d7345d6b8c1ac6607134f62d06"
+  },
+  {
+    "source": "P",
+    "block_id": "P-023",
+    "tag": "ul",
+    "source_anchor": "_6",
+    "original_url": "https://eda.youwei.xyz/lectures/placement/#_6",
+    "lesson_anchor": "lab-wire",
+    "characters": 52,
+    "text_sha256": "52eff150e476c3ad522b451e4695be36055b65c7bf915c279eaebf22d83b900e"
+  },
+  {
+    "source": "P",
+    "block_id": "P-024",
+    "tag": "p",
+    "source_anchor": "_6",
+    "original_url": "https://eda.youwei.xyz/lectures/placement/#_6",
+    "lesson_anchor": "lab-wire",
+    "characters": 49,
+    "text_sha256": "41f16828052c23871723d5a0f8a1489d6abf432293466eebe5f23840faa66239"
+  },
+  {
+    "source": "P",
+    "block_id": "quiz_2",
+    "tag": "h3",
+    "source_anchor": "quiz_2",
+    "original_url": "https://eda.youwei.xyz/lectures/placement/#quiz_2",
+    "lesson_anchor": "quiz-p-q_2-1",
+    "characters": 4,
+    "text_sha256": "03aa7dc16797a82b4892dcc79747011b78a071b5a1c1213b4d08ee8e8a0450ff"
+  },
+  {
+    "source": "P",
+    "block_id": "P-026",
+    "tag": "ol",
+    "source_anchor": "quiz_2",
+    "original_url": "https://eda.youwei.xyz/lectures/placement/#quiz_2",
+    "lesson_anchor": "quiz-p-q_2-1",
+    "characters": 80,
+    "text_sha256": "78270c4220b663af2b820c665a224035377793c8dd20f3a735b3ac1f3ee14c4d"
+  },
+  {
+    "source": "P",
+    "block_id": "quadratic-placement",
+    "tag": "h2",
+    "source_anchor": "quadratic-placement",
+    "original_url": "https://eda.youwei.xyz/lectures/placement/#quadratic-placement",
+    "lesson_anchor": "placement-formulas",
+    "characters": 19,
+    "text_sha256": "08dbfba2b78245013756f5dce71718be83eb9a248dae069c334425bbeb7fa6e4"
+  },
+  {
+    "source": "P",
+    "block_id": "P-028",
+    "tag": "ul",
+    "source_anchor": "quadratic-placement",
+    "original_url": "https://eda.youwei.xyz/lectures/placement/#quadratic-placement",
+    "lesson_anchor": "placement-formulas",
+    "characters": 219,
+    "text_sha256": "116c9acd1160b2b7e6edb19973ef2cf72a8d320ae6fa487e5a4c529b177ecdc5"
+  },
+  {
+    "source": "P",
+    "block_id": "quiz_3",
+    "tag": "h3",
+    "source_anchor": "quiz_3",
+    "original_url": "https://eda.youwei.xyz/lectures/placement/#quiz_3",
+    "lesson_anchor": "quiz-p-q_3-1",
+    "characters": 4,
+    "text_sha256": "03aa7dc16797a82b4892dcc79747011b78a071b5a1c1213b4d08ee8e8a0450ff"
+  },
+  {
+    "source": "P",
+    "block_id": "P-030",
+    "tag": "ol",
+    "source_anchor": "quiz_3",
+    "original_url": "https://eda.youwei.xyz/lectures/placement/#quiz_3",
+    "lesson_anchor": "quiz-p-q_3-1",
+    "characters": 53,
+    "text_sha256": "bac61bb7d25352fd68293a4d1d2dfc3cab63799d7580cbdd1ce66dfa72b35245"
+  },
+  {
+    "source": "P",
+    "block_id": "nonlinear-placement",
+    "tag": "h2",
+    "source_anchor": "nonlinear-placement",
+    "original_url": "https://eda.youwei.xyz/lectures/placement/#nonlinear-placement",
+    "lesson_anchor": "placement-formulas",
+    "characters": 19,
+    "text_sha256": "8b1238eef1d31afd379ff7667d179ed1356de7dfb5a6d645a27aac7d059daf9a"
+  },
+  {
+    "source": "P",
+    "block_id": "P-032",
+    "tag": "ul",
+    "source_anchor": "nonlinear-placement",
+    "original_url": "https://eda.youwei.xyz/lectures/placement/#nonlinear-placement",
+    "lesson_anchor": "placement-formulas",
+    "characters": 116,
+    "text_sha256": "3bedb2082bc00cd09475084dfab6ee8aaa30f66f84d958501ee44e2c475f4610"
+  },
+  {
+    "source": "P",
+    "block_id": "quiz_4",
+    "tag": "h3",
+    "source_anchor": "quiz_4",
+    "original_url": "https://eda.youwei.xyz/lectures/placement/#quiz_4",
+    "lesson_anchor": "quiz-p-q_4-1",
+    "characters": 4,
+    "text_sha256": "03aa7dc16797a82b4892dcc79747011b78a071b5a1c1213b4d08ee8e8a0450ff"
+  },
+  {
+    "source": "P",
+    "block_id": "P-034",
+    "tag": "ol",
+    "source_anchor": "quiz_4",
+    "original_url": "https://eda.youwei.xyz/lectures/placement/#quiz_4",
+    "lesson_anchor": "quiz-p-q_4-1",
+    "characters": 67,
+    "text_sha256": "e82be6b6ad0040e1e159b5a0ba3bc7ebdbfd1af68ecdc0b012314ff57cb9e1b5"
+  },
+  {
+    "source": "R",
+    "block_id": "R-001",
+    "tag": "h1",
+    "source_anchor": "",
+    "original_url": "https://eda.youwei.xyz/lectures/routing/",
+    "lesson_anchor": "ch-routing",
+    "characters": 7,
+    "text_sha256": "bcba696f3eb100537ab06942d097dfb259afca3eaa6e37a43327e67215620060"
+  },
+  {
+    "source": "R",
+    "block_id": "_1",
+    "tag": "h2",
+    "source_anchor": "_1",
+    "original_url": "https://eda.youwei.xyz/lectures/routing/#_1",
+    "lesson_anchor": "routing-formulas",
+    "characters": 2,
+    "text_sha256": "8f26f0e61682bbcb9532b1ab924394da3920e0cb778eaf9366452ea6730d9a05"
+  },
+  {
+    "source": "R",
+    "block_id": "R-003",
+    "tag": "ul",
+    "source_anchor": "_1",
+    "original_url": "https://eda.youwei.xyz/lectures/routing/#_1",
+    "lesson_anchor": "routing-formulas",
+    "characters": 105,
+    "text_sha256": "fbc98cc010211acb1d943e5c41aba36baf43f56110451ced49136adb744df445"
+  },
+  {
+    "source": "R",
+    "block_id": "steiner",
+    "tag": "h2",
+    "source_anchor": "steiner",
+    "original_url": "https://eda.youwei.xyz/lectures/routing/#steiner",
+    "lesson_anchor": "steiner-vectors",
+    "characters": 9,
+    "text_sha256": "b9af44c437d22c8fd97f16c6e445689b82683351512b7a879a1aa1a5bc2f19ca"
+  },
+  {
+    "source": "R",
+    "block_id": "R-005",
+    "tag": "ul",
+    "source_anchor": "steiner",
+    "original_url": "https://eda.youwei.xyz/lectures/routing/#steiner",
+    "lesson_anchor": "steiner-vectors",
+    "characters": 96,
+    "text_sha256": "207fe294f042234144589f6f6c9aeb7f821f923b2aad1db345963553ce5ed608"
+  },
+  {
+    "source": "R",
+    "block_id": "flute",
+    "tag": "h2",
+    "source_anchor": "flute",
+    "original_url": "https://eda.youwei.xyz/lectures/routing/#flute",
+    "lesson_anchor": "routing-formulas",
+    "characters": 8,
+    "text_sha256": "a334d957fba67dc9e36e8ea31f6c7d594151469293bfbfc21cffe663ac69a042"
+  },
+  {
+    "source": "R",
+    "block_id": "R-007",
+    "tag": "ul",
+    "source_anchor": "flute",
+    "original_url": "https://eda.youwei.xyz/lectures/routing/#flute",
+    "lesson_anchor": "routing-formulas",
+    "characters": 270,
+    "text_sha256": "2c7bbe91dd8eee5667821845d7a5b59a8c16ad0d236e1728d355d15845bdbd73"
+  },
+  {
+    "source": "R",
+    "block_id": "R-008",
+    "tag": "div",
+    "source_anchor": "flute",
+    "original_url": "https://eda.youwei.xyz/lectures/routing/#flute",
+    "lesson_anchor": "routing-formulas",
+    "characters": 74,
+    "text_sha256": "754c4dc3873833d3a9942175a459f1d599a56df1d94383df36bdd793825c2737"
+  },
+  {
+    "source": "R",
+    "block_id": "_2",
+    "tag": "h2",
+    "source_anchor": "_2",
+    "original_url": "https://eda.youwei.xyz/lectures/routing/#_2",
+    "lesson_anchor": "lee",
+    "characters": 4,
+    "text_sha256": "0320c54df066060ddec2341e4467021a0e4a02ba552e473a168e28fe16ed025d"
+  },
+  {
+    "source": "R",
+    "block_id": "lees-algorithm",
+    "tag": "h2",
+    "source_anchor": "lees-algorithm",
+    "original_url": "https://eda.youwei.xyz/lectures/routing/#lees-algorithm",
+    "lesson_anchor": "lee",
+    "characters": 15,
+    "text_sha256": "590eb5587bc678efa02b842f298ea68e2bdb0ab2c78673a8ea4c42711f264399"
+  },
+  {
+    "source": "R",
+    "block_id": "R-011",
+    "tag": "ul",
+    "source_anchor": "lees-algorithm",
+    "original_url": "https://eda.youwei.xyz/lectures/routing/#lees-algorithm",
+    "lesson_anchor": "lee",
+    "characters": 7,
+    "text_sha256": "b3bde1172402ee7def7bf3b0bb7878dbadaf5bbdb32a1508bf3ee52ee79b7d4d"
+  },
+  {
+    "source": "R",
+    "block_id": "_3",
+    "tag": "h3",
+    "source_anchor": "_3",
+    "original_url": "https://eda.youwei.xyz/lectures/routing/#_3",
+    "lesson_anchor": "lab-lee",
+    "characters": 2,
+    "text_sha256": "283ba9f1bcbcf21ed82bc245fefa604d1601787a5a40e92df2b0d89645a8753b"
+  },
+  {
+    "source": "R",
+    "block_id": "R-013",
+    "tag": "ul",
+    "source_anchor": "_3",
+    "original_url": "https://eda.youwei.xyz/lectures/routing/#_3",
+    "lesson_anchor": "lab-lee",
+    "characters": 37,
+    "text_sha256": "00b576ee4f6a22bfae3b4a377f27cc869fed5b060e67a91bbc587a62df7b3343"
+  },
+  {
+    "source": "R",
+    "block_id": "wave-propagation",
+    "tag": "h4",
+    "source_anchor": "wave-propagation",
+    "original_url": "https://eda.youwei.xyz/lectures/routing/#wave-propagation",
+    "lesson_anchor": "routing-formulas",
+    "characters": 27,
+    "text_sha256": "2640b7d83e1ac2031e627de04258fc962b059ad876832653e7f24f85694ac0f6"
+  },
+  {
+    "source": "R",
+    "block_id": "R-015",
+    "tag": "p",
+    "source_anchor": "wave-propagation",
+    "original_url": "https://eda.youwei.xyz/lectures/routing/#wave-propagation",
+    "lesson_anchor": "routing-formulas",
+    "characters": 5,
+    "text_sha256": "09e12de0cbc5971ccab00b0d0896f7b23435c149bc76628d3d94d97c6ec78dc1"
+  },
+  {
+    "source": "R",
+    "block_id": "R-016",
+    "tag": "p",
+    "source_anchor": "wave-propagation",
+    "original_url": "https://eda.youwei.xyz/lectures/routing/#wave-propagation",
+    "lesson_anchor": "routing-formulas",
+    "characters": 40,
+    "text_sha256": "07ce06a51b94c8709783656e54ad5d278f07958bc47e550d6285fa7ee604f8e0"
+  },
+  {
+    "source": "R",
+    "block_id": "R-017",
+    "tag": "p",
+    "source_anchor": "wave-propagation",
+    "original_url": "https://eda.youwei.xyz/lectures/routing/#wave-propagation",
+    "lesson_anchor": "routing-formulas",
+    "characters": 15,
+    "text_sha256": "9d472eedf9e84e657b413b22460ce091e02a23dbdc1dc1a458a608b91e7e71cf"
+  },
+  {
+    "source": "R",
+    "block_id": "R-018",
+    "tag": "div",
+    "source_anchor": "wave-propagation",
+    "original_url": "https://eda.youwei.xyz/lectures/routing/#wave-propagation",
+    "lesson_anchor": "routing-formulas",
+    "characters": 31,
+    "text_sha256": "4472930804b490058dd67732ffe2847168a42378413e2df52a7a6123e4565816"
+  },
+  {
+    "source": "R",
+    "block_id": "R-019",
+    "tag": "p",
+    "source_anchor": "wave-propagation",
+    "original_url": "https://eda.youwei.xyz/lectures/routing/#wave-propagation",
+    "lesson_anchor": "routing-formulas",
+    "characters": 93,
+    "text_sha256": "6dd400104f77d017a333e0d5d6b19c5252e49029e8a0ed73887b3d02cd6544f9"
+  },
+  {
+    "source": "R",
+    "block_id": "2-retrace",
+    "tag": "h4",
+    "source_anchor": "2-retrace",
+    "original_url": "https://eda.youwei.xyz/lectures/routing/#2-retrace",
+    "lesson_anchor": "routing-formulas",
+    "characters": 17,
+    "text_sha256": "f069c46f9e75c316a0a28fe8fa03f002aa1b5d440d718469ebeeadb8db595329"
+  },
+  {
+    "source": "R",
+    "block_id": "R-021",
+    "tag": "p",
+    "source_anchor": "2-retrace",
+    "original_url": "https://eda.youwei.xyz/lectures/routing/#2-retrace",
+    "lesson_anchor": "routing-formulas",
+    "characters": 41,
+    "text_sha256": "d13b29c86f3c9e5c2be42cd78e1aaefd3d44d0e50c219ca3418433abfdd0b77f"
+  },
+  {
+    "source": "R",
+    "block_id": "R-022",
+    "tag": "ol",
+    "source_anchor": "2-retrace",
+    "original_url": "https://eda.youwei.xyz/lectures/routing/#2-retrace",
+    "lesson_anchor": "routing-formulas",
+    "characters": 118,
+    "text_sha256": "da522ebb01f7c73e4843a2e8d2f3e79512dcf82b98aa26ab32840118bcc167bc"
+  },
+  {
+    "source": "R",
+    "block_id": "R-023",
+    "tag": "p",
+    "source_anchor": "2-retrace",
+    "original_url": "https://eda.youwei.xyz/lectures/routing/#2-retrace",
+    "lesson_anchor": "routing-formulas",
+    "characters": 119,
+    "text_sha256": "d933e02180485079a0a136322603b0372b35c812a9bdfbca8c5e8d2a48a91617"
+  },
+  {
+    "source": "R",
+    "block_id": "quiz",
+    "tag": "h3",
+    "source_anchor": "quiz",
+    "original_url": "https://eda.youwei.xyz/lectures/routing/#quiz",
+    "lesson_anchor": "quiz-r-q-1",
+    "characters": 4,
+    "text_sha256": "03aa7dc16797a82b4892dcc79747011b78a071b5a1c1213b4d08ee8e8a0450ff"
+  },
+  {
+    "source": "R",
+    "block_id": "R-025",
+    "tag": "ol",
+    "source_anchor": "quiz",
+    "original_url": "https://eda.youwei.xyz/lectures/routing/#quiz",
+    "lesson_anchor": "quiz-r-q-1",
+    "characters": 64,
+    "text_sha256": "8e0996d20c4053544ebeb856e705dd599b503e9e8659afd1455774e83d5f4490"
+  },
+  {
+    "source": "R",
+    "block_id": "akers-coding",
+    "tag": "h2",
+    "source_anchor": "akers-coding",
+    "original_url": "https://eda.youwei.xyz/lectures/routing/#akers-coding",
+    "lesson_anchor": "akers",
+    "characters": 13,
+    "text_sha256": "63d9d85d48ea64ff5f513dbb9ad8357c88747e483e4863a96daad0fcc8c8c268"
+  },
+  {
+    "source": "R",
+    "block_id": "R-027",
+    "tag": "ul",
+    "source_anchor": "akers-coding",
+    "original_url": "https://eda.youwei.xyz/lectures/routing/#akers-coding",
+    "lesson_anchor": "akers",
+    "characters": 70,
+    "text_sha256": "d183ddf4e4cb28759a5448e51c5462d8d83e3eb12f375cfdf8311de74c6b01a8"
+  },
+  {
+    "source": "R",
+    "block_id": "_4",
+    "tag": "h3",
+    "source_anchor": "_4",
+    "original_url": "https://eda.youwei.xyz/lectures/routing/#_4",
+    "lesson_anchor": "routing-formulas",
+    "characters": 2,
+    "text_sha256": "283ba9f1bcbcf21ed82bc245fefa604d1601787a5a40e92df2b0d89645a8753b"
+  },
+  {
+    "source": "R",
+    "block_id": "R-029",
+    "tag": "p",
+    "source_anchor": "_4",
+    "original_url": "https://eda.youwei.xyz/lectures/routing/#_4",
+    "lesson_anchor": "routing-formulas",
+    "characters": 5,
+    "text_sha256": "09e12de0cbc5971ccab00b0d0896f7b23435c149bc76628d3d94d97c6ec78dc1"
+  },
+  {
+    "source": "R",
+    "block_id": "R-030",
+    "tag": "div",
+    "source_anchor": "_4",
+    "original_url": "https://eda.youwei.xyz/lectures/routing/#_4",
+    "lesson_anchor": "routing-formulas",
+    "characters": 31,
+    "text_sha256": "60385d67d9c8803d72b5bf2437b7092c96f2766aa2650911496c3e71b12b75c9"
+  },
+  {
+    "source": "R",
+    "block_id": "R-031",
+    "tag": "p",
+    "source_anchor": "_4",
+    "original_url": "https://eda.youwei.xyz/lectures/routing/#_4",
+    "lesson_anchor": "routing-formulas",
+    "characters": 40,
+    "text_sha256": "07f915df3b2023b3e56369923de84a9a45b412807adf8d4ed5256ba4d6ec534e"
+  },
+  {
+    "source": "R",
+    "block_id": "R-032",
+    "tag": "p",
+    "source_anchor": "_4",
+    "original_url": "https://eda.youwei.xyz/lectures/routing/#_4",
+    "lesson_anchor": "routing-formulas",
+    "characters": 8,
+    "text_sha256": "563d3af532fcf2ddd85d3634082c2d32038b8def14c171d7bd6d6ac21a89a492"
+  },
+  {
+    "source": "R",
+    "block_id": "R-033",
+    "tag": "div",
+    "source_anchor": "_4",
+    "original_url": "https://eda.youwei.xyz/lectures/routing/#_4",
+    "lesson_anchor": "routing-formulas",
+    "characters": 31,
+    "text_sha256": "d5b3925a7b6687a74bbecf92fb4a0fa86db7bc3b0931dcbc991c7730b457f29e"
+  },
+  {
+    "source": "R",
+    "block_id": "quiz_1",
+    "tag": "h3",
+    "source_anchor": "quiz_1",
+    "original_url": "https://eda.youwei.xyz/lectures/routing/#quiz_1",
+    "lesson_anchor": "quiz-r-q_1-1",
+    "characters": 4,
+    "text_sha256": "03aa7dc16797a82b4892dcc79747011b78a071b5a1c1213b4d08ee8e8a0450ff"
+  },
+  {
+    "source": "R",
+    "block_id": "R-035",
+    "tag": "ol",
+    "source_anchor": "quiz_1",
+    "original_url": "https://eda.youwei.xyz/lectures/routing/#quiz_1",
+    "lesson_anchor": "quiz-r-q_1-1",
+    "characters": 80,
+    "text_sha256": "6d960b7d472bbbca3ae5fa3f20d2d0a7bdee3efd1c64fb4acf0fa6c9f9bd7b66"
+  },
+  {
+    "source": "T",
+    "block_id": "T-001",
+    "tag": "h1",
+    "source_anchor": "",
+    "original_url": "https://eda.youwei.xyz/lectures/static-timing-analysis/",
+    "lesson_anchor": "ch-timing",
+    "characters": 21,
+    "text_sha256": "8c56fcd3524ae004184ee18724918cf0b20de0a5a6f5e7d9ff182ae1a17ef277"
+  },
+  {
+    "source": "T",
+    "block_id": "_1",
+    "tag": "h2",
+    "source_anchor": "_1",
+    "original_url": "https://eda.youwei.xyz/lectures/static-timing-analysis/#_1",
+    "lesson_anchor": "arrival",
+    "characters": 6,
+    "text_sha256": "0d7de78b1ca525f7a0c09c57cc65d13efed7970058f341b4417e329620c75cb7"
+  },
+  {
+    "source": "T",
+    "block_id": "T-003",
+    "tag": "ul",
+    "source_anchor": "_1",
+    "original_url": "https://eda.youwei.xyz/lectures/static-timing-analysis/#_1",
+    "lesson_anchor": "arrival",
+    "characters": 195,
+    "text_sha256": "9b42e31f269139ecc0c0288ea9aec3aafb49872156e334a13aee47a9b9e8afb1"
+  },
+  {
+    "source": "T",
+    "block_id": "_2",
+    "tag": "h2",
+    "source_anchor": "_2",
+    "original_url": "https://eda.youwei.xyz/lectures/static-timing-analysis/#_2",
+    "lesson_anchor": "timing-formulas",
+    "characters": 4,
+    "text_sha256": "098b074c42d26eeba9d175324e796621668f486a60303da709ecab15dc608103"
+  },
+  {
+    "source": "T",
+    "block_id": "T-005",
+    "tag": "ul",
+    "source_anchor": "_2",
+    "original_url": "https://eda.youwei.xyz/lectures/static-timing-analysis/#_2",
+    "lesson_anchor": "timing-formulas",
+    "characters": 319,
+    "text_sha256": "fd47a0dda80e7e3db3c08401b51566efe8d17b8276f8566b08ce0e5591ebf036"
+  },
+  {
+    "source": "T",
+    "block_id": "quiz",
+    "tag": "h3",
+    "source_anchor": "quiz",
+    "original_url": "https://eda.youwei.xyz/lectures/static-timing-analysis/#quiz",
+    "lesson_anchor": "quiz-t-q-1",
+    "characters": 4,
+    "text_sha256": "03aa7dc16797a82b4892dcc79747011b78a071b5a1c1213b4d08ee8e8a0450ff"
+  },
+  {
+    "source": "T",
+    "block_id": "T-007",
+    "tag": "ol",
+    "source_anchor": "quiz",
+    "original_url": "https://eda.youwei.xyz/lectures/static-timing-analysis/#quiz",
+    "lesson_anchor": "quiz-t-q-1",
+    "characters": 18,
+    "text_sha256": "b33c4750c7945b007d3abca2bc29dd430000a360cf00b0819dc317800e80167d"
+  },
+  {
+    "source": "G",
+    "block_id": "schedule",
+    "tag": "h1",
+    "source_anchor": "schedule",
+    "original_url": "https://eda.youwei.xyz/schedule/#schedule",
+    "lesson_anchor": "source-catalog",
+    "characters": 15,
+    "text_sha256": "5ddd2ed59d809b15f4c61cf65e7c4de2170d219b2f63a5b65046b9233480b857"
+  },
+  {
+    "source": "G",
+    "block_id": "G-002",
+    "tag": "table",
+    "source_anchor": "schedule",
+    "original_url": "https://eda.youwei.xyz/schedule/#schedule",
+    "lesson_anchor": "source-catalog",
+    "characters": 129,
+    "text_sha256": "aca449719f83a7e9d029020f750dcdca23500fc5b9a037b3383be9610803554d"
+  }
+]

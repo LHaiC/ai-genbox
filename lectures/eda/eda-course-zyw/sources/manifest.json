@@ -1,0 +1,27 @@
+{
+  "title": "Design Automation and Computing Systems · 可探索讲义 · 桌面阅读版",
+  "canonical_course_url": "https://eda.youwei.xyz/",
+  "course_pages": 10,
+  "lecture_pages": 8,
+  "headings": 102,
+  "lecture_headings": 93,
+  "content_blocks": 254,
+  "lecture_content_blocks": 236,
+  "tex_fragments": 127,
+  "quiz_groups": 21,
+  "quiz_questions": 45,
+  "labs": 24,
+  "trace_players": 18,
+  "body_text_px": 18,
+  "known_gaps": [
+    "原网页提及的流水线PPT无正文或链接。",
+    "课程首页的三本教材没有指定章节正文。",
+    "技术映射ASCII符号存在歧义且最后一道成本题的单价不完整。",
+    "rough legalization有截断句；课程安排含占位。"
+  ],
+  "coverage_definition": "逐原始标题、内容块和Quiz映射到正文；缺少的附件不计为已经覆盖。",
+  "ui_text_px": 16,
+  "sidebar_text_px": 15,
+  "mobile_body_text_px": 17,
+  "large_body_text_px": 22
+}

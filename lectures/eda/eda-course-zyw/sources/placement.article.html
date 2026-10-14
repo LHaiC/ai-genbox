@@ -1,0 +1,174 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>布局</title><link rel="canonical" href="https://eda.youwei.xyz/lectures/placement/"><style>body{font:24px/1.9 system-ui,sans-serif;max-width:1100px;margin:40px auto;padding:24px;color:#20332f;background:#f7f7f2}h5,h6,small,code,pre,td{font-size:22px}pre{overflow:auto}img{max-width:100%}a{overflow-wrap:anywhere}</style><body><a href="https://eda.youwei.xyz/lectures/placement/">原始出处</a>
+<h1 data-block="P-001">Placement</h1>
+<h2 id="_1">布局</h2>
+<ul data-block="P-003">
+<li>布局 (Placement)：将逻辑单元映射到芯片上的物理位置。</li>
+<li>输入：网表，单元形状，pin 位置。</li>
+<li>输出：单元的物理位置。单元之间没有重叠。</li>
+<li>目标：最小化连线长度 (wirelength)，时序 (timing)，可绕线性 (routability) 等。</li>
+</ul>
+<h2 id="_2">全局布局</h2>
+<h2 id="_3">模拟退火</h2>
+<ul data-block="P-006">
+<li>基本思想：通过模拟物理退火过程，逐步降低系统温度，寻找最优或近优解。</li>
+<li>关键设计：<ul>
+<li>移动策略：如何生成新状态</li>
+<li>成本函数：如何评估状态质量</li>
+</ul>
+</li>
+<li>TimberWolf：<ul>
+<li>成本函数：<span class="arithmatex">\(C = C_1 + C_2 + C_3\)</span><ul>
+<li>线长估算 (半周长法)：<span class="arithmatex">\(C_1 = \sum {HPWL}\)</span></li>
+<li>重叠惩罚：<span class="arithmatex">\(C_2 = \sum(O(i, j) + \alpha)^2\)</span>, <span class="arithmatex">\(O(i, j)\)</span> 为单元 <span class="arithmatex">\(i\)</span> 和 <span class="arithmatex">\(j\)</span> 的重叠面积。允许移动时的临时重叠，通过惩罚逐渐消除。</li>
+<li>行长平衡：<span class="arithmatex">\(C_3 = \sum|l(r) - d(r)|^2\)</span>，其中 <span class="arithmatex">\(l(r)\)</span> 为实际行长度，<span class="arithmatex">\(d(r)\)</span> 为目标行长度。每行单元总宽度应接近行长度，避免某些行过满而其他行稀疏。</li>
+</ul>
+</li>
+<li>移动策略：<ul>
+<li>M1: 选择一个单元，移动到一个新位置。</li>
+<li>M2: 选择两个单元，交换位置。</li>
+<li>M3: 选择一个单元，旋转方向。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Dragon2000<ul>
+<li>优化思路：多级优化。将电路划分成多层的粗粒度的格子（bins），在格子之间使用模拟退火算法，加速超大规模电路的布局收敛。</li>
+</ul>
+</li>
+</ul>
+<h3 id="quiz">Quiz</h3>
+<ol data-block="P-008">
+<li>模拟退火算法中温度 T 的作用是什么？(单选)<ol>
+<li>控制成本函数的权重</li>
+<li>控制算法运行时间</li>
+<li>控制接受较差解的概率</li>
+<li>控制单元移动的距离</li>
+</ol>
+</li>
+<li>为什么在移动时允许单元重叠？</li>
+<li>为什么多级优化可以加速模拟退火收敛？</li>
+</ol>
+<h2 id="_4">划分</h2>
+<ul data-block="P-010">
+<li>基本思想：将连接紧密的单元聚集在一起，反复地将电路划分为多个分区。</li>
+<li>关键设计：<ul>
+<li>目标函数：最小化分区间连线数 (cut size)，保持分区平衡 (balance)。</li>
+<li>划分算法</li>
+<li>划分线（cutline）选择</li>
+</ul>
+</li>
+</ul>
+<h3 id="quiz_1">Quiz</h3>
+<ol data-block="P-012">
+<li>划分算法中，为什么要保持分区平衡？</li>
+</ol>
+<h2 id="analytic-placement">解析式布局 Analytic placement</h2>
+<ul data-block="P-014">
+<li>基本思想：将布局问题转化为数学优化问题，通过求解优化问题得到单元位置。</li>
+<li>关键设计：<ul>
+<li>目标函数</li>
+<li>约束条件</li>
+<li>优化方法</li>
+</ul>
+</li>
+</ul>
+<h2 id="_5">线长的估计方法</h2>
+<table data-block="P-016">
+<thead>
+<tr>
+<th>模型</th>
+<th>描述</th>
+<th>距离度量</th>
+<th>精度</th>
+<th>平滑度</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Min. Steiner Tree (MST)</strong></td>
+<td>最小斯坦纳树</td>
+<td>曼哈顿</td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>⭐</td>
+<td><strong>金标准</strong>，最接近实际布线长度，但计算极其复杂且不可导。</td>
+</tr>
+<tr>
+<td><strong>Clique Model</strong></td>
+<td>团模型 (全连接)</td>
+<td>曼哈顿/欧氏</td>
+<td>⭐</td>
+<td>⭐⭐ / ⭐⭐⭐⭐⭐</td>
+<td><strong>悲观估计</strong>。将 <span class="arithmatex">\(k\)</span> 个引脚两两相连。由于边数随 <span class="arithmatex">\(k^2\)</span> 增长，会严重高估长度。</td>
+</tr>
+<tr>
+<td><strong>HPWL</strong></td>
+<td>半周长导线长度</td>
+<td>曼哈顿</td>
+<td>⭐⭐⭐⭐</td>
+<td>⭐⭐</td>
+<td><strong>常用</strong>。计算包围所有引脚的最小矩形。对于 2-3 个引脚完全准确，对多引脚属于<strong>乐观估计</strong>。</td>
+</tr>
+<tr>
+<td><strong>Star Model</strong></td>
+<td>星型模型</td>
+<td>欧氏</td>
+<td>⭐⭐⭐</td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>添加一个虚拟中心点，所有引脚连向中心。由于其高度平滑（<span class="arithmatex">\(C^\infty\)</span> 连续），常用于<strong>解析式布局器</strong>。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_6">例子</h3>
+<p data-block="P-018">假设一个 Net 包含 4 个引脚，分别位于正方形的顶点：<span class="arithmatex">\(A(0,1), B(1,1), C(0,0), D(1,0)\)</span>。</p>
+<ul data-block="P-019">
+<li>HPWL (最快): 计算 Bounding Box。</li>
+</ul>
+<p data-block="P-020"><span class="arithmatex">\(X_{span} = 1, Y_{span} = 1\)</span>
+<span class="arithmatex">\(HPWL = 1 + 1 = \mathbf{2}\)</span></p>
+<ul data-block="P-021">
+<li>Clique Model (最悲观): 连接所有组合（AB, AC, AD, BC, BD, CD）。</li>
+</ul>
+<p data-block="P-022">边数 = <span class="arithmatex">\(k(k-1)/2 = 6\)</span> 条边。长度总和远超 2，会产生巨大的“引力”将单元拉向一点。</p>
+<ul data-block="P-023">
+<li>Star Model (最平滑): 在中心 <span class="arithmatex">\((0.5, 0.5)\)</span> 增加一个虚拟点 <span class="arithmatex">\(S\)</span>。</li>
+</ul>
+<p data-block="P-024">连接 <span class="arithmatex">\(SA, SB, SC, SD\)</span>。这种模型没有拐点，在数学优化（梯度下降）中表现极佳。</p>
+<h3 id="quiz_2">Quiz</h3>
+<ol data-block="P-026">
+<li>举例说明，为什么 HPWL 是一种乐观估计？</li>
+<li>举例说明，为什么 Clique Model 是一种悲观估计？</li>
+<li>为什么 Star Model 适合用于解析式布局器？</li>
+</ol>
+<h2 id="quadratic-placement">Quadratic placement</h2>
+<ul data-block="P-028">
+<li>核心思想：将导线视为弹簧，通过最小化总能量（平方距离之和）来确定单元位置。</li>
+<li>目标函数：最小化所有连线的平方距离加权和。（线长模型可以选择 HPWL 或 Clique Model 或 Star Model）</li>
+<li>优点：形式简单，易于求解。适合大规模电路。</li>
+<li>缺点：单元重叠严重（所有单元倾向于挤在中心）。</li>
+<li>解决方法：<ul>
+<li>去除重叠（Rough legalization）：通过线性映射，将</li>
+<li>循环迭代：优化目标-&gt;满足约束-&gt;优化目标-&gt;满足约束...</li>
+</ul>
+</li>
+</ul>
+<h3 id="quiz_3">Quiz</h3>
+<ol data-block="P-030">
+<li>为什么 Quadratic placement 会导致单元重叠？</li>
+<li>为什么在去除重叠后需要重新优化目标函数？</li>
+</ol>
+<h2 id="nonlinear-placement">Nonlinear placement</h2>
+<ul data-block="P-032">
+<li>核心思想：将布线长度和单元密度同时放入一个连续可微的函数中。</li>
+<li>目标函数：<span class="arithmatex">\(C = \min_{x,y} WL(x,y) + \lambda D(x,y)\)</span><ul>
+<li>WL: 平滑的线长估计</li>
+<li>D: 利用类似静电场的函数替代离散的重叠计算。</li>
+</ul>
+</li>
+</ul>
+<h3 id="quiz_4">Quiz</h3>
+<ol data-block="P-034">
+<li>为什么要将单元密度作为目标函数的一部分？</li>
+<li>在 Nonlinear placement 中，如果参数 λ 过大，布局结果会发生什么变化？</li>
+</ol>
+</body></html>

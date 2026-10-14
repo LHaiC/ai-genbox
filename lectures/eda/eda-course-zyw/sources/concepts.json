@@ -1,0 +1,414 @@
+[
+  {
+    "id": "truth",
+    "title": "真值表与子函数",
+    "depends_on": [],
+    "source": "B",
+    "source_anchor": "_2",
+    "lesson_lab": "boolean",
+    "scope": "原概念；可编辑真值表为补充实现",
+    "original_page": null
+  },
+  {
+    "id": "shannon",
+    "title": "香农展开",
+    "depends_on": [
+      "truth"
+    ],
+    "source": "B",
+    "source_anchor": "_1",
+    "lesson_lab": "boolean",
+    "scope": "原定义与原例题",
+    "original_page": null
+  },
+  {
+    "id": "difference",
+    "title": "布尔差分",
+    "depends_on": [
+      "truth"
+    ],
+    "source": "B",
+    "source_anchor": "_4",
+    "lesson_lab": "boolean",
+    "scope": "原定义；逐行敏感性解释为补充",
+    "original_page": null
+  },
+  {
+    "id": "quantifiers",
+    "title": "存在 / 全称量词",
+    "depends_on": [
+      "truth"
+    ],
+    "source": "B",
+    "source_anchor": "_8",
+    "lesson_lab": "boolean",
+    "scope": "原定义与补充的量词次序辨析",
+    "original_page": null
+  },
+  {
+    "id": "repair",
+    "title": "逻辑网络修复",
+    "depends_on": [
+      "shannon",
+      "quantifiers"
+    ],
+    "source": "B",
+    "source_anchor": "_11",
+    "lesson_lab": "repair",
+    "scope": "原任务；明确索引后穷举16配置",
+    "original_page": null
+  },
+  {
+    "id": "sop",
+    "title": "SOP / POS / literal",
+    "depends_on": [
+      "truth"
+    ],
+    "source": "S",
+    "source_anchor": "_2",
+    "lesson_lab": "qm",
+    "scope": "原概念",
+    "original_page": null
+  },
+  {
+    "id": "qm",
+    "title": "精确两级化简",
+    "depends_on": [
+      "sop"
+    ],
+    "source": "S",
+    "source_anchor": "_2",
+    "lesson_lab": "qm",
+    "scope": "QM 与穷举覆盖是补充实现；不冒充原文或 ESPRESSO",
+    "original_page": null
+  },
+  {
+    "id": "multilevel",
+    "title": "多级共享、技术无关优化",
+    "depends_on": [
+      "sop"
+    ],
+    "source": "S",
+    "source_anchor": "_3",
+    "lesson_lab": "mapping",
+    "scope": "原概念与图示；DAG共享反例为补充",
+    "original_page": null
+  },
+  {
+    "id": "mapping",
+    "title": "库映射 / 树覆盖 DP",
+    "depends_on": [
+      "multilevel"
+    ],
+    "source": "S",
+    "source_anchor": "tree-covering",
+    "lesson_lab": "mapping",
+    "scope": "原算法原则；可读AND/OR/NOT模式为补充",
+    "original_page": null
+  },
+  {
+    "id": "physical",
+    "title": "物理设计目标与约束",
+    "depends_on": [
+      "mapping"
+    ],
+    "source": "P",
+    "source_anchor": "_1",
+    "lesson_lab": "wire",
+    "scope": "原概念；布局输入/输出/目标",
+    "original_page": null
+  },
+  {
+    "id": "wire",
+    "title": "HPWL / clique / star / RSMT",
+    "depends_on": [
+      "physical"
+    ],
+    "source": "P",
+    "source_anchor": "_5",
+    "lesson_lab": "wire",
+    "scope": "原模型；光滑条件与平方距离恒等式为校核补充",
+    "original_page": null
+  },
+  {
+    "id": "sa",
+    "title": "模拟退火",
+    "depends_on": [
+      "physical",
+      "wire"
+    ],
+    "source": "P",
+    "source_anchor": "_3",
+    "lesson_lab": "sa",
+    "scope": "原原则；4矩形HPWL+重叠的简化实现",
+    "original_page": null
+  },
+  {
+    "id": "partition",
+    "title": "超图二分与平衡",
+    "depends_on": [
+      "physical"
+    ],
+    "source": "P",
+    "source_anchor": "_4",
+    "lesson_lab": "partition",
+    "scope": "原概念；6节点穷举为补充，不是FM",
+    "original_page": null
+  },
+  {
+    "id": "quadratic",
+    "title": "二次布局与线性方程",
+    "depends_on": [
+      "wire"
+    ],
+    "source": "P",
+    "source_anchor": "quadratic-placement",
+    "lesson_lab": "optimizer",
+    "scope": "原思路；4移动点/2锚点的矩阵与迭代为补充",
+    "original_page": null
+  },
+  {
+    "id": "lse",
+    "title": "LSE 光滑线长",
+    "depends_on": [
+      "wire"
+    ],
+    "source": "P",
+    "source_anchor": "nonlinear-placement",
+    "lesson_lab": "optimizer",
+    "scope": "补充公式、稳定计算和梯度验证",
+    "original_page": null
+  },
+  {
+    "id": "density",
+    "title": "拥挤、排斥与约束",
+    "depends_on": [
+      "quadratic",
+      "lse"
+    ],
+    "source": "P",
+    "source_anchor": "nonlinear-placement",
+    "lesson_lab": "optimizer",
+    "scope": "高斯排斥教学实现，不是ePlace密度求解",
+    "original_page": null
+  },
+  {
+    "id": "legalization",
+    "title": "合法化与详细布局",
+    "depends_on": [
+      "physical",
+      "quadratic"
+    ],
+    "source": "P",
+    "source_anchor": "_1",
+    "lesson_lab": null,
+    "scope": "静态概念与限制；不假装实现原文未完成部分",
+    "original_page": null
+  },
+  {
+    "id": "steiner",
+    "title": "Hanan 网格与直角Steiner树",
+    "depends_on": [
+      "wire"
+    ],
+    "source": "R",
+    "source_anchor": "steiner",
+    "lesson_lab": "wire",
+    "scope": "原概念；精确子集DP为补充计算",
+    "original_page": null
+  },
+  {
+    "id": "flute",
+    "title": "WV / POWV / 相对次序",
+    "depends_on": [
+      "steiner"
+    ],
+    "source": "R",
+    "source_anchor": "flute",
+    "lesson_lab": "vectors",
+    "scope": "矩形两候选演示；不是FLUTE实现",
+    "original_page": null
+  },
+  {
+    "id": "lee",
+    "title": "迷宫布线 / BFS / 回溯",
+    "depends_on": [
+      "physical"
+    ],
+    "source": "R",
+    "source_anchor": "lees-algorithm",
+    "lesson_lab": "lee",
+    "scope": "原算法；统一原文混用的网格",
+    "original_page": null
+  },
+  {
+    "id": "akers",
+    "title": "循环距离编码",
+    "depends_on": [
+      "lee"
+    ],
+    "source": "R",
+    "source_anchor": "akers-coding",
+    "lesson_lab": "lee",
+    "scope": "校核0101反例；模3和成对循环+相位独立恢复",
+    "original_page": null
+  },
+  {
+    "id": "timing-graph",
+    "title": "时序弧与DAG",
+    "depends_on": [
+      "mapping",
+      "physical"
+    ],
+    "source": "T",
+    "source_anchor": "_1",
+    "lesson_lab": "sta",
+    "scope": "原定义；显式单时钟域假设",
+    "original_page": null
+  },
+  {
+    "id": "at",
+    "title": "early / late 到达时间",
+    "depends_on": [
+      "timing-graph"
+    ],
+    "source": "T",
+    "source_anchor": "_2",
+    "lesson_lab": "sta",
+    "scope": "原late/max与补充early/min",
+    "original_page": null
+  },
+  {
+    "id": "rat",
+    "title": "required与建立检查",
+    "depends_on": [
+      "at"
+    ],
+    "source": "T",
+    "source_anchor": "_2",
+    "lesson_lab": "sta",
+    "scope": "原RAT与补充偏斜符号约定",
+    "original_page": null
+  },
+  {
+    "id": "hold",
+    "title": "保持检查与降频无效",
+    "depends_on": [
+      "at"
+    ],
+    "source": "T",
+    "source_anchor": "_2",
+    "lesson_lab": "sta",
+    "scope": "原题；标量hold公式补充",
+    "original_page": null
+  },
+  {
+    "id": "performance",
+    "title": "IC × CPI × 周期",
+    "depends_on": [
+      "rat"
+    ],
+    "source": "C",
+    "source_anchor": "_1",
+    "lesson_lab": "cpu",
+    "scope": "原公式与影响因素表；对比条件显式化",
+    "original_page": null
+  },
+  {
+    "id": "pipeline",
+    "title": "五级流水、冒险与转发",
+    "depends_on": [
+      "performance"
+    ],
+    "source": "C",
+    "source_anchor": "cpu",
+    "lesson_lab": "pipeline",
+    "scope": "原PPT缺失；指令模拟器全部为补充",
+    "original_page": null
+  },
+  {
+    "id": "locality",
+    "title": "局部性与存储层次",
+    "depends_on": [
+      "performance"
+    ],
+    "source": "M",
+    "source_anchor": "_1",
+    "lesson_lab": "cache",
+    "scope": "原概念；地址序列为教学构造",
+    "original_page": null
+  },
+  {
+    "id": "cache",
+    "title": "组相联缓存 / 标签 / LRU",
+    "depends_on": [
+      "locality"
+    ],
+    "source": "M",
+    "source_anchor": "cache",
+    "lesson_lab": "cache",
+    "scope": "原hit/miss；组相联与LRU实现为补充",
+    "original_page": null
+  },
+  {
+    "id": "stall",
+    "title": "访存停顿 CPI",
+    "depends_on": [
+      "cache",
+      "performance"
+    ],
+    "source": "M",
+    "source_anchor": "cache",
+    "lesson_lab": "memory",
+    "scope": "原公式；单位修正与跨实验数据导入",
+    "original_page": null
+  },
+  {
+    "id": "amdahl",
+    "title": "强扩展与串行上限",
+    "depends_on": [
+      "performance"
+    ],
+    "source": "X",
+    "source_anchor": "_1",
+    "lesson_lab": "amdahl",
+    "scope": "原公式、原题；两种开销分母解释补充",
+    "original_page": null
+  },
+  {
+    "id": "mutex",
+    "title": "互斥 / 无死锁 / 无饥饿",
+    "depends_on": [
+      "amdahl"
+    ],
+    "source": "X",
+    "source_anchor": "_2",
+    "lesson_lab": "locks",
+    "scope": "原属性；区分安全与活性",
+    "original_page": null
+  },
+  {
+    "id": "peterson",
+    "title": "LockOne / LockTwo / Peterson",
+    "depends_on": [
+      "mutex"
+    ],
+    "source": "X",
+    "source_anchor": "_5",
+    "lesson_lab": "locks",
+    "scope": "原伪代码；SC单次申请状态模型补充",
+    "original_page": null
+  },
+  {
+    "id": "dining",
+    "title": "哲学家就餐与资源顺序",
+    "depends_on": [
+      "mutex"
+    ],
+    "source": "X",
+    "source_anchor": "quiz_1",
+    "lesson_lab": null,
+    "scope": "原题；无环与公平性条件的静态推导",
+    "original_page": null
+  }
+]

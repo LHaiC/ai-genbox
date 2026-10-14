@@ -1,0 +1,293 @@
+Boolean Algebra
+香农展开
+定义
+布尔函数（Boolean Function）：
+\(F: \{0,1\}^n \to \{0,1\}\)
+，输入为
+\(n\)
+个布尔变量，输出为一个布尔值。
+子函数（Cofactor）：
+\(F\)
+在
+\(x_i=1\)
+时的子函数：
+\(F_{x_i}=F_{x_i=1} = F(x_1, \ldots, x_{i-1}, 1, x_{i+1}, \ldots, x_n)\)
+\(F\)
+在
+\(x_i=0\)
+时的子函数：
+\(F_{\bar{x_i}}=F_{x_i=0} = F(x_1, \ldots, x_{i-1}, 0, x_{i+1}, \ldots, x_n)\)
+Important
+子函数不是一个值，而是关于剩余变量的布尔函数。
+香农展开（Shannon Expansion）：将布尔函数分解为变量的正负两种情况的子函数之和。
+\[
+F(x_1, x_2, \ldots, x_n) = x_i F_{x_i=1} + \overline{x_i} F_{x_i=0}
+\]
+性质
+Note
+会用定义验证即可，不用记。
+多变量展开：可以递归地对子函数继续应用香农展开，直到所有变量都被展开。
+\[
+F(x,y,z,w)=xF_{x=1}+\overline{x} F_{x=0}
+\]
+\[
+F_{x=1}=yF_{x=1,y=1}+\overline{y}F_{x=1,y=0}
+\]
+\[
+F_{x=0}=yF_{x=0,y=1}+\overline{y}F_{x=0,y=0}
+\]
+\[
+F(x,y,z,w)=xyF_{x=1,y=1}+x\overline{y}F_{x=1,y=0}+\overline{x}yF_{x=0,y=1}+\overline{x}\overline{y}F_{x=0,y=0}
+\]
+多变量顺序无关：对任意变量顺序应用香农展开，结果相同。
+二元运算保持：对于布尔函数
+\(F\)
+和
+\(G\)
+，以及二元运算
+\(\odot \in \{+, \cdot, \oplus\}\)
+, 有
+\[
+\left(F \odot G\right)_{x_i} = F_{x_i} \odot G_{x_i}
+\]
+Quiz
+给定布尔函数
+\(F(a,b,c) = ab + \overline{a}c\)
+，使用香农展开对变量
+\(a\)
+进行展开，写出结果。
+给定布尔函数
+\(F(a,b,c) = ab + \overline{a}c\)
+，使用香农展开对变量
+\(a\)
+和
+\(b\)
+进行展开，写出结果。
+布尔差分
+定义
+布尔差分（Boolean Difference）：
+\[
+\frac{\partial F}{\partial x_i} = F_{x_i=1} \oplus F_{x_i=0}
+\]
+其中
+\(\oplus\)
+表示异或运算。
+意义：布尔差分表示当变量
+\(x_i\)
+取值变化时，布尔函数
+\(F\)
+的输出是否发生变化。
+如果
+\(\frac{\partial F}{\partial x_i} = 1\)
+，则表示
+\(F\)
+对
+\(x_i\)
+敏感；如果
+\(\frac{\partial F}{\partial x_i} = 0\)
+，则表示
+\(F\)
+对
+\(x_i\)
+不敏感。
+性质
+Note
+会用定义验证即可，不用记。
+顺序无关：对任意变量顺序计算布尔差分，结果相同。
+\[
+\frac{\partial}{\partial x_j}\left(\frac{\partial F}{\partial x_i}\right) = \frac{\partial}{\partial x_i}\left(\frac{\partial F}{\partial x_j}\right)
+\]
+对异或保持：对于布尔函数
+\(F\)
+和
+\(G\)
+，有
+\[
+\frac{\partial}{\partial x_i}(F \oplus G) = \frac{\partial F}{\partial x_i} \oplus \frac{\partial G}{\partial x_i}
+\]
+对与或非的计算规则：用定义推导。
+对复合函数的链式法则：用定义推导。
+例子
+非门：
+\(F = \overline{x}\)
+\[
+F_{x=1} = \overline{1} = 0
+\]
+\[
+F_{x=0} = \overline{0} = 1
+\]
+\[
+\frac{\partial F}{\partial x} = F_{x=1} \oplus F_{x=0} = 0 \oplus 1 = 1
+\]
+与门：
+\(F = xy\)
+\[
+F_{x=1} = 1 \cdot y = y
+\]
+\[
+F_{x=0} = 0 \cdot y = 0
+\]
+\[
+\frac{\partial F}{\partial x} = F_{x=1} \oplus F_{x=0} = y \oplus 0 = y
+\]
+或门：
+\(F = x + y\)
+\[
+F_{x=1} = 1 + y = 1
+\]
+\[
+F_{x=0} = 0 + y = y
+\]
+\[
+\frac{\partial F}{\partial x} = F_{x=1} \oplus F_{x=0} = 1 \oplus y = \overline{y}
+\]
+异或门：
+\(F = x \oplus y\)
+\[
+F_{x=1} = 1 \oplus y = \overline{y}
+\]
+\[
+F_{x=0} = 0 \oplus y = y
+\]
+\[
+\frac{\partial F}{\partial x} = F_{x=1} \oplus F_{x=0} = \overline{y} \oplus y = 1
+\]
+Quiz
+给定布尔函数
+\(F(a,b) = ab + \overline{a}\)
+，计算
+\(\frac{\partial F}{\partial a}\)
+和
+\(\frac{\partial F}{\partial b}\)
+。
+证明布尔差分对异或运算保持。
+布尔差分为 1 有什么含义？
+量词
+定义
+存在量词（Existential Quantification）：
+\[
+\exists x_i F = F_{x_i=0} + F_{x_i=1}
+\]
+含义：
+\(\exists x_i F\)
+是一个与
+\(x_i\)
+无关的布尔函数。当存在某个
+\(x_i\)
+的取值使得
+\(F\)
+为真时，
+\(\exists x_i F\)
+为真。
+全称量词（Universal Quantification）：
+\[
+\forall x_i F = F_{x_i=0} \cdot F_{x_i=1}
+\]
+含义：
+\(\forall x_i F\)
+是一个与
+\(x_i\)
+无关的布尔函数。当对于所有
+\(x_i\)
+的取值，
+\(F\)
+都为真时，
+\(\forall x_i F\)
+为真。
+Important
+量词是关于剩余变量的布尔函数。
+例子
+非门：
+\(F = \overline{x}\)
+\[
+\exists x F = F_{x=0} + F_{x=1} = \overline{0} + \overline{1} = 1 + 0 = 1
+\]
+\[
+\forall x F = F_{x=0} \cdot F_{x=1} = \overline{0} \cdot \overline{1} = 1 \cdot 0 = 0
+\]
+与门：
+\(F = xy\)
+\[
+\exists x F = F_{x=0} + F_{x=1} = 0 \cdot y + 1 \cdot y = 0 + y   = y
+\]
+\[
+\forall x F = F_{x=0} \cdot F_{x=1} = 0 \cdot y \cdot 1 \cdot y = 0
+\]
+或门：
+\(F = x + y\)
+\[
+\exists x F = F_{x=0} + F_{x=1} = 0 + 1 = 1
+\]
+\[
+\forall x F = F_{x=0} \cdot F_{x=1} = y \cdot 1 = y
+\]
+异或门：
+\(F = x \oplus y\)
+\[
+\exists x F = F_{x=0} + F_{x=1} = 0 \oplus y + 1 \oplus y = y + \overline{y} = 1
+\]
+\[
+\forall x F = F_{x=0} \cdot F_{x=1} = (0 \oplus y) \cdot (1 \oplus y) = y \cdot \overline{y} = 0
+\]
+应用：网络修复
+问题描述
+假设我们需要实现一个逻辑模块
+\(f(a,b)=ab+\overline{b}\)
+，但是实现中有一个门是错误的。
+修复方法
+替换
+：
+    将可疑的门（这里以 + 为例）替换为一个控制线为
+\(d_0, d_1, d_2, d_3\)
+，选择线为
+\(s_0=ab\)
+和
+\(s_1=\overline{b}\)
+的多路选择器（MUX）（可以实现任意 2 变量函数）。
+构建等价函数
+：
+    设修复后的电路函数为
+\(G(a,b,d_0, \dots, d_3)\)
+。我们需要
+\(G\)
+与
+\(f\)
+等价。
+    定义函数
+\(z\)
+为
+\(G\)
+与
+\(f\)
+的同或（XNOR）：
+\[
+z(a,b,d_0, \dots, d_3) = \overline{G(a,b,d_0, \dots, d_3) \oplus f(a,b)}
+\]
+当且仅当
+\(G=f\)
+时，
+\(z=1\)
+。
+全称量词
+：
+    我们需要找到一组
+\(d_0, \dots, d_3\)
+，使得对于所有可能的输入
+\(a, b\)
+，电路输出都正确。
+    这可以通过对
+\(a, b\)
+进行全称量化来表示：
+\[
+\forall a,b \ z = 1
+\]
+Quiz
+给定布尔函数
+\(F(a,b) = ab + \overline{a}\)
+，计算
+\(\exists a F\)
+和
+\(\forall a F\)
+。
+全称量词为 1 有什么含义？
+存在量词为 1 有什么含义？

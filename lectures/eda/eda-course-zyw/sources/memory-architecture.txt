@@ -1,0 +1,14 @@
+Memory Architecture
+存储器层次结构
+L1 - L2 - L3 - 主存 (DRAM) - 二级存储
+Quiz
+什么是 memory wall？
+为什么要设计存储器层次结构？
+什么是 locality？有哪些类型的 locality？
+Cache
+Cache Hit
+Cache Miss
+CPU 时间 = 指令数 (Instruction Count, IC) × （CPI_ideal + Memory-stall cycles) × 时钟周期
+Memory-stall cycles = Memory_Access per Instruction × Miss Rate × Miss Penalty
+Quiz
+熟练掌握上述公式，并理解各个参数的含义。

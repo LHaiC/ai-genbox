@@ -1,0 +1,36 @@
+Design Automation and Computing Systems
+Welcome! This site hosts the course information and lecture notes.
+Announcements
+Add your first announcement here (date, summary, optional link).
+Overview
+Term: 2025 Fall
+Instructor: Youwei Zhuo
+Teaching Assistants:
+Names (emails)
+Meeting Times/Location: 13:00-16:00, Wednesday / Room 203
+Learning Outcomes
+Electronic Design Automation
+Digital Logic Synthesis
+Physical Design Automation
+Timing Analysis and Optimization
+Computing Systems
+Compute Architecture
+Memory Systems
+Parralel Programming
+Prerequisites
+digital logic
+algorithms
+Textbooks
+Electronic Design Automation for IC Implementation, Circuit Design, and Process Technology by Luciano Lavagno et.al.
+Computer Architecture: A quantitative approach by David Patterson et.al.
+The Art of Multiprocessor Programming
+Grading
+Homework: 20%
+Project: 30%
+Exam(s): 30%
+Participation: 20%
+Communication
+Primary contact:
+email or forum link
+Office hours:
+time / location / virtual link

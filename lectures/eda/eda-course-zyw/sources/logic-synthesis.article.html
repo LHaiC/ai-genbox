@@ -1,0 +1,162 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>逻辑综合</title><link rel="canonical" href="https://eda.youwei.xyz/lectures/logic-synthesis/"><style>body{font:24px/1.9 system-ui,sans-serif;max-width:1100px;margin:40px auto;padding:24px;color:#20332f;background:#f7f7f2}h5,h6,small,code,pre,td{font-size:22px}pre{overflow:auto}img{max-width:100%}a{overflow-wrap:anywhere}</style><body><a href="https://eda.youwei.xyz/lectures/logic-synthesis/">原始出处</a>
+<h1 data-block="S-001">Logic Synthesis</h1>
+<h2 id="_1">逻辑综合</h2>
+<p data-block="S-003">RTL
+=&gt; Technology-Independent Synthesis
+=&gt; Technology Mapping
+=&gt; netlist</p>
+<h2 id="_2">两级逻辑化简</h2>
+<ul data-block="S-005">
+<li>SOP (Sum of Products)：第一层为多个与门，第二层为一个或门。</li>
+<li>POS (Product of Sums)：第一层为多个或门，第二层为一个与门。</li>
+<li>优化目标：最小化变量出现的次数（literal count）。</li>
+<li>化简方法：精确方法（如 QM）和启发式方法（如 ESPRESSO）。</li>
+</ul>
+<div class="admonition danger" data-block="S-006">
+<p class="admonition-title">Caution</p>
+<p>随着输入增加，表达式呈指数级增长，不适合大规模设计。</p>
+</div>
+<h3 id="quiz">Quiz</h3>
+<ol data-block="S-008">
+<li>判断下列布尔函数是 SOP 还是 POS 形式，并计算 literal count：<ul>
+<li><span class="arithmatex">\(F(a,b,c) = ab + \overline{a}c + bc\)</span></li>
+<li><span class="arithmatex">\(F(a,b,c) = (a + b)(\overline{a} + c)\)</span></li>
+</ul>
+</li>
+</ol>
+<h2 id="_3">多级逻辑化简</h2>
+<h3 id="technology-independent-synthesis">Technology-Independent Synthesis</h3>
+<ul data-block="S-011">
+<li>目标：将 RTL 转换为技术无关的逻辑网络。</li>
+<li>布尔逻辑网络 (Boolean Logic Network)：节点为两级逻辑 (SOP 形式) 的图。</li>
+<li>优化目标：最小化变量出现的次数（literal count，与面积相关）。</li>
+<li>化简方法：<ul>
+<li>化简节点内部逻辑函数 (两级逻辑化简)</li>
+<li>删除节点：把小的节点和后续节点合并。</li>
+<li>增加节点：提取公因式，把大的节点分解成更小的节点。</li>
+</ul>
+</li>
+</ul>
+<h3 id="technology-mapping">Technology mapping</h3>
+<ul data-block="S-013">
+<li>目标：将技术无关的逻辑网络映射为技术相关的网表。</li>
+<li>工艺库（technology library）：包含各种门的集合，每个门有其功能和成本（cost）。</li>
+<li>网表（netlist）：节点为工艺库中的门的图。</li>
+<li>优化目标：最小化总成本（total cost，比如面积，延迟等）。</li>
+</ul>
+<p data-block="S-014"><img alt="原课程技术映射示意：共享 OR2 与复制 OA21 两种实现" src="../assets/tech-mapping.png"/></p>
+<h3 id="quiz_1">Quiz</h3>
+<ol data-block="S-016">
+<li>上面的例子中，假设 AND2，OR2，OA21 的 cost 分别为 3，3，4，两种 mapping 的总 cost 分别是多少？</li>
+</ol>
+<h2 id="_4">算法</h2>
+<ol data-block="S-018">
+<li>将工艺库中的门转换为 NAND 和 NOT 门组成的网络（pattern）。</li>
+<li>将逻辑网络中的 SOP 节点转换为 NAND 和 NOT 门组成的网络（subject）。</li>
+<li>使用 pattern matching 算法。</li>
+</ol>
+<h3 id="tree-covering">为什么使用 Tree Covering？</h3>
+<ul data-block="S-020">
+<li>DAG covering：对 DGA 进行最优的匹配无法高效解决（NP-hard 问题）。</li>
+<li>Tree covering：可以用动态规划解决。可以将 DAG 分解为多棵树，然后对每棵树进行匹配。</li>
+</ul>
+<h3 id="_5">例子</h3>
+<h4 id="pattern-tree">Pattern Tree</h4>
+<h5 id="not">NOT</h5>
+<div class="highlight" data-block="S-024"><pre><span></span><code>    o
+    |
+    □
+</code></pre></div>
+<h5 id="nand">NAND</h5>
+<div class="highlight" data-block="S-026"><pre><span></span><code>    •
+   / \
+  □   □
+</code></pre></div>
+<h5 id="and">AND</h5>
+<div class="highlight" data-block="S-028"><pre><span></span><code>    o
+    |
+    •
+   / \
+  □   □
+</code></pre></div>
+<h5 id="nor">NOR</h5>
+<div class="highlight" data-block="S-030"><pre><span></span><code>    o
+    |
+    •
+   / \
+  •   •
+  |   |
+  □   □
+</code></pre></div>
+<h5 id="or2">OR2</h5>
+<div class="highlight" data-block="S-032"><pre><span></span><code>    o
+   / \
+  •   •
+  |   |
+  □   □
+</code></pre></div>
+<h5 id="aoi21">AOI21</h5>
+<div class="highlight" data-block="S-034"><pre><span></span><code>        •
+        |
+        o
+    / \
+    o   •
+    |   |
+    □   □
+</code></pre></div>
+<div class="highlight" data-block="S-035"><pre><span></span><code>        •
+        |
+        o
+    / \
+    •  o
+    |  |
+    □  □
+</code></pre></div>
+<div class="admonition important" data-block="S-036">
+<p class="admonition-title">Important</p>
+<p>不对称的模式（如 AIO21）需要尝试旋转匹配所有可能。</p>
+</div>
+<h5 id="aoi22">AOI22</h5>
+<div class="highlight" data-block="S-038"><pre><span></span><code>    •
+    |
+    o
+   / \
+  o   o
+  |   |
+  □   □
+</code></pre></div>
+<h4 id="subject-tree">Subject Tree</h4>
+<div class="highlight" data-block="S-040"><pre><span></span><code>         z
+         |
+         •
+         | t
+         o
+    r  /   \ s
+      o     •
+   p / \ q  |
+    •   o   d
+    |  / \
+    a  b  c
+</code></pre></div>
+<h4 id="matching">Matching</h4>
+<p data-block="S-042"><div class="highlight"><pre><span></span><code>Match(z) = {NOT, AND2, AOI21}
+Match(z, NOT) = Match(t)
+Match(z, AND2) = {Match(r), Match(s)}
+Match(z, AOI21) = {Match(p), Match(q)}
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Cost(z)
+    = min(
+        Cost(z, NOT) + Cost(NOT),
+        Cost(z, AND2) + Cost(AND2),
+        Cost(z, AOI21) + Cost(AOI21))
+    = min(
+        Cost(t) + Cost(NOT),
+        Cost(r) + Cost(s) + Cost(AND2),
+        Cost(p) + Cost(q) + Cost(AOI21))
+</code></pre></div></p>
+<h3 id="quiz_2">Quiz</h3>
+<ol data-block="S-044">
+<li>如果交换上面 subject tree 中节点 r 和 s 的位置，Cost(z) 会改变吗？为什么？</li>
+<li>假设工艺库中只有 NOT 和 AND2 两种门，计算上面 subject tree 的最小成本。</li>
+</ol>
+</body></html>

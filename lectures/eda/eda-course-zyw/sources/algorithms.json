@@ -1,0 +1,122 @@
+[
+  {
+    "concept": "repair",
+    "name": "逻辑网络修复",
+    "source": "B",
+    "source_anchor": "_11",
+    "implementation_lab": "repair",
+    "scope": "原任务；明确索引后穷举16配置"
+  },
+  {
+    "concept": "qm",
+    "name": "精确两级化简",
+    "source": "S",
+    "source_anchor": "_2",
+    "implementation_lab": "qm",
+    "scope": "QM 与穷举覆盖是补充实现；不冒充原文或 ESPRESSO"
+  },
+  {
+    "concept": "mapping",
+    "name": "库映射 / 树覆盖 DP",
+    "source": "S",
+    "source_anchor": "tree-covering",
+    "implementation_lab": "mapping",
+    "scope": "原算法原则；可读AND/OR/NOT模式为补充"
+  },
+  {
+    "concept": "sa",
+    "name": "模拟退火",
+    "source": "P",
+    "source_anchor": "_3",
+    "implementation_lab": "sa",
+    "scope": "原原则；4矩形HPWL+重叠的简化实现"
+  },
+  {
+    "concept": "partition",
+    "name": "超图二分与平衡",
+    "source": "P",
+    "source_anchor": "_4",
+    "implementation_lab": "partition",
+    "scope": "原概念；6节点穷举为补充，不是FM"
+  },
+  {
+    "concept": "quadratic",
+    "name": "二次布局与线性方程",
+    "source": "P",
+    "source_anchor": "quadratic-placement",
+    "implementation_lab": "optimizer",
+    "scope": "原思路；4移动点/2锚点的矩阵与迭代为补充"
+  },
+  {
+    "concept": "steiner",
+    "name": "Hanan 网格与直角Steiner树",
+    "source": "R",
+    "source_anchor": "steiner",
+    "implementation_lab": "wire",
+    "scope": "原概念；精确子集DP为补充计算"
+  },
+  {
+    "concept": "flute",
+    "name": "WV / POWV / 相对次序",
+    "source": "R",
+    "source_anchor": "flute",
+    "implementation_lab": "vectors",
+    "scope": "矩形两候选演示；不是FLUTE实现"
+  },
+  {
+    "concept": "lee",
+    "name": "迷宫布线 / BFS / 回溯",
+    "source": "R",
+    "source_anchor": "lees-algorithm",
+    "implementation_lab": "lee",
+    "scope": "原算法；统一原文混用的网格"
+  },
+  {
+    "concept": "akers",
+    "name": "循环距离编码",
+    "source": "R",
+    "source_anchor": "akers-coding",
+    "implementation_lab": "lee",
+    "scope": "校核0101反例；模3和成对循环+相位独立恢复"
+  },
+  {
+    "concept": "at",
+    "name": "early / late 到达时间",
+    "source": "T",
+    "source_anchor": "_2",
+    "implementation_lab": "sta",
+    "scope": "原late/max与补充early/min"
+  },
+  {
+    "concept": "rat",
+    "name": "required与建立检查",
+    "source": "T",
+    "source_anchor": "_2",
+    "implementation_lab": "sta",
+    "scope": "原RAT与补充偏斜符号约定"
+  },
+  {
+    "concept": "pipeline",
+    "name": "五级流水、冒险与转发",
+    "source": "C",
+    "source_anchor": "cpu",
+    "implementation_lab": "pipeline",
+    "scope": "原PPT缺失；指令模拟器全部为补充"
+  },
+  {
+    "concept": "cache",
+    "name": "组相联缓存 / 标签 / LRU",
+    "source": "M",
+    "source_anchor": "cache",
+    "implementation_lab": "cache",
+    "scope": "原hit/miss；组相联与LRU实现为补充"
+  },
+  {
+    "concept": "peterson",
+    "name": "LockOne / LockTwo / Peterson",
+    "source": "X",
+    "source_anchor": "_5",
+    "implementation_lab": "locks",
+    "scope": "原伪代码；SC单次申请状态模型补充"
+  }
+]

@@ -1,0 +1,41 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>静态时序分析</title><link rel="canonical" href="https://eda.youwei.xyz/lectures/static-timing-analysis/"><style>body{font:24px/1.9 system-ui,sans-serif;max-width:1100px;margin:40px auto;padding:24px;color:#20332f;background:#f7f7f2}h5,h6,small,code,pre,td{font-size:22px}pre{overflow:auto}img{max-width:100%}a{overflow-wrap:anywhere}</style><body><a href="https://eda.youwei.xyz/lectures/static-timing-analysis/">原始出处</a>
+<h1 data-block="T-001">Staic Timing Analysis</h1>
+<h2 id="_1">静态时序分析</h2>
+<ul data-block="T-003">
+<li>静态时序分析 (Static Timing Analysis, STA)：在不需要输入向量的情况下，通过电路结构和元件参数验证电路时序</li>
+<li>时序弧 (Timing Arc)：<ul>
+<li>单元延迟 (Cell Arc): 逻辑门内部输入到输出的延迟。</li>
+<li>连线延迟 (Net Arc): 逻辑门之间连线引起的延迟。</li>
+</ul>
+</li>
+<li>时序图（Timing Graph）：由引脚（节点）和时序弧（边）构成的有向无环图 (DAG)。</li>
+</ul>
+<h2 id="_2">时序约束</h2>
+<ul data-block="T-005">
+<li>建立时间 (Setup Time)：在时钟沿之前，数据必须稳定的最短时间。</li>
+<li>修复方法：<ul>
+<li>减小数据路径延迟（优化组合逻辑）</li>
+<li>增加时钟周期（降低频率）</li>
+</ul>
+</li>
+<li>保持时间 (Hold Time)：在时钟沿之后，数据必须稳定的最短时间。</li>
+<li>修复方法：<ul>
+<li>增加数据路径延迟（插入缓冲器）</li>
+<li>注意：降频无法解决保持时间违例！</li>
+</ul>
+</li>
+<li>到达时间（Arrival Time, AT）：信号到达某节点的时间。</li>
+<li>计算规则：按拓扑顺序遍历，取最大值。</li>
+<li>要求到达时间 (Required Arrival Time, RAT)：为满足时序约束，信号必须在何时到达该节点。</li>
+<li>计算规则：反向拓扑遍历，取最小值。</li>
+<li>松弛度（Slack）：RAT - AT<ul>
+<li>正松弛度：时序满足</li>
+<li>负松弛度：时序违例</li>
+</ul>
+</li>
+</ul>
+<h3 id="quiz">Quiz</h3>
+<ol data-block="T-007">
+<li>为什么降低频率不能解决保持时间违例？</li>
+</ol>
+</body></html>
