@@ -1,0 +1,1556 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cube / Orbit</title>
+<style>
+:root{color-scheme:light;--paper:#faf9f4;--stage:#f7f4ed;--ink:#273b32;--teal:#28766b;--line:#deddd1}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;-webkit-font-smoothing:antialiased}.app{max-width:1100px;margin:0 auto;padding:28px 30px 22px}.stage{background:var(--stage);border:1px solid #e3dfd5;border-radius:22px;overflow:hidden}.views{display:grid;grid-template-columns:1fr 1fr;padding:17px 12px 4px}.view{min-width:0}.view canvas{width:100%;height:400px;display:block;touch-action:none;cursor:grab}.view canvas:active{cursor:grabbing}#orbit{cursor:grab}.search-wrap{border-top:1px solid #e3dfd5;padding:8px 12px 10px;overflow:hidden}.search-wrap[hidden]{display:none}#search{display:block;width:100%;height:120px;touch-action:none;cursor:grab}.controls{display:flex;justify-content:center;align-items:center;gap:12px;padding:21px 0 0;flex-wrap:wrap}button{font:14px inherit;font-family:inherit;font-size:14px;font-weight:500;color:var(--ink);border:1px solid var(--line);border-radius:10px;background:transparent;min-height:43px;padding:10px 20px;display:inline-flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;white-space:nowrap;transition:background .15s,opacity .15s}button svg{width:17px;height:17px;flex-shrink:0}button:hover:not(:disabled){background:#eef0e7}button:focus-visible{outline:2px solid var(--teal);outline-offset:4px}button:disabled{opacity:.33;cursor:default}button.primary{background:var(--ink);border-color:var(--ink);color:#fff}button.primary:hover:not(:disabled){background:#365144}button.working{border-color:#28766b66;color:var(--teal)}button.error{border-color:#a74f38;color:#a74f38}.screen-reader{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}@media(max-width:760px){.app{padding:18px 15px}.views{padding:12px 0 0}.view canvas{height:310px}.controls{gap:8px;padding-top:16px}button{font-size:13px;padding:10px 13px}}@media(max-width:480px){.views{grid-template-columns:1fr}.view canvas{height:285px}.view+.view{border-top:1px solid #e7e3d944}.controls{gap:6px}button{font-size:12px;padding:10px 11px;gap:5px}button svg{width:15px;height:15px}.search-wrap{padding-left:3px;padding-right:3px}}
+.strategy-row{display:flex;justify-content:center;margin-top:18px}.strategy{display:inline-flex;gap:2px;padding:3px;background:#eeeee5;border:1px solid #e1e1d5;border-radius:11px}.strategy button{border:0;min-height:30px;padding:5px 21px;font-size:12px;border-radius:7px;color:#808677}.strategy button[aria-pressed="true"]{background:var(--paper);color:var(--teal);box-shadow:0 1px 4px #283b3212}.strategy button:hover{color:var(--ink)}.controls{padding-top:12px}
+</style>
+</head>
+<body>
+<main class="app" aria-label="魔方与九圆图">
+ <section class="stage">
+  <div class="views">
+   <div class="view"><canvas id="cube" width="500" height="400" aria-label="拖动色块拧动魔方，空白处拖动调整视角。按住 U R F D L B 锁定面，Shift 反向。" title="拖色块拧动 · 空白处拖动视角 · 按住面键锁定 · Shift 反向"></canvas></div>
+   <div class="view"><canvas id="orbit" width="500" height="400" aria-label="拖动节点或圆弧，转动对应的一层。Shift 反向。" title="拖动节点或圆弧拧动 · Shift 反向"></canvas></div>
+  </div>
+  <div id="search-wrap" class="search-wrap" hidden><canvas id="search" width="1000" height="120" aria-label="求解器探索的魔方状态和找到的路径"></canvas></div>
+ </section>
+ <div class="strategy-row"><div class="strategy" role="group" aria-label="求解策略">
+  <button id="strategy-optimal" type="button" aria-pressed="false" title="IDA*：证明步数最短；全局随机局面可能很慢。">最短</button>
+  <button id="strategy-fast" type="button" aria-pressed="true" title="两阶段：优先尽快找到有效解，不保证步数最短。">最快</button>
+ </div></div>
+ <div class="controls">
+  <button id="scramble" title="从全部合法局面均匀抽样；Shift+点击：10 步演示打乱。"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h3c5 0 7 12 12 12h3M18 15l3 3-3 3M3 18h3c2 0 3.5-2 5-4.5M14 8.5C15 7 16.5 6 18 6h3M18 3l3 3-3 3"/></svg><span>打乱</span></button>
+  <button id="solve" title="选择最短或最快策略；不设超时，可以随时停止。"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="5" cy="12" r="2.5"/><circle cx="18" cy="5" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="m7 11 8.5-5M7 13l8.5 5"/></svg><span id="solve-label">开始求解</span></button>
+  <button id="execute" class="primary" disabled title="依次执行求出的路径；空格暂停，右箭头单步"><svg id="execute-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="m8 5 11 7-11 7z"/></svg><span id="execute-label">按顺序拧过去</span></button>
+ </div>
+ <p id="live" class="screen-reader" aria-live="polite"></p>
+</main>
+<script id="cube-core">
+/* Geometry and facelet permutations for a 3 x 3 x 3 Rubik's cube.
+ * Axes: +x right, +y up, +z front. Rows run top to bottom when
+ * looking directly at a face from outside the cube.
+ * The module has no dependencies and works in browsers and Node.
+ */
+(function (root) {
+  'use strict';
+
+  const FACES = Object.freeze(['U', 'R', 'F', 'D', 'L', 'B']);
+  const COLORS = Object.freeze({
+    U: '#f5f7fb', R: '#f65365', F: '#51d991',
+    D: '#ffda62', L: '#ffa456', B: '#619eff'
+  });
+  const FACE_DATA = Object.freeze({
+    U: { n: [0, 1, 0], u: [1, 0, 0], v: [0, 0, -1] },
+    R: { n: [1, 0, 0], u: [0, 0, -1], v: [0, 1, 0] },
+    F: { n: [0, 0, 1], u: [1, 0, 0], v: [0, 1, 0] },
+    D: { n: [0, -1, 0], u: [1, 0, 0], v: [0, 0, 1] },
+    L: { n: [-1, 0, 0], u: [0, 0, 1], v: [0, 1, 0] },
+    B: { n: [0, 0, -1], u: [-1, 0, 0], v: [0, 1, 0] }
+  });
+  Object.values(FACE_DATA).forEach(function (basis) {
+    Object.freeze(basis.n); Object.freeze(basis.u); Object.freeze(basis.v);
+    Object.freeze(basis);
+  });
+
+  const SLOTS = [];
+  const positionIndex = new Map();
+  function positionKey(p, n) { return p.join(',') + ':' + n.join(','); }
+  FACES.forEach(function (face) {
+    const basis = FACE_DATA[face];
+    for (let row = 0; row < 3; row++) {
+      for (let col = 0; col < 3; col++) {
+        const p = basis.n.map(function (value, axis) {
+          return value + (col - 1) * basis.u[axis] + (1 - row) * basis.v[axis];
+        });
+        const slot = Object.freeze({
+          id: SLOTS.length, face: face, row: row, col: col,
+          p: Object.freeze(p), n: basis.n, u: basis.u, v: basis.v
+        });
+        SLOTS.push(slot);
+        positionIndex.set(positionKey(slot.p, slot.n), slot.id);
+      }
+    }
+  });
+  Object.freeze(SLOTS);
+
+  // M turns like L; E turns like D; S turns like F (standard notation).
+  const MOVE_DATA = Object.freeze({
+    U: { axis: 1, layer: 1, turns: -1 },
+    R: { axis: 0, layer: 1, turns: -1 },
+    F: { axis: 2, layer: 1, turns: -1 },
+    D: { axis: 1, layer: -1, turns: 1 },
+    L: { axis: 0, layer: -1, turns: 1 },
+    B: { axis: 2, layer: -1, turns: 1 },
+    M: { axis: 0, layer: 0, turns: 1 },
+    E: { axis: 1, layer: 0, turns: 1 },
+    S: { axis: 2, layer: 0, turns: -1 }
+  });
+  Object.values(MOVE_DATA).forEach(Object.freeze);
+
+  function normalizeMove(move) {
+    if (typeof move !== 'string') throw new TypeError('Move must be a string.');
+    const normalized = move.trim().replace(/[\u2018\u2019\u2032]/g, "'").toUpperCase();
+    if (!/^[URFDLBMES](?:'|2'?)?$/.test(normalized)) {
+      throw new Error('Invalid cube move: ' + move);
+    }
+    return normalized.replace("2'", '2');
+  }
+
+  function parse(sequence) {
+    if (Array.isArray(sequence)) return sequence.map(normalizeMove);
+    if (typeof sequence !== 'string') throw new TypeError('Sequence must be a string or array.');
+    const compact = sequence.replace(/[\s,;]+/g, '').replace(/[\u2018\u2019\u2032]/g, "'").toUpperCase();
+    if (compact.length === 0) return [];
+    const tokens = compact.match(/[URFDLBMES](?:2'?|')?/g) || [];
+    if (tokens.join('') !== compact) throw new Error('Invalid cube sequence: ' + sequence);
+    return tokens.map(normalizeMove);
+  }
+
+  function descriptor(move) {
+    const canonical = normalizeMove(move);
+    const base = MOVE_DATA[canonical[0]];
+    const multiplier = canonical.endsWith('2') ? 2 : (canonical.endsWith("'") ? -1 : 1);
+    const turns = base.turns * multiplier;
+    return {
+      move: canonical, face: canonical[0], axis: base.axis,
+      axisName: ['x', 'y', 'z'][base.axis], layer: base.layer,
+      turns: turns, angle: turns * Math.PI / 2
+    };
+  }
+
+  // A right-hand-rule rotation along the POSITIVE axis. angle is in radians.
+  // Fractional angles are deliberately retained for smooth rendering.
+  function rotateVector(vector, axis, angle) {
+    if (typeof axis === 'string') axis = ['x', 'y', 'z'].indexOf(axis.toLowerCase());
+    const x = vector[0], y = vector[1], z = vector[2];
+    const c = Math.cos(angle), s = Math.sin(angle);
+    if (axis === 0) return [x, c * y - s * z, s * y + c * z];
+    if (axis === 1) return [c * x + s * z, y, -s * x + c * z];
+    if (axis === 2) return [c * x - s * y, s * x + c * y, z];
+    throw new Error('Rotation axis must be 0, 1, 2, x, y, or z.');
+  }
+
+  const permutationCache = new Map();
+  function cachedPermutation(move) {
+    const desc = descriptor(move);
+    if (permutationCache.has(desc.move)) return permutationCache.get(desc.move);
+    const result = SLOTS.map(function (slot) {
+      if (slot.p[desc.axis] !== desc.layer) return slot.id;
+      const p = rotateVector(slot.p, desc.axis, desc.angle).map(Math.round);
+      const n = rotateVector(slot.n, desc.axis, desc.angle).map(Math.round);
+      const target = positionIndex.get(positionKey(p, n));
+      if (target === undefined) throw new Error('Internal cube geometry mismatch.');
+      return target;
+    });
+    Object.freeze(result);
+    permutationCache.set(desc.move, result);
+    return result;
+  }
+
+  // result[oldSlot] is the destination slot, never the other way around.
+  function permutation(move) { return cachedPermutation(move).slice(); }
+
+  function cycles(move) {
+    const perm = cachedPermutation(move);
+    const seen = new Uint8Array(54);
+    const result = [];
+    for (let start = 0; start < 54; start++) {
+      if (seen[start]) continue;
+      const cycle = [];
+      let current = start;
+      while (!seen[current]) {
+        seen[current] = 1;
+        cycle.push(current);
+        current = perm[current];
+      }
+      if (cycle.length > 1) result.push(cycle);
+    }
+    return result;
+  }
+
+  function solvedState() { return SLOTS.map(function (slot) { return slot.id; }); }
+
+  // state[position] is the original sticker id currently at that position.
+  // The input state is never mutated.
+  function apply(state, move) {
+    if (!state || state.length !== 54) throw new Error('A cube state must contain 54 sticker ids.');
+    const perm = cachedPermutation(move);
+    const next = new Array(54);
+    for (let oldSlot = 0; oldSlot < 54; oldSlot++) next[perm[oldSlot]] = state[oldSlot];
+    return next;
+  }
+
+  function applySequence(state, sequence) {
+    return parse(sequence).reduce(function (current, move) { return apply(current, move); }, Array.from(state));
+  }
+
+  function inverse(move) {
+    const canonical = normalizeMove(move);
+    if (canonical.endsWith('2')) return canonical;
+    return canonical.endsWith("'") ? canonical.slice(0, -1) : canonical + "'";
+  }
+
+  // Returns an ARRAY of move strings, so it can be passed to applySequence
+  // or displayed with .join(' '). This also accepts a string sequence.
+  function inverseSequence(sequence) { return parse(sequence).reverse().map(inverse); }
+
+  function isIdentity(state) {
+    return !!state && state.length === 54 && SLOTS.every(function (slot) { return state[slot.id] === slot.id; });
+  }
+
+  // A solved cube has a uniform color on each face, including when the
+  // entire cube has been reoriented through three parallel slice moves.
+  function isSolved(state) {
+    if (!state || state.length !== 54 || new Set(state).size !== 54) return false;
+    for (let offset = 0; offset < 54; offset += 9) {
+      const first = SLOTS[state[offset]];
+      if (!first) return false;
+      for (let j = 1; j < 9; j++) {
+        const sticker = SLOTS[state[offset + j]];
+        if (!sticker || sticker.face !== first.face) return false;
+      }
+    }
+    return true;
+  }
+
+  const CubeCore = Object.freeze({
+    FACES: FACES, COLORS: COLORS, FACE_DATA: FACE_DATA,
+    SLOTS: SLOTS, slots: SLOTS, MOVE_DATA: MOVE_DATA,
+    normalizeMove: normalizeMove, parse: parse, parseSequence: parse,
+    descriptor: descriptor, rotateVector: rotateVector,
+    permutation: permutation, cycles: cycles,
+    solvedState: solvedState, apply: apply, applySequence: applySequence,
+    inverse: inverse, inverseSequence: inverseSequence,
+    isSolved: isSolved, isIdentity: isIdentity
+  });
+  root.CubeCore = CubeCore;
+  if (typeof module !== 'undefined' && module.exports) module.exports = CubeCore;
+})(typeof window !== 'undefined' ? window : globalThis);
+
+</script>
+<script id="cube-gestures">
+/* Pure gesture geometry; no DOM, state mutations, animation or solver.
+ * Coordinate inputs and projected points use CSS pixels, with screen y down.
+ * A "slot" is the CURRENT position, not the identity of its colored sticker.
+ *
+ * Pick once after a small drag with cubeDrag()/orbitDrag(), retain .gesture,
+ * then call dragAngle(gesture, totalDrag, {project, invert, core}) each frame.
+ * The returned angle is a signed right-hand rotation about the positive axis.
+ * Preview |angle| / (PI/2); only commit a legal move after pointer release.
+ */
+(function (root) {
+  'use strict';
+  const HALF_PI = Math.PI / 2, TAU = 2 * Math.PI;
+  function coreOf(core) {
+    const c = core || root.CubeCore;
+    if (!c) throw new Error('CubeGestures requires CubeCore.');
+    return c;
+  }
+  function xy(p) { return Array.isArray(p) ? {x:p[0],y:p[1]} : p; }
+  function dot(a,b) { return a.x*b.x + a.y*b.y; }
+  function length(a) { return Math.hypot(a.x,a.y); }
+  function crossAxis(axis,p) {
+    return axis===0 ? [0,-p[2],p[1]] : axis===1 ? [p[2],0,-p[0]] : [-p[1],p[0],0];
+  }
+  function moveForTurn(axis,layer,sign,core) {
+    const c=coreOf(core);
+    const name=Object.keys(c.MOVE_DATA).find(function(m){
+      const d=c.MOVE_DATA[m]; return d.axis===axis && d.layer===layer;
+    });
+    if (!name || !sign) return null;
+    return Math.sign(c.MOVE_DATA[name].turns)===Math.sign(sign) ? name : name+"'";
+  }
+  function lockDescriptor(move,core) {
+    return move ? coreOf(core).descriptor(String(move)[0].toUpperCase()) : null;
+  }
+  function projectedVelocity(point,axis,project) {
+    const v=crossAxis(axis,point),eps=1e-4;
+    const a=xy(project(point.map((p,i)=>p+eps*v[i])));
+    const b=xy(project(point.map((p,i)=>p-eps*v[i])));
+    return {x:(a.x-b.x)/(2*eps),y:(a.y-b.y)/(2*eps)};
+  }
+  function choose(candidates,drag,options) {
+    if (length(drag)<(options.minDrag==null ? 9 : options.minDrag)) return {status:'pending',reason:'threshold'};
+    const usable=candidates.filter(c=>length(c.velocity)>1e-7).map(function(c){
+      const signed=dot(c.velocity,drag)/(length(c.velocity)*length(drag));
+      return Object.assign({},c,{score:Math.abs(signed),sign:Math.sign(signed)});
+    }).sort((a,b)=>b.score-a.score);
+    if (!usable.length) return {status:'ambiguous',reason:'edge-on-or-axis-center'};
+    const best=usable[0],second=usable[1];
+    if (best.score<(options.minAlignment==null ? .6 : options.minAlignment)) return {status:'ambiguous',reason:'drag-not-tangential'};
+    if (second && best.score-second.score<(options.minMargin==null ? .055 : options.minMargin)) {
+      return {status:'ambiguous',reason:'two-directions',candidates:usable.slice(0,2)};
+    }
+    // Test the selected physical layer AFTER comparison. Filtering middle layers
+    // first would silently redirect a middle-row swipe to an unrelated outer face.
+    if (best.layer===0 && !options.allowMiddle) {
+      return {status:'blocked',reason:'middle-layer-disabled',axis:best.axis,layer:0};
+    }
+    return {status:'ready',candidate:best};
+  }
+  function finish(gesture,chosen,drag,options) {
+    const angle=dragAngle(gesture,drag,options);
+    return {status:'ready',axis:gesture.axis,layer:gesture.layer,
+      move:moveForTurn(gesture.axis,gesture.layer,angle || chosen.sign,options.core),
+      angle:angle,score:chosen.score,gesture:gesture};
+  }
+  function cubeDrag(options) {
+    const slot=options.slot,lock=lockDescriptor(options.lockedMove,options.core);
+    if (!slot && !options.point) return {status:'miss',reason:'no-cube-hit'};
+    if (!lock && !slot) return {status:'miss',reason:'no-position'};
+    const point=options.point ? options.point.slice() : slot.p.map((v,i)=>v+.495*slot.n[i]);
+    const axes=lock ? [lock.axis] : [0,1,2].filter(a=>Math.abs(slot.n[a])<.5);
+    const candidates=axes.map(function(axis){return {
+      axis:axis,layer:lock ? lock.layer : slot.p[axis],
+      velocity:projectedVelocity(point,axis,options.project)
+    };});
+    const result=choose(candidates,options.drag,options);
+    if (result.status!=='ready') return result;
+    const best=result.candidate;
+    return finish({type:'cube',axis:best.axis,layer:best.layer,point:point},best,options.drag,options);
+  }
+  function orbitRings(centers,options) {
+    options=options || {};
+    const scale=options.scale==null ? 1 : options.scale;
+    const origin=xy(options.origin || {x:0,y:0});
+    const base=options.base==null ? 95 : options.base;
+    const step=options.step==null ? -20 : options.step;
+    return centers.flatMap(function(value,axis){
+      const c=xy(value);
+      return [-1,0,1].map(layer=>({axis:axis,layer:layer,
+        center:{x:origin.x+scale*c.x,y:origin.y+scale*c.y},radius:scale*(base+step*layer)}));
+    });
+  }
+  function quarterArc(slot,ring,points,sign,core) {
+    const c=coreOf(core),move=moveForTurn(ring.axis,ring.layer,sign,c);
+    const target=c.permutation(move)[slot.id];
+    const a=xy(points[slot.id]),b=xy(points[target]),center=ring.center;
+    let delta=Math.atan2(b.y-center.y,b.x-center.x)-Math.atan2(a.y-center.y,a.x-center.x);
+    const direction=-sign; // Increasing screen angle is a NEGATIVE spatial turn.
+    while (delta*direction<0) delta+=direction*TAU;
+    return Math.abs(delta);
+  }
+  function orbitDrag(options) {
+    const point=xy(options.point),slot=options.slot,lock=lockDescriptor(options.lockedMove,options.core);
+    const tolerance=options.hitTolerance==null ? 8 : options.hitTolerance;
+    let rings=options.rings.filter(function(r){
+      if (lock) return r.axis===lock.axis && r.layer===lock.layer;
+      if (slot) return Math.abs(slot.n[r.axis])<.5 && slot.p[r.axis]===r.layer;
+      return Math.abs(Math.hypot(point.x-r.center.x,point.y-r.center.y)-r.radius)<=tolerance;
+    });
+    if (!rings.length) return {status:'miss',reason:'no-circle-hit'};
+    if (!slot && !lock) {
+      const distance=r=>Math.abs(Math.hypot(point.x-r.center.x,point.y-r.center.y)-r.radius);
+      const nearest=Math.min(...rings.map(distance));
+      rings=rings.filter(r=>distance(r)<=nearest+(options.distanceTie==null ? 3 : options.distanceTie));
+    }
+    const source=(slot && options.points) ? xy(options.points[slot.id]) : point;
+    const candidates=rings.map(function(r){
+      const radial={x:source.x-r.center.x,y:source.y-r.center.y};
+      return {axis:r.axis,layer:r.layer,ring:r,velocity:{x:radial.y,y:-radial.x}};
+    });
+    const result=choose(candidates,options.drag,options);
+    if (result.status!=='ready') return result;
+    const best=result.candidate,ring=best.ring;
+    const onRing=slot && Math.abs(slot.n[ring.axis])<.5 && slot.p[ring.axis]===ring.layer && options.points;
+    const gesture={type:'orbit',axis:best.axis,layer:best.layer,point:source,
+      center:{x:ring.center.x,y:ring.center.y},
+      positiveArc:onRing ? quarterArc(slot,ring,options.points,1,options.core) : HALF_PI,
+      negativeArc:onRing ? quarterArc(slot,ring,options.points,-1,options.core) : HALF_PI};
+    return finish(gesture,best,options.drag,options);
+  }
+  function cubeAngle(gesture,drag,options) {
+    const c=coreOf(options.core),project=options.project,point=gesture.point;
+    const start=xy(project(point)),target={x:start.x+drag.x,y:start.y+drag.y};
+    const limit=options.limit==null ? HALF_PI : options.limit;
+    function loss(angle) {
+      const p=xy(project(c.rotateVector(point,gesture.axis,angle)));
+      return (p.x-target.x)**2+(p.y-target.y)**2;
+    }
+    // The grip traces a projected circular arc (an ellipse for this camera).
+    // A coarse bracket plus a bounded scalar minimization also works with a
+    // perspective project() callback and avoids inverse-view sign assumptions.
+    const count=24,step=2*limit/count;
+    let best=0,bestLoss=Infinity;
+    for(let i=0;i<=count;i++) {
+      const angle=-limit+i*step,value=loss(angle);
+      if(value<bestLoss){bestLoss=value;best=angle;}
+    }
+    let low=Math.max(-limit,best-step),high=Math.min(limit,best+step);
+    for(let i=0;i<24;i++) {
+      const a=low+(high-low)/3,b=high-(high-low)/3;
+      if(loss(a)<=loss(b)) high=b;else low=a;
+    }
+    const angle=(low+high)/2;
+    // Include endpoints so a drag past the quarter turn returns precisely 90°.
+    return [-limit,angle,limit].reduce((a,b)=>loss(a)<loss(b) ? a : b);
+  }
+  function dragAngle(gesture,drag,options) {
+    options=options || {};
+    let angle;
+    if (length(drag)<1e-8) return 0;
+    if (gesture.type==='cube') angle=cubeAngle(gesture,drag,options);
+    else {
+      const a={x:gesture.point.x-gesture.center.x,y:gesture.point.y-gesture.center.y};
+      const b={x:a.x+drag.x,y:a.y+drag.y};
+      const screen=Math.atan2(a.x*b.y-a.y*b.x,dot(a,b));
+      const physicalSign=-Math.sign(screen);
+      const full=physicalSign>0 ? gesture.positiveArc : gesture.negativeArc;
+      angle=physicalSign*Math.min(1,Math.abs(screen)/Math.max(full,1e-8))*HALF_PI;
+    }
+    return options.invert ? -angle : angle;
+  }
+  const api=Object.freeze({cubeDrag:cubeDrag,orbitDrag:orbitDrag,dragAngle:dragAngle,
+    orbitRings:orbitRings,moveForTurn:moveForTurn,projectedVelocity:projectedVelocity});
+  root.CubeGestures=api;
+  if(typeof module!=='undefined' && module.exports) module.exports=api;
+})(typeof window!=='undefined' ? window : globalThis);
+
+</script>
+<script id="cube-solver" type="text/plain">
+/* Exact HTM IDA*: all 18 outer-face moves have unit cost.
+ * Reuses the original demo's all-18-move coordinate/PDB code. No phase-2
+ * restricted distance is used as a global lower bound.
+ * Three rotated projections share two small PDBs (Mike Reid / Kociemba idea):
+ * https://kociemba.org/math/optimal.htm
+ * Only fully exhausted subtrees enter the collision-checked transposition table.
+ * Each IDA contour is completed before increasing the integer bound by ONE.
+ * There is no wall-clock deadline or default node quota. Cancellation is explicit.
+ * The fast strategy shares phase-1 tables and uses separate restricted tables.
+ */
+(function (root) {
+  'use strict';
+  const Core = root.CubeCore || (typeof require === 'function' ? require('./cube-core.js') : null);
+  if (!Core) throw new Error('Load CubeCore before CubeSolver.');
+
+  const FACE_NAMES = ['U', 'R', 'F', 'D', 'L', 'B'];
+  const MOVE_NAMES = FACE_NAMES.flatMap(f => [f, f + '2', f + "'"]);
+  const CORNER_FACELETS = [
+    [8, 9, 20], [6, 18, 38], [0, 36, 47], [2, 45, 11],
+    [29, 26, 15], [27, 44, 24], [33, 53, 42], [35, 17, 51]
+  ];
+  const EDGE_FACELETS = [
+    [5, 10], [7, 19], [3, 37], [1, 46],
+    [32, 16], [28, 25], [30, 43], [34, 52],
+    [23, 12], [21, 41], [50, 39], [48, 14]
+  ];
+  const CORNER_COLORS = CORNER_FACELETS.map(a => a.map(i => Math.floor(i / 9)));
+  const EDGE_COLORS = EDGE_FACELETS.map(a => a.map(i => Math.floor(i / 9)));
+  const FACTORIAL = [1, 1, 2, 6, 24, 120, 720, 5040, 40320];
+  const POPCOUNT = new Uint8Array(4096);
+  for (let i = 1; i < POPCOUNT.length; i++) POPCOUNT[i] = POPCOUNT[i >> 1] + (i & 1);
+  const SLICE_MASKS = [];
+  const SLICE_INDEX = new Int16Array(4096).fill(-1);
+  for (let mask = 0; mask < 4096; mask++) {
+    if (POPCOUNT[mask] === 4) {
+      SLICE_INDEX[mask] = SLICE_MASKS.length;
+      SLICE_MASKS.push(mask);
+    }
+  }
+  const SOLVED_SLICE = SLICE_INDEX[0xf00];
+  let tables = null;
+  let lastRun = null;
+  const now = () => (typeof performance !== 'undefined' ? performance.now() : Date.now());
+
+  function invalid(message) {
+    const error = new Error(message);
+    error.code = 'INVALID_CUBE';
+    throw error;
+  }
+
+  function parity(permutation) {
+    let result = 0;
+    for (let i = 0; i < permutation.length; i++) {
+      for (let j = i + 1; j < permutation.length; j++) result ^= permutation[i] > permutation[j] ? 1 : 0;
+    }
+    return result;
+  }
+
+  function toCubie(state) {
+    if (!state || state.length !== 54) invalid('A cube state must contain 54 facelets.');
+    const raw = new Uint8Array(54);
+    const counts = new Uint8Array(6);
+    const isText = typeof state === 'string';
+    if (!isText && new Set(state).size !== 54) invalid('Sticker ids must be a permutation of 0 through 53.');
+    for (let i = 0; i < 54; i++) {
+      const value = isText ? FACE_NAMES.indexOf(state[i]) : state[i];
+      if (!Number.isInteger(value) || value < 0 || value >= (isText ? 6 : 54)) invalid('Invalid sticker value at position ' + i + '.');
+      raw[i] = isText ? value : Math.floor(value / 9);
+      counts[raw[i]]++;
+    }
+    if (counts.some(n => n !== 9)) invalid('There must be exactly nine facelets of each color.');
+
+    // Relabel colors by the CURRENT centers. This also accepts states made
+    // with M/E/S: a solution may finish in a different whole-cube orientation.
+    const centerMap = new Int8Array(6).fill(-1);
+    for (let face = 0; face < 6; face++) {
+      const color = raw[face * 9 + 4];
+      if (centerMap[color] !== -1) invalid('The six centers must have distinct colors.');
+      centerMap[color] = face;
+    }
+    const colors = raw.map(color => centerMap[color]);
+    const cp = new Uint8Array(8), co = new Uint8Array(8);
+    const ep = new Uint8Array(12), eo = new Uint8Array(12);
+    for (let position = 0; position < 8; position++) {
+      const facelets = CORNER_FACELETS[position];
+      let orientation = 0;
+      while (orientation < 3 && colors[facelets[orientation]] !== 0 && colors[facelets[orientation]] !== 3) orientation++;
+      if (orientation === 3) invalid('A corner has no U/D color.');
+      const observed = [0, 1, 2].map(j => colors[facelets[(j + orientation) % 3]]);
+      const piece = CORNER_COLORS.findIndex(expected => expected.every((color, j) => color === observed[j]));
+      if (piece < 0) invalid('A corner has an impossible color order.');
+      cp[position] = piece;
+      co[position] = orientation;
+    }
+    for (let position = 0; position < 12; position++) {
+      const [a, b] = EDGE_FACELETS[position].map(i => colors[i]);
+      let piece = EDGE_COLORS.findIndex(pair => pair[0] === a && pair[1] === b);
+      if (piece >= 0) { ep[position] = piece; eo[position] = 0; }
+      else {
+        piece = EDGE_COLORS.findIndex(pair => pair[0] === b && pair[1] === a);
+        if (piece < 0) invalid('An edge has an impossible color pair.');
+        ep[position] = piece; eo[position] = 1;
+      }
+    }
+    if (new Set(cp).size !== 8 || new Set(ep).size !== 12) invalid('A corner or edge piece occurs more than once.');
+    if (co.reduce((sum, n) => sum + n, 0) % 3 !== 0) invalid('The total corner twist is invalid.');
+    if (eo.reduce((sum, n) => sum + n, 0) % 2 !== 0) invalid('The total edge flip is invalid.');
+    if (parity(cp) !== parity(ep)) invalid('Corner and edge permutation parity do not match.');
+    return { cp, co, ep, eo, centerMap: Array.from(centerMap) };
+  }
+
+  function applyCubie(state, move) {
+    const cp = new Uint8Array(8), co = new Uint8Array(8);
+    const ep = new Uint8Array(12), eo = new Uint8Array(12);
+    for (let i = 0; i < 8; i++) {
+      const from = move.cp[i];
+      cp[i] = state.cp[from];
+      co[i] = (state.co[from] + move.co[i]) % 3;
+    }
+    for (let i = 0; i < 12; i++) {
+      const from = move.ep[i];
+      ep[i] = state.ep[from];
+      eo[i] = state.eo[from] ^ move.eo[i];
+    }
+    return { cp, co, ep, eo };
+  }
+
+  function twistIndex(co) {
+    let index = 0;
+    for (let i = 0; i < 7; i++) index = index * 3 + co[i];
+    return index;
+  }
+  function flipIndex(eo) {
+    let index = 0;
+    for (let i = 0; i < 11; i++) index = (index << 1) | eo[i];
+    return index;
+  }
+  function sliceIndex(ep) {
+    let mask = 0;
+    for (let i = 0; i < 12; i++) if (ep[i] >= 8) mask |= 1 << i;
+    return SLICE_INDEX[mask];
+  }
+  function rankPermutation(permutation, length, offset) {
+    let result = 0, used = 0;
+    offset = offset || 0;
+    for (let i = 0; i < length; i++) {
+      const value = permutation[i] - offset;
+      const smaller = value - POPCOUNT[used & ((1 << value) - 1)];
+      result = result * (length - i) + smaller;
+      used |= 1 << value;
+    }
+    return result;
+  }
+  function unrankPermutation(index, length) {
+    const result = new Uint8Array(length);
+    let used = 0;
+    for (let i = 0; i < length; i++) {
+      let order = Math.floor(index / FACTORIAL[length - 1 - i]);
+      index %= FACTORIAL[length - 1 - i];
+      for (let value = 0; value < length; value++) {
+        if (used & (1 << value)) continue;
+        if (order-- === 0) { result[i] = value; used |= 1 << value; break; }
+      }
+    }
+    return result;
+  }
+
+  function createReporter(options, startedAt) {
+    let lastReported = -Infinity;
+    function check() {
+      if ((options.signal && options.signal.aborted) || (options.isCancelled && options.isCancelled())) {
+        const error = new Error('Solving was cancelled.');
+        error.code = 'SOLVE_CANCELLED'; throw error;
+      }
+    }
+    function emit(data, force) {
+      check();
+      const time = now();
+      if (!force && time - lastReported < 50) return false;
+      lastReported = time;
+      if (options.onProgress) options.onProgress(Object.assign({ elapsedMs: time - startedAt }, data));
+      return true;
+    }
+    return { check, emit, due: () => now() - lastReported >= 50 };
+  }
+
+  function coordinateDistances(aMoves, aSize, bMoves, bSize, nMoves, goalA, goalB, onProgress) {
+      const size = aSize * bSize;
+      const distance = new Uint8Array(size).fill(255);
+      const queue = new Uint32Array(size);
+      const goal = goalA * bSize + goalB;
+      distance[goal] = 0; queue[0] = goal;
+      let head = 0, tail = 1;
+      while (head < tail) {
+        const state = queue[head++];
+        const a = Math.floor(state / bSize) * nMoves, b = (state % bSize) * nMoves;
+        const nextDistance = distance[state] + 1;
+        for (let m = 0; m < nMoves; m++) {
+          const next = aMoves[a + m] * bSize + bMoves[b + m];
+          if (distance[next] === 255) { distance[next] = nextDistance; queue[tail++] = next; }
+        }
+        if ((head & 8191) === 0) onProgress(head, size);
+      }
+      if (tail !== size) throw new Error('Pruning-table construction did not reach every coordinate.');
+      onProgress(size, size);
+      return distance;
+    }
+
+  function buildTables(reporter) {
+    if (tables) return tables;
+    const moves = MOVE_NAMES.map(move => toCubie(Core.apply(Core.solvedState(), move)));
+    let stage = 0;
+    function progress(table, completed, total, force) {
+      reporter.emit({ type: 'init', phase: 0, table, completed, total,
+        fraction: (stage + completed / total) / 6, nodes: 0, path: [] }, force);
+    }
+
+    const twistMove = new Uint16Array(2187 * 18);
+    for (let coordinate = 0; coordinate < 2187; coordinate++) {
+      const co = new Uint8Array(8); let rest = coordinate, sum = 0;
+      for (let i = 6; i >= 0; i--) { co[i] = rest % 3; sum += co[i]; rest = Math.floor(rest / 3); }
+      co[7] = (3 - sum % 3) % 3;
+      for (let m = 0; m < 18; m++) {
+        const move = moves[m]; let index = 0;
+        for (let i = 0; i < 7; i++) index = index * 3 + (co[move.cp[i]] + move.co[i]) % 3;
+        twistMove[coordinate * 18 + m] = index;
+      }
+      if ((coordinate & 255) === 0) progress('corner-orientation moves', coordinate, 2187);
+    }
+    stage++;
+
+    const flipMove = new Uint16Array(2048 * 18);
+    for (let coordinate = 0; coordinate < 2048; coordinate++) {
+      const eo = new Uint8Array(12); let rest = coordinate, sum = 0;
+      for (let i = 10; i >= 0; i--) { eo[i] = rest & 1; sum ^= eo[i]; rest >>= 1; }
+      eo[11] = sum;
+      for (let m = 0; m < 18; m++) {
+        const move = moves[m]; let index = 0;
+        for (let i = 0; i < 11; i++) index = (index << 1) | (eo[move.ep[i]] ^ move.eo[i]);
+        flipMove[coordinate * 18 + m] = index;
+      }
+      if ((coordinate & 255) === 0) progress('edge-orientation moves', coordinate, 2048);
+    }
+    stage++;
+
+    const sliceMove = new Uint16Array(495 * 18);
+    for (let coordinate = 0; coordinate < 495; coordinate++) {
+      const mask = SLICE_MASKS[coordinate];
+      for (let m = 0; m < 18; m++) {
+        let nextMask = 0;
+        for (let i = 0; i < 12; i++) if (mask & (1 << moves[m].ep[i])) nextMask |= 1 << i;
+        sliceMove[coordinate * 18 + m] = SLICE_INDEX[nextMask];
+      }
+      if ((coordinate & 127) === 0) progress('middle-slice membership moves', coordinate, 495);
+    }
+    stage++;
+
+    const cornerMove = new Uint16Array(40320 * 18);
+    const temp = new Uint8Array(8);
+    for (let c = 0; c < 40320; c++) {
+      const p = unrankPermutation(c, 8);
+      for (let m = 0; m < 18; m++) {
+        for (let i = 0; i < 8; i++) temp[i] = p[moves[m].cp[i]];
+        cornerMove[c * 18 + m] = rankPermutation(temp, 8);
+      }
+      if ((c & 2047) === 0) progress('corner permutation / 18 moves', c, 40320);
+    }
+    stage++;
+    function pruningTable(name, aMoves, aSize, bMoves, bSize, nMoves, goalA, goalB) {
+      const result=coordinateDistances(aMoves,aSize,bMoves,bSize,nMoves,goalA,goalB,(done,total)=>progress(name,done,total));
+      stage++;return result;
+    }
+    const twistSlicePrune = pruningTable('phase 1: corner orientation + slice', twistMove, 2187, sliceMove, 495, 18, 0, SOLVED_SLICE);
+    const flipSlicePrune = pruningTable('phase 1: edge orientation + slice', flipMove, 2048, sliceMove, 495, 18, 0, SOLVED_SLICE);
+    const cornerPrune = new Uint8Array(40320).fill(255);
+    const queue = new Uint16Array(40320);
+    cornerPrune[0] = 0; queue[0] = 0;
+    let read = 0, write = 1;
+    while (read < write) {
+      const c = queue[read++], d = cornerPrune[c] + 1;
+      for (let m = 0; m < 18; m++) {
+        const next = cornerMove[c * 18 + m];
+        if (cornerPrune[next] === 255) { cornerPrune[next] = d; queue[write++] = next; }
+      }
+    }
+    if (write !== 40320) throw new Error('Incomplete corner permutation table.');
+    tables = { moves, twistMove, flipMove, sliceMove, cornerMove,
+      twistSlicePrune, flipSlicePrune, cornerPrune };
+    tables.bytes = Object.values(tables).reduce((sum, a) => sum + (a.byteLength || 0), 0);
+    reporter.emit({type:'init',table:'ready',fraction:1,nodes:0,path:[]}, true);
+    return tables;
+  }
+
+  // Proper whole-cube conjugations preserve the 18 generators and solved state.
+  // They provide U/D-, F/B-, and R/L-oriented subgroup distance lower bounds.
+  const slotMap = new Map(Core.SLOTS.map(s => [s.p.join(',')+':'+s.n.join(','), s.id]));
+  const rotations = [-1, 0, 2].map(axis => {
+    const rotate = v => axis < 0 ? v : Core.rotateVector(v, axis, Math.PI/2).map(Math.round);
+    const perm = Core.SLOTS.map(s => slotMap.get(rotate(s.p).join(',')+':'+rotate(s.n).join(',')));
+    const face = FACE_NAMES.map(f => {
+      const n = rotate(Core.FACE_DATA[f].n);
+      return FACE_NAMES.findIndex(g => Core.FACE_DATA[g].n.every((x,i) => x === n[i]));
+    });
+    return {perm, moves:MOVE_NAMES.map((_,m) => face[Math.floor(m/3)]*3+m%3)};
+  });
+  function rotatedCubie(state, rotation) {
+    const p = rotation.perm, out = new Array(54);
+    if (typeof state === 'string') {
+      const fm = FACE_NAMES.map((_,i) => Math.floor(p[i*9+4]/9));
+      for (let i=0;i<54;i++) out[p[i]]=FACE_NAMES[fm[FACE_NAMES.indexOf(state[i])]];
+      return toCubie(out.join(''));
+    }
+    for (let i=0;i<54;i++) out[p[i]]=p[state[i]];
+    return toCubie(out);
+  }
+  function initialCoordinates(state) {
+    const cubes = rotations.map(r => rotatedCubie(state,r)), a = new Int32Array(10);
+    cubes.forEach((c,i) => {a[i*3]=twistIndex(c.co);a[i*3+1]=flipIndex(c.eo);a[i*3+2]=sliceIndex(c.ep)});
+    a[9]=rankPermutation(cubes[0].cp,8);
+    return {coords:a,cube:cubes[0]};
+  }
+  function nextCoordinates(a,m,b,t) {
+    for(let i=0;i<3;i++) {
+      const move=rotations[i].moves[m],k=i*3;
+      b[k]=t.twistMove[a[k]*18+move];
+      b[k+1]=t.flipMove[a[k+1]*18+move];
+      b[k+2]=t.sliceMove[a[k+2]*18+move];
+    }
+    b[9]=t.cornerMove[a[9]*18+m];
+  }
+  function boundFor(a,t,triple=true) {
+    const p0=Math.max(t.twistSlicePrune[a[0]*495+a[2]],t.flipSlicePrune[a[1]*495+a[2]]);
+    if(!triple) return Math.max(p0,t.cornerPrune[a[9]]);
+    const p1=Math.max(t.twistSlicePrune[a[3]*495+a[5]],t.flipSlicePrune[a[4]*495+a[5]]);
+    const p2=Math.max(t.twistSlicePrune[a[6]*495+a[8]],t.flipSlicePrune[a[7]*495+a[8]]);
+    // On a length-n solution, the last move belongs to at least one subgroup,
+    // so one subgroup projection must be <= n-1. This holds for lower bounds
+    // as well as exact subgroup distances. Do NOT add one at the solved zero.
+    return Math.max(p0,p1,p2,t.cornerPrune[a[9]],p0>0&&p0===p1&&p1===p2?p0+1:0);
+  }
+
+  class ExactTT {
+    constructor(bits) {
+      this.size=1<<bits; this.mask=this.size-1;
+      this.a=new Uint32Array(this.size);this.b=new Uint32Array(this.size);this.c=new Uint32Array(this.size);
+      this.depth=new Uint8Array(this.size);this.epoch=new Uint8Array(this.size);this.ref=new Float64Array(this.size);
+      this.generation=0;this.collisions=0;
+    }
+    clear() { if(++this.generation===256){this.epoch.fill(0);this.generation=1} }
+    index(a,b,c) {return (Math.imul(a^0x9e3779b9,0x85ebca6b)^Math.imul(b,0xc2b2ae35)^Math.imul(c,0x27d4eb2d))&this.mask}
+    probe(a,b,c,remaining) {
+      const i=this.index(a,b,c);
+      if(this.epoch[i]!==this.generation)return 0;
+      // The hash ONLY selects a bucket; compare ALL bits of the exact key.
+      if(this.a[i]!==a||this.b[i]!==b||this.c[i]!==c){this.collisions++;return 0}
+      return this.depth[i]>=remaining?this.ref[i]||-1:0;
+    }
+    store(a,b,c,remaining,ref) {
+      const i=this.index(a,b,c);
+      if(this.epoch[i]===this.generation&&this.a[i]===a&&this.b[i]===b&&this.c[i]===c&&this.depth[i]>remaining)return;
+      this.a[i]=a;this.b[i]=b;this.c[i]=c;this.depth[i]=remaining;this.ref[i]=ref;
+      this.epoch[i]=this.generation;
+    }
+    get bytes(){return this.size*22}
+  }
+
+  // Bounded, parent-complete event projection of ACTUAL DFS calls. No synthetic
+  // branches. Sampling does not participate in solver decisions. Main thread
+  // can replay at human speed without sending a message per expanded state.
+  function recorder(options,stats,path,ids,hs,maxDepth) {
+    let events=[],count=0,budget=options.traceNodes===undefined?1700:Math.max(0,options.traceNodes);
+    let quota=0,emitted=new Set(),lastFlush=now(),lastWindow=now(),activeContour=0;
+    const enabled=budget>0&&typeof options.onProgress==='function';
+    function push(e){if(enabled)events.push(e)}
+    function flush(force) {
+      if(!enabled||!events.length)return;
+      const time=now();
+      if(!force&&events.length<160&&time-lastFlush<45)return;
+      const send=events;events=[];lastFlush=time;
+      options.onProgress({type:'tree',bound:stats.bound,nodes:stats.nodes,events:send,shown:count});
+    }
+    function pulse() {
+      if(!enabled||now()-lastWindow<650||count<350)return;
+      lastWindow=now();emitted=new Set();quota=48;
+      budget=Math.max(budget,count+48+maxDepth+1);
+      push({op:'window',bound:stats.bound});
+    }
+    function begin(bound) {
+      activeContour++;quota=Math.min(360,Math.max(0,budget-count));
+      emitted=new Set();push({op:'contour',bound,iteration:activeContour});
+    }
+    function enter(g,h) {
+      if(!enabled)return false;
+      if(quota<=0&&count<budget&&stats.nodes%32768===0)quota=Math.min(42,budget-count);
+      if((quota<=0||count>=budget)&&g!==0)return false;
+      for(let d=0;d<=g;d++) {
+        const id=ids[d];if(emitted.has(id))continue;
+        push({op:'enter',id,parent:d?ids[d-1]:0,move:d?MOVE_NAMES[path[d-1]]:'',g:d,h:hs[d],bound:stats.bound,phase:stats.phase===2&&d<stats.phase1Depth?1:stats.phase,strategy:stats.strategy});
+        emitted.add(id);count++;
+      }
+      quota--;return true;
+    }
+    function status(g,status,extra) {
+      if(emitted.has(ids[g]))push(Object.assign({op:'status',id:ids[g],status},extra||{}));
+    }
+    function solution(g) {
+      // Always retain the complete proof path, even after the display budget.
+      if(enabled){quota=maxDepth+1;budget=Math.max(budget,count+maxDepth+1);enter(g,0)}
+      push({op:'solution',ids:Array.from(ids.slice(0,g+1)),moves:Array.from(path.slice(0,g),m=>MOVE_NAMES[m]),length:g,optimal:stats.strategy!=='fast',strategy:stats.strategy});
+      flush(true);
+    }
+    return {begin,enter,status,flush,solution,pulse,get shown(){return count}};
+  }
+
+  function init(options={}) {buildTables(createReporter(options,now()));return {ready:true,bytes:tables.bytes}}
+  function solve(state,options={}) {
+    lastRun=null;
+    const startedAt=now(),reporter=createReporter(options,startedAt);
+    const input=typeof state==='string'?state:Array.from(state||[]);
+    toCubie(input); // Validate before allocating or indexing any table.
+    const t=buildTables(reporter),searchAt=now();
+    const {coords,cube}=initialCoordinates(input);
+    const maxDepth=options.maxDepth===undefined?20:Math.max(0,Math.min(30,options.maxDepth|0));
+    const maxNodes=options.maxNodes===undefined?Infinity:options.maxNodes;
+    const stats={strategy:'optimal',phase:'optimal',nodes:0,visited:0,expanded:0,prunedNodes:0,duplicatePrunes:0,iterations:0,bound:0,
+      initMs:searchAt-startedAt,searchMs:0,elapsedMs:0,solutionLength:0,optimal:false,
+      provedLowerBound:0,tableBytes:t.bytes,ttBytes:0,hashCollisions:0,traceNodes:0,metric:'HTM'};
+    // Benchmarks show hashing/allocation can cost more than it saves on short
+    // demonstration scrambles. Default: enable the exact TT only at bound 12+.
+    // Explicit tt / ttBits options remain available for collision tests.
+    const ttMode=options.tt===undefined?(options.ttBits===undefined?'auto':true):options.tt;
+    const ttBits=Math.max(0,Math.min(20,options.ttBits===undefined?18:options.ttBits));
+    let tt=ttMode===true?new ExactTT(ttBits):null;
+    stats.ttBytes=tt?tt.bytes:0;
+    const path=new Int8Array(maxDepth+2),ids=new Float64Array(maxDepth+2),hs=new Uint8Array(maxDepth+2);
+    const es=Array.from({length:maxDepth+2},()=>new Uint8Array(12));es[0].set(cube.ep);
+    const child=Array.from({length:maxDepth+1},()=>Array.from({length:18},()=>new Int32Array(10)));
+    const orders=Array.from({length:maxDepth+1},()=>new Int8Array(18));
+    const values=Array.from({length:maxDepth+1},()=>new Uint8Array(18));
+    const childIds=Array.from({length:maxDepth+1},()=>new Float64Array(18));
+    const trace=recorder(options,stats,path,ids,hs,maxDepth);
+    const triple=options.triple!==false,ordering=options.ordering!==false;
+    let solutionDepth=-1,lastReport=now();
+    const FOUND=-1;
+    function goal(a,ep) {
+      if(a[0]||a[1]||a[9])return false;
+      for(let i=0;i<12;i++)if(ep[i]!==i)return false;
+      return true;
+    }
+    function dfs(a,g,remaining,previous,h,id) {
+      stats.visited++;ids[g]=id;hs[g]=h;
+      trace.enter(g,h);trace.status(g,'active');
+      if(stats.nodes>maxNodes){const e=new Error('达到搜索节点预算，尚未证明最短。');e.code='SOLVE_NODE_LIMIT';throw e}
+      if((stats.visited&127)===0) {
+        reporter.check();trace.pulse();trace.flush(false);
+        if(now()-lastReport>=80){lastReport=now();reporter.emit({type:'search',phase:'optimal',depth:stats.bound,
+          nodes:stats.nodes,lowerBound:stats.provedLowerBound,path:Array.from(path.slice(0,g),m=>MOVE_NAMES[m])},false)}
+      }
+      if(h>remaining){stats.prunedNodes++;trace.status(g,'pruned-h');return 0}
+      const ep=es[g];
+      if(goal(a,ep)){solutionDepth=g;trace.solution(g);return FOUND}
+      if(remaining===0){stats.prunedNodes++;trace.status(g,'dead');return 0}
+      let ka=0,kb=0,kc=0;
+      if(tt&&remaining>=3) {
+        // Full state: corner permutation+twist, all edge positions, edge flips,
+        // and previous face (canonical successor restrictions depend on it).
+        ka=((a[9]*2187+a[0])|((previous+1)<<27))>>>0;
+        for(let i=0;i<8;i++)kb=(kb|(ep[i]<<(i*4)))>>>0;
+        for(let i=8;i<12;i++)kc|=ep[i]<<((i-8)*4);
+        kc=(kc|(a[1]<<16))>>>0;
+        const hit=tt.probe(ka,kb,kc,remaining);
+        if(hit){stats.duplicatePrunes++;trace.status(g,'pruned-dup',{target:hit>0?hit:0});return 0}
+      }
+      stats.expanded++;
+      const order=orders[g],hvals=values[g];let n=0;
+      for(let m=0;m<18;m++) {
+        const f=Math.floor(m/3);
+        if(f===previous||(previous>=3&&f===previous-3))continue;
+        nextCoordinates(a,m,child[g][m],t);
+        const estimate=boundFor(child[g][m],t,triple);hvals[m]=estimate;
+        const generatedId=++stats.nodes;childIds[g][m]=generatedId;
+        if(stats.nodes>maxNodes){const e=new Error('达到搜索节点预算，尚未证明最短。');e.code='SOLVE_NODE_LIMIT';throw e}
+        // These are real generated/heuristically evaluated children, not
+        // fictitious DFS visits. A valid-but-unexplored sibling stays 'queued'.
+        path[g]=m;ids[g+1]=generatedId;hs[g+1]=estimate;
+        trace.enter(g+1,estimate);
+        if(estimate>remaining-1){stats.prunedNodes++;trace.status(g+1,'pruned-h');continue}
+        trace.status(g+1,'queued');
+        let j=n++;
+        if(ordering)while(j>0&&hvals[order[j-1]]>estimate){order[j]=order[j-1];j--}
+        order[j]=m;
+      }
+      trace.status(g,'expanded');
+      for(let i=0;i<n;i++) {
+        const m=order[i],next=child[g][m],nh=hvals[m];path[g]=m;
+        // Pruned calls never inspect ep; skip their full permutation work.
+        if(nh<=remaining-1) {
+          const p=t.moves[m].ep,dst=es[g+1];
+          for(let j=0;j<12;j++)dst[j]=ep[p[j]];
+        }
+        if(dfs(next,g+1,remaining-1,Math.floor(m/3),nh,childIds[g][m])===FOUND)return FOUND;
+      }
+      // Store ONLY after every permitted successor is exhausted (no on-stack
+      // dominance assumptions, and no unsafe path-dependent cycle pruning).
+      if(tt&&remaining>=3)tt.store(ka,kb,kc,remaining,id);
+      trace.status(g,'backtracked');return 0;
+    }
+    try {
+      const initialH=boundFor(coords,t,triple);
+      stats.provedLowerBound=initialH;
+      for(let bound=initialH;bound<=maxDepth;bound++) {
+        stats.bound=bound;stats.iterations++;
+        if(ttMode==='auto'&&bound>=12&&!tt){tt=new ExactTT(ttBits);stats.ttBytes=tt.bytes}
+        if(tt)tt.clear();trace.begin(bound);
+        reporter.emit({type:'search',phase:'optimal',event:'depth',depth:bound,nodes:stats.nodes,
+          lowerBound:bound,path:[]},true);
+        if(dfs(coords,0,bound,-1,initialH,++stats.nodes)===FOUND)break;
+        stats.provedLowerBound=bound+1;trace.flush(true);
+      }
+      if(solutionDepth<0){const e=new Error('当前深度预算内无解，尚未完成最短解证明。');e.code='SOLVE_DEPTH_LIMIT';throw e}
+      const moves=Array.from(path.slice(0,solutionDepth),m=>MOVE_NAMES[m]);
+      if(typeof input!=='string') {
+        if(!Core.isSolved(Core.applySequence(input,moves)))throw new Error('解未通过独立贴纸引擎校验。');
+      }else {
+        let verify=cube;for(const move of moves)verify=applyCubie(verify,t.moves[MOVE_NAMES.indexOf(move)]);
+        if(!verify.cp.every((v,i)=>v===i)||!verify.ep.every((v,i)=>v===i)||verify.co.some(Boolean)||verify.eo.some(Boolean))throw new Error('解未通过 cubie 校验。');
+      }
+      stats.searchMs=now()-searchAt;stats.elapsedMs=now()-startedAt;stats.solutionLength=moves.length;
+      stats.optimal=true;stats.provedLowerBound=moves.length;stats.hashCollisions=tt?tt.collisions:0;stats.traceNodes=trace.shown;
+      lastRun={status:'solved',moves:moves.slice(),stats,samples:[]};
+      reporter.emit({type:'done',moves,path:moves,stats,nodes:stats.nodes},true);
+      return moves;
+    }catch(error) {
+      stats.searchMs=now()-searchAt;stats.elapsedMs=now()-startedAt;stats.traceNodes=trace.shown;
+      stats.hashCollisions=tt?tt.collisions:0;trace.flush(true);
+      lastRun={status:'error',error:error.message,code:error.code||'SOLVE_ERROR',stats,samples:[]};throw error;
+    }
+  }
+  // Fast strategy: first route through the phase-1 subgroup, then solve inside
+  // it. Its restricted distances NEVER enter the globally optimal heuristic.
+  const PHASE2_MOVES = [0,1,2,4,7,9,10,11,13,16];
+  let fastTables = null;
+  function buildFastTables(t, reporter) {
+    if (fastTables) return fastTables;
+    const corner = new Uint16Array(40320*10), edge = new Uint16Array(40320*10);
+    const middle = new Uint8Array(24*10), temp = new Uint8Array(8);
+    for (let c=0;c<40320;c++) {
+      const p=unrankPermutation(c,8);
+      for (let m=0;m<10;m++) {
+        const move=PHASE2_MOVES[m];
+        corner[c*10+m]=t.cornerMove[c*18+move];
+        for(let i=0;i<8;i++)temp[i]=p[t.moves[move].ep[i]];
+        edge[c*10+m]=rankPermutation(temp,8);
+      }
+      if((c&2047)===0)reporter.emit({type:'init',table:'phase-2 permutations',nodes:0},false);
+    }
+    for(let c=0;c<24;c++) {
+      const p=unrankPermutation(c,4);
+      for(let m=0;m<10;m++) {
+        const move=t.moves[PHASE2_MOVES[m]];
+        for(let i=0;i<4;i++)temp[i]=p[move.ep[i+8]-8];
+        middle[c*10+m]=rankPermutation(temp,4);
+      }
+    }
+    const progress=(done,total)=>reporter.emit({type:'init',table:'phase-2 distances',completed:done,total,nodes:0},false);
+    const cornerPrune=coordinateDistances(corner,40320,middle,24,10,0,0,progress);
+    const edgePrune=coordinateDistances(edge,40320,middle,24,10,0,0,progress);
+    fastTables={corner,edge,middle,cornerPrune,edgePrune};
+    fastTables.bytes=Object.values(fastTables).reduce((n,a)=>n+(a.byteLength||0),0);
+    reporter.emit({type:'init',table:'ready',nodes:0},true);
+    return fastTables;
+  }
+  function solveFast(state,options={}) {
+    lastRun=null;
+    const startedAt=now(),reporter=createReporter(options,startedAt);
+    const input=typeof state==='string'?state:Array.from(state||[]),cube=toCubie(input);
+    const t=buildTables(reporter),p2=buildFastTables(t,reporter),searchAt=now();
+    const maxDepth=32,path=new Int8Array(maxDepth+2),ids=new Float64Array(maxDepth+2),hs=new Uint8Array(maxDepth+2);
+    const stats={strategy:'fast',phase:1,nodes:0,visited:0,expanded:0,prunedNodes:0,duplicatePrunes:0,
+      iterations:0,bound:0,phase1Depth:0,phase2Depth:0,initMs:searchAt-startedAt,searchMs:0,
+      elapsedMs:0,solutionLength:0,optimal:false,provedLowerBound:null,tableBytes:t.bytes+p2.bytes,ttBytes:0,traceNodes:0,metric:'HTM'};
+    const trace=recorder(options,stats,path,ids,hs,maxDepth),FOUND=-1;
+    const children=Array.from({length:maxDepth+1},()=>Array.from({length:18},()=>new Int32Array(3)));
+    const orders=Array.from({length:maxDepth+1},()=>new Int8Array(18));
+    const values=Array.from({length:maxDepth+1},()=>new Uint8Array(18));
+    const childIds=Array.from({length:maxDepth+1},()=>new Float64Array(18));
+    let phase1Depth=0,solutionDepth=-1,lastReport=now();
+    function h1(a){return Math.max(t.twistSlicePrune[a[0]*495+a[2]],t.flipSlicePrune[a[1]*495+a[2]])}
+    function h2(a){return Math.max(p2.cornerPrune[a[0]*24+a[2]],p2.edgePrune[a[1]*24+a[2]])}
+    function dfs(a,g,remaining,previous,h,id,second) {
+      stats.visited++;ids[g]=id;hs[g]=h;trace.enter(g,h);trace.status(g,'active');
+      if((stats.visited&127)===0){
+        reporter.check();trace.pulse();trace.flush(false);
+        if(now()-lastReport>=80){lastReport=now();reporter.emit({type:'search',phase:second?2:1,
+          depth:stats.bound,stageDepth:second?stats.bound-phase1Depth:stats.bound,nodes:stats.nodes},false)}
+      }
+      if(h>remaining){stats.prunedNodes++;trace.status(g,'pruned-h');return 0}
+      const goal=second?a[0]===0&&a[1]===0&&a[2]===0:a[0]===0&&a[1]===0&&a[2]===SOLVED_SLICE;
+      if(goal){
+        if(second){solutionDepth=g;trace.solution(g)}
+        else{phase1Depth=g;trace.status(g,'subgroup')}
+        return FOUND;
+      }
+      if(remaining===0){stats.prunedNodes++;trace.status(g,'dead');return 0}
+      stats.expanded++;const order=orders[g],hvals=values[g];let count=0;
+      const width=second?10:18;
+      for(let m=0;m<width;m++) {
+        const globalMove=second?PHASE2_MOVES[m]:m,face=Math.floor(globalMove/3);
+        if(face===previous||(previous>=3&&face===previous-3))continue;
+        const c=children[g][m];
+        if(second){c[0]=p2.corner[a[0]*10+m];c[1]=p2.edge[a[1]*10+m];c[2]=p2.middle[a[2]*10+m]}
+        else{c[0]=t.twistMove[a[0]*18+m];c[1]=t.flipMove[a[1]*18+m];c[2]=t.sliceMove[a[2]*18+m]}
+        const estimate=second?h2(c):h1(c);hvals[m]=estimate;
+        path[g]=globalMove;ids[g+1]=childIds[g][m]=++stats.nodes;hs[g+1]=estimate;
+        trace.enter(g+1,estimate);
+        if(estimate>remaining-1){stats.prunedNodes++;trace.status(g+1,'pruned-h');continue}
+        trace.status(g+1,'queued');let j=count++;
+        while(j>0&&hvals[order[j-1]]>estimate){order[j]=order[j-1];j--}order[j]=m;
+      }
+      trace.status(g,'expanded');
+      for(let i=0;i<count;i++){
+        const m=order[i],move=second?PHASE2_MOVES[m]:m;path[g]=move;
+        if(dfs(children[g][m],g+1,remaining-1,Math.floor(move/3),hvals[m],childIds[g][m],second)===FOUND)return FOUND;
+      }
+      trace.status(g,'backtracked');return 0;
+    }
+    try {
+      const start=[twistIndex(cube.co),flipIndex(cube.eo),sliceIndex(cube.ep)],firstH=h1(start);
+      let firstFound=false;
+      // 12 and 18 are subgroup diameter bounds, not wall-clock budgets.
+      for(let bound=firstH;bound<=12;bound++) {
+        stats.bound=bound;stats.iterations++;trace.begin(bound);
+        reporter.emit({type:'search',phase:1,depth:bound,nodes:stats.nodes},true);
+        if(dfs(start,0,bound,-1,firstH,++stats.nodes,false)===FOUND){firstFound=true;break}
+        trace.flush(true);
+      }
+      if(!firstFound)throw Error('第一阶段未能到达目标子群。');
+      stats.phase1Depth=phase1Depth;
+      let subgroup=cube;
+      for(let i=0;i<phase1Depth;i++)subgroup=applyCubie(subgroup,t.moves[path[i]]);
+      if(twistIndex(subgroup.co)||flipIndex(subgroup.eo)||sliceIndex(subgroup.ep)!==SOLVED_SLICE)throw Error('第一阶段状态校验失败。');
+      const second=[rankPermutation(subgroup.cp,8),rankPermutation(subgroup.ep,8),rankPermutation(subgroup.ep.subarray(8,12),4,8)];
+      const secondH=h2(second);stats.phase=2;
+      for(let bound=secondH;bound<=18;bound++){
+        stats.bound=phase1Depth+bound;stats.iterations++;trace.begin(stats.bound);
+        // Keep the true prefix and its ids, so phase 2 attaches to the same tree.
+        reporter.emit({type:'search',phase:2,depth:stats.bound,stageDepth:bound,nodes:stats.nodes},true);
+        const id=phase1Depth?ids[phase1Depth]:++stats.nodes;
+        if(dfs(second,phase1Depth,bound,-1,secondH,id,true)===FOUND)break;
+        trace.flush(true);
+      }
+      if(solutionDepth<0)throw Error('第二阶段未能完成复原。');
+      // Do not simplify phase boundaries: the executed route must match the
+      // real search-tree edges exactly. This mode does not claim optimality.
+      const moves=Array.from(path.slice(0,solutionDepth),m=>MOVE_NAMES[m]);
+      if(typeof input!=='string'){
+        if(!Core.isSolved(Core.applySequence(input,moves)))throw Error('解未通过独立贴纸校验。');
+      }else{
+        let v=cube;for(const move of moves)v=applyCubie(v,t.moves[MOVE_NAMES.indexOf(move)]);
+        if(v.cp.some((x,i)=>x!==i)||v.ep.some((x,i)=>x!==i)||v.co.some(Boolean)||v.eo.some(Boolean))throw Error('解未通过 cubie 校验。');
+      }
+      stats.phase2Depth=solutionDepth-phase1Depth;stats.searchMs=now()-searchAt;
+      stats.elapsedMs=now()-startedAt;stats.solutionLength=moves.length;stats.traceNodes=trace.shown;
+      lastRun={status:'solved',moves:moves.slice(),stats,samples:[]};
+      reporter.emit({type:'done',moves,path:moves,stats,nodes:stats.nodes},true);return moves;
+    }catch(error){
+      stats.searchMs=now()-searchAt;stats.elapsedMs=now()-startedAt;stats.traceNodes=trace.shown;trace.flush(true);
+      lastRun={status:'error',error:error.message,code:error.code||'SOLVE_ERROR',stats,samples:[]};throw error;
+    }
+  }
+
+  const CubeSolver=Object.freeze({solve,solveFast,init,toCubie,
+    heuristic(state){const t=buildTables(createReporter({},now()));return boundFor(initialCoordinates(state).coords,t)},
+    inspect(state){const t=buildTables(createReporter({},now())),c=initialCoordinates(state).coords;return {coords:Array.from(c),h:boundFor(c,t),bytes:t.bytes}},
+    get initialized(){return !!tables},get lastRun(){return lastRun}
+  });
+  root.CubeSolver=CubeSolver;
+  if(typeof module!=='undefined'&&module.exports)module.exports=CubeSolver;
+})(typeof window!=='undefined'?window:globalThis);
+</script>
+<script id="worker-bootstrap" type="text/plain">
+self.onmessage=function(event){
+ const request=event.data;if(!request||request.type!=='solve')return;
+ const strategy=request.strategy==='fast'?'fast':'optimal';
+ const send=(type,payload)=>self.postMessage(Object.assign({type,id:request.id,revision:request.revision,strategy},payload));
+ try{
+  // No wall-clock deadline or default node budget; the main thread may
+  // terminate this Worker explicitly, without freezing the UI.
+  const options=Object.assign({},request.options||{},{onProgress:p=>send('progress',{progress:p})});
+  const moves=(strategy==='fast'?CubeSolver.solveFast:CubeSolver.solve)(request.state,options);
+  const run=CubeSolver.lastRun;
+  send('result',{moves,stats:run?run.stats:{}});
+ }catch(error){send('error',{message:error.message,code:error.code||'SOLVE_ERROR',stats:CubeSolver.lastRun?CubeSolver.lastRun.stats:null})}
+};
+</script>
+<script id="cube-random">
+/* The default generator below samples uniform legal states from Web Crypto.
+ * Seeded scramble walks are retained ONLY for compatibility with older links.
+ * These legacy walks are not uniform states of the entire cube group.
+ * xoshiro128** 1.1 by David Blackman & Sebastiano Vigna (public domain):
+ * https://prng.di.unimi.it/xoshiro128starstar.c
+ * Seeds come from Web Crypto. Bounded choices use rejection, never biased '%'.
+ */
+(function(root){
+'use strict';
+const C=root.CubeCore,faces=C.FACES;
+const colorKey=state=>String.fromCharCode(...state.map(v=>65+Math.floor(v/9)));
+function newSeed(){
+ if(!root.crypto||!root.crypto.getRandomValues)throw Error('当前浏览器没有安全随机源。');
+ const a=new Uint32Array(4);do{root.crypto.getRandomValues(a)}while(a.every(v=>v===0));
+ return Array.from(a,v=>v.toString(16).padStart(8,'0')).join('');
+}
+function generator(seed){
+ if(typeof seed!=='string'||!/^[a-f0-9]{32}$/i.test(seed)||/^0{32}$/.test(seed))throw Error('种子应为非零的 32 位十六进制字符串。');
+ const s=Uint32Array.from(seed.match(/.{8}/g),v=>parseInt(v,16));
+ const rotl=(x,k)=>(x<<k)|(x>>>(32-k));
+ const next=()=>{const result=Math.imul(rotl(Math.imul(s[1],5),7),9)>>>0,t=s[1]<<9;
+  s[2]^=s[0];s[3]^=s[1];s[1]^=s[2];s[0]^=s[3];s[2]^=t;s[3]=rotl(s[3],11);return result};
+ return {next,int(n){if(!Number.isInteger(n)||n<1||n>0x100000000)throw Error('Invalid random range.');
+  const limit=Math.floor(0x100000000/n)*n;let x;do{x=next()}while(x>=limit);return x%n}};
+}
+function scramble(seed=newSeed(),turns=10){
+ if(!Number.isInteger(turns)||turns<1||turns>30)throw Error('打乱长度应在 1–30 之间。');
+ const rng=generator(seed);
+ // Diffuse all 128 seed bits before choosing the first face, including for
+ // hand-entered related seeds. The generator itself stays the reference PRNG.
+ for(let warmup=0;warmup<32;warmup++)rng.next();
+ let state=C.solvedState();const moves=[],seen=new Set([colorKey(state)]);
+ for(let i=0;i<turns;i++){
+  const previous=moves.length?faces.indexOf(moves[moves.length-1][0]):-1;
+  const before=moves.length>1?faces.indexOf(moves[moves.length-2][0]):-1;
+  const allowed=faces.map((_,f)=>f).filter(f=>f!==previous&&!(before>=0&&before%3===previous%3&&f%3===previous%3));
+  let accepted=false;
+  for(let attempt=0;attempt<200;attempt++){
+   const f=allowed[rng.int(allowed.length)],move=faces[f]+['','2',"'"][rng.int(3)];
+   const next=C.apply(state,move),key=colorKey(next);
+   if(seen.has(key))continue;
+   seen.add(key);moves.push(move);state=next;accepted=true;break;
+  }
+  if(!accepted)throw Error('无法生成不重复的打乱路径，请重试。');
+ }
+ return {version:1,seed:seed.toLowerCase(),turns,moves,state,key:colorKey(state)};
+}
+// Each new sample reads Web Crypto directly. A browser promises cryptographic
+// randomness, not a physical/quantum true-random source. Under uniform source
+// words, rejection sampling + Fisher-Yates yields uniform legal cube states.
+function secureSource(){
+ if(!root.crypto||typeof root.crypto.getRandomValues!=='function')throw Error('当前浏览器没有 Web Crypto 安全随机源。');
+ const pool=new Uint32Array(64);let cursor=pool.length;
+ const next=()=>{if(cursor===pool.length){root.crypto.getRandomValues(pool);cursor=0}return pool[cursor++]};
+ return {int(n){
+  if(!Number.isInteger(n)||n<1||n>0x100000000)throw Error('Invalid random range.');
+  const limit=Math.floor(0x100000000/n)*n;let x;do{x=next()}while(x>=limit);return x%n;
+ }};
+}
+function uniformState(){
+ const rng=secureSource();
+ const perm=n=>{const a=Array.from({length:n},(_,i)=>i);for(let i=n-1;i>0;i--){const j=rng.int(i+1);[a[i],a[j]]=[a[j],a[i]]}return a};
+ const parity=a=>{let p=0;for(let i=0;i<a.length;i++)for(let j=i+1;j<a.length;j++)p^=a[i]>a[j]?1:0;return p};
+ const cp=perm(8),ep=perm(12),co=new Array(8),eo=new Array(12);
+ // A fixed transposition is a two-to-one map onto the required edge parity;
+ // unlike a heuristic "repair", it does NOT bias the distribution.
+ if(parity(cp)!==parity(ep))[ep[10],ep[11]]=[ep[11],ep[10]];
+ let twist=0,flip=0;
+ for(let i=0;i<7;i++){co[i]=rng.int(3);twist+=co[i]}co[7]=(3-twist%3)%3;
+ for(let i=0;i<11;i++){eo[i]=rng.int(2);flip^=eo[i]}eo[11]=flip;
+ const corners=[[8,9,20],[6,18,38],[0,36,47],[2,45,11],[29,26,15],[27,44,24],[33,53,42],[35,17,51]];
+ const edges=[[5,10],[7,19],[3,37],[1,46],[32,16],[28,25],[30,43],[34,52],[23,12],[21,41],[50,39],[48,14]];
+ const state=C.solvedState();
+ for(let p=0;p<8;p++)for(let k=0;k<3;k++)state[corners[p][(k+co[p])%3]]=corners[cp[p]][k];
+ for(let p=0;p<12;p++)for(let k=0;k<2;k++)state[edges[p][(k+eo[p])%2]]=edges[ep[p]][k];
+ // Do not reject repeats, the solved state, or difficult states: all are part
+ // of the distribution. No seed or short-walk history limits this sample.
+ return {version:2,kind:'uniform',source:'web-crypto',state,key:colorKey(state),cp,co,ep,eo};
+}
+function secureWalk(turns=10){
+ if(!Number.isInteger(turns)||turns<1||turns>30)throw Error('演示打乱长度应在 1–30 之间。');
+ const rng=secureSource(),moves=[];let state=C.solvedState(),previous=-1;
+ for(let i=0;i<turns;i++){
+  const allowed=faces.map((_,j)=>j).filter(j=>j!==previous);
+  const f=allowed[rng.int(allowed.length)],move=faces[f]+['','2',"'"][rng.int(3)];
+  state=C.apply(state,move);moves.push(move);previous=f;
+ }
+ return {version:2,kind:'walk',source:'web-crypto',turns,moves,state,key:colorKey(state)};
+}
+
+root.CubeRandom=Object.freeze({newSeed,generator,scramble,colorKey,uniformState,secureWalk,secureSource});
+if(typeof module!=='undefined'&&module.exports)module.exports=root.CubeRandom;
+})(typeof window!=='undefined'?window:globalThis);
+</script>
+<script id="cube-tree">
+/* Canvas projection of the solver's real parent-complete event stream.
+ * 'pruned-h' means f > contour, 'pruned-dup' means an exact-key, fully
+ * exhausted transposition. Queued/unvisited children are never called pruned.
+ * Display compaction affects only drawing, not the search or its proof.
+ */
+(function(root){'use strict';
+class SearchTree {
+ constructor(){this.reset()}
+ reset(){this.queue=[];this.cursor=0;this.nodes=new Map();this.root=0;this.current=0;
+  this.bound=0;this.activePath=new Set();this.solutionPath=[];this.solutionSet=new Set();
+  this.finished=false;this.proofAt=0;this.elapsed=0;this.credit=0;this.rate=.18;
+  this.shownTotal=0;this.omitted=0;this.hits=[];this.pendingResult=false;this.layoutDirty=true;this.view=[];this.layoutWidth=0;
+  this.latestNodes=0;this.hovered=null;this.pathIndex=new Map();this.eventIds=new Map();this.evicted=0;this.nodeLimit=3200;this.optimal=false;this.strategy='optimal';this.zoom=1;this.pan={x:0,y:0};this.drag=null;
+ }
+ append(events){
+  if(!Array.isArray(events))return;
+  this.queue.push(...events);
+  if(this.queue.length-this.cursor>14000){
+   // Recorder budgets normally keep us below this. Consume old actual events
+   // rather than silently discarding parent links when the consumer is slow.
+   this.consume(this.queue.length-this.cursor-10000);
+  }
+ }
+ result(stats){if(stats){this.optimal=!!stats.optimal;this.strategy=stats.strategy||this.strategy}this.pendingResult=true;this.rate=Math.max(.14,(this.queue.length-this.cursor)/3000)}
+ // Merge by the exact move prefix, not by a state hash. Thus branches
+ // previously shown stay visible across IDA contours and phase boundaries.
+ // Different paths to the same state remain distinct tree nodes.
+ evictLeaf(){
+  const protectedIds=new Set(this.eventIds.values());let chosen=null;
+  for(const n of this.nodes.values()){
+   if(n.parent&&n.children.length===0&&!protectedIds.has(n.id)&&!this.activePath.has(n.id)&&!this.solutionSet.has(n.id)){
+    if(!chosen||(n.seenAt||0)<(chosen.seenAt||0))chosen=n;
+   }
+  }
+  if(!chosen)return false;
+  const parent=this.nodes.get(chosen.parent);
+  if(parent){parent.children=parent.children.filter(id=>id!==chosen.id);parent.evicted=(parent.evicted||0)+1}
+  this.nodes.delete(chosen.id);this.pathIndex.delete(chosen.key);this.evicted++;return true;
+ }
+ apply(e){
+  if(e.op==='contour'||e.op==='window'){
+   this.current=this.root;this.bound=e.bound;this.eventIds.clear();
+   this.activePath.clear();this.solutionPath=[];this.solutionSet.clear();this.finished=false;
+   this.nodes.forEach(n=>{n.stale=true});this.layoutDirty=true;return;
+  }
+  if(e.op==='enter'){
+   if(this.eventIds.has(e.id))return;
+   const parentId=e.parent?this.eventIds.get(e.parent):0;
+   if(e.parent&&!parentId)return; // Never invent a parent edge.
+   const parent=this.nodes.get(parentId),key=parent?parent.key+'/'+e.move:'';
+   let n=this.nodes.get(this.pathIndex.get(key));
+   if(n){Object.assign(n,{h:e.h,bound:e.bound,phase:e.phase,strategy:e.strategy,status:'queued',stale:false,seenAt:this.elapsed})}
+   else{
+    if(this.nodes.size>=this.nodeLimit&&!this.evictLeaf())return;
+    n={...e,parent:parentId,key,children:[],status:'queued',stale:false,born:this.elapsed,seenAt:this.elapsed,
+       x:parent?parent.x:0,y:parent?parent.y:30,tx:0,ty:30};
+    this.nodes.set(n.id,n);this.pathIndex.set(key,n.id);
+    if(parent)parent.children.push(n.id);else this.root=n.id;
+    this.shownTotal++;
+   }
+   this.eventIds.set(e.id,n.id);this.layoutDirty=true;return;
+  }
+  if(e.op==='status'){
+   const n=this.nodes.get(this.eventIds.get(e.id));if(!n)return;
+   n.status=e.status;n.target=this.eventIds.get(e.target)||e.target||0;n.changed=this.elapsed;n.seenAt=this.elapsed;n.stale=false;
+   if(e.status==='active'||e.status==='expanded'){
+    this.current=n.id;this.activePath.clear();let p=n;
+    while(p){this.activePath.add(p.id);p=this.nodes.get(p.parent)}
+   }
+   this.layoutDirty=true;return;
+  }
+  if(e.op==='solution'){
+   const ids=e.ids.map(id=>this.eventIds.get(id));
+   if(ids.some(id=>!this.nodes.has(id)))return;
+   this.solutionPath=ids;this.solutionSet=new Set(ids);this.current=ids[ids.length-1];
+   this.optimal=e.optimal!==false;this.strategy=e.strategy||'optimal';
+   ids.forEach(id=>{const n=this.nodes.get(id);n.status='solution';n.stale=false});
+   this.activePath=new Set(ids);this.finished=true;this.proofAt=this.elapsed;this.layoutDirty=true;
+  }
+ }
+ consume(count){let n=0;while(this.cursor<this.queue.length&&n++<count)this.apply(this.queue[this.cursor++]);
+  if(this.cursor>7000){this.queue=this.queue.slice(this.cursor);this.cursor=0}
+ }
+ update(dt){
+  this.elapsed+=dt;let changed=false;
+  if(this.cursor<this.queue.length){this.credit+=dt*this.rate;const n=Math.floor(this.credit);
+   if(n){this.credit-=n;this.consume(Math.min(n,90));changed=true}}
+  return changed||this.elapsed-this.proofAt<1300;
+ }
+ skip(){this.consume(this.queue.length-this.cursor);this.proofAt=this.elapsed-1200}
+ get replaying(){return this.cursor<this.queue.length||this.finished&&this.elapsed-this.proofAt<1050}
+ get pathReady(){return this.finished&&!this.replaying}
+ nodePath(id){const result=[];let n=this.nodes.get(id);while(n&&n.parent){result.push(n.move);n=this.nodes.get(n.parent)}return result.reverse()}
+ layout(w,h){
+  if(!this.layoutDirty&&this.layoutWidth===w&&this.layoutHeight===h)return;
+  this.layoutWidth=w;this.layoutHeight=h;this.layoutDirty=false;
+  const rootNode=this.nodes.get(this.root);this.view=[];this.omitted=0;
+  if(!rootNode)return;
+  const visible=new Map(),limit=250;let leaves=0,maxDepth=1;
+  const walk=(n)=>{
+   if(visible.has(n.id))return;
+   visible.set(n.id,n);maxDepth=Math.max(maxDepth,n.g);
+   const all=n.children.map(id=>this.nodes.get(id)).filter(Boolean);
+   const kept=[],slots={dead:0,done:0,queued:0};
+   all.forEach(c=>{
+    const pinned=this.activePath.has(c.id)||this.solutionSet.has(c.id);
+    const type=c.status.startsWith('pruned')||c.status==='dead'?'dead':c.status==='backtracked'?'done':'queued';
+    const cap=type==='dead'?2:type==='done'?1:3;
+    if(pinned||slots[type]<cap&&visible.size+kept.length<limit){kept.push(c);slots[type]++}
+   });
+   kept.sort((a,b)=>a.id-b.id);n.visibleChildren=kept;n.hidden=all.length-kept.length+(n.evicted||0);this.omitted+=n.hidden;
+   if(!kept.length){n.leaf=leaves++;return}
+   kept.forEach(walk);n.leaf=kept.reduce((s,c)=>s+c.leaf,0)/kept.length;
+  };
+  walk(rootNode);
+  const margin=34,available=w-margin*2;
+  visible.forEach(n=>{
+   n.tx=leaves<=1?w/2:margin+n.leaf/(leaves-1)*available;
+   n.ty=37+n.g/Math.max(maxDepth,5)*(h-80);
+   if(!n.born||n.x===0){n.x=n.parent?this.nodes.get(n.parent).x:w/2;n.y=37}
+   this.view.push(n);
+  });
+ }
+ draw(ctx,w,h,miniCube,base,C,phase,playback){
+  this.layout(w,h);ctx.clearRect(0,0,w,h);this.hits=[];
+  if(!this.root){
+   ctx.beginPath();ctx.arc(w/2,45,9,0,Math.PI*2);ctx.fillStyle='#f7f4ed';ctx.fill();ctx.strokeStyle='#aaa396';ctx.lineWidth=1.8;ctx.stroke();
+   if(phase==='searching'){ctx.beginPath();ctx.arc(w/2,45,15,this.elapsed/320,this.elapsed/320+3.5);ctx.strokeStyle='#28766b';ctx.stroke()}
+   return;
+  }
+  const shown=new Set(this.view.map(n=>n.id));
+  const finished=this.finished,fade=finished?Math.min(1,(this.elapsed-this.proofAt)/850):0;
+  const progress=playback&&finished?playback:null,tracking=progress&&(phase==='playing'||phase==='paused'||progress.cursor>0);
+  const cursorId=tracking?this.solutionPath[Math.min(progress.cursor,this.solutionPath.length-1)]:this.current;
+  ctx.save();ctx.translate(w/2+this.pan.x,h/2+this.pan.y);ctx.scale(this.zoom,this.zoom);ctx.translate(-w/2,-h/2);
+  for(const n of this.view){n.x+=(n.tx-n.x)*.24;n.y+=(n.ty-n.y)*.24}
+  for(const n of this.view){
+   const p=this.nodes.get(n.parent);if(!p||!shown.has(p.id))continue;
+   const onPath=this.activePath.has(n.id)&&this.activePath.has(p.id);
+   const bad=n.status.startsWith('pruned')||n.status==='dead';
+   const alpha=onPath?1:finished?.54*(1-fade)+.34*fade:bad?.75-.39*Math.min(1,(this.elapsed-(n.changed||n.born))/360):.58;
+   ctx.globalAlpha=alpha;ctx.strokeStyle=onPath?'#28766b':'#a7a395';ctx.lineWidth=onPath?2.5:1.2;
+   // Node positions already ease out of their parent; connect to the same
+   // position so a growing edge never becomes detached from its endpoint.
+   const x=n.x,y=n.y;
+   ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.bezierCurveTo(p.x,(p.y+y)/2,x,(p.y+y)/2,x,y);ctx.stroke();
+   if(n.status==='pruned-dup'&&n.target&&shown.has(n.target)){
+    const target=this.nodes.get(n.target);ctx.setLineDash([3,4]);ctx.beginPath();ctx.moveTo(n.x,n.y);ctx.lineTo(target.x,target.y);ctx.stroke();ctx.setLineDash([]);
+   }
+  }
+  for(const n of this.view){
+   const current=n.id===cursorId,rootNode=n.id===this.root,onPath=this.activePath.has(n.id),goal=finished&&n.id===this.solutionPath[this.solutionPath.length-1];
+   const bad=n.status.startsWith('pruned')||n.status==='dead';
+   const radius=rootNode||current||goal?14:onPath?6:bad?3.2:4.4;
+   ctx.globalAlpha=onPath?1:finished?.46:bad?.88-.42*Math.min(1,(this.elapsed-(n.changed||n.born))/360):.72;
+   ctx.beginPath();ctx.arc(n.x,n.y,radius,0,Math.PI*2);ctx.fillStyle='#f7f4ed';ctx.fill();
+   ctx.strokeStyle=onPath?'#28766b':'#aaa396';ctx.lineWidth=current?2.5:onPath?2:1.2;ctx.stroke();
+   if(bad){ctx.beginPath();ctx.moveTo(n.x-2,n.y-2);ctx.lineTo(n.x+2,n.y+2);ctx.moveTo(n.x+2,n.y-2);ctx.lineTo(n.x-2,n.y+2);ctx.stroke()}
+   if(goal){ctx.beginPath();ctx.arc(n.x,n.y,radius+4,0,Math.PI*2);ctx.strokeStyle='#28766b77';ctx.lineWidth=1;ctx.stroke()}
+   if(n.hidden){ctx.beginPath();ctx.setLineDash([1,3]);ctx.arc(n.x,n.y,radius+4.5,0,Math.PI*2);ctx.strokeStyle='#aaa396';ctx.stroke();ctx.setLineDash([])}
+   if(rootNode||current||goal){
+    if(!n.facelets&&base)n.facelets=C.applySequence(base,this.nodePath(n.id));
+    if(n.facelets)miniCube(ctx,n.facelets,n.x,n.y,23);
+   }
+   if(onPath&&n.move&&(!finished||this.solutionSet.has(n.id))){
+    ctx.fillStyle='#3a675d';ctx.font='500 12px ui-monospace,monospace';ctx.textAlign='left';ctx.textBaseline='middle';
+    ctx.fillText(n.move.replace("'",'′'),n.x+radius+5,n.y-3);
+   }
+   this.hits.push({id:n.id,x:w/2+this.pan.x+(n.x-w/2)*this.zoom,y:h/2+this.pan.y+(n.y-h/2)*this.zoom,r:Math.max(6,radius*this.zoom)});
+  }
+  // Execution stays on the tree: a marker travels along the next real edge.
+  if(progress&&progress.t>0&&progress.cursor<this.solutionPath.length-1){
+   const a=this.nodes.get(this.solutionPath[progress.cursor]),b=this.nodes.get(this.solutionPath[progress.cursor+1]);
+   if(a&&b){const t=progress.t,u=1-t,mid=(a.y+b.y)/2,x=a.x+(b.x-a.x)*(3*t*t-2*t*t*t),y=u*u*u*a.y+3*u*t*mid+t*t*t*b.y;
+    ctx.globalAlpha=1;ctx.beginPath();ctx.arc(x,y,4.6,0,Math.PI*2);ctx.fillStyle='#28766b';ctx.fill();ctx.strokeStyle='#faf9f4';ctx.lineWidth=1.6;ctx.stroke();}
+  }
+  ctx.globalAlpha=1;ctx.restore();
+ }
+ hit(x,y){let chosen=null,dist=Infinity;for(const p of this.hits){const d=Math.hypot(x-p.x,y-p.y);if(d<p.r&&d<dist){chosen=this.nodes.get(p.id);dist=d}}return chosen}
+ describe(n){if(!n)return '实际搜索树的有界投影 · 灰叉：下界剪枝 · 绿线：当前分支 · 滚轮缩放、拖动平移';
+  const names={'pruned-h':'下界剪枝：f > 当前上限','pruned-dup':'完整状态一致，且已有预算更大的失败子树','queued':'已生成，尚未展开','expanded':'已展开','backtracked':'子树已搜索完，正在回溯','active':'当前 DFS 分支','solution':this.optimal?'已证明最短路径':'快速解路径（未证明最短）','subgroup':'已到达第一阶段的目标子群','dead':'预算用尽，尚未复原'};
+  return `${n.phase===1?'阶段 1 · ':n.phase===2?'阶段 2 · ':''}${n.move||'起点'} · g=${n.g}, h=${n.h}, f=${n.g+n.h}, 该轮上限=${n.bound} · ${names[n.status]||n.status}${n.stale?'（先前搜索记录）':''}${n.hidden?' · 已折叠 '+n.hidden+' 条真实分支':''}`;
+ }
+}
+root.CubeSearchTree=SearchTree;
+})(typeof window!=='undefined'?window:globalThis);
+</script>
+<script>
+
+(function(){
+'use strict';
+const C=window.CubeCore,G=window.CubeGestures,slots=C.SLOTS,$=id=>document.getElementById(id),TAU=2*Math.PI,HALF=Math.PI/2;
+const palette={U:'#fbb43a',R:'#164391',F:'#f98a2d',D:'#ffffff',L:'#2c674a',B:'#ed4527'},reference=["U'",'D','L',"F'"];
+const centers=[[46,92*Math.sqrt(3)/6],[0,-92*Math.sqrt(3)/3],[-46,92*Math.sqrt(3)/6]];
+const cube=$('cube'),orbit=$('orbit'),search=$('search'),cx=cube.getContext('2d'),gx=orbit.getContext('2d'),sx=search.getContext('2d');
+let cubeSize={w:500,h:400},graphSize={w:500,h:400},searchSize={w:1000,h:120},yaw=-Math.PI/4,pitch=.34;
+let state=C.applySequence(C.solvedState(),reference),revision=0,phase='idle',active=null,solution=null,job=null,worker=null,jobSequence=0;
+let selected=null,hover=null,cubeHits=[],graphHits=[],drag=null,held=null,lastTime=0,dirty=true,gap=0,executionLimit=Infinity;
+let traceBase=null,searchNodes=[],lastScramble=null,searchOptions={},strategy='fast';
+const tree=new window.CubeSearchTree();
+let lastStats=null,lastError='',searchHeight=120,workerBusy=false;
+const nice=m=>m.replace("'",'′'),ease=p=>(1-Math.cos(Math.PI*Math.max(0,Math.min(1,p))))/2,pose=()=>active?active.t:0;
+function graphPosition(slot){const a=slot.n.findIndex(v=>Math.abs(v)>.5),ij=[0,1,2].filter(k=>k!==a),i=ij[0],j=ij[1],A=centers[i],B=centers[j],r=95-20*slot.p[i],s=95-20*slot.p[j],dx=B[0]-A[0],dy=B[1]-A[1],d=Math.hypot(dx,dy),ux=dx/d,uy=dy/d,t=(d*d+r*r-s*s)/(2*d),h=Math.sqrt(Math.max(0,r*r-t*t)),sign=slot.n[a]*[-1,1,-1][a];return{x:A[0]+t*ux-sign*h*uy,y:A[1]+t*uy+sign*h*ux}}
+const graphSlots=slots.map(graphPosition),slotLookup=new Map(slots.map(s=>[s.p.join(',')+':'+s.n.join(','),s.id]));
+function moving(id){return active&&slots[id].p[active.desc.axis]===active.desc.layer&&active.perm[id]!==id}
+function animatedGraph(id,t){const s=slots[id];if(!active||s.p[active.desc.axis]!==active.desc.layer)return graphSlots[id];const d=active.desc;if(s.n[d.axis]!==0)return graphPosition({p:C.rotateVector(s.p,d.axis,d.angle*t),n:s.n});const a=graphSlots[id],b=graphSlots[active.perm[id]],center=centers[d.axis],radius=95-20*d.layer,from=Math.atan2(a.y-center[1],a.x-center[0]),to=Math.atan2(b.y-center[1],b.x-center[0]),dir=-Math.sign(d.angle);let delta=to-from;while(delta*dir<0)delta+=dir*TAU;return{x:center[0]+radius*Math.cos(from+delta*t),y:center[1]+radius*Math.sin(from+delta*t)}}
+const highlight=true;
+function rgbShade(hex,k){const n=parseInt(hex.slice(1),16);return'rgb('+[n>>16,(n>>8)&255,n&255].map(function(v){return Math.round(Math.min(255,v*k))}).join(',')+')'}
+function camera(v){const c=Math.cos(yaw),s=Math.sin(yaw),x=c*v[0]+s*v[2],z=-s*v[0]+c*v[2],cp=Math.cos(pitch),sp=Math.sin(pitch);return[x,cp*v[1]-sp*z,sp*v[1]+cp*z]}
+function transformed(v,turn){return turn?C.rotateVector(v,active.desc.axis,active.desc.angle*pose()):v}
+function add3(a,b,scale){return a.map(function(v,i){return v+scale*b[i]})}
+function roundedPath(ctx,points,round){ctx.beginPath();points.forEach(function(p,i){const prev=points[(i+points.length-1)%points.length],next=points[(i+1)%points.length],dp=Math.hypot(prev.x-p.x,prev.y-p.y),dn=Math.hypot(next.x-p.x,next.y-p.y),rp=Math.min(round,dp*.2),rn=Math.min(round,dn*.2),a={x:p.x+(prev.x-p.x)*rp/dp,y:p.y+(prev.y-p.y)*rp/dp},b={x:p.x+(next.x-p.x)*rn/dn,y:p.y+(next.y-p.y)*rn/dn};if(i===0)ctx.moveTo(a.x,a.y);else ctx.lineTo(a.x,a.y);ctx.quadraticCurveTo(p.x,p.y,b.x,b.y)});ctx.closePath()}
+function drawCube(){const w=cubeSize.w,h=cubeSize.h,scale=Math.min(w/5.7,h/5.3),ox=w/2,oy=h/2-5;cx.clearRect(0,0,w,h);cubeHits=[];const faces=[];const tracked=selected===null?hover:selected;
+ function project(v){const q=camera(v);return{x:ox+q[0]*scale,y:oy-q[1]*scale,z:q[2]}}
+ for(let x=-1;x<=1;x++)for(let y=-1;y<=1;y++)for(let z=-1;z<=1;z++){if(x===0&&y===0&&z===0)continue;const pos=[x,y,z],turn=!!active&&pos[active.desc.axis]===active.desc.layer;C.FACES.forEach(function(f){const b=C.FACE_DATA[f],n=transformed(b.n,turn),nc=camera(n);if(nc[2]<.015)return;const make=function(size,depth){return[[-1,1],[1,1],[1,-1],[-1,-1]].map(function(corner){let v=add3(pos,b.n,depth);v=add3(v,b.u,corner[0]*size);v=add3(v,b.v,corner[1]*size);return project(transformed(v,turn))})};const body=make(.488,.488),id=slotLookup.get(pos.join(',')+':'+b.n.join(',')),surface=pos.reduce(function(sum,v,i){return sum+v*b.n[i]},0)===1;faces.push({body:body,sticker:surface?make(.429,.495):null,id:surface?id:null,depth:body.reduce(function(s,v){return s+v.z},0)/4,light:.83+.22*Math.max(0,n[0]*.75+n[1]*.77+n[2]*.2)})})}
+ faces.sort(function(a,b){return a.depth-b.depth});faces.forEach(function(f){roundedPath(cx,f.body,1.2);cx.fillStyle=rgbShade('#f0f0e9',f.light+.035);cx.fill();cx.strokeStyle='#9b9e9533';cx.lineWidth=.8;cx.stroke();if(f.sticker){roundedPath(cx,f.sticker,3);cx.fillStyle=rgbShade(palette[slots[state[f.id]].face],f.light);cx.fill();cx.lineWidth=.8;cx.strokeStyle='#263a2e55';cx.stroke();if(state[f.id]===tracked){cx.lineWidth=3;cx.strokeStyle='#ffffff';cx.stroke();cx.lineWidth=1.4;cx.strokeStyle='#153c33';cx.stroke()}else if(highlight&&moving(f.id)){cx.lineWidth=1.6;cx.strokeStyle='#ffffffbb';cx.stroke()}cubeHits.push({poly:f.sticker,id:state[f.id]})}})
+}
+function drawGraph(){const w=graphSize.w,h=graphSize.h,scale=Math.min(w/378,h/373),ox=w/2,oy=h/2+9,t=pose(),tracked=selected===null?hover:selected;gx.clearRect(0,0,w,h);graphHits=[];gx.save();gx.translate(ox,oy);gx.scale(scale,scale);centers.forEach(function(c){[-1,0,1].forEach(function(v){gx.beginPath();gx.arc(c[0],c[1],95-20*v,0,TAU);gx.strokeStyle='#aaa396';gx.lineWidth=2.75;gx.stroke()})});if(active&&highlight){const d=active.desc,c=centers[d.axis],r=95-20*d.layer;gx.beginPath();gx.arc(c[0],c[1],r,0,TAU);gx.strokeStyle='#28766b20';gx.lineWidth=10;gx.stroke();gx.strokeStyle='#28766b';gx.lineWidth=2.7;gx.stroke();const a=-Math.PI/2+(-Math.sign(d.angle))*t*.55,sign=-Math.sign(d.angle),x=c[0]+r*Math.cos(a),y=c[1]+r*Math.sin(a);gx.save();gx.translate(x,y);gx.rotate(a+(sign>0?Math.PI/2:-Math.PI/2));gx.beginPath();gx.moveTo(6,0);gx.lineTo(-4,-4);gx.lineTo(-4,4);gx.closePath();gx.fillStyle='#28766b';gx.fill();gx.restore()}
+ if(tracked!==null&&active){const idx=state.indexOf(tracked);if(moving(idx)){gx.beginPath();for(let k=0;k<=35;k++){const p=animatedGraph(idx,t*k/35);if(k===0)gx.moveTo(p.x,p.y);else gx.lineTo(p.x,p.y)}gx.strokeStyle='#1f5049';gx.lineWidth=3;gx.stroke()}}
+ slots.forEach(function(s){const p=animatedGraph(s.id,t),id=state[s.id],isTracked=id===tracked;gx.beginPath();gx.arc(p.x,p.y,isTracked?10.5:8.25,0,TAU);gx.fillStyle=palette[slots[id].face];gx.fill();gx.strokeStyle=isTracked?'#143d34':(highlight&&moving(s.id)?'#28766b':'#3d4038');gx.lineWidth=isTracked?3.2:2.3;gx.stroke();if(isTracked){gx.beginPath();gx.arc(p.x,p.y,14,0,TAU);gx.strokeStyle='#28766b99';gx.lineWidth=1.5;gx.stroke()}graphHits.push({x:ox+p.x*scale,y:oy+p.y*scale,id:id,r:12*scale})});gx.restore()
+}
+
+function projectCube(v){const q=camera(v),scale=Math.min(cubeSize.w/5.7,cubeSize.h/5.3);return{x:cubeSize.w/2+q[0]*scale,y:cubeSize.h/2-5-q[1]*scale}}
+function grabPoint(slot,p){const scale=Math.min(cubeSize.w/5.7,cubeSize.h/5.3),X=(p.x-cubeSize.w/2)/scale,Y=-(p.y-cubeSize.h/2+5)/scale,cy=Math.cos(yaw),sy=Math.sin(yaw),cp=Math.cos(pitch),sp=Math.sin(pitch),right=[cy,0,sy],up=[sp*sy,cp,-sp*cy],forward=[-cp*sy,sp,cp*cy],base=right.map((v,i)=>v*X+up[i]*Y),n=slot.n,dot=(a,b)=>a.reduce((s,v,i)=>s+v*b[i],0),face=slot.p.map((v,i)=>v+.495*n[i]),z=(dot(face,n)-dot(base,n))/dot(forward,n);return base.map((v,i)=>v+z*forward[i])}
+function graphGeometry(){const scale=Math.min(graphSize.w/378,graphSize.h/373),origin={x:graphSize.w/2,y:graphSize.h/2+9};return{rings:G.orbitRings(centers,{scale:scale,origin:origin}),points:graphSlots.map(p=>({x:origin.x+p.x*scale,y:origin.y+p.y*scale}))}}
+function canvasResize(canvas,ctx,size){const dpr=Math.min(window.devicePixelRatio||1,2);canvas.width=Math.round(size.w*dpr);canvas.height=Math.round(size.h*dpr);ctx.setTransform(dpr,0,0,dpr,0,0)}
+function resize(){[[cube,cx],[orbit,gx]].forEach((item,i)=>{const r=item[0].getBoundingClientRect(),size={w:Math.max(1,r.width),h:Math.max(1,r.height)};canvasResize(item[0],item[1],size);if(i===0)cubeSize=size;else graphSize=size});resizeSearch();dirty=true}
+function resizeSearch(){const r=search.getBoundingClientRect();searchSize={w:Math.max(1,r.width),h:searchHeight};canvasResize(search,sx,searchSize);dirty=true}
+function statesAlong(base,moves){const result=[base.slice()];for(const move of moves)result.push(C.apply(result[result.length-1],move));return result}
+function miniCube(ctx,current,x,y,size){const iso=v=>({x:(v[0]-v[2])*.7071,y:-v[1]*.9428+(v[0]+v[2])*.2357}),scale=size/4.3;['U','F','R'].forEach(face=>{const f=C.FACE_DATA[face];slots.filter(s=>s.face===face).forEach(s=>{ctx.beginPath();[[-1,1],[1,1],[1,-1],[-1,-1]].forEach((corner,i)=>{const p=s.p.map((v,a)=>v+.5*f.n[a]+.465*corner[0]*f.u[a]+.465*corner[1]*f.v[a]),q=iso(p);if(i===0)ctx.moveTo(x+q.x*scale,y+q.y*scale);else ctx.lineTo(x+q.x*scale,y+q.y*scale)});ctx.closePath();ctx.fillStyle=palette[slots[current[s.id]].face];ctx.fill()})})}
+function drawSearch(now){
+ if($('search-wrap').hidden)return;
+ let depth=0;for(const n of tree.nodes.values())depth=Math.max(depth,n.g);
+ const target=Math.min(800,Math.max(searchSize.w<500?360:345,depth*22+82));
+ if(searchHeight!==target){searchHeight=target;search.style.height=target+'px';resizeSearch()}
+ const playback=solution?{cursor:solution.cursor,t:active&&active.kind==='solution'?pose():0}:null;
+ tree.draw(sx,searchSize.w,searchSize.h,miniCube,traceBase,C,phase,playback);searchNodes=[];
+}
+function render(now){drawCube();drawGraph();drawSearch(now||lastTime);dirty=false}
+function controls(){
+ const busy=phase==='searching',has=!!solution&&solution.moves.length>0,done=has&&solution.cursor===solution.moves.length;
+ const exact=strategy==='optimal';
+ $('solve').classList.toggle('working',busy);$('solve').classList.toggle('error',phase==='error');
+ const progress=job&&job.depth!==undefined?(exact?'≤'+job.depth+' 步':'阶段 '+job.stage):'初始化';
+ $('solve-label').textContent=busy?'停止 · '+progress:phase==='error'?'重试求解':phase==='stopped'?'重新搜索':solution?(solution.optimal?'最短 · ':'快速解 · ')+solution.moves.length+' 步':'开始求解';
+ $('solve').disabled=!!active&&active.kind!=='solution'||C.isSolved(state)&&!busy;
+ $('execute').disabled=!has||done||busy||!!active&&active.kind!=='solution';
+ $('execute-label').textContent=done?'✓':phase==='playing'?'暂停':phase==='paused'?'继续拧动':'按顺序拧过去';
+ $('execute-icon').innerHTML=phase==='playing'?'<path d="M8 5v14M16 5v14"/>':done?'<path d="m5 12 4 4L19 6"/>':'<path d="m8 5 11 7-11 7z"/>';
+ $('execute-icon').style.display=done?'none':'';
+ $('strategy-optimal').setAttribute('aria-pressed',String(exact));$('strategy-fast').setAttribute('aria-pressed',String(!exact));
+ if(busy)$('solve').title='不设时间或节点上限；点击停止，或按 Esc。';
+ else if(!solution&&phase!=='error')$('solve').title=exact?'证明 HTM 最短路径；均匀随机局面可能非常耗时。':'两阶段快速求解，不保证最短。';
+ $('live').textContent=busy?(exact?'正在证明最短解；不设超时':'正在两阶段求解；不设超时'):phase==='ready'?(solution&&solution.optimal?'已证明最短，可以执行':'已找到有效解，可以执行'):phase==='stopped'?'已停止搜索，保留已展示的树':phase==='error'?lastError:'';dirty=true;
+}
+function stopSearch(){if(phase!=='searching')return;terminateBusy();phase='stopped';tree.result();controls()}
+function setStrategy(value){
+ if(value!=='optimal'&&value!=='fast')throw Error('策略必须是 optimal 或 fast。');
+ if(strategy===value)return;
+ // Changing strategy never changes the committed cube. It invalidates only
+ // a stale job/route, so both algorithms can be compared on the same state.
+ invalidate();strategy=value;controls();
+}
+function terminateBusy(){if(worker&&workerBusy){worker.terminate();worker=null}workerBusy=false;job=null;jobSequence++}
+function invalidate(){terminateBusy();revision++;active=null;drag=null;solution=null;phase='idle';traceBase=null;tree.reset();lastError='';lastStats=null;$('search-wrap').hidden=true;controls()}
+function pauseAtCommitted(){if(active&&active.kind==='solution'){active=null;phase='paused';controls()}else if(phase==='playing'){phase='paused';controls()}}
+function motion(move,kind,from,to,duration){const d=C.descriptor(move);return{move:move,desc:d,perm:C.permutation(move),kind:kind,t:from,from:from,to:to,elapsed:0,duration:duration}}
+function externalTurn(move){invalidate();active=motion(C.normalizeMove(move),'edit',0,1,480);phase='editing';controls()}
+function commitMotion(){const completed=active;active=null;if(completed.to===1){state=C.apply(state,completed.move);revision++;if(completed.kind==='solution'&&solution)solution.cursor++}if(completed.kind==='solution'){gap=130;if(solution&&solution.cursor>=solution.moves.length){phase='ready';executionLimit=Infinity}else if(solution&&solution.cursor>=executionLimit){phase='paused';executionLimit=Infinity}}else phase='idle';controls()}
+function doScramble(input){
+ const opts=input&&typeof input==='object'?input:{};
+ try{
+  // The normal button is full-state sampling, regardless of solver strategy.
+  // Shift is an explicit short-walk teaching mode, NOT a biased "random state".
+  const result=opts.seed?window.CubeRandom.scramble(opts.seed,opts.turns||10)
+    :opts.shiftKey||opts.turns!==undefined?window.CubeRandom.secureWalk(opts.turns===undefined?10:opts.turns)
+    :window.CubeRandom.uniformState();
+  invalidate();state=result.state.slice();
+  lastScramble={kind:result.kind||'legacy-walk',source:result.source||'legacy-seed',version:result.version,
+    key:result.key,turns:result.turns,moves:result.moves?result.moves.slice():null,seed:result.seed};
+  selected=null;hover=null;
+  // New random samples are not restored from a fixed URL seed on reload.
+  try{const url=new URL(location.href);url.hash=opts.seed?'seed='+result.seed+'&turns='+result.turns+'&rng=1':'';history.replaceState(null,'',url)}catch(_){}
+  $('scramble').title=result.kind==='uniform'?'当前：全体合法局面均匀抽样。Shift+点击：10 步演示打乱。'
+    :'当前：短步演示打乱（不是全局均匀抽样）。普通点击：均匀随机局面。';
+  controls();return lastScramble;
+ }catch(e){failJob(e.message)}
+}
+function ensureWorker(){if(worker)return worker;const source=['cube-core','cube-solver','worker-bootstrap'].map(id=>$(id).textContent).join('\n;\n'),url=URL.createObjectURL(new Blob([source],{type:'text/javascript'})),created=new Worker(url);URL.revokeObjectURL(url);worker=created;created.onmessage=function(event){if(worker!==created)return;onWorkerMessage(event.data)};created.onerror=function(event){if(worker!==created)return;if(job)failJob(event.message||'求解未完成');created.terminate();worker=null;workerBusy=false};return created}
+function validJob(message){return job&&message.id===job.id&&message.revision===job.revision&&revision===job.revision&&phase==='searching'&&state.every((v,i)=>v===job.base[i])}
+function failJob(message){lastError=message;terminateBusy();phase='error';$('solve').title=message;tree.result();controls()}
+function onWorkerMessage(message){
+ if(!validJob(message))return;
+ if(message.type==='progress'){
+  const p=message.progress;
+  if(p.type==='tree'){tree.append(p.events);tree.latestNodes=p.nodes;dirty=true;}
+  if(p.type==='search'){job.depth=p.depth;job.stage=p.phase;tree.latestNodes=p.nodes;controls()}
+  search.title=p.type==='init'?'正在建立可复用的距离下界表':'真实搜索树的有界投影 · 已生成 '+(p.nodes||0)+' 个节点；可视动画与计算速度独立';return;
+ }
+ if(message.type==='error'){lastStats=message.stats;failJob(message.message);return;}
+ if(message.type==='result'){
+  const base=job.base.slice(),exact=job.strategy==='optimal';let moves;
+  try{moves=C.parse(message.moves);if(!message.stats||message.stats.strategy!==job.strategy||exact&&(!message.stats.optimal||message.stats.provedLowerBound!==moves.length)||!C.isSolved(C.applySequence(base,moves)))throw Error('解或证明状态未通过独立校验。')}
+  catch(e){failJob(e.message);return;}
+  job=null;workerBusy=false;lastStats=message.stats;
+  solution={base,moves,cursor:0,states:statesAlong(base,moves),optimal:exact,strategy};phase='ready';tree.result(lastStats);
+  $('solve').title=(exact?'已证明最短 · ':'有效解，未证明最短 · ')+moves.length+' HTM；搜索 '+Math.round(lastStats.searchMs)+' ms，生成 '+lastStats.nodes+' 个节点。';controls();
+ }
+}
+function startSolve(){
+ if(phase==='searching'){stopSearch();return}pauseAtCommitted();if(active)return;
+ if(C.isSolved(state)){controls();return}terminateBusy();solution=null;phase='searching';lastError='';
+ traceBase=state.slice();tree.reset();$('search-wrap').hidden=false;searchHeight=345;search.style.height=searchHeight+'px';resizeSearch();
+ job={id:++jobSequence,revision,base:state.slice(),strategy};controls();
+ try{workerBusy=true;ensureWorker().postMessage({type:'solve',id:job.id,revision:job.revision,state:job.base.slice(),strategy,options:searchOptions})}
+ catch(e){failJob('无法启动本地求解 Worker，请用浏览器打开完整 HTML。')}
+}
+function execute(){if(!solution||solution.cursor>=solution.moves.length)return;if(phase==='playing'){phase='paused';controls();return}if(active&&active.kind!=='solution')return;tree.skip();phase='playing';executionLimit=Infinity;gap=0;controls()}
+function singleStep(){if(!solution||solution.cursor>=solution.moves.length)return;tree.skip();phase='playing';executionLimit=solution.cursor+1;gap=0;controls()}
+function localPoint(canvas,e){const r=canvas.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top}}
+function inPoly(x,y,poly){let inside=false;for(let i=0,j=poly.length-1;i<poly.length;j=i++){const a=poly[i],b=poly[j];if((a.y>y)!==(b.y>y)&&x<(b.x-a.x)*(y-a.y)/(b.y-a.y)+a.x)inside=!inside}return inside}
+function cubeHit(p){for(let i=cubeHits.length-1;i>=0;i--)if(inPoly(p.x,p.y,cubeHits[i].poly))return cubeHits[i];return null}
+function graphHit(p){let result=null,dist=Infinity;graphHits.forEach(h=>{const d=Math.hypot(p.x-h.x,p.y-h.y);if(d<h.r&&d<dist){dist=d;result=h}});return result}
+function pointerDown(surface,e){if(e.button!==0&&e.button!==undefined)return;pauseAtCommitted();if(active&&active.kind!=='solution')return;render();const canvas=surface==='cube'?cube:orbit,p=localPoint(canvas,e),hit=surface==='cube'?cubeHit(p):graphHit(p),slot=hit?slots[state.indexOf(hit.id)]:null;drag={surface:surface,start:p,last:p,slot:slot,hit:hit,point:slot&&surface==='cube'?grabPoint(slot,p):null,lock:held?held.face:null,gesture:null,moved:false,viewOnly:!!e.altKey,angle:0};if(held)held.used=true;canvas.setPointerCapture(e.pointerId);dirty=true}
+function pointerMove(surface,e){const canvas=surface==='cube'?cube:orbit,p=localPoint(canvas,e);if(!drag||drag.surface!==surface){const hit=surface==='cube'?cubeHit(p):graphHit(p);hover=hit?hit.id:null;dirty=true;return}const total={x:p.x-drag.start.x,y:p.y-drag.start.y};if(Math.hypot(total.x,total.y)>5)drag.moved=true;if(surface==='cube'&&(drag.viewOnly||!drag.slot&&!drag.lock)){yaw+=(p.x-drag.last.x)*.007;pitch=Math.max(-1.25,Math.min(1.25,pitch+(p.y-drag.last.y)*.006));drag.last=p;dirty=true;return}if(!drag.gesture){let picked;if(surface==='cube'){let slot=drag.slot,point=drag.point;if(!slot&&drag.lock){slot=slots[C.FACES.indexOf(drag.lock)*9+4]||slots[4];point=slot.p.map((v,i)=>v+.495*slot.n[i]+.65*slot.u[i]+.65*slot.v[i])}picked=G.cubeDrag({slot:slot,point:point,drag:total,project:projectCube,lockedMove:drag.lock,allowMiddle:true,invert:!!e.shiftKey,core:C})}else{const geometry=graphGeometry();picked=G.orbitDrag({slot:drag.slot,point:drag.start,drag:total,rings:geometry.rings,points:geometry.points,lockedMove:drag.lock,allowMiddle:true,invert:!!e.shiftKey,core:C})}if(picked.status!=='ready')return;const pendingDrag=drag;invalidate();drag=pendingDrag;drag.gesture=picked.gesture;phase='editing'}const angle=G.dragAngle(drag.gesture,total,{project:projectCube,invert:!!e.shiftKey,core:C}),move=G.moveForTurn(drag.gesture.axis,drag.gesture.layer,Math.sign(angle)||1,C);drag.angle=angle;active=motion(move,'drag',Math.min(1,Math.abs(angle)/HALF),1,0);drag.last=p;controls()}
+function pointerUp(surface,e,cancel){if(!drag||drag.surface!==surface)return;if(drag.gesture&&active){const commit=!cancel&&Math.abs(drag.angle)>.20;active.kind='edit';active.from=active.t;active.to=commit?1:0;active.elapsed=0;active.duration=150+160*Math.abs(active.to-active.from);phase='editing'}else if(!drag.moved&&!cancel){const hit=drag.hit;selected=hit&&selected!==hit.id?hit.id:null}drag=null;controls()}
+[[cube,'cube'],[orbit,'orbit']].forEach(([canvas,surface])=>{canvas.addEventListener('pointerdown',e=>pointerDown(surface,e));canvas.addEventListener('pointermove',e=>pointerMove(surface,e));canvas.addEventListener('pointerup',e=>pointerUp(surface,e,false));canvas.addEventListener('pointercancel',e=>pointerUp(surface,e,true));canvas.addEventListener('pointerleave',()=>{if(!drag){hover=null;dirty=true}})});
+cube.addEventListener('dblclick',()=>{yaw=-Math.PI/4;pitch=.34;dirty=true});$('scramble').addEventListener('click',doScramble);$('solve').addEventListener('click',startSolve);$('execute').addEventListener('click',execute);
+document.addEventListener('keydown',e=>{if(e.target&&e.target.closest('.strategy')&&(e.code==='Space'||e.key==='Enter'))return;if(e.target&&['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)||e.ctrlKey||e.metaKey||e.altKey)return;if(/^[urfdlbmes]$/i.test(e.key)&&!e.repeat){held={face:e.key.toUpperCase(),used:false,invert:!!e.shiftKey};e.preventDefault()}else if(e.code==='Space'){e.preventDefault();execute()}else if(e.key==='ArrowRight'){e.preventDefault();singleStep()}else if(e.key==='Escape'){if(drag){pointerUp(drag.surface,e,true)}else if(phase==='searching')stopSearch();else if(phase==='playing'){phase='paused';controls()}else{selected=null;hover=null;dirty=true}}});
+document.addEventListener('keyup',e=>{if(!held||e.key.toUpperCase()!==held.face)return;const key=held;held=null;if(!key.used)externalTurn(key.face+(key.invert?"'":''))});window.addEventListener('blur',()=>{held=null;if(drag)pointerUp(drag.surface,{},true)});
+function frame(now){const dt=lastTime?Math.min(64,now-lastTime):0;lastTime=now;let changing=false;if(active&&active.kind!=='drag'&&(active.kind!=='solution'||phase==='playing')){active.elapsed+=dt;active.t=active.from+(active.to-active.from)*ease(active.elapsed/active.duration);changing=true;if(active.elapsed>=active.duration)commitMotion()}else if(!active&&phase==='playing'&&solution){gap-=dt;if(gap<=0&&solution.cursor<solution.moves.length){const move=solution.moves[solution.cursor];active=motion(move,'solution',0,1,move.endsWith('2')?840:600);controls()}}if(!$('search-wrap').hidden&&tree.update(dt))changing=true;if(phase==='searching')changing=true;if(changing||dirty)render(now);requestAnimationFrame(frame)}
+search.addEventListener('pointermove',e=>{
+ const p=localPoint(search,e);
+ if(tree.drag){tree.pan.x+=p.x-tree.drag.x;tree.pan.y+=p.y-tree.drag.y;tree.drag=p;dirty=true;return;}
+ search.title=tree.describe(tree.hit(p.x,p.y));
+});
+search.addEventListener('pointerdown',e=>{tree.drag=localPoint(search,e);search.setPointerCapture(e.pointerId)});
+search.addEventListener('pointerup',()=>{tree.drag=null});search.addEventListener('pointercancel',()=>{tree.drag=null});
+search.addEventListener('wheel',e=>{e.preventDefault();tree.zoom=Math.max(.5,Math.min(5,tree.zoom*Math.exp(-e.deltaY*.001)));dirty=true},{passive:false});
+search.addEventListener('dblclick',()=>{tree.zoom=1;tree.pan={x:0,y:0};dirty=true});
+$('strategy-optimal').addEventListener('click',()=>setStrategy('optimal'));$('strategy-fast').addEventListener('click',()=>setStrategy('fast'));
+window.CubeDemo={setStrategy,getStrategy:()=>strategy,stop:stopSearch,getState:()=>state.slice(),getStatus:()=>({phase:phase,strategy,revision:revision,job:job?{id:job.id,revision:job.revision}:null,solution:solution?{moves:solution.moves.slice(),cursor:solution.cursor,base:solution.base.slice(),optimal:solution.optimal,strategy:solution.strategy}:null,active:active?{move:active.move,kind:active.kind,t:active.t}:null,trace:{nodes:tree.nodes.size,queued:tree.queue.length-tree.cursor,finished:tree.finished,pathReady:tree.pathReady,bound:tree.bound,evicted:tree.evicted,zoom:tree.zoom},stats:lastStats,error:lastError}),getHits:()=>({cube:cubeHits.map(h=>({id:h.id,poly:h.poly})),orbit:graphHits.map(h=>Object.assign({},h))}),getView:()=>({yaw:yaw,pitch:pitch}),projectCube:projectCube,graphGeometry:graphGeometry,graphPosition:graphPosition,graphSlots:graphSlots,palette:palette,reference:reference,turn:externalTurn,scramble:doScramble,getScramble:()=>lastScramble?JSON.parse(JSON.stringify(lastScramble)):null,getTree:()=>Array.from(tree.nodes.values(),n=>({id:n.id,parent:n.parent,g:n.g,h:n.h,move:n.move,status:n.status,key:n.key,phase:n.phase,stale:!!n.stale})),setSearchOptions:o=>{searchOptions=Object.assign({},o)},setState:value=>{if(!value||value.length!==54||new Set(value).size!==54||Array.from(value).some(v=>!Number.isInteger(v)||v<0||v>53))throw Error('Invalid facelet permutation');invalidate();state=Array.from(value);controls()},solve:startSolve,execute:execute,singleStep:singleStep,cancel:invalidate,render:render,dispose:()=>{if(worker)worker.terminate()}};
+new ResizeObserver(resize).observe(document.querySelector('.views'));window.addEventListener('resize',resize);resize();controls();
+try{const p=new URLSearchParams(location.hash.slice(1));if(p.has('seed')&&(!p.has('rng')||p.get('rng')==='1'))doScramble({seed:p.get('seed'),turns:Number(p.get('turns')||10)})}catch(e){failJob(e.message)}
+render();requestAnimationFrame(frame);
+})();
+
+</script>
+</body>
+</html>
