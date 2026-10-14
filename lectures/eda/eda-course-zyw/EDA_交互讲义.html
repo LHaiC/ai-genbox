@@ -286,7 +286,7 @@ code{overflow-wrap:normal;word-break:normal}pre{font-size:var(--ui-size)}.code-b
 <p>课程列出的层次是 L1 → L2 → L3 → DRAM → 二级存储。时间局部性意味着最近访问的数据可能很快再次访问；空间局部性意味着邻近地址可能被访问。memory wall 讨论处理能力与供数能力不匹配带来的限制，而不是某一级容量单独不足。<a class="ref" data-at="_1" data-src="M" href="https://eda.youwei.xyz/lectures/memory-architecture/#_1">原 M·存储层次</a></p>
 <p>下面补充一个固定规则的组相联缓存：字节地址、write-free 读访问、LRU 替换。一个缓存块有 \(B\) 字节，\(S\) 个 set，每 set 有 \(A\) 路；容量是 \(BSA\)。</p>
 <div class="equation">\[b=\lfloor\mathrm{addr}/B\rfloor,\qquad \mathrm{set}=b\bmod S,\qquad \mathrm{tag}=\lfloor b/S\rfloor.\]</div>
-<p>每次访问先找 set，再在该 set 的所有有效路中比较 tag。容量足够并不意味着不会 miss：多个活跃块映射到同一个 set，可以互相替换。先运行“冲突”案例，增加路数，再比较相同总容量的不同组织。</p>
+<p>每次访问先找 set，再在该 set 的所有有效路中比较 tag。容量足够并不意味着不会 miss：多个活跃块映射到同一个 set，可以互相替换。先运行“冲突”案例，增加路数，再比较相同总容量的不同组织；实验 14 顶部把字节地址拆成 tag／set／offset，并列出每个 set 会收留哪些块。</p>
 </div>
 <figure class="lab" data-lab="cache" id="lab-cache"><figcaption><span>实验 14 · 补充实现</span><h4>跟着一串地址，追踪每次命中与替换</h4><p>可编辑地址流；展示 block / set / tag / offset 和 LRU 内容，支持完整回退。</p></figcaption><div class="lab-ui"></div></figure>
 <div class="prose">
@@ -1816,10 +1816,38 @@ window.COVERAGE=[{"source": "H", "slug": "home", "level": 1, "anchor": "design-a
     const cacheCases = { sequential: [0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 4, 5], conflict: [0, 16, 0, 16, 0, 16, 0, 16], reuse: [0, 8, 0, 16, 8, 0, 16, 8, 0] };
     function initCache() {
         const controls = select('cache-case', '地址序列', [['sequential', '空间局部性'], ['conflict', '同组冲突'], ['reuse', 'LRU 复用次序']], 'sequential') + select('cache-sets', '组数 S', [['1', '1'], ['2', '2'], ['4', '4'], ['8', '8']], '4') + select('cache-ways', '每组路数 W', [['1', '1（直接映射）'], ['2', '2'], ['4', '4']], '1') + select('cache-block', '块字节数 B', [['4', '4 B'], ['8', '8 B'], ['16', '16 B']], '4') + `<div class="control wide-control"><label for="cache-addresses">字节地址（十进制整数，以逗号或空格分隔，最多 128 个）</label><textarea id="cache-addresses" rows="2" data-param>${cacheCases.sequential.join(', ')}</textarea></div>`;
+        /* Physical address -> (tag, set, offset) encoding, and which blocks share one set. */
+        function cacheMapFigure(r, s) { const o = r.options, step = s.index >= 0 ? s : null, addr = step ? step.address : (r.addresses[0] ?? 0);
+            const offsetBits = Math.max(1, Math.round(Math.log2(o.block))), setBits = Math.max(0, Math.round(Math.log2(o.sets))), tagBits = Math.max(1, addr.toString(2).length - offsetBits - setBits), digits = addr.toString(2).padStart(tagBits + setBits + offsetBits, '0'), pitch = 30, cell = 26, x0 = 16, y0 = 30;
+            const groups = [['tag', tagBits, 'var(--accent-soft)'], ['set', setBits, 'var(--orange-soft)'], ['offset', offsetBits, 'var(--panel)']];
+            let inner = '', x = x0, read = 0;
+            for (const [name, n, fill] of groups) { const part = digits.slice(read, read + n);
+                read += n;
+                if (!n)
+                    continue;
+                const w = n * pitch - 4;
+                inner += `<rect x="${x}" y="${y0}" width="${w}" height="${cell + 8}" rx="4" fill="${fill}" stroke="var(--line)"/>`;
+                for (let b = 0; b < n; b++)
+                    inner += text(x + b * pitch + cell / 2, y0 + cell - 1, part[b], 'small-label');
+                if (w >= 24)
+                    inner += text(x + w / 2, y0 - 8, name, 'small-label');
+                x += w + 8; }
+            inner += text(x + 8, y0 + cell / 2 + 4, `← 字节地址 ${addr}`, 'label', 'start');
+            const rowH = 28, top = y0 + cell + 34, chipW = 68, chipPitch = 74, chipX = x0 + 72;
+            for (let k = 0; k < o.sets; k++) { const yy = top + k * rowH, on = step && step.set === k;
+                if (on)
+                    inner += `<rect x="${x0 - 4}" y="${yy - 16}" width="528" height="${rowH - 6}" rx="4" fill="var(--accent-soft)" opacity=".6"/>`;
+                inner += text(x0, yy + 1, 'set ' + k, 'label', 'start');
+                for (let j = 0; j < 3; j++) { const b = k + j * o.sets, bx = chipX + j * chipPitch, active = step && step.blockNumber === b;
+                    inner += `<rect x="${bx}" y="${yy - 15}" width="${chipW}" height="22" rx="3" fill="${active ? 'var(--accent)' : 'var(--paper)'}" stroke="${active ? 'var(--accent)' : 'var(--line)'}"/>` + text(bx + chipW / 2, yy + 1, '块 ' + b, 'small-label', 'middle', active ? 'fill="#fff"' : ''); }
+                inner += text(chipX + 3 * chipPitch + 4, yy + 1, `… 只留 ${o.ways} 路`, 'small-label', 'start'); }
+            return svg(inner, 560, top + o.sets * rowH + 8, '物理地址如何拆成 tag、set、offset，以及哪些块映射到同一个 set'); }
         const api = player('cache', controls, () => { const raw = str('cache-addresses').trim(), addresses = raw ? raw.split(/[\s,，]+/).map(x => /^\d+$/.test(x) ? Number(x) : NaN) : []; if (addresses.length > 128)
             throw new Error('地址序列超过 128 项'); const options = { sets: val('cache-sets'), ways: val('cache-ways'), block: val('cache-block') }; return { ...E.cacheTrace(addresses, options), options, addresses }; }, (s, i, t, r) => {
             const grid = table(['组', ...E.range(r.options.ways).map(w => 'way ' + w)], s.lines.map((set, k) => row([k, ...set.map((x, w) => x ? `<div class="cache-line ${s.set === k && s.way === w ? 'active' : ''}"><b>tag ${x.tag}</b><small>block ${x.block} · 最近访问 #${x.used + 1}</small></div>` : '<span class="muted">invalid</span>')], s.set === k ? 'selected-row' : '')));
-            return `<div class="metrics">${metric('已处理访问', i)}${metric('命中 / 未命中', s.hits + ' / ' + s.misses)}${metric('当前未命中率', i ? fmt(s.misses / i * 100, 1) + '%' : '—')}${metric('数据容量', r.options.sets * r.options.ways * r.options.block, 'bytes（不含元数据）')}</div>${grid}${s.index >= 0 ? `<div class="address-fields"><span>地址 <b>${s.address}</b></span><span>block <b>${s.blockNumber}</b></span><span>tag <b>${s.tag}</b></span><span>set <b>${s.set}</b></span><span>offset <b>${s.offset}</b></span></div>` : ''}${status(s.index >= 0 ? (s.hit ? 'HIT · ' : 'MISS · ') + s.message : s.message, s.index >= 0 && !s.hit ? 'warn' : '')}<div class="address-stream">${r.addresses.map((a, k) => `<button data-address-step="${k + 1}" class="${k === s.index ? 'active' : ''}" aria-label="跳转到第 ${k + 1} 次访问，地址 ${a}">${a}</button>`).join('')}</div><p class="lab-note">这是冷启动、按读取访问分配的组相联 LRU 缓存。增加路数而不减少组数也会增加容量；讨论相联度时应控制总容量。LRU 按最近访问时间戳选择，不用随机替换。</p>`;
+            const shown = s.index >= 0 ? s.address : (r.addresses[0] ?? 0), blockOf = Math.floor(shown / r.options.block), encBits = { off: Math.round(Math.log2(r.options.block)), set: Math.max(0, Math.round(Math.log2(r.options.sets))) };
+            const enc = `${cacheMapFigure(r, s)}<p class="lab-note">${s.index >= 0 ? '当前地址' : '首个地址'} ${shown} 的编码：b=⌊${shown}/${r.options.block}⌋=${blockOf}，set=b mod ${r.options.sets}=${blockOf % r.options.sets}，tag=⌊b/${r.options.sets}⌋=${Math.floor(blockOf / r.options.sets)}，offset=${shown} mod ${r.options.block}=${shown % r.options.block}。这里 B 与 S 都是 2 的幂，所以等价于地址位切片：低 ${encBits.off} 位是块内偏移，接着 ${encBits.set} 位选 set，其余高位是 tag。图中每行列出会落入同一个 set 的块（它们相差 S 个块），而该 set 只有 ${r.options.ways} 路，装不下的就会被替换。</p>`;
+            return `<div class="metrics">${metric('已处理访问', i)}${metric('命中 / 未命中', s.hits + ' / ' + s.misses)}${metric('当前未命中率', i ? fmt(s.misses / i * 100, 1) + '%' : '—')}${metric('数据容量', r.options.sets * r.options.ways * r.options.block, 'bytes（不含元数据）')}</div>${enc}${grid}${s.index >= 0 ? `<div class="address-fields"><span>地址 <b>${s.address}</b></span><span>block <b>${s.blockNumber}</b></span><span>tag <b>${s.tag}</b></span><span>set <b>${s.set}</b></span><span>offset <b>${s.offset}</b></span></div>` : ''}${status(s.index >= 0 ? (s.hit ? 'HIT · ' : 'MISS · ') + s.message : s.message, s.index >= 0 && !s.hit ? 'warn' : '')}<div class="address-stream">${r.addresses.map((a, k) => `<button data-address-step="${k + 1}" class="${k === s.index ? 'active' : ''}" aria-label="跳转到第 ${k + 1} 次访问，地址 ${a}">${a}</button>`).join('')}</div><p class="lab-note">这是冷启动、按读取访问分配的组相联 LRU 缓存。增加路数而不减少组数也会增加容量；讨论相联度时应控制总容量。LRU 按最近访问时间戳选择，不用随机替换。</p>`;
         }, { bind: false, note: '回退恢复所有缓存行、valid/tag 与最近访问时间；空地址序列合法。无效输入会明确报错，并保留上一次有效状态。' });
         api.el.addEventListener('input', e => { if (e.target.id === 'cache-case')
             $('#cache-addresses').value = cacheCases[str('cache-case')].join(', '); if (e.target.matches('[data-param]'))

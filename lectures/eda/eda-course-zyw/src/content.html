@@ -178,7 +178,7 @@
 <p>课程列出的层次是 L1 → L2 → L3 → DRAM → 二级存储。时间局部性意味着最近访问的数据可能很快再次访问；空间局部性意味着邻近地址可能被访问。memory wall 讨论处理能力与供数能力不匹配带来的限制，而不是某一级容量单独不足。<a class="ref" data-at="_1" data-src="M" href="https://eda.youwei.xyz/lectures/memory-architecture/#_1">原 M·存储层次</a></p>
 <p>下面补充一个固定规则的组相联缓存：字节地址、write-free 读访问、LRU 替换。一个缓存块有 \(B\) 字节，\(S\) 个 set，每 set 有 \(A\) 路；容量是 \(BSA\)。</p>
 <div class="equation">\[b=\lfloor\mathrm{addr}/B\rfloor,\qquad \mathrm{set}=b\bmod S,\qquad \mathrm{tag}=\lfloor b/S\rfloor.\]</div>
-<p>每次访问先找 set，再在该 set 的所有有效路中比较 tag。容量足够并不意味着不会 miss：多个活跃块映射到同一个 set，可以互相替换。先运行“冲突”案例，增加路数，再比较相同总容量的不同组织。</p>
+<p>每次访问先找 set，再在该 set 的所有有效路中比较 tag。容量足够并不意味着不会 miss：多个活跃块映射到同一个 set，可以互相替换。先运行“冲突”案例，增加路数，再比较相同总容量的不同组织；实验 14 顶部把字节地址拆成 tag／set／offset，并列出每个 set 会收留哪些块。</p>
 </div>
 <figure class="lab" data-lab="cache" id="lab-cache"><figcaption><span>实验 14 · 补充实现</span><h4>跟着一串地址，追踪每次命中与替换</h4><p>可编辑地址流；展示 block / set / tag / offset 和 LRU 内容，支持完整回退。</p></figcaption><div class="lab-ui"></div></figure>
 <div class="prose">
