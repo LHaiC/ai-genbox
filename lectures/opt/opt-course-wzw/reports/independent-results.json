@@ -1,0 +1,139 @@
+{
+  "suite": "independent external-library cross-check",
+  "timestamp": "2026-10-14T09:38:31.171599+00:00",
+  "python": "3.13.5",
+  "numpy": "2.3.5",
+  "scipy": "1.17.0",
+  "tests": 5,
+  "passed": 5,
+  "failed": 0,
+  "results": [
+    {
+      "name": "Independent nuclear norm prox via NumPy SVD",
+      "status": "pass",
+      "seconds": 0.0009474359999330773,
+      "details": {
+        "cases": 30,
+        "max_frobenius_error": 2.1511130683051933e-15,
+        "oracle": "numpy.linalg.svd"
+      }
+    },
+    {
+      "name": "Independent symmetric spectrum via LAPACK",
+      "status": "pass",
+      "seconds": 0.0002962460002891021,
+      "details": {
+        "cases": 30,
+        "max_eigenvalue_error": 4.440892098500626e-16,
+        "oracle": "numpy.linalg.eigvalsh"
+      }
+    },
+    {
+      "name": "Independent LASSO via epigraph constrained optimization",
+      "status": "pass",
+      "seconds": 0.01444433000006029,
+      "details": {
+        "cases": 15,
+        "max_solution_distance": 7.901290161034964e-07,
+        "oracle": "SciPy SLSQP epigraph QP",
+        "records": [
+          {
+            "lambda": 0,
+            "error": 1.2412670766236366e-16,
+            "iterations": 4
+          },
+          {
+            "lambda": 0.05,
+            "error": 7.901290161034964e-07,
+            "iterations": 12
+          },
+          {
+            "lambda": 0.45,
+            "error": 1.5205075106402016e-16,
+            "iterations": 6
+          },
+          {
+            "lambda": 1,
+            "error": 2.0193642271105617e-16,
+            "iterations": 5
+          },
+          {
+            "lambda": 2.5,
+            "error": 2.7946188401800283e-14,
+            "iterations": 7
+          },
+          {
+            "lambda": 0,
+            "error": 7.780750296361793e-07,
+            "iterations": 5
+          },
+          {
+            "lambda": 0.05,
+            "error": 4.264881373559276e-07,
+            "iterations": 11
+          },
+          {
+            "lambda": 0.45,
+            "error": 2.444548743364042e-09,
+            "iterations": 8
+          },
+          {
+            "lambda": 1,
+            "error": 1.2766961211560852e-15,
+            "iterations": 6
+          },
+          {
+            "lambda": 2.5,
+            "error": 2.589462819655575e-15,
+            "iterations": 2
+          },
+          {
+            "lambda": 0,
+            "error": 3.636721891222372e-15,
+            "iterations": 4
+          },
+          {
+            "lambda": 0.05,
+            "error": 5.643677091219929e-10,
+            "iterations": 8
+          },
+          {
+            "lambda": 0.45,
+            "error": 4.953394839502366e-09,
+            "iterations": 6
+          },
+          {
+            "lambda": 1,
+            "error": 9.183239437835843e-08,
+            "iterations": 5
+          },
+          {
+            "lambda": 2.5,
+            "error": 1.0443579341972549e-10,
+            "iterations": 6
+          }
+        ]
+      }
+    },
+    {
+      "name": "Independent global trust-region objective via angular minimization",
+      "status": "pass",
+      "seconds": 0.4517445870001211,
+      "details": {
+        "cases": 16,
+        "max_objective_difference": 2.1316282072803006e-14,
+        "oracle": "SciPy scalar boundary minimization on 72 intervals + independent interior solve"
+      }
+    },
+    {
+      "name": "Source bytes, physical PDF page counts and complete page index",
+      "status": "pass",
+      "seconds": 0.19818916999975045,
+      "details": {
+        "sha256_verified_files": 65,
+        "verified_pdf_pages": 1990,
+        "all_pdf_pages_indexed": true
+      }
+    }
+  ]
+}

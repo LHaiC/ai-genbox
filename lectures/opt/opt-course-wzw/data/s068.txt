@@ -1,0 +1,564 @@
+Publications
+Zaiwen Wen
+Home
+Research
+Service
+Research
+Publications
+Recognition
+Recent Talks
+Seminars
+Group
+Optbook
+Databook
+Mathematical
+Formalization
+Workstation
+Guidance
+Software
+ReasLab
+OptSuite
+SSNCVX
+ReasBook
+ReasAtlas
+Teaching
+Optimization
+Methods
+(2026 Fall)
+Algorithms for
+Big Data
+Analysis
+(2026 Spring)
+Publications
+Books
+刘浩洋, 户将, 李勇锋，文再文，最优化：建模、算法与理论, 书号978-7-04-055035-1
+H. Liu, J. Hu, Y. Li,
+Z. Wen
+, Optimization: Modeling, Algorithm and Theory (in Chinese)
+刘浩洋, 户将, 李勇锋，文再文，最优化计算方法，书号978-7-04-055841-8
+H. Liu, J. Hu, Y. Li,
+Z. Wen
+, Computational Methods For Optimization (in Chinese)
+文再文，袁亚湘，最优化方法与理论，书号978-7-04-062561-5
+Z. Wen
+, Y. Yuan, Optimization Methods and Theory (in Chinese)
+Review papers
+K. Deng, R. Wang, Z. Zhu, J. Zhang,
+Z. Wen
+, Augmented Lagrangian Methods: A Survey of Recent Advances, SIAM Review,
+(paper)
+李晨毅，文再文, 基于Lean 的数学形式化简介,
+(paper)
+X. Liu,
+Z. Wen
+, Y. Yuan, Subspace Methods for Nonlinear Optimization, CSIAM Transactions on Applied Mathematics
+(paper)
+潘少华, 文再文, 低秩稀疏矩阵优化问题的模型与算法, 运筹学学报
+(paper)
+S. Pan,
+Z. Wen
+, Models and Algorithms for Low-rank and Sparse Matrix Optimization Problems (in Chinese), Operations Research Transactions
+(paper)
+J. Hu, X. Liu,
+Z. Wen
+, Y. Yuan, A Brief Introduction to Manifold Optimization,  Journal of Operations Research Society of China,
+(paper)
+王奇超，文再文，蓝光辉，袁亚湘, 优化算法复杂度分析, 中国科学：数学
+(paper)
+Q. Wang,
+Z. Wen
+, G. Lan, Y. Yuan, Complexity Analysis For Optimization Methods (in Chinese), SCIENTIA SINICA Mathematica,
+(paper)
+Selected papers
+W. Long, Y. Zhang, C. Li, L. Zhou, C. Sun,
+Z. Wen
+, CAM-Bench: A Benchmark for Computational and Applied Mathematics in Lean
+W. Ma, Z. Wang,
+Z. Wen
+, A Unified Framework for Formalizing Matrix Decomposition Proofs,
+(paper)
+B. Liu, J. Cao, W. Yin,
+Z. Wen
+, Restarted Reflected Halpern Acceleration for Augmented Primal-Dual Methods,
+(paper)
+Z. Wang, Y. Fu, Z. Wang, K. Yuan,
+Z. Wen
+, The Future Is the Test: Library Abstractions for Mathematics Not Yet Written
+Q. Dai, C. Li, Y. Liu, J. Zhang,
+Z. Wen
+, Accelerated Composite Optimization under Gradient-Dependent Curvature
+Z. Wang, Q. Dai, C. Li,
+Z. Wen
+, Beyond Formal Correctness: Structure-Aware Evaluation of Informal–Formal Proof Correspondence
+C. Li,
+Z. Wen
+, ReasAtlas: Shared Expositions as a Representation for Mathematical Knowledge
+S. Miao, F. Wang, W. Long, C. Li, K. Yuan,
+Z. Wen
+, PACE: Research Proving Agent for Adaptive Conjecture Exploration
+W. Ma, Z. Wang, Z. Wang,
+Z. Wen
+, LIFT: Library Integration of Formalized Theorems for Reusable Mathematical Knowledge
+B. Liu, Z. Wang,
+Z. Wen
+, L. Zhang, Y. Yuan, A counterexample to global convergence of classical DFP under the standard strong Wolfe conditions,
+(paper)
+B. Liu, K. Deng, Z. Wang,
+Z. Wen
+, A Fixed-Penalty Linearized Augmented Lagrangian Method with Classical Multiplier Updates,
+(paper)
+W. Long, Y. Zhang, C. Li,
+Z. Wen
+, MECA: A Mechanism-Centered Agent for Constructing Well-Specified and Valuable Mathematical Conjectures,
+(paper)
+S. Zhu, R. Hu, M. Wang, M. Sun, X. Wang, K. Yuan,
+Z. Wen
+, Accelerating LLM Pre-training through Flat-Direction Dynamics Enhancement, NeurIPS, 2026
+Z. Wang, Q. Dai, Y. Wu,
+Z. Wen
+, FaithSieve: Fine-Grained Evaluation of Math Proofs with Faithful Formal Evidence, NeurIPS, 2026
+Y. Zhang, J. Hu, Z. Lai, L. Lin,
+Z. Wen
+, Retraction-Free Optimization over the Stiefel Manifold for the LoRA Fine-Tuning, IEEE Transactions on Pattern Analysis and Machine Intelligence, 2026
+Y. Pan, H. Zou, R. Zhou, T. Li,
+Z. Wen
+, Learning the Quadratic Assignment Problem with Warm-Started MCMC Finetuning and Cross-Graph Attention,
+(paper)
+Y. Liu, Q. Dai, J. Zhang,
+Z. Wen
+, Non-Asymptotic Global Convergence of PPO-Clip,
+(paper)
+C. Li, Z. Lai, D. An, J. Hu,
+Z. Wen
+, A Human-AI Collaborative Workflow for Mathematical Discovery: A Case Study in Grover-Compatible Riemannian Optimization, Journal of Scientific Computing,
+(paper)
+Z. Lai, D. An, J. Hu,
+Z. Wen
+, A Grover-compatible manifold optimization algorithm for quantum search, SIAM Journal on Scientific Computing,
+(paper)
+Z. Li, H. Lu, T. Wei, W. Liu, Y. Chen, Y. Lan, F. Zhang,
+Z. Wen
+, Constructing Industrial-Scale Optimization Modeling Benchmark, ICML 2026,
+(paper)
+H. Lu, Z. Li, Y. Chen, Y. Lan, F. Zhang,
+Z. Wen
+, PEARL: Interactive Optimization Modeling with Tool-Integrated Agentic Reinforcement Learning, NeurIPS 2026
+B. Yang, Y. Yuan, C. Li, Z. Wang, L. Li, B. Zhang, Z. Li,
+Z. Wen
+, Construction-Verification: A Benchmark for Formalizing Applied Mathematics in Lean 4,
+(paper)
+C. Li, Y. Nie, Z. Ming, G. Zhang, K. Yuan,
+Z. Wen
+, OptProver: Bridging Olympiad and Optimization through Continual Training in Formal Theorem Proving, ICML 2026,
+(paper)
+S. Miao, Z. Wang, A. Dong, Y. Wu, W. Zhang,
+Z. Wen
+, Directed Multi-Relational GCNs for Premise Selection
+X. Huang, Y. Jiang, Z. Luo, W. Chen, J. Wan, X. Wang,
+Z. Wen
+, Optimization Modular Modeling for Statistical Learning
+Z. Wang, W. Ma, Z. Ming, G. Zhang, K. Yuan,
+Z. Wen
+, M2F: Automated Formalization of Mathematical Literature at Scale,
+(paper)
+R. Zhou, H. Zou, L. Zhou, C. Sun,
+Z. Wen
+, Reinforcement Learning for Heterogeneous DAG Scheduling with Weighted Cross-Attention
+Z. Wang, B. Yang, S. Zhou, C. Li, Y. Zhang, B. Dong,
+Z. Wen
+, Translating Informal Proofs into Formal Proofs Using a Chain of States, CSIAM Transactions on Applied Mathematics,
+(paper)
+Z. Deng, T. Wei, J. Ma,
+Z. Wen
+, SSNCVX: A primal-dual semismooth Newton method for convex composite optimization,
+(paper)
+,
+(code)
+C. Li, W. Ma, Z. Wang,
+Z. Wen
+, SITA: A Framework for Structure-to-Instance Theorem Autoformalization, AAAI, 2025
+Z. Xie, Y. Fong, H. Yuan,
+Z. Wen
+, Accelerating Optimization via Differentiable Stopping Time, NeurIPS 2025 Spotlight
+Z.	Wang, A. Dong,
+Z. Wen
+, Tree-Based Premise Selection for Lean4, NeurIPS 2025
+T. Li, H. Zou, J. Wu,
+Z. Wen
+, LMask: Learn to Solve Constrained Routing Problems with Lazy Masking, ICLR 2026,
+(paper)
+Z. Deng, J. Hu, K. Deng,
+Z. Wen
+, An efficient primal dual semismooth Newton method for semidefinite programming, Mathematics of Operations Research,
+(paper)
+C. Li, S. Zhu, Z. Xie,
+Z. Wen
+, Accelerated Natural Gradient Method for Parametric Manifold Optimization,
+(paper)
+C. Li, Z. Wang, Y. Bai, Y. Duan, Y. Gao, P. Hao,
+Z. Wen
+, Formalization of Algorithms for Optimization with Block Structures, Science in China Series A: Mathematics,
+(paper)
+,
+(code: “optlib”)
+C. Li, S. Xu, C. Sun, L. Zhou,
+Z. Wen
+, Formalization of Optimality Conditions for Smooth Constrained Optimization Problems,
+(paper)
+,
+(code: “optlib”)
+H. Lu, Z. Xie, Y. Wu, C. Ren, Y. Chen,
+Z. Wen
+, OptMATH: A Scalable Bidirectional Data Synthesis Framework for Optimization Modeling, ICML 2025,
+(paper)
+,
+(code: “OptMATH”)
+Y. Chen, Y. Zhang, Y. Liu, K. Yuan,
+Z. Wen
+, A Memory Efficient Randomized Subspace Optimization Method for Training Large Language Models, ICML 2025,
+(paper)
+Y. Chen, Y. Zhang, L. Cao, K. Yuan,
+Z. Wen
+, Enhancing Zeroth-order Fine-tuning for Language Models with Low-rank Structures, ICLR 2025,
+(paper)
+,
+(code: “LOZO”)
+C. Li, Z. Wang, W. He, Y. Wu, S. Xu,
+Z. Wen
+, Formalization of Complexity Analysis of the First-order Algorithms for Convex Optimization, Journal of Automated Reasoning,
+(paper)
+,
+(code: “optlib”)
+Z. Xie, W. Yin,
+Z. Wen
+, ODE-based Learning to Optimize, Mathematical Programming,
+(paper)
+,
+(code: “O2O”)
+Y. Chen, L. Cao, K. Yuan,
+Z. Wen
+, Sharper Convergence Guarantees for Federated Learning with Partial Model Personalization,
+(paper)
+R. Wang, C. Zhang, S. Pu, J. Gao,
+Z. Wen
+, A Customized Augmented Lagrangian Method for Block-Structured Integer Programming, IEEE Transactions on Pattern Analysis and Machine Intelligence,
+(paper)
+J. Wu, J. Hu, H. Zhang,
+Z. Wen
+, Convergence analysis of an adaptively regularized natural gradient method, IEEE Transactions on Signal Processing, 2024
+Z. Ke, J. Zhang,
+Z. Wen
+, An Improved Finite-time Analysis of Temporal Difference Learning with Deep Neural Networks, ICML 2024
+Z. Deng, K. Deng, J. Hu,
+Z. Wen
+, An Augmented Lagrangian Primal-Dual Semismooth Newton Method for Multi-Block Composite Optimization, Journal of Scientific Computing,
+(paper)
+C. Chen, R. Chen, T. Li, R. Ao,
+Z. Wen
+,  A Monte Carlo Policy Gradient Method with Local Search for Binary Optimization, Mathematical Programming,
+(paper)
+(code: “MCPG”)
+T. Li, F. Chen, H. Chen,
+Z. Wen
+, Convergence Analysis of Stochastic Gradient Descent with MCMC Estimators, Science in China Series A: Mathematics,
+(paper)
+Z. Ke, J. Zhang,
+Z. Wen
+, Gauss-Newton Temporal Difference Learning with Nonlinear Function Approximation, IEEE Transactions on Neural Networks and Learning Systems,
+(paper)
+J. Hu, T. Tian, S. Pan,
+Z. Wen
+, On the local convergence of the semismooth Newton method for composite optimization, Journal of Scientific Computing,
+(paper)
+L. Cao,
+Z. Wen
+, Y. Yuan, Some Sharp Error Bounds for Multivariate Linear Interpolation and Extrapolation, Optimization Methods and Software,
+(paper)
+Z. Zhu, F. Chen, J. Zhang,
+Z. Wen
+, A Unified Primal-Dual Algorithm Framework for Inequality Constrained Problems, Journal of Scientific Computing, 2023,
+(paper)
+J. Hu, R. Ao, A. So, M. Yang,
+Z. Wen
+, Riemannian Natural Gradient Methods, SIAM Journal on Scientific Computing,
+(paper)
+Y. Liu, H. Liu, H. Nie,
+Z. Wen
+, A DRS-based Path-following Algorithm for Linear Programming, Journal of Computational Mathematics
+F. Chen, J. Zhang,
+Z. Wen
+, A Near-Optimal Primal-Dual Method for Off-Policy Learning in CMDP, NeurIPS 2022,
+(paper)
+Y. Wang, K. Deng, H. Liu,
+Z. Wen
+, A Decomposition Augmented Lagrangian Method for Low-rank Semidefinite Programming,  SIAM Journal on Optimization,
+(paper)
+H. Liu, K. Deng, H. Liu,
+Z. Wen
+, An Entropy-Regularized ADMM For Binary Quadratic Programming, Journal of Global Optimization
+J. Zhang, Z. Jin, B. Jiang,
+Z. Wen
+, Stochastic Augmented Projected Gradient Methods for the Large-Scale Precoding Matrix Indicator Selection Problem, IEEE Transactions on Wireless Communications
+M. Yang, D. Xu, Q. Cui,
+Z. Wen
+, P. Xu, NG+ : A Multi-Step Matrix-Product Natural Gradient Method for Deep Learning, IEEE Transactions on Pattern Analysis and Machine Intelligence,
+(paper)
+(code)
+Y. Liu,
+Z. Wen
+, W. Yin, A multiscale semi-smooth Newton method for Optimal Transport, Journal of Scientific Computing
+Y. Li, M. Zhao, W. Chen,
+Z. Wen
+, A Stochastic Composite Augmented Lagrangian Method For Reinforcement Learning, SIAM Journal on Optimization,
+(paper)
+Z. Jin, J. Schmitt,
+Z. Wen
+, On the Analysis of Model-free Methods for the Linear Quadratic Regulator, Journal of Operations Research Society of China,
+(paper)
+M. Yang, D. Xu, Y. Li,
+Z. Wen
+, M. Chen, Sketchy Empirical Natural Gradient Methods for Deep Learning, Journal of Scientific Computing
+(paper)
+M. Yang, D. Xu, H. Chen,
+Z. Wen
+, M. Chen, Enhance Curvature Information by Structured Stochastic Quasi-Newton Methods, CVPR 2021
+(paper)
+Z. Chen, A. Milzarek,
+Z. Wen
+, A Trust-Region Method For Nonsmooth Nonconvex Optimization, Journal of Computational Mathematics
+(paper)
+M. Zhao, Y. Li,
+Z.Wen
+, A Stochastic Trust-Region Framework for Policy Optimization, Journal of Computational Mathematics
+(paper)
+M. Yang, A. Milzarek,
+Z. Wen
+, T. Zhang, A Stochastic Extra-Step Quasi-Newton Method for Nonsmooth Nonconvex Optimization, Mathematical Programming
+(paper)
+H. Zhang, A. Milzarek,
+Z. Wen
+, W. Yin, On the geometric analysis of a quartic-quadratic optimization problem under a spherical constraint, Mathematical Programming
+(paper)
+L. Wu, X. Liu,
+Z. Wen
+, Symmetric rank-1 approximation of symmetric high-order tensors, Optimization Methods and Software
+B. Jiang, X. Meng,
+Z. Wen
+, X. Chen, An exact penalty approach for optimization with nonnegative orthogonality constraints, Mathematical Programming
+(paper)
+T. Tian, Y. Cai, X. Wu,
+Z. Wen
+, Ground states and their characterization of spin-F Bose-Einstein condensates, SIAM Journal on Scientific Computing
+(paper)
+Z. Jia,
+Z. Wen
+, Y. Ye, Toward Solving 2-TBSG Efficiently, Optimization Methods and Software,
+(paper)
+Y. Wang, Z. Jia,
+Z. Wen
+, The Search direction Correction makes first-order methods faster, SIAM Journal on Scientific Computing
+(paper)
+Y. Li, H. Liu,
+Z. Wen
+, Y, Yuan, Low-rank Matrix Optimization Using Polynomial-filtered Subspace Extraction, SIAM Journal on Scientific Computing
+(paper)
+,
+(code)
+Y. Duan, M. Wang,
+Z. Wen
+, Y. Yuan, Adaptive Low-Nonnegative-Rank Approximation for State Aggregation of Markov Chains, SIAM Journal on Matrix Analysis and Applications,
+(paper)
+J. Hu, B. Jiang, L. Lin,
+Z. Wen
+, Y. Yuan, Structured Quasi-Newton Methods for Optimization with Orthogonality Constraints, SIAM Journal on Scientific Computing
+(paper)
+A. Milzarek, X. Xiao, S. Cen,
+Z. Wen
+, M. Ulbrich, A Stochastic Semismooth Newton Method for Nonsmooth Nonconvex Optimization, SIAM Journal on Optimization,
+(paper)
+J. Hu,
+Z. Wen
+, A. Milzarek, Y. Yuan, Adaptive Regularized Newton Method for Riemannian Optimization, SIAM Journal on Matrix Analysis and Applications
+(paper)
+Y. Li,
+Z. Wen
+, C. Yang, Y. Yuan, A Semi-smooth Newton Method For semidefinite programs and its applications in electronic structure calculations, SIAM Journal on Scientific Computing
+(paper)
+J. Zhang, H. Liu,
+Z. Wen
+, S. Zhang, A Sparse Completely Positive Relaxation of the Modularity Maximization for Community Detection, SIAM Journal on Scientific Computing
+(paper)
+H. Yuan, X. Gu, R. Lai,
+Z. Wen
+, Global optimization with orthogonality constraints via stochastic diffusion, Journal of Scientific Computing
+(paper)
+T. Pang, Q. Li,
+Z. Wen
+, Z. Shen, Phase retrieval, a data-driven wavelet frame based approach, Applied and Computational Harmonic Analysis
+(paper)
+C. Ma, X. Liu,
+Z. Wen
+, Globally Convergent Levenberg-Marquardt Method For Phase Retrieval, IEEE Transactions on Information Theory
+(paper)
+C. Chen,
+Z. Wen
+, Y. Yuan, A general two-level subspace method for nonlinear optimization, Journal of Computational Mathematics
+X. Xiao, Y. Li,
+Z. Wen
+, L. Zhang, Semi-Smooth Second-order Type Methods for Composite Convex Programs, Journal of Scientific Computing
+(paper)
+Y. Yang, B. Dong,
+Z. Wen
+, Randomized Algorithms For High Quality Treatment Planning in Volumetric Modulated Arc Therapy, Inverse Problems,
+(paper)
+J. Zhang,
+Z. Wen
+, Y. Zhang, Subspace Methods With Local Refinements for Eigenvalue Computation Using Low-Rank Tensor-Train Format, Journal of Scientific Computing,
+(pdf)
+J. Hu, B. Jiang, X. Liu,
+Z. Wen
+, A Note on Semidefinite Programming Relaxations For Polynomial
+Optimization Over a Single Sphere, Science in China, Mathematics,
+(pdf)
+B. Jiang, Y. Liu,
+Z. Wen
+, L_p-norm regularization algorithms for optimization over permutation matrices, SIAM Journal on Optimization,
+(pdf)
+Z. Wen
+, Y. Zhang, Block algorithms with augmented Rayleigh-Ritz projections
+for large-scale eigenpair computation, SIAM Journal on Matrix Analysis and Applications
+(pdf)
+X. Wu,
+Z. Wen
+, W. Bao, A regularized Newton method for computing ground states of Bose-Einstein condensates, Journal of Scientific Computing,
+(pdf)
+P. Qian, Z. Wang,
+Z. Wen
+, A Composite Risk Measure Framework for Decision Making under Uncertainty, Journal of Operations Research Society of China
+(pdf)
+M, Ulbrich,
+Z. Wen
+, C. Yang, D, Klockner, Z. Lu, A proximal gradient method for ensemble density functional theory,  SIAM Journal on Scientific Computing,
+(pdf)
+Q. Dong, X. Liu,
+Z. Wen
+, Y. Yuan, A Parallel Line Search Subspace Correction Method for Composite Convex Optimization, Journal of Operations Research Society of China
+(pdf)
+X. Liu,
+Z. Wen
+, Y. Zhang, An Efficient Gauss-Newton Algorithm for Symmetric Low-Rank Product Matrix Approximations,  SIAM Journal on Optimization,
+(pdf)
+X. Liu,
+Z. Wen
+, X. Wang, M. Ulbrich,  Y. Yuan, On the Analysis of the Discretized Kohn-Sham Density Functional Theory,  SIAM Journal on Numerical Analysis,
+(pdf)
+X. Zhang, J. Zhu,
+Z. Wen
+, A. Zhou, Gradient type optimization methods for electronic structure calculations, SIAM Journal on Scientific Computing
+(pdf)
+Z. Wen
+, C. Yang, X. Liu, and Y. Zhang, Trace-Penalty Minimization for Large-scale Eigenspace Computation, Journal of Scientific Computing,
+(pdf)
+X. Liu, X. Wang,
+Z. Wen
+, Y. Yuan, On the Convergence of the Self-Consistent Field Iteration in Kohn-Sham Density Functional Theory, SIAM Journal on Matrix Analysis and Applications
+(pdf)
+L. Wang, A. Singer,
+Z. Wen
+, Orientation Determination from Cryo-EM images Using Least Unsquared Deviation, SIAM Journal on Imaging Sciences
+(pdf)
+Z. Wen
+, X. Peng, X. Liu, X. Bai and X. Sun, Asset Allocation under the Basel Accord Risk Measures
+(pdf)
+Z. Wen
+, A. Milzarek, and M. Ulbrich, and H. Zhang, Adaptive regularized self-consistent field iteration with exact Hessian
+for electronic structure calculation, SIAM Journal on Scientific Computing
+(pdf)
+X. Liu,
+Z. Wen
+, Y. Zhang, Limited memory block Krylov subspace optimization for computing dominant singular value decompositions, SIAM Journal on Scientific Computing
+(pdf)
+(code: “LMSVD”)
+Z. Wen
+, C. Yang, X. Liu and S. Marchesini, Alternating direction methods for classical and ptychographic phase retrieval, Inverse Problems
+(pdf)
+Q. Ling, Y. Xu, W. Yin, and Z. Wen, Decentralized low-rank matrix completion, ICASSP 2012
+(pdf)
+(blog)
+R. Lai,
+Z. Wen
+, W. Yin, X. Gu and L. Lui, Folding-free global conformal mapping for genus-0 surfaces by Harmonic energy minimization, Journal of Scientific Computing
+(pdf)
+Q. Ling, W. Yin and
+Z. Wen
+, Decentralized jointly sparse signal recovery by reweighted lq minimization, IEEE Transactions on Signal Processing
+(pdf)
+(blog)
+Y. Xu, W. Yin,
+Z. Wen
+and Y. Zhang, An alternating direction algorithm for matrix completion with nonnegative factors, Frontiers of Mathematics in China, Vol. 7, No. 2, pp. 365-384
+(pdf)
+S. Yuan,
+Z. Wen
+and Y. Zhang, Augmented Lagrangian alternating direction method for matrix separation based on low-rank factorization, Optimization Methods and Software
+(pdf)
+Z. Wen
+and W. Yin, A feasible method for optimization with orthogonality constraints, Mathematical Programming
+(pdf)
+(code)
+J. Laska,
+Z. Wen
+, W. Yin and R. Baraniuk, Fast and accurate signal recovery from 1-bit compressive measurements, IEEE Transactions on Signal Processing
+(pdf)
+Z. Wen
+, W. Yin and Y. Zhang, Solving a low-rank factorization model for matrix completion by a nonlinear successive over-relaxation algorithm, Mathematical Programming Computation
+(pdf)
+(code: “LMaFit”)
+Z. Wen
+, D. Goldfarb and W. Yin, Alternating direction augmented Lagrangian methods for semidefinite programming, Mathematical Programming Computation
+(pdf)
+(code: “SDPAD”, beta1, Sept. 2009)
+(code: “SDPAD”, beta2, Dec. 2012)
+(data)
+Z. Wen
+, D. Goldfarb and K. Scheinberg, Block coordinate descent methods for semidefinite programming, Handbook on Semidefinite, Cone and Polynomial Optimization
+(pdf)
+Previous version: Row by row methods for semidefinite programming (with D. Goldfarb, S. Ma and K. Scheinberg)
+Z. Wen
+, W. Yin, D. Goldfarb and Y. Zhang, A fast algorithm for sparse reconstruction based on shrinkage, subspace optimization and continuation, SIAM Journal on Scientific Computing, Vol 32, No. 4, pp. 1832-1857
+(pdf)
+(code: “FPC_AS”)
+Z. Wen
+and W. Yin, H. Zhang and D. Goldfarb, On the convergence of an active set method for l_1 minimization, Optimization Methods and Software
+(pdf)
+D. Goldfarb, S. Ma,
+Z. Wen
+, Solving low-rank matrix completion problems efficiently, Allerton’09 Proceedings of the 47th annual Allerton conference on Communication, control, and computing
+Z. Wen
+and D. Goldfarb, Line search multigrid methods for large-scale nonconvex optimization, SIAM Journal on Optimization, Vol. 20, No. 3, pp. 1478-1503
+(pdf)
+(code)
+D. Goldfarb,
+Z. Wen
+and W. Yin, A curvilinear search method for the p-Harmonic flow on sphere, SIAM Journal on Imaging Sciences, Vol. 2, No. 1, pp. 84-109
+(pdf)
+(code)
+Y. Wang,
+Z. Wen
+, Z. Nashed and Q. Sun, Direct fast method for time-limited signal reconstruction, Applied Optics, Vol. 45, No. 13, pp. 3111-3126
+(pdf)
+Z. Wen
+, Y. Wang, A new trust region algorithm for image restoration, Science in China Series A, Vol. 48, No. 2
+Z. Wang, Y. Yuan,
+Z. Wen
+, A subspace trust region method for large-scale unconstrained optimization, in Y.Yuan, editor, Numerical Linear Algebra and Optimization (Science Press)
+Thesis
+Z. Wen
+, First-order methods for semidefinite-programming, Ph.D Thesis, Columbia University, Advisor: Prof. Donald Goldfarb, 2009
+(pdf)
+Z. Wen
+, Least squares and their applications, M.S. Thesis, Institute of Computational Mathematics, Chinese Academy of Sciences, Advisor: Prof. Ya-xiang Yuan, 2004
+(pdf (in Chinese))
+Page generated 2026-10-06 22:15:50 CST, by
+jemdoc+MathJax
+.

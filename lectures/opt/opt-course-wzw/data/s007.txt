@@ -1,0 +1,610 @@
+
+===== PDF PAGE 1 | FOOTER ['1/29'] =====
+Lecture: Introduction to LP, SDP and SOCP
+
+
+
+                   Zaiwen Wen
+
+
+            Beijing International Center For Mathematical Research
+                           Peking University
+
+     http://bicmr.pku.edu.cn/~wenzw/bigdata2015.html
+                       wenzw@pku.edu.cn
+
+
+ Acknowledgement: this slides is based on Prof. Farid Alizadeh lecture notes
+
+
+
+
+
+                             1/29
+===== PDF PAGE 2 | FOOTER [] =====
+Linear Programming (LP)
+
+
+
+
+
+               Primal                            Dual
+
+     min  c1x1 + . . . + cnxn             max  b1y1 + . . . + bmym
+        s.t.   a11x1 + . . . + a1nxn = b1                s.t.   a11y1 + . . . + am1ym ≤c1
+                    . . .                                                            . . .
+            am1x1 + . . . + amnxn = bm                  a1ny1 + . . . + amnym ≤cn
+                 xi ≥0
+
+
+
+
+
+                                                                                                                                                    2/29
+===== PDF PAGE 3 | FOOTER [] =====
+Linear Programming (LP)
+
+
+
+
+
+ more succinctly
+
+              Primal (P)                         Dual (D)
+
+            min  c⊤x                    max  b⊤y
+                    s.t.   Ax = b                                  s.t.  A⊤y + s = c
+                     x ≥0                                     s ≥0
+
+
+
+
+
+                                                                                                                                                    3/29
+===== PDF PAGE 4 | FOOTER [] =====
+Weak duality
+
+
+
+ Suppose
+
+      x is feasible to (P)
+       (y, s) is feasible to (D)
+
+ Then
+
+                           0 ≤  x⊤s  because xisi ≥0
+                   =  x⊤(c −A⊤y)
+                   =  c⊤x −(Ax)⊤y
+                   =  c⊤x −b⊤y
+
+                   =  duality gap
+
+
+
+
+
+                                                                                                                                                    4/29
+===== PDF PAGE 5 | FOOTER ['0'] =====
+Key Properties of LP
+
+
+
+
+
+     Strong duality: If both Primal and Dual are feasible then at the optimum
+
+                               c⊤x = b⊤y ⇐⇒x⊤s = 0
+
+     complementary slackness: This implies
+
+                      x⊤s =  x1s1 + . . . + xnsn = 0  and therefore
+                                   xisi =  0
+
+
+
+
+
+                                                                                                                                                    5/29
+===== PDF PAGE 6 | FOOTER ['0'] =====
+complementarity
+
+
+
+
+
+      Putting together primal feasibility, dual feasibility and complementarity together we
+     get a square system of equations
+
+
+                               Ax =  b,   x ≥0
+                         A⊤y + s =   c,   s ≥0
+                                                  xisi =  0   for i = 1, . . . , n
+
+     At least in principle this system determines the primal and dual optimal values
+
+
+
+
+
+                                                                                                                                                    6/29
+===== PDF PAGE 7 | FOOTER [] =====
+Algebraic characterization
+
+
+
+   We can define x ◦s = (x1s1, . . . , xnsn)⊤and
+
+                           Lx : y →(x1y1, . . . , xnyn)⊤i.e. Lx = Diag(x)
+
+   We can write complementary slackness conditions as
+
+                                    x ◦s = Lxs = LxLs1 = 0
+
+      1, the vector of all ones, is the identity element:
+
+                                           x ◦1 = x
+
+
+
+
+
+                                                                                                                                                    7/29
+===== PDF PAGE 8 | FOOTER ['8/29'] =====
+Semidefinite Programming (SDP)
+
+
+
+
+
+    X ⪰Y means that the the symmetric matrix X −Y is positive semidefinite
+
+
+    X is positive semidefinite
+
+                    a⊤Xa ≥0 for all vector a ⇐⇒X = B⊤B ⇐⇒
+
+                                        all eigenvalues of X is nonnegative
+
+
+
+
+
+                                                                                                                                                    8/29
+===== PDF PAGE 9 | FOOTER [] =====
+Semidefinite Programming (SDP)
+
+
+
+
+      ⟨X, Y⟩= Pij XijYij = Tr(XY)
+                 Primal (P)                                Dual (D)
+
+     min   ⟨C1, X1⟩+ . . . + ⟨Cn, Xn⟩               max  b1y1 + . . . + bmym
+        s.t.    ⟨A11, X1⟩+ . . . + ⟨A1n, Xn⟩= b1                    s.t.   A11y1 + . . . + Am1ym + S1 = c1
+                    . . .                                                                            . . .
+             ⟨Am1, X1⟩+ . . . + ⟨Amn, Xn⟩= bm                    A1ny1 + . . . + Amnym + Sn = cn
+              Xi ⪰0                                                        Si ⪰0
+
+
+
+
+
+                                                                                                                                                    9/29
+===== PDF PAGE 10 | FOOTER ['i'] =====
+Simplified SDP
+
+
+
+
+     For simplicity we deal with single variable SDP:
+                  Primal (P)                         Dual (D)
+
+             min   ⟨C, X⟩                   max  b⊤y
+                      s.t.    ⟨A1, X⟩= b1                            s.t. X yiAi + S = C
+                                    . . .                                                                                 i
+                      ⟨Am, X⟩= bm                       S ⪰0
+                X ⪰0
+    A single variable LP is trivial
+
+     But a single matrix SDP is as general as a multiple matrix
+
+
+
+
+
+                                                                                                                                               10/29
+===== PDF PAGE 11 | FOOTER [] =====
+Weak duality in SDP
+
+
+
+
+      Just as in LP
+                                     ⟨X, S⟩= ⟨C, X⟩−b⊤y
+
+     Also if both X ⪰0 and S ⪰0 then
+
+                           ⟨X, S⟩= Tr(XS1/2S1/2) = Tr(S1/2XS1/2) ≥0
+
+     because S1/2XS1/2 ⪰0
+
+     Thus
+                                   ⟨X, S⟩= ⟨C, X⟩−b⊤y ≥0
+
+
+
+
+
+                                                                                                                                               11/29
+===== PDF PAGE 12 | FOOTER [] =====
+Complementarity Slackness Theorem
+
+
+
+
+    X ⪰0 and S ⪰0 and ⟨X, S⟩= 0 implies
+
+                                   XS = 0
+
+      Proof:
+                             ⟨X, S⟩= Tr(XS1/2S1/2) = Tr(S1/2XS1/2)
+
+     Thus Tr(S1/2XS1/2) = 0. Since S1/2XS1/2 ⪰0, then
+
+                           S1/2XS1/2 = 0 =⇒S1/2X1/2X1/2S1/2 = 0
+                                          X1/2S1/2 = 0 =⇒XS = 0
+
+
+
+
+
+                                                                                                                                               12/29
+===== PDF PAGE 13 | FOOTER ['2'] =====
+Algebraic properties of SDP
+
+
+
+
+
+     For reasons to become clear later it is better to write complementary slackness
+      conditions as
+                                 XS + SX
+                             = 0
+                                        2
+
+         It can be shown that if X ⪰0 and S ⪰0, then XS = 0 iff
+
+                                 XS + SX = 0
+
+
+
+
+
+                                                                                                                                               13/29
+===== PDF PAGE 14 | FOOTER [] =====
+Algebraic properties of SDP
+
+
+      Definition: X ◦S = XS+SX                                2
+
+    The binary operation ◦is commutative X ◦S = S ◦X
+
+     ◦is not associative: X ◦(Y ◦Z) ̸= (X ◦Y) ◦Z in general
+
+     But X ◦(X ◦X) = (X ◦X) ◦X. Thus X◦p = Xp is well defined
+
+      In general X ◦(X2 ◦Y) = X2 ◦(X ◦Y)
+
+    The identity matrix I is identity w.r.t ◦
+
+     Define the operator
+
+                      LX : Y →X ◦Y, thus X ◦S = LX(S) = LX(LS(I))
+
+
+
+
+
+                                                                                                                                               14/29
+===== PDF PAGE 15 | FOOTER [] =====
+Constraint Qualifications
+
+
+
+
+
+     Unlike LP we need some conditions for the optimal values of Primal and Dual SDP
+      to coincide
+
+     Here are two:
+                  If there is primal-feasible X ≻0 (i.e. X is positive definite)
+                  If there is dual-feasible S ≻0
+
+    When strong duality holds ⟨X, S⟩= 0
+
+
+
+
+
+                                                                                                                                               15/29
+===== PDF PAGE 16 | FOOTER ['0'] =====
+KKT Condition
+
+
+
+
+
+     Thus just like LP The system of equations
+
+                                  ⟨Ai, X⟩ =   bi,  X ⪰0,    for i = 1, . . . , m
+       X yiAi + S =  C,  S ⪰0,
+                                                        i
+                      X ◦S =  0
+
+     Gives us a square system
+
+
+
+
+
+                                                                                                                                               16/29
+===== PDF PAGE 17 | FOOTER [] =====
+Second Order Cone Programming (SOCP)
+
+
+
+     For simplicity we deal with single variable SOCP:
+                  Primal (P)                         Dual (D)
+
+                min  c⊤x                    max  b⊤y
+                          s.t.   Ax = b                                  s.t.  A⊤y + s = c
+                         x ⪰Q 0                                   s ⪰Q 0
+
+     the vectors x, s, c are indexed from zero
+
+         If z = (z0, z1, . . . , zn)⊤and ¯z = (z1, . . . , zn)⊤
+
+                                zQ ≥0 ⇐⇒z0 ≥∥¯z∥
+
+
+
+
+
+                                                                                                                                               17/29
+===== PDF PAGE 18 | FOOTER ['18/29'] =====
+Illustration of SOC
+
+
+
+
+
+                                                                                                                                               18/29
+===== PDF PAGE 19 | FOOTER ['0'] =====
+Weak Duality in SOCP
+
+
+
+    The single block SOCP is not as trivial as LP but it still can be solved analytically
+
+    weak duality: Again as in LP and SDP
+
+                             x⊤s = c⊤x −b⊤y = duality gap
+
+         If x, s ⪰Q 0, then
+
+                    x⊤s =  x0s0 + ¯x⊤¯s ≥
+                ≥  ∥¯x∥· ∥¯s∥+ ¯x⊤¯s   since x, s ⪰Q 0
+                ≥   |¯x⊤¯s| + ¯x⊤¯s  Cauchy-Schwartz inequality
+                ≥  0
+
+
+
+
+
+                                                                                                                                               19/29
+===== PDF PAGE 20 | FOOTER [] =====
+Complementary Slackness for SOCP
+
+     Given x ⪰Q 0, s ⪰Q 0 and x⊤s = 0. Assume x0 > 0 and s0 > 0
+
+   We have
+
+                                     n
+                    (∗)  x20 ≥ X x2i
+                                  i=1
+                                       n
+                                                          n  s2i x20                   (∗∗)   s20 ≥ X                                        s2i ⇐⇒x20 ≥ X
+                                                            s20                                   i=1               i=1
+                                                                                     n
+                                                                                      2xisix0
+                (∗∗∗)  x⊤s = 0 ⇐⇒−x0s0 = X xisi ⇐⇒−2x20 = X
+                                                                                        s0                                                                                                               i                     i=1
+
+                                                                 2
+     Adding (*), (**), (***), we get 0 ≥Pni=1   xi + six0s0
+
+     This implies
+                                        xis0 + x0si = 0, for i = 1, . . . , n
+                                                                                                                                               20/29
+===== PDF PAGE 21 | FOOTER ['21/29'] =====
+Illustration of SOC
+
+
+
+
+
+                                                                                                                                               21/29
+===== PDF PAGE 22 | FOOTER [] =====
+Strong Duality
+
+
+
+
+
+      at the optimum
+                               c⊤x = b⊤y ⇐⇒x⊤s = 0
+
+      Like SDP constraint qualifications are required
+
+         If there is primal-feasible x ≻Q 0
+
+         If there is dual-feasible s ≻Q 0
+
+
+
+
+
+                                                                                                                                               22/29
+===== PDF PAGE 23 | FOOTER ['0'] =====
+Complementary Slackness for SOCP
+
+
+
+
+
+     Thus again we have a square system
+
+                                  Ax =  b,   x ⪰Q 0,
+                            A⊤y + s =   c,   s ⪰Q 0,
+                                    x⊤s =  0,
+                                         x0si + s0xi =  0
+
+
+
+
+
+                                                                                                                                               23/29
+===== PDF PAGE 24 | FOOTER [] =====
+Algebraic properties of SOCP
+
+
+
+
+
+     Let us define a binary operation for vectors x and s both indexed from zero
+
+                 x0  s0      x⊤s  
+                                     x1       s1        x0s1 + s0x1                          
+                          
+                                                                                                                                                                                                                                                                                                                                      ...                                                                                                                                                                       ... ◦                                                                                                                                                                                                                               ... =                                                                        
+                                     xn       sn        x0sn + s0xn
+
+
+
+
+
+                                                                                                                                               24/29
+===== PDF PAGE 25 | FOOTER [] =====
+Algebraic properties of SOCP
+
+
+
+
+    The binary operation ◦is commutative x ◦s = s ◦x
+
+     ◦is not associative: x ◦(y ◦z) ̸= (x ◦y) ◦z in general
+
+     But x ◦(x ◦x) = (x ◦x) ◦x. Thus x◦p = xp is well defined
+
+      In general x ◦(x2 ◦y) = x2 ◦(x ◦y)
+
+    The identity matrix I is identity w.r.t ◦
+
+      e = (1, 0, . . . , 0)⊤is the identity: x ◦e = x
+
+
+
+
+
+                                                                                                                                               25/29
+===== PDF PAGE 26 | FOOTER [] =====
+Algebraic properties of SOCP
+
+
+
+
+
+     Define the operator
+                                         Lx : y →x ◦y
+
+                                                        x0   ¯x⊤
+                                   Lx = Arw(x) =
+                                                                                            ¯x   x0I
+
+                               x ◦s = Arw(x)s = Arw(x)Arw(s)e
+
+
+
+
+
+                                                                                                                                               26/29
+===== PDF PAGE 27 | FOOTER [] =====
+Summary
+
+
+
+
+
+                            LP        SDP         SOCP
+                                                           XS+SX             x⊤s
+              binary operator    x ◦s = (xisi)   X ◦S =    2      x ◦s =                                                                                                        x0¯s + s0¯x
+                     identity           1                         I           e = (1, 0, . . . , 0)⊤
+Properties     associative         yes           no              no
+                   LX          y →Diag(x)y    Y →XY+YX2           y →Arw(x)y
+             Primal feasibility     Ax = b         ⟨Ai, X⟩= bi         Ax = b
+               dual feasility    A⊤y + s = c Pi yiAi + S = C     A⊤y + s = c
+             complementarity    LxLs1 = 0      LX(LS(I)) = 0         LxLse = 0
+
+
+
+
+
+                                                                                                                                              27/29
+===== PDF PAGE 28 | FOOTER [] =====
+Conic LP
+
+
+ A set K ⊆Rn is a proper cone if
+         It is a cone: If x ∈K =⇒ax ∈K for all α ≥0
+
+         It is convex: x, y ∈K =⇒αx + (1 −α)y ∈K for α ∈[0, 1]
+
+         It is pointed: K ∩(−K) = {0}
+
+         It is closed
+
+         It has non-empty interior in Rn
+
+     dual cone:
+                   K∗= {x | for all z ∈K, ⟨x, z⟩≥0}
+
+
+
+
+
+                                                                                                                                               28/29
+===== PDF PAGE 29 | FOOTER [] =====
+Conic LP
+
+
+
+ Conic-LP is defined as the following optimization problem:
+              Primal (P)                         Dual (D)
+
+            min  c⊤x                    max  b⊤y
+                    s.t.   Ax = b                                  s.t.  A⊤y + s = c
+                     x ∈K                                     s ∈K∗
+     For LP K is the nonnegative orthant
+
+     For SDP K is the cone of positive semidefinite matrices
+
+     For SOCP K is the circular or Lorentz cone
+
+      In all three cases the cones are self-dual K = K∗
+
+
+
+
+
+                                                                                                                                               29/29

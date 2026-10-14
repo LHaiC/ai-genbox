@@ -1,0 +1,478 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta name="generator" content="jemdoc, see http://jemdoc.jaboc.net/" />
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link rel="stylesheet" href="jemdoc.css" type="text/css" />
+<title>大数据分析中的算法 (2026年春季)</title>
+<!-- MathJax -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async>
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+	  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+<!-- End MathJax -->
+</head>
+<body>
+<table summary="Table for page layout." id="tlayout">
+<tr valign="top">
+<td id="layout-menu">
+<div class="menu-category">Zaiwen Wen</div>
+<div class="menu-item"><a href="index.html">Home</a></div>
+<div class="menu-category">Research</div>
+<div class="menu-item"><a href="service.html">Service</a></div>
+<div class="menu-item"><a href="mresearch.html">Research</a></div>
+<div class="menu-item"><a href="pub.html">Publications</a></div>
+<div class="menu-item"><a href="recognition.html">Recognition</a></div>
+<div class="menu-item"><a href="talks.html">Recent&nbsp;Talks</a></div>
+<div class="menu-item"><a href="seminar.html">Seminars</a></div>
+<div class="menu-item"><a href="group.html">Group</a></div>
+<div class="menu-item"><a href="optbook.html">Optbook</a></div>
+<div class="menu-item"><a href="databook.html">Databook</a></div>
+<div class="menu-item"><a href="formal/index.html">Mathematical<br /> Formalization</a></div>
+<div class="menu-item"><a href="guide/index.html">Workstation<br /> Guidance</a></div>
+<div class="menu-category">Software</div>
+<div class="menu-item"><a href="https://reaslab.io">ReasLab</a></div>
+<div class="menu-item"><a href="softwares.html">OptSuite</a></div>
+<div class="menu-item"><a href="ssncvx/index.html">SSNCVX</a></div>
+<div class="menu-item"><a href="http://github.com/optpku/ReasBook">ReasBook</a></div>
+<div class="menu-item"><a href="https://atlas.reaslab.io">ReasAtlas</a></div>
+<div class="menu-category">Teaching</div>
+<div class="menu-item"><a href="opt-2026-fall.html">Optimization&nbsp;<br /> Methods&nbsp;<br /> (2026&nbsp;Fall)</a></div>
+<div class="menu-item"><a href="bigdata2026.html">Algorithms&nbsp;for&nbsp;<br /> Big&nbsp;Data&nbsp;<br /> Analysis&nbsp;<br />(2026&nbsp;Spring)</a></div>
+</td>
+<td id="layout-content">
+<div id="toptitle">
+<h1>大数据分析中的算法 (2026年春季)</h1>
+</div>
+<ul>
+<li><p><b>本课程考核包括平时作业和程序，期中项目，期末考试，请谨慎选课</b>
+
+</p>
+</li>
+<li><p>上课地点：二教407<br />
+
+
+
+
+
+
+</p>
+</li>
+<li><p><b>外院系本科生未选上课的同学请邮件和微信告知学号</b>
+</p>
+</li>
+<li><p>2020年春季课程回放视频
+
+</p>
+<ul>
+<li><p><a href="http://www.chinesemooc.org/mooc/4974" target=&ldquo;blank&rdquo;>华文慕课平台，点击此链接</a>
+</p>
+</li></ul>
+</li>
+<li><p>课程代码：00136720 (本科生），00100863 （本研合）
+</p>
+</li>
+<li><p>课程内容： 侧重数据分析中的数值代数和最优化算法
+</p>
+</li>
+<li><p>教师信息： 文再文，wenzw at pku dot edu dot cn
+</p>
+</li>
+<li><p>助教信息： 周瑞松 
+</p>
+</li>
+<li><p>课程微信群（下面二维码3月5日失效）
+</p>
+</li>
+</ul>
+<table class="imgtable"><tr><td>
+<img src="bigdata/bigdata2026.png" alt="150px" width="250px" />&nbsp;</td>
+<td align="left"></td></tr></table>
+<ul>
+<li><p>上课时间： 
+</p>
+<ul>
+<li><p>每周周一3~4节(10:10am - 12:00am)，双周周四1~2节(8:00am - 9:50am) 
+</p>
+</li>
+<li><p>老师答疑时间: 单独和老师联系或者每次课后
+</p>
+</li>
+<li><p>助教答疑时间: 根据反馈待定
+</p>
+</li>
+<li><p><a href="https://www.pku.edu.cn/detail/3220.html" target=&ldquo;blank&rdquo;>北京大学校历</a>
+</p>
+</li></ul>
+</li>
+<li><p>先修课程要求:
+</p>
+<ul>
+<li><p>年级要求: 大三，大四，研究生
+</p>
+</li>
+<li><p>不是必须先修但有帮助: 数值代数，最优化（凸优化），概率论
+</p>
+</li>
+<li><p>会Matlab或者Python程序编写
+</p>
+</li></ul>
+</li>
+<li><p>其它信息： 
+</p>
+<ul>
+<li><p><a href="http://bicmr.pku.edu.cn/~wenzw/bigdata2025.html" target=&ldquo;blank&rdquo;>大数据分析中的算法 (2025年春季)</a>
+
+
+
+
+</p>
+</li>
+<li><p><a href="http://bicmr.pku.edu.cn/~wenzw/opt-2025-fall.html" target=&ldquo;blank&rdquo;>最优化方法 (2025年秋季)</a> 
+
+
+
+
+</p>
+</li></ul>
+</li>
+<li><p>参考材料：
+
+</p>
+<ul>
+<li><p><a href="databook.html" target=&ldquo;blank&rdquo;>&ldquo;大数据分析中的算法&rdquo;，文再文课题组</a>
+</p>
+</li>
+<li><p><a href="optbook.html" target=&ldquo;blank&rdquo;>&ldquo;最优化: 建模、算法与理论&rdquo;，刘浩洋, 户将, 李勇锋，文再文</a>
+
+</p>
+</li>
+<li><p>Dimitris Bertsimas, John N. Tsitsiklis, Introduction to linear optimizattion, Athena Scientific 
+</p>
+</li>
+<li><p>Michele Conforti, Gerard Cornuejols, Giacomo Zambelli, Integer Programming, Springer
+</p>
+</li>
+<li><p><a href="http://www.stanford.edu/~boyd/cvxbook" target=&ldquo;blank&rdquo;>&ldquo;Convex optimization&rdquo;, Stephen Boyd and Lieven Vandenberghe</a>
+</p>
+</li>
+<li><p><a href="http://users.iems.northwestern.edu/~nocedal/book/num-opt.html" target=&ldquo;blank&rdquo;>&ldquo;Numerical Optimization&rdquo;, Jorge Nocedal and Stephen Wright, Springer, second edition</a>
+</p>
+</li>
+<li><p><a href="http://www.springer.com/mathematics/book/978-0-387-24975-9" target=&ldquo;blank&rdquo;>&ldquo;Optimization Theory and Methods&rdquo;, Wenyu Sun, Ya-Xiang Yuan</a>
+</p>
+</li>
+<li><p><a href="http://www.cs.cornell.edu/cv/GVL4/golubandvanloan.htm" target=&ldquo;blank&rdquo;>&ldquo;Matrix Computations&rdquo;, Gene H. Golub and Charles F. Van Loan, The Johns Hopkins University Press</a>
+
+</p>
+</li>
+<li><p><a href="http://www.deeplearningbook.org/" target=&ldquo;blank&rdquo;>Deep Learning, Ian Goodfellow and Yoshua Bengio and Aaron Courville</a>
+
+</p>
+</li>
+<li><p><a href="http://incompleteideas.net/book/the-book-2nd.html" target=&ldquo;blank&rdquo;>Richard S. Sutton
+and Andrew G. Barto, Reinforcement Learning: An Introduction</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</p>
+</li></ul>
+</li>
+<li><p>课程信息 （大致安排）
+</p>
+<ul>
+<li><p><b>Acknowledgement: quite a few materials are taken from slides or lecture notes online.<br /> Please email me if the usage of any part is not appropriate and they will be deleted immediately.</b>
+</p>
+</li>
+<li><p>第1周，3月2日，课程简介: <a href="bigdata/lect1.pdf" target=&ldquo;blank&rdquo;>lecture notes</a><br />
+</p>
+</li>
+<li><p>第2周，3月9日，线性规划，二次锥规划，半定规划简介: <a href="bigdata/lect2-cone.pdf" target=&ldquo;blank&rdquo;>lecture notes</a> <br />
+read: <a href="http://www.stanford.edu/~boyd/cvxbook" target=&ldquo;blank&rdquo;>&ldquo;Convex optimization&rdquo;, Stephen Boyd and Lieven Vandenberghe, chapters 2 and 3</a><br />
+思考题： 有哪些问题和应用可以化成线性规划，二次锥规划，半定规划？
+
+模型语言： <a href="http://cvxr.com/cvx/" target=&ldquo;blank&rdquo;>CVX</a>, <a href="http://users.isy.liu.se/johanl/yalmip/" target=&ldquo;blank&rdquo;>YALMIP</a><br />
+LP, SOCP, SDP典型算法软件: <a href="http://www.math.nus.edu.sg/~mattohkc/sdpt3.html" target=&ldquo;blank&rdquo;>SDPT3</a>, 
+<a href="http://www.mosek.com/" target=&ldquo;blank&rdquo;>MOSEK</a>, 
+<a href="http://www-01.ibm.com/software/commerce/optimization/cplex-optimizer/" target=&ldquo;blank&rdquo;>CPLEX</a>, 
+<a href="http://www.gurobi.com/" target=&ldquo;blank&rdquo;>GUROBI</a> <br />
+<a href="bigdata/lectcvx.pdf" target=&ldquo;blank&rdquo;>Prof. Boyd lecture notes on Disciplined convex programming and CVX</a><br />
+<a href="http://www.stanford.edu/~boyd/cvxbook" target=&ldquo;blank&rdquo;>&ldquo;Convex optimization&rdquo;, Stephen Boyd and Lieven Vandenberghe, chapters 4 and 5</a><br />
+</p>
+</li>
+<li><p>第2周，3月12日，凸优化对偶理论: <a href="bigdata/lect2-LPSDP2.pdf" target=&ldquo;blank&rdquo;>lecture notes</a> <br />
+</p>
+</li>
+<li><p>第3周，3月16日，线性规划单纯形算法，内点算法: <a href="bigdata/lect2-LPSDP4-2023.pdf" target=&ldquo;blank&rdquo;>lecture notes</a> <br />
+<a href="http://users.iems.northwestern.edu/~nocedal/book/num-opt.html" target=&ldquo;blank&rdquo;>&ldquo;Numerical Optimization&rdquo;, Jorge Nocedal and Stephen Wright, Springer, chapters 13 and 14</a>
+</p>
+</li>
+<li><p>第4周，3月23日，Primal-Dual Hybrid Gradient Algorithm for LP: <a href="bigdata/lect-PDLP.pdf" target=&ldquo;blank&rdquo;>lecture notes</a> <br />
+<a href="https://proceedings.neurips.cc/paper/2021/hash/a8fbbd3b11424ce032ba813493d95ad7-Abstract.html" target=&ldquo;blank&rdquo;>David Applegate, Mateo Diaz, Oliver Hinder, Haihao Lu, Miles Lubin, Brendan O'Donoghue, Warren Schudy, Practical Large-Scale Linear Programming using Primal-Dual Hybrid Gradient</a>
+</p>
+</li>
+<li><p>第4周，3月26日，压缩感知和稀疏优化基本理论: <a href="bigdata/lect-cs.pdf" target=&ldquo;blank&rdquo;>lecture notes</a>  <br />
+
+<a href="bigdata/introduction-compressive-sensing.pdf" target=&ldquo;blank&rdquo;>references: An Introduction to Compressive Sensing</a><br />
+E. Candes and T. Tao. Decoding by linear programming. IEEE Transactions on
+Information Theory, 51:4203&ndash;4215, 2005<br /> 
+<a href="http://dsp.rice.edu/cs" target=&ldquo;blank&rdquo;>Compressive Sensing Resources</a><br />
+
+</p>
+</li>
+<li><p>第5周，3月30日，稀疏优化的算法 <a href="bigdata/lect-cs-alg.pdf" target=&ldquo;blank&rdquo;>lecture notes</a> <br />
+<a href="http://stanford.edu/~boyd/papers/prox_algs.html" target=&ldquo;blank&rdquo;>&ldquo;Proximal Algorithms&rdquo;, N. Parikh and S. Boyd, Foundations and Trends in Optimization, 1(3):123-231, 2014.</a>  <br />
+<a href="http://epubs.siam.org/doi/abs/10.1137/080716542" target=&ldquo;blank&rdquo;>Amir Beck, Marc Teboulle, A Fast Iterative Shrinkage-Thresholding Algorithm for Linear Inverse Problems</a> <br /> 
+<a href="http://stanford.edu/~boyd/papers/admm_distr_stats.html" target=&ldquo;blank&rdquo;>&ldquo;Distributed Optimization and Statistical Learning via the Alternating Direction Method of Multipliers&rdquo;, S. Boyd, N. Parikh, E. Chu, B. Peleato, and J. Eckstein, Foundations and Trends in Machine Learning, 3(1):1–122, 2011</a> <br /> 
+<a href="https://epubs.siam.org/doi/abs/10.1137/090777761" target=&ldquo;blank&rdquo;>Junfeng Yang, Yin Zhang, Alternating direction algorithms for
+l1-problems in Compressed Sensing, SIAM Journal on Scientific Computing</a><br />
+<a href="https://ieeexplore.ieee.org/document/9363511" target=&ldquo;blank&rdquo;>Vishal Monga, Yuelong Li, Yonina C. Eldar, Algorithm Unrolling: Interpretable, Efficient Deep Learning for Signal and Image Processing</a>
+
+</p>
+</li>
+<li><p>第6周，4月6日（4月6日下午7-8节15:10-17:00 补6月1日课，理教307)，稀疏优化的算法 
+</p>
+</li>
+<li><p>第6周，4月9日，推荐系统与低秩矩阵恢复的算法 <a href="bigdata/lect-MC.pdf" target=&ldquo;blank&rdquo;>lecture notes</a> <br />
+<a href="http://www.cs.cornell.edu/cv/GVL4/golubandvanloan.htm" target=&ldquo;blank&rdquo;>SVD: read section 2.5 in  &ldquo;Matrix Computations&rdquo;, Gene H. Golub and Charles F. Van Loan, The Johns Hopkins University Press</a><br />
+<a href="http://web.stanford.edu/class/cs246/index.html" target=&ldquo;blank&rdquo;>chapter 9 in &ldquo;Mining Massive Data Sets&rdquo;, Stanford University</a><br />
+<a href="http://epubs.siam.org/doi/abs/10.1137/070697835" target=&ldquo;blank&rdquo;>&ldquo;Guaranteed Minimum-Rank Solutions of Linear
+Matrix Equations via Nuclear Norm Minimization&rdquo;, Benjamin Recht,
+Maryam Fazel, Pablo A. Parrilo</a>
+</p>
+</li>
+<li><p>第7周，4月13日， optimal transport, <a href="bigdata/lect-ot.pdf" target=&ldquo;blank&rdquo;>lecture notes</a> <br />
+<a href="https://optimaltransport.github.io" target=&ldquo;blank&rdquo;>slides and computational resources on optimal transport</a>
+
+
+
+
+
+
+</p>
+</li>
+<li><p>第8周，4月20日，线性整数规划选讲: 整数规划建模<a href="bigdata/intopt-model.pdf" target=&ldquo;blank&rdquo;>lecture notes</a>  <br />
+Michele Conforti, Gerard Cornuejols, Giacomo Zambelli, Integer Programming, Springer
+</p>
+</li>
+<li><p>第8周，4月23日，线性整数规划选讲: 分支定界方法，割平面法 <a href="bigdata/intopt-alg.pdf" target=&ldquo;blank&rdquo;>lecture notes</a> <br />
+网络流问题选讲 <a href="bigdata/lect-networksum.pdf" target=&ldquo;blank&rdquo;>lecture notes</a>  <br />
+图和网络流问题: 最短路径问题 <a href="bigdata/lect-network.pdf" target=&ldquo;blank&rdquo;>lecture notes</a>  <br />
+<a href="book:" target=&ldquo;blank&rdquo;>&ldquo;Network Flows:  Theory, Algorithms, and Applications&rdquo;, Ahuja, Magnanti, and Orlin</a><br />
+图和网络流问题: 最大流问题，组合优化与线性规划 <a href="bigdata/lect-network2.pdf" target=&ldquo;blank&rdquo;>lecture notes</a>  <br />
+<a href="book:" target=&ldquo;blank&rdquo;>&ldquo;Network Flows:  Theory, Algorithms, and Applications&rdquo;, Ahuja, Magnanti, and Orlin</a><br />
+链接分析： page rank <a href="bigdata/lect-link.pdf" target=&ldquo;blank&rdquo;>lecture notes</a>  <br />
+<a href="http://infolab.stanford.edu/~ullman/mmds/ch5.pdf" target=&ldquo;blank&rdquo;>chapter 5, link analysis, Mining of Massive Datasets</a>
+</p>
+</li>
+<li><p>第9周，4月27日，大规模线性整数规划选讲: Lagrange relaxation, Benders decomposition <a href="bigdata/large-intopt.pdf" target=&ldquo;blank&rdquo;>lecture notes</a> <br />
+大规模线性整数规划的机器学习算法 <a href="bigdata/ML4IP.pdf" target=&ldquo;blank&rdquo;>lecture notes</a>
+</p>
+</li>
+<li><p>第10周，5月4日, 放假取消 <br /> 
+</p>
+</li>
+<li><p>第10周，5月7日，Submodular 优化与数据挖掘 <a href="bigdata/lect-submodular.pdf" target=&ldquo;blank&rdquo;>lecture notes</a> <br />  
+<a href="http://arxiv.org/abs/1111.6453v2" target=&ldquo;blank&rdquo;>Learning with Submodular Functions: A Convex Optimization Perspective, Francis Bach</a> <br />
+<a href="bigdata/submodular_fbach_mlss2012.pdf" target=&ldquo;blank&rdquo;>Learning with Submodular Functions, Francis Bach</a><br />
+<a href="http://j.ee.washington.edu/~bilmes/classes/ee596b_spring_2014/" target=&ldquo;blank&rdquo;>EE596B - Submodular Functions, Optimization, and Applications to Machine Learning, Prof. Jeff A. Bilmes</a>
+</p>
+</li>
+<li><p>第11周，5月11日， 随机优化算法  <a href="bigdata/lect-sto.pdf" target=&ldquo;blank&rdquo;>lecture notes</a><br />
+
+<a href="http://arxiv.org/pdf/1501.01571v1.pdf" target=&ldquo;blank&rdquo;>Joel A Tropp, An introduction to matrix concentration inequalities</a><br />
+<a href="https://arxiv.org/abs/1606.04838v1" target=&ldquo;blank&rdquo;>Optimization Methods for Large-Scale Machine Learning, Léon Bottou, Frank E. Curtis, Jorge Nocedal</a> <br />
+<a href="http://stanford.edu/~jduchi/PCMIConvex/Duchi16.pdf" target=&ldquo;blank&rdquo;>Introductory Lectures on Stochastic Optimization, by John Duchi</a> <br />
+<a href="http://www.deeplearningbook.org/" target=&ldquo;blank&rdquo;>Deep Learning, Ian Goodfellow and Yoshua Bengio and Aaron Courville</a> <br />
+<a href="https://arxiv.org/abs/1912.08957" target=&ldquo;blank&rdquo;>Optimization for deep learning: theory and algorithms, Ruoyu Sun</a><br />
+<a href="https://arxiv.org/abs/1412.1193" target=&ldquo;blank&rdquo;>New insights and perspectives on the natural gradient method, James Martens</a>
+
+</p>
+</li>
+<li><p>第12周，5月18日， 随机优化算法，随机特征值分解算法
+</p>
+</li>
+<li><p>第12周，5月21日， 随机特征值分解算法 <a href="bigdata/lect-rand.pdf" target=&ldquo;blank&rdquo;>lecture notes</a><br />
+<a href="http://epubs.siam.org/doi/abs/10.1137/S0097539704442684" target=&ldquo;blank&rdquo;>Petros Drineas, Ravi Kannan, and Michael W. Mahoney, Fast Monte Carlo Algorithms for Matrices I: Approximating Matrix Multiplication, SIAM J. Comput., 36(1), 132–157</a><br />
+<a href="http://epubs.siam.org/doi/abs/10.1137/S0097539704442696" target=&ldquo;blank&rdquo;>Petros Drineas, Ravi Kannan, and Michael W. Mahoney, Fast Monte Carlo Algorithms for Matrices II: Computing a Low-Rank Approximation to a Matrix, SIAM J. Comput., 36(1), 158–183</a><br />
+<a href="http://epubs.siam.org/doi/abs/10.1137/090771806" target=&ldquo;blank&rdquo;>N. Halko, P. G. Martinsson, and J. A. Tropp, Finding Structure with Randomness: Probabilistic Algorithms for Constructing Approximate Matrix Decompositions,SIAM Rev., 53(2), 217–288.</a> <br />
+</p>
+</li>
+<li><p>第13周，5月25日，相位恢复 <a href="bigdata/lect-phase.pdf" target=&ldquo;blank&rdquo;>lecture notes</a>   <br />
+<a href="http://epubs.siam.org/doi/abs/10.1137/110848074" target=&ldquo;blank&rdquo;>E. J. Candes, Y. Eldar, T. Strohmer and V. Voroninski. Phase retrieval via matrix completion. SIAM J. on Imaging Sciences 6(1), 199&ndash;225.</a><br />
+<a href="http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7029630" target=&ldquo;blank&rdquo;>E. J. Candès, X. Li and M. Soltanolkotabi. Phase retrieval via Wirtinger flow: theory and algorithms. IEEE Transactions on Information Theory 61(4), 1985&ndash;2007.</a><br />
+<a href="https://link.springer.com/article/10.1007/s10208-017-9365-9" target=&ldquo;blank&rdquo;>J. Sun, Q. Qu and J. Wright, A Geometric Analysis of Phase Retrieval, Foundations of Computational Mathematics, Vol. 18, pages 1131–1198</a><br />
+
+
+</p>
+</li>
+<li><p>第14周，6月1日（4月6日下午已补课），Markov Decision Process <a href="bigdata/lect-mdp.pdf" target=&ldquo;blank&rdquo;>lecture notes</a><br />
+<a href="http://incompleteideas.net/book/the-book-2nd.html" target=&ldquo;blank&rdquo;>Richard S. Sutton
+and Andrew G. Barto, Reinforcement Learning: An Introduction</a><br />
+<a href="http://web.mit.edu/dimitrib/www/publ.html" target=&ldquo;blank&rdquo;>Prof. Dimitri Bertsekas's lecture slides</a><br />
+<a href="http://web.mit.edu/dimitrib/www/abstractdp_MIT.html" target=&ldquo;blank&rdquo;>Dimitri P. Bertsekas, Abstract Dynamic Programming</a>
+</p>
+</li>
+<li><p>第14周，6月4日（5月31日上午3-4节补6月4日课，二教407），TD learning and Q-Learning <a href="bigdata/lect-DQN.pdf" target=&ldquo;blank&rdquo;>lecture notes</a> 
+</p>
+</li>
+<li><p>第15周，6月8日，Policy gradient methods <a href="bigdata/lect-policy.pdf" target=&ldquo;blank&rdquo;>lecture notes</a><br />
+
+
+</p>
+</li>
+</ul>
+
+</li>
+</ul>
+<ul>
+<li><p>作业和课程项目，重要日期和提交内容：
+
+
+</p>
+<ul>
+<li><p>如果没有明确作业文件和来源，下面习题选自教材1：<a href="optbook.html" target=&ldquo;blank&rdquo;>&ldquo;最优化：建模、算法与理论&rdquo;，刘浩洋, 户将, 李勇锋，文再文</a>，教材2: <a href="databook.html" target=&ldquo;blank&rdquo;>&ldquo;大数据分析中的算法&rdquo;，文再文课题组</a>
+</p>
+</li>
+<li><p>3月9日上课前,   教材1习题：4.2, 4.4, 4.6
+
+</p>
+</li>
+<li><p>3月16日上课前,   教材1习题： 5.1,  5.7, 5.11
+</p>
+</li>
+<li><p>3月23日上课前, <a href="bigdata/homework-LP.pdf" target=&ldquo;blank&rdquo;>homework-LP.pdf</a> 
+
+
+
+</p>
+</li>
+<li><p>3月30日上课前, 教材2习题: 3.1, 3.2
+</p>
+</li>
+<li><p>4月6日上课前, 教材2习题：3.6, 3.8 
+
+
+
+</p>
+</li>
+<li><p>4月13日, 教材2习题：4.1, 4.2
+
+
+</p>
+</li>
+<li><p>4月27日, 教材2习题：5.2, 5.4 
+</p>
+</li>
+<li><p>5月7日, <a href="bigdata/homework-mid.pdf" target=&ldquo;blank&rdquo;>期中课程项目，建议提前开始做</a>  <br />
+作业文件打包，文件名为 &ldquo;proj1-name-ID.zip&rdquo; ，发email给助教 (pkuopt@163.com) 
+
+
+</p>
+</li>
+<li><p>5月11日, 教材2习题：6.3, 6.7
+</p>
+</li>
+<li><p>5月18日, 教材1习题：8.20, 8.21
+</p>
+</li>
+<li><p>5月25日, 教材2习题：2.2, 2.5
+</p>
+</li>
+<li><p>6月1日, 教材2习题：7.9, 7.11
+
+
+
+</p>
+</li></ul>
+</li>
+<li><p>成绩评定<br />
+</p>
+<ul>
+<li><p>迟交一天(24小时）打折10%， 不接受晚交4天的作业和项目（任何时候理由都不接受）
+</p>
+</li>
+<li><p>大作业，包括习题和程序： 40%
+</p>
+</li>
+<li><p>期中课程项目： 30%  
+</p>
+</li>
+<li><p>期末考试： 30%  
+</p>
+</li>
+<li><p>作业要求：i) 计算题要求写出必要的推算步骤，证明题要写出关键推理和论证。数值试验题应该同时提交书面报告和程序，其中书面报告有详细的推导和数值结果及分析。
+ii) 可以同学间讨论或者找助教答疑，但不允许在讨论中直接抄袭，应该过后自己独立完成。 iii) 严禁从其他学生，从互联网，从往年的答案，其它课程等等任何途径直接抄袭。iv) 如果有讨论或从其它任何途径取得帮助，请列出来源。
+</p>
+</li>
+</ul>
+
+</li>
+</ul>
+<h3>期末考试</h3>
+<ul>
+<li><p><a href="bigdata/2026dataexer.pdf" target=&ldquo;blank&rdquo;>课堂选做题，持续更新</a>
+</p>
+</li>
+<li><p>参考材料：课程作业题、讲义习题和课堂选做题
+</p>
+</li>
+<li><p><b>闭卷考试： 2026年6月15日上午8：30－10：30，考场为二教309</b> 
+</p>
+</li>
+<li><p>考试范围：课堂讲过的相关内容，包括但可能不限于以下典型内容
+</p>
+<ul>
+<li><p>对偶问题、最优性条件、典型简单问题的最优解推导
+</p>
+</li>
+<li><p>压缩感知和稀疏优化基本理论、稀疏优化的算法
+</p>
+</li>
+<li><p>推荐系统与低秩矩阵恢复的算法
+</p>
+</li>
+<li><p>最优输运
+</p>
+</li>
+<li><p>次模优化
+</p>
+</li>
+<li><p>随机优化算法
+</p>
+</li>
+<li><p>随机特征值分解算法
+</p>
+</li>
+<li><p>相位恢复
+</p>
+</li>
+</ul>
+
+</li>
+</ul>
+<div id="footer">
+<div id="footer-text">
+Page generated 2026-10-06 22:15:50 CST, by <a href="https://github.com/wsshin/jemdoc_mathjax" target="blank">jemdoc+MathJax</a>.
+</div>
+</div>
+</td>
+</tr>
+</table>
+</body>
+</html>

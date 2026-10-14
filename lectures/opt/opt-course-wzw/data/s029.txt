@@ -1,0 +1,256 @@
+
+===== PDF PAGE 1 | FOOTER ['1'] =====
+               凸优化homework5 说明
+
+
+
+
+                         2020 年11 月26 日
+
+
+
+1 作业要求
+
+   你的压缩包命名应该为“gl-学号-日期.zip”, 解压你提交的压缩包之后, 目录树应当如下:
+  gl-学号-日期/
+
+     code/
+
+        README.txt
+
+        your source code(*.m, *.py etc.)
+
+     doc/
+
+        report.pdf
+
+        else(*.tex, *.bib, *.docx etc.)
+
+
+程序语言请使用matlab、python 的某一种完成上机作业. matlab 建议使用2018a 或之后
+
+   的版本.
+
+
+上机报告gl-学号-日期/doc/report.pdf 作为你的上机报告.
+
+
+README 需要说明的.
+
+
+     • 后继作业文件和上机报告可以包含之前提交的内容.
+
+     • 指明你程序中所有用到的matlab/python/模块/工具箱的版本, 程序中若使用了
+
+         非anaconda/matlab 自带模块/工具箱, 请在code/README.txt 文件中说明.
+
+     • 其他你想要说明的.
+
+
+
+
+                                        1
+===== PDF PAGE 2 | FOOTER [] =====
+2 上机作业批改及评分                                                           2
+
+2 上机作业批改及评分
+
+
+程序60% (由程序性能和程序格式两部分组成).
+
+  测试算例：
+
+       % generate  data
+
+            seed = 97006855;
+
+              ss = RandStream (  ’ mt19937ar  ’   ,  ’ Seed  ’  , seed ) ;
+
+           RandStream . setGlobalStream ( ss ) ;
+
+           n = 512;
+
+       m = 256;
+
+        A = randn (m, n ) ;
+
+            k = round (n ∗0 . 1 ) ;   l = 2;
+
+        A = randn (m, n ) ;
+
+           p = randperm (n ) ; p = p ( 1 : k ) ;
+
+           u = zeros (n , l ) ;  u(p , : ) = randn (k , l ) ;
+
+           b = A∗u ;
+
+         mu = 1e −2;
+
+
+   批改方式(批处理在助教机器上运行，可参照Test_group_lasso.m ) ：
+
+     % function Test_group_lasso
+
+     % min  0.5  ∗   | |A ∗x −b | | _2^2 + mu ∗   | | x | |_{1 ,2}
+
+     % generate  data
+
+        seed = 97006855;
+
+         ss = RandStream ( ’ mt19937ar ’ , ’ Seed ’ , seed ) ;
+
+       RandStream . setGlobalStream ( ss ) ;
+
+       n = 512;
+
+     m = 256;
+
+     A = randn (m, n ) ;
+
+        k = round (n ∗0 . 1 ) ;   l = 2;
+
+     A = randn (m, n ) ;
+===== PDF PAGE 3 | FOOTER [] =====
+2 上机作业批改及评分                                                           3
+
+
+
+       p = randperm (n ) ; p = p ( 1 : k ) ;
+
+       u = zeros (n , l ) ;  u(p , : ) = randn (k , l ) ;
+
+       b = A∗u ;
+
+      mu = 1e −2;
+
+
+
+        x0 = randn (n ,   l ) ;
+
+
+
+        errfun = @( x1 ,  x2 ) norm( x1 −x2 ,    ’ f r o ’ )  /  (1 + norm( x1 , ’ f r o ’ ) ) ;
+
+       errfun_exact = @( x ) norm( x −u ,    ’ f r o ’ )  /  (1 + norm(u , ’ f r o ’ ) ) ;
+
+           s p a r i s i t y = @( x ) sum( abs ( x ( : ) ) > 1E−6 ∗max( abs ( x ( : ) ) ) )  /(n∗l ) ;
+
+       opts_mosek =   [ ] ; %modify options
+
+
+
+           t i c ;
+
+               [ x_mosek , out_mosek ] = gl_cvx_mosek ( x0 , A, b , mu, opts_mosek ) ;
+
+       t_mosek = toc ;
+
+
+
+      %c a l l i n g  your  s o l v e r
+
+        opts =   [ ] ;
+
+     %如果opts 非空，请在函数内部写默认值，批改的时候传入空集
+
+           t i c ;
+
+               [ x ,   i t e r  ,  out ] = your_solver ( x0 , A, b , mu,  opts ) ;
+
+     % 只需要提供函数接口.
+
+           t = toc ;
+
+
+     % 指标包括：
+
+     % errfun (x_mosek , x ) , errfun_exact ( x ) ,
+
+     %  s p a r s i t y ( x ) ,   i t e r 以及时间  t
+
+
+   程序性能(50%): 得分由以下部分决定：
+===== PDF PAGE 4 | FOOTER [] =====
+2 上机作业批改及评分                                                           4
+
+
+     • 算法解的效果(比如稀疏度，恢复效果).
+
+     • 相比于CVX mosek/gurobi 的数值表现情况，其他不同算法之间的数值效果比较.
+
+     • 报告与程序运行结果的一致性.
+
+     • 算法在其他种子下的数值表现情况(请不要根据给定的种子调参).
+
+     注: 报告中的绝对时间会作为主要参考. 在运行你的程序时会关心算法解的性质、相
+
+     对效率以及算法收敛的迭代次数. 为了保证你的结果可以复现，随机种子请指定.
+
+
+   程序格式(10%): 算法接口格式：
+
+     •  [ x, iter, out ] = your_method_name( x0, A, b, mu, opts )，输入(按顺序) 提供
+
+     给定的初始解x0，A , b, mu 是给定的数据，opts 是结构体存储了你想提供的其
+
+     他参数（如果有，请在函数内部写默认参数，批改时是默认传入空集，并在上机
+
+       报告及README.txt 中注明）；前两个输出(按顺序) 为x , iter, x 为你的算法求
+
+      解出的解，iter 为输出为x 时所对应的算法迭代次数，如果迭代次数没法获得，
+
+      请传-1，并在报告中注明；out 是结构体为其他你想输出的指标(请在上机报告及
+
+        README.txt 中注明).
+
+     • python 用户的输入和输出格式要求同matlab，请指明随机数的种子.
+
+     • 统一的程序命名如下[题号-函数名] (‘_’ 为一个下划线，注意方法名的大小写)：
+
+              1. gl_cvx_mosek.* / gl_cvx_gurobi.*
+
+              2. gl_mosek.*/gl_gurobi.*
+
+            3.a. gl_SGD_primal.m / gl_SGD_primal.py
+
+           3.b. gl_GD_primal.m / gl_GD_primal.py
+
+             3.c. gl_FGD_primal.m / gl_FGD_primal.py
+
+           3.d. gl_ProxGD_primal.m / gl_ProxGD_primal.py
+
+             3.e. gl_FProxGD_primal.m / gl_FProxGD_primal.py
+
+              3.f. gl_ALM_dual.m / gl_ALM_dual.py
+
+            3.g. gl_ADMM_dual.m / gl_ADMM_dual.py
+
+           3.h. gl_ADMM_primal.m / gl_ADMM_primal.py
+===== PDF PAGE 5 | FOOTER ['xx', 'xx', 'xx', 'xx'] =====
+2 上机作业批改及评分                                                           5
+
+
+               3.i. gl_PPA_dual.m / gl_PPA_dual.py
+
+              3.j. gl_BCD_primal.m / gl_BCD_primal.py
+
+
+ 实验报告40% 基本知识(模型与算法的细节), 结果丰富性创新性, 排版.
+
+
+     • 你的结果请在报告中至少用表格及图片方式呈现.
+
+     表格可类似于表1 (仅供参考).
+
+                   表1: Compare the efficiency of different solvers.
+
+           Solver         Fval  Errfun  Errfun_Exact  Time   Iter  Sparisity
+
+           your_solver1  xxx    xx        xx        xx    xx     xx
+
+           your_solver2  xxx    xx        xx        xx    xx     xx
+
+                           Fval 代表着目标函数值. 鼓励呈现其他未列出的统计指标.
+
+
+     • 报告排版请尽可能的整齐美观.

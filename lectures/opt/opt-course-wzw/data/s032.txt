@@ -1,0 +1,77 @@
+
+===== PDF PAGE 1 | FOOTER ['1'] =====
+       2017年秋季凸优化期中考试试题
+
+
+
+
+1. （10分）分别证明如下两个集合为凸锥(convex cone)，写出并证明其对偶锥(dual cone)的具体形式。
+
+     (a) Rn+ = {x ∈Rn  | x ≥0}.
+     (b) S +n = {X ∈Rn×n  | X⊤= X,  X ⪰0}.
+2. （10分）令A ∈S n = {X ∈Rn×n  | X⊤= X}, b ∈Rn, c ∈R. 定义集合Ω= {x ∈Rn  | x⊤Ax + b⊤x + c ≤0}.
+
+     (a) 证明: 如果A半正定, 则Ω是凸集。
+     (b) 证明: 令g ∈Rn非零。如果存在λ ∈R使得A + λgg⊤半正定, 则集合Ω与超平面g⊤x + h = 0 的交集是
+   凸集。
+
+3. （30分）
+
+     (a) 给定c ∈Rn, 讨论下列问题的最优解：
+
+                                                                      n
+                  X                                   min c⊤x; s.t.      xi = 1, x ≥0.
+                                                    x∈Rn
+                                                                          i=1
+
+     (b) 给定A ∈S n, c ∈Rn, 分情况讨论下列问题的最优解：
+
+                                      min c⊤x; s.t. x⊤Ax ≤1.
+                                                        x∈Rn
+
+     (c) 令Pi ∈S +,n  i = 0, . . . , K, Ω= n P0 + PKi=1 Piui  | ∥u∥2 ≤1o. 将下列问题写成写成二次锥规划：
+
+                                min sup (1/2)x⊤Px + q⊤x, s.t. Ax ≤b.
+                                          P∈Ω
+
+     (d) 令Ai ∈S m, A(x) = A0 + x1A1 + · · · + xnAn, λmax(A(x))是矩阵A(x)的最大特征值。证明问题
+
+                                         min   λmax(A(x))
+                                                            x∈Rn
+
+     可以写成半定规划(semideﬁnite programming)。
+
+4. （20分）
+     (a) 证明：f(x) = (Pni=1 x1/2i   )2 在定义域domf = Rn++上为凹(concave)函数。
+     (b) 证明：f(x, u, v) = −log(uv −x⊤x) 在定义域domf = {(x, u, v) | uv > x⊤x, u, v > 0, u, v ∈R, x ∈Rn}上是
+   凸函数。
+     (c) 证明：f(X) = trace(X−1) 在定义域domf = S ++上是凸函数。n
+     (d) 写出函数f(x) = −log(t2 −x⊤x) 在定义域domf = {(x, t) ∈Rn × R  | ∥x∥2 ≤t}上的共轭函数(conjugate
+       function)。
+
+5. （30分）
+
+     (a) 写出下面问题的对偶问题及其最优性条件：minx∈Rn   maxi=1,...,m(a⊤i x + bi)
+     (b) 写出下面问题的对偶问题及其最优性条件：minx∈Rn ∥x∥1, s.t. ∥Ax −b∥2 ≤σ
+
+
+
+                                            1
+===== PDF PAGE 2 | FOOTER ['2'] =====
+(c) 写出下面问题的对偶问题及其最优性条件：
+
+                                                                n
+                                  1   X                            min         2 + C1     ξi                                                 w,b,ξ  2∥w∥2
+                                                                   i=1
+                                                  s.t.    yi · (a⊤i w + b) ≥1 −ξi, ∀i = 1, . . . , n
+                                                      ξi ≥0, ∀i = 1, . . . , n
+
+(d) 推导下列问题的对偶问题，以及该对偶问题的对偶问题：
+
+                                   min   x⊤Cx,   x2i = 1.                                                    x∈Rn
+
+
+
+
+
+                                        2

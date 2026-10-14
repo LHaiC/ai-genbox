@@ -1,0 +1,66 @@
+Recognition
+Zaiwen Wen
+Home
+Research
+Service
+Research
+Publications
+Recognition
+Recent Talks
+Seminars
+Group
+Optbook
+Databook
+Mathematical
+Formalization
+Workstation
+Guidance
+Software
+ReasLab
+OptSuite
+SSNCVX
+ReasBook
+ReasAtlas
+Teaching
+Optimization
+Methods
+(2026 Fall)
+Algorithms for
+Big Data
+Analysis
+(2026 Spring)
+Recognition
+Awards & Honors
+2026/06, First Prize of Beijing Natural Science Award (2025)
+2026/04, Wang Xuan Outstanding Young Scholar Award (2025)
+2024/04, Changjiang Distinguished Professor (2023), Ministry of Education
+2021/08, Peking University Teaching Excellence Award
+2020/09, Beijing Science and Technology Award — Outstanding Young Zhongguancun Award
+2020/11, Leading Talent in Science and Technology Innovation, National Ten Thousand Talents Program
+2019/12, Huang Tingfang / Sino Group Young Distinguished Scholar, Peking University
+2016/05, The 14th China Youth Science and Technology Award
+2015/08, National Program for Top-Notch Young Professionals
+2015, Charles Broyden Prize, Journal of Optimization Methods & Software
+2013/01, Excellent Young Scientists Fund, National Natural Science Foundation of China
+2012/08, First Prize, Youth Science and Technology Award, Operations Research Society of China
+2012, New Century Excellent Talents in University Program, Ministry of Education
+2009, INFORMS Computing Society Student Paper Award
+Invited Lectures
+2025/08, Plenary Lecture, The 14th National Meeting of Computational Mathematics, Guangzhou, China
+2024/10, Plenary speaker, The 17th Annual Conference of the Operations Research Society of China
+2024/07, XXIII International Conference Mathematical Optimization Theory and Operations Research, Keynote speaker
+2022/08, Semi-Plenary Lecture, International Conference on Continuous Optimization, USA (cancelled due to Covid-19)
+2017/05, Plenary Lecture, The 11th National Meeting on Mathematical Programming, Guilin, China
+2016/09, Plenary Lecture, The 10th National Meeting of Computational Mathematics, Guangzhou, China
+Funding Agencies
+Ministry of Science and Technology of China (MOST)
+National Natural Science Foundation of China (NSFC)
+Beijing Natural Science Foundation
+Beijing Academy of Artificial Intelligence (BAAI), 2019 - 2021
+Huawei
+Alibaba DAMO Academy
+Goertek
+...
+Page generated 2026-10-06 22:15:50 CST, by
+jemdoc+MathJax
+.

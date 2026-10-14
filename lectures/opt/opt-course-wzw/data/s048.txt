@@ -1,0 +1,1013 @@
+
+===== PDF PAGE 1 | FOOTER ['1/54'] =====
+   典型优化问题
+
+      文再文
+
+  北京大学北京国际数学研究中心
+
+教材《最优化：建模、算法与理论》配套电子教案
+
+      http://bicmr.pku.edu.cn/~wenzw/optbook.html
+
+  致谢：本教案由邓展望协助准备
+
+
+
+
+
+                                                                                                                       1/54
+===== PDF PAGE 2 | FOOTER ['3', '4', '5'] =====
+提纲
+
+
+
+ 1 凸优化
+
+
+ 2 线性规划
+
+ 3 二次锥规划
+
+
+ 4 半定规划
+
+ 5 典型优化算法软件与优化模型语言
+
+
+
+
+
+                                                                                                                                                    2/54
+===== PDF PAGE 3 | FOOTER [] =====
+凸优化问题
+
+
+ 标准形式的凸优化问题
+                         min   f0(x)
+                                           s.t.    fi(x) ≤0,    i = 1, ..., m
+                                     aTi x = bi,    i = 1, ..., p
+
+        f0, f1, ..., fm 凸函数; 线性等式约束
+   拟凸问题：如果f0 是拟凸(且f1, ..., fm 为凸函数)
+ 经常写成：
+                         min   f0(x)
+                                           s.t.    fi(x) ≤0,    i = 1, ..., m
+                                Ax = b
+ 重要性质：凸问题的可行集为凸集.
+
+
+                                                                                                                                                    3/54
+===== PDF PAGE 4 | FOOTER ['2'] =====
+例子
+
+
+                         min   f0(x) = x21 + x22
+                                          s.t.    f1(x) = x1/(1 + x22) ≤0
+                                       h1(x) = (x1 + x2)2 = 0
+
+        f0 凸函数; 可行集{(x1, x2)|x1 = −x2 ≤0} 为凸集
+   根据我们定义不是凸问题: f1 非凸, h1 不是线性函数
+
+   等价于(但不完全相等) 凸优化问题：
+
+                               min  x21 + x22
+                                                     s.t.   x1 ≤0
+                                                  x1 + x2 = 0
+
+
+                                                                                                                                                    4/54
+===== PDF PAGE 5 | FOOTER [] =====
+局部和全局极小
+
+ 凸优化问题的任意局部极小点都是全局最优
+
+ 证明: 假设x是局部极小，y全局最优且f0(y) < f0(x).
+ x 局部最优意味着存在R > 0使得
+                z可行,   ∥z −x∥2 ≤R  =⇒   f0(z) ≥f0(x).
+ 考虑z = θy + (1 −θ)x 且θ = R/(2∥y −x∥2)
+     ∥y −x∥2 > R, 因此0 < θ < 1/2
+      z 是两个可行点的凸组合，因此也可行。
+      ∥z −x∥2 = R/2，并且
+                                    f0(z) ≤θf0(x) + (1 −θ)f0(y) < f0(x),
+   这与x是局部极小的假设矛盾.
+
+                                                                                                                                                    5/54
+===== PDF PAGE 6 | FOOTER ['x'] =====
+可微凸优化问题的最优性条件
+
+ x 是凸优化问题minx∈X f0(x)最优解当且仅当x可行且满足：
+                              ∇f0(x)T(y −x) ≥0,  ∀y ∈X.
+
+
+
+                                     −∇f0(x)                               x
+                X
+
+
+
+ 如果∇f0(x)非零，它定义了可行集X在x处的支撑超平面.                                                        6/54
+===== PDF PAGE 7 | FOOTER [] =====
+具体含义
+
+   无约束优化: x 是最优解当且仅当
+                                    x ∈dom f0,   ∇f0(x) = 0
+   等式约束优化问题
+                          min   f0(x)       s.t.   Ax = b
+      x 是最优解当且仅当存在υ使得
+
+                                    = 0                           x ∈dom f0,  Ax = b,   ∇f0(x) + ATυ
+   非负约束优化问题
+                           min   f0(x)       s.t.   x ⪰0
+      x 是最优解当且仅当
+                          (∇f0(x)i ≥0   xi = 0                          x          f0,   x                  ∈dom     ⪰0,       = 0   xi > 0                                                    ∇f0(x)i
+                                                                                                                                                    7/54
+===== PDF PAGE 8 | FOOTER ['3', '4', '5'] =====
+提纲
+
+
+
+ 1 凸优化
+
+
+ 2 线性规划
+
+ 3 二次锥规划
+
+
+ 4 半定规划
+
+ 5 典型优化算法软件与优化模型语言
+
+
+
+
+
+                                                                                                                                                    8/54
+===== PDF PAGE 9 | FOOTER [] =====
+线性规划基本形式
+
+ 线性规划问题的一般形式如下：
+                               min  cTx,
+                                          x∈Rn
+                                                                                              (1)                                                    s.t.   Ax = b,
+                                  Gx ≤e,
+ 其中c ∈Rn, A ∈Rm×n, b ∈Rm, G ∈Rp×n 和e ∈Rp 是给定的矩阵和向量，x ∈Rn 是决策变 量．
+   标准形式
+                                 min  cTx,
+                                            x∈Rn
+                                                                                              (2)                                                       s.t.   Ax = b,
+                                               x ≥0,
+   不等式形式
+                             max  bTy,
+                                            y∈Rn                                              (3)
+                                                       s.t.   ATy ≤c.                                                         9/54
+===== PDF PAGE 10 | FOOTER [] =====
+基追踪问题
+
+
+ 基追踪问题是压缩感知中的一个基本问题，可以写为
+                               min  ∥x∥1,                                          x∈Rn                                                                                              (4)
+                                                    s.t.   Ax = b.
+
+ 对每个|xi| 引入一个新的变量zi，可以将问题(4) 转化为
+                                          n
+                      min X zi,
+                              z∈Rn
+                                      i=1                                                      (5)
+                                     s.t.   Ax = b,
+                            −zi ≤xi ≤zi,    i = 1, 2, · · · , n,
+ 这是一个线性规划问题．
+
+
+                                                                                                                                               10/54
+===== PDF PAGE 11 | FOOTER [] =====
+基追踪问题
+
+
+   也可以引入xi的正部和负部,其中x+i = max{xi, 0}, x−                                                                                                                        i = max{−xi, 0}..
+                                                                  i + x−i ，则问题(4) 转化为的另外一种等价的线性规划形式    利用xi = x+i −x−                                              i  , |xi| = x+   可以写成
+                                                        n
+                             min X (x+i + x−i ),
+                                     x+,x−∈Rn                                                    i=1
+                                                    s.t.  Ax+ −Ax−= b,
+                                           x+, x−≥0.
+   可以看出这也是一个线性规划问题，且与原问题等价.
+
+
+
+
+
+                                                                                                                                               11/54
+===== PDF PAGE 12 | FOOTER [] =====
+数据拟合
+
+ 在数据拟合中，除了常用的最小二乘模型外，还有最小ℓ1 范数模型
+                              min  ∥Ax −b∥1,                                    (6)                                        x∈Rn
+
+ 和最小ℓ∞范数模型
+                             min  ∥Ax −b∥∞.                                   (7)                                       x∈Rn
+ 这两个问题都可以转化成线性规划的形式．
+   对于问题(6)，通过引入变量y = Ax −b，可以得到如下等价问题：
+                               min   ∥y∥1,                                               x,y∈Rn
+                                                     s.t.   y = Ax −b.
+   利用基追踪问题中类似的技巧，可以将上述绝对值优化问题转化成线性规划问题．
+
+
+                                                                                                                                               12/54
+===== PDF PAGE 13 | FOOTER [] =====
+多面体的切比雪夫中心
+
+
+ 多面体的
+
+                                           i x ≤bi, i = 1, ..., m}       P = {x|aT
+ 的切比雪夫中心即为其最大半径内接球的球                             xchebxcheb
+ 心
+          B = {xc + u| ∥u∥2 ≤r}
+      aTi x ≤bi 对∀x ∈B 当且仅当
+                       sup{aT                                                                  i (xc + u)| ∥u∥2 ≤r} = aT                                                                                                                     i xc + r∥ai∥2 ≤bi
+   因此, xc, r 可以用LP方式求解
+                     max   r
+                                               xc,r
+                                 = 1, ..., m                                       s.t.   aTi xc + r∥ai∥2 ≤bi,    i
+                                                                                                                                               13/54
+===== PDF PAGE 14 | FOOTER [] =====
+分式线性问题
+
+
+                            min   f0(x)
+                                                                                              (8)
+                                               s.t.  Gx ≤h, Ax = b
+ 分式线性函数：
+                            cTx + d
+                                  f0 =             ,   domf0(x) =    + f >                         (9)                            eTx + f                {x|eTx      0}
+ 则该问题等价于一个线性问题：
+
+                             min  cTy + dz
+                                                 s.t.  Gy ≤hz
+                                      Ay = bz                                   (10)
+                                         eTy + fz = 1
+                                                 z ≥0
+
+                                                                                                                                               14/54
+===== PDF PAGE 15 | FOOTER ['3', '4', '5'] =====
+提纲
+
+
+
+ 1 凸优化
+
+
+ 2 线性规划
+
+ 3 二次锥规划
+
+
+ 4 半定规划
+
+ 5 典型优化算法软件与优化模型语言
+
+
+
+
+
+                                                                                                                                               15/54
+===== PDF PAGE 16 | FOOTER [] =====
+二次规划问题
+
+                                    1
+                            min                           + qTx + r                                  2xTPx
+                                                                                     (11)
+                                              s.t.  Gx ≤h
+                                  Ax = b
+    P ∈Sn+,故目标函数是二次的
+   在一个多面体内最小化一个二次凸问题
+
+                                                      −∇f0(x⋆)
+
+                                                           x⋆
+
+                                   P
+
+
+
+
+
+                                                                                                                                               16/54
+===== PDF PAGE 17 | FOOTER [] =====
+二次规划的应用
+
+
+   最小二乘问题：
+                                                                 2                               (12)                                min ∥Ax −b∥2
+
+     该问题的解析解为x∗= A†b (其中A†为广义逆)
+   随机线性规划
+
+                     min   ¯cTx + γxTΣx = EcTx + γvar(cTx)
+                                    s.t.  Gx ≤h,  Ax = b
+      c 是随机向量并且均值为¯c，方差为Σ
+     cTx 均值为¯cTx ,方差为xTΣx
+     γ > 0 为风险参数,控制预期成本与风险.
+
+
+                                                                                                                                               17/54
+===== PDF PAGE 18 | FOOTER [] =====
+带有二次约束的二次规划问题(QCQP)
+
+
+
+ 考虑带有二次约束的二次规划问题：
+                   min  (1/2)xTP0x + qT0x + r0
+                                 = 1, ..., m                               s.t.   (1/2)xTPix + qTi x + ri ≤0,    i
+                         Ax = b
+
+         + ;即目标函数与约束均为二次凸的      Pi ∈Sn
+    如果P1, ..., Pm ∈Sn++, 则可行域为m个椭球与一个仿射集的交集.
+
+
+
+
+
+                                                                                                                                               18/54
+===== PDF PAGE 19 | FOOTER [] =====
+广义不等式约束
+
+   凸问题的广义不等式约束
+
+                          min   f0(x)
+                                            s.t.    fi(x) ⪯Ki 0,    i = 1, ..., m
+                                 Ax = b
+
+                f0 : Rn →R 为凸函数; fi : Rn →Rki 关于适当锥Ki为Ki-凸的.
+     与标准凸问题有相同的性质
+
+   锥形式问题(具有仿射目标函数与约束的特殊情况)
+                               min  cTx
+                                                    s.t.   Fx + g ⪯K 0
+                                      Ax = b
+
+   将线性规划问题延伸到了非多面体锥上(K = Rm+)
+                                                                                                                                               19/54
+===== PDF PAGE 20 | FOOTER [] =====
+二次锥
+
+
+    二次锥(SOC):
+                                                                    x1
+                 Q =  x ∈Rn+1 | ∥¯x∥2 ≤x1,   x =    ¯x
+
+   旋转二次锥
+
+                                       x1 
+                                   
+                                                  2             Q =   ∈Rn+1 | ∥¯x∥2                 x            ≤x1x2, x1, x2 ≥0,   x = x2¯x 
+    旋转二次锥∥¯x∥2 ≤x1x2, 其中x1, x2 ≥0, 等价于
+                                           x1 −x2     + x2                                                         2¯x    ≤x1
+
+
+
+                                                                                                                                               20/54
+===== PDF PAGE 21 | FOOTER [] =====
+二次锥规划
+
+
+
+                    min    f Tx
+                                                                                                    i x + di,    i = 1, ..., m                                  s.t.   ∥Aix + bi∥2 ≤cT
+                          Fx = g
+ (Ai ∈Rni×n, F ∈Rp×n)
+   优化问题中的不等式:
+                                   (cTi x + di, Aix + bi) ∈为二次锥
+    对于ni = 0, 问题退化为LP; 若ci = 0, 问题退化为QCQP
+
+   问题形式比LP与QCQP更常规
+
+
+
+
+                                                                                                                                               21/54
+===== PDF PAGE 22 | FOOTER [] =====
+二次规划(QP)
+
+               min  q(x) = x⊤Qx + a⊤x + β  假设 Q ≻0, Q = Q⊤
+                          s.t.   Ax = b
+                         x ≥0
+
+          + β                       = Q1/2x + 2Q−1/2a.      q(x) = ∥¯u∥2                                         1             −14a⊤Q−1a, 其中¯u
+   等价的SOCP问题形式：
+
+                            min  u0
+                                                1
+                                               s.t.     ¯u = Q1/2x + 2Q−1/2a
+                                   Ax = b
+                                         x ≥0,   (u0, ¯u) ⪰Q 0
+
+
+                                                                                                                                               22/54
+===== PDF PAGE 23 | FOOTER ['2', '2'] =====
+二次约束
+
+
+
+                               q(x) = x⊤B⊤Bx + a⊤x + β ≤0
+ 等价于
+                                            (u0, ¯u) ⪰Q 0,
+ 其中
+                           Bx  !              1                                          ¯u =  a⊤x+β+1  并且  u0 =  −a⊤x −β                                                     2                                        2
+
+
+
+
+
+                                                                                                                                               23/54
+===== PDF PAGE 24 | FOOTER [] =====
+最小范数问题
+
+ 令¯vi = Aix + bi ∈Rni.
+     minx Pi ∥¯vi∥等价于
+                               min X vi0
+                                                                                                       i
+                                                     s.t.      ¯vi = Aix + bi
+                                                             (vi0,¯vi) ⪰Q 0
+     minx  max1≤i≤r ∥¯vi∥等价于
+                                min    t
+                                                     s.t.      ¯vi = Aix + bi
+                                                                (t,¯vi) ⪰Q 0
+
+
+
+                                                                                                                                               24/54
+===== PDF PAGE 25 | FOOTER [] =====
+最小范数问题
+
+ 令¯vi = Aix + bi ∈Rni.
+        ∥¯v[1]∥, . . . , ∥¯v[r]∥是范数∥¯v1∥, . . . , ∥¯vr∥按照非递增方式的排列
+     minx  Pki=1 ∥¯v[i]∥等价于
+                                 m
+                          min X ui + kt
+                                            i=1
+                                           s.t.      ¯vi = Aix + bi,    i = 1, . . . , m
+                                    ∥¯vi∥≤ui + t,    i = 1, . . . , m
+                                                ui ≥0,    i = 1, . . . , m
+
+
+
+
+
+                                                                                                                                               25/54
+===== PDF PAGE 26 | FOOTER [] =====
+Minimizing the sum of the k largest functions
+
+ Let θ(x) = (θ1(x), θ2(x), . . . , θm(x))⊤. We sort the m components in nonincreasing order,
+  i.e., θ[1](x) ≥θ[2](x) ≥. . . ≥θ[m](x).
+     Let Q be a convex set. Consider
+
+                                                        k
+                            min X θ[i](x), s.t. x                                                  x             ∈Q.
+                                             i=1
+
+         It is equivalent to
+                                      m
+                              min X ui + kt
+                                                      x
+                                                   i=1
+                                                   s.t.    ui + t ≥θi(x),
+                                                        ui ≥0
+                                            x ∈Q.
+
+                                                                                                                                               26/54
+===== PDF PAGE 27 | FOOTER [] =====
+旋转二次锥
+
+
+
+   极小化仿射函数的调和平均值
+
+                     min X 1/(a⊤i x + βi), s.t.  a⊤i x + βi > 0
+                                                                           i
+
+   该问题等价于
+                               min X ui
+                                                                                                      i
+                                                     s.t.      ¯vi = a⊤i x + βi
+                                        1 ≤uivi
+                                                         ui ≥0
+
+
+
+
+                                                                                                                                               27/54
+===== PDF PAGE 28 | FOOTER [] =====
+对数切比雪夫逼近
+
+
+
+   对数切比雪夫逼近
+                          min  max    ln(a⊤i x)                                               x    1≤i≤r    |      −ln bi|
+                                                                                 i x/bi, bi/a⊤i x),该问题等价于：   由于| ln(a⊤                                 i x) −ln bi| = ln max(a⊤
+                               min    t
+                                                                                                                i x/bi)t                                                    s.t.   1 ≤(a⊤
+                                    a⊤i x/bi ≤t
+                                                                        t ≥0
+
+
+
+
+
+                                                                                                                                               28/54
+===== PDF PAGE 29 | FOOTER ['2', '3'] =====
+二次锥规划的应用
+
+   含有几何平均的不等式：
+                                               n          !1/n
+             Y(a⊤i x + bi)   ≥t
+                                           i=1
+   对于n=4情形：
+
+                                max  w3
+                                                            s.t.  a⊤i x −bi ≥0
+                              4                      (a⊤1 x         2 x            1             max Y(a⊤i x                    −b1)(a⊤ −b2) ≥w2                          −bi) ⇐⇒        (a⊤3 x         4 x            2                           i=1                                             −b3)(a⊤ −b4) ≥w2
+                                                                         3                                           w1w2 ≥w2
+                                                    wi ≥0
+   目标函数可延伸为仿射函数有理幂次的乘积
+
+                                                                                                                                               29/54
+===== PDF PAGE 30 | FOOTER [] =====
+Robust linear programming
+
+ the parameters in LP are often uncertain
+
+                               min  c⊤x
+                                                   s.t.  a⊤i x ≤bi
+ There can be uncertainty in c, ai, b.
+
+ two common approaches to handling uncertainty (in ai, for simplicity)
+      deterministic model: constraints must hold for all ai ∈Ei
+                           min  c⊤x
+                                             s.t.  a⊤i x ≤bi, for all ai ∈Ei
+      stochastic model: ai is random variable; constraints must hold with probability η
+                            min  c⊤x
+                                                s.t.   prob(a⊤i x ≤bi) ≥η
+                                                                                                                                               30/54
+===== PDF PAGE 31 | FOOTER [] =====
+deterministic approach via SOCP
+
+    Choose an ellipsoid as Ei:
+                              Ei = {¯ai + Piu | ∥u∥2 ≤1},     ¯ai ∈Rn, Pi ∈Rn×n
+     Robust LP
+                           min  c⊤x
+                                             s.t.  a⊤i x ≤bi, for all ai ∈Ei
+       is equivalent to the SOCP
+
+                            min  c⊤x
+
+                                                                                                              i                                                s.t.    ¯a⊤i x + ∥P⊤                                                     x∥2 ≤bi
+     since
+
+                                                                                                                                  i                            sup  (¯ai + Piu)⊤x = ¯a⊤i x + ∥P⊤                                                              x∥2                                 ∥u∥2≤1
+
+                                                                                                                                               31/54
+===== PDF PAGE 32 | FOOTER [] =====
+stochastic approach via SOCP
+       ai is Gaussian with mean ¯ai, covariance Σi ( ai ∼N(¯ai, Σi)
+     a⊤i x is Gaussian r.v. with mean ¯a⊤i x, variance x⊤Σix; hence
+                                                                   bi         i x                              prob(a⊤i x    = Φ    −¯a⊤                                 ≤bi)                                                   ∥Σ1/2x∥2
+     where Φ(x) = (1/√ 2π) R −∞e−t2/2dtx             is CDF of      1)                                          N(0,
+     robust LP
+                            min  c⊤x
+                                                s.t.   prob(a⊤i x ≤bi) ≥η
+       is equivalent to the SOCP
+
+                         min  c⊤x
+                                          s.t.    ¯a⊤i x + Φ−1(η)∥Σ1/2x∥2 ≤bi
+                                                                                                                                               32/54
+===== PDF PAGE 33 | FOOTER ['3', '4', '5'] =====
+提纲
+
+
+
+ 1 凸优化
+
+
+ 2 线性规划
+
+ 3 二次锥规划
+
+
+ 4 半定规划
+
+ 5 典型优化算法软件与优化模型语言
+
+
+
+
+
+                                                                                                                                               33/54
+===== PDF PAGE 34 | FOOTER [] =====
+半定规划
+
+ 半定规划问题的一般形式如下：
+
+                     min  cTx,
+                                   s.t.   x1A1 + x2A2 + · · · + xnAn + B ⪯0,                    (13)
+                        Gx = h,
+
+ 其中c ∈Rn, Ai ∈Sm, i             = 1, 2, · · · , m, B ∈Sm, G ∈Rp×n, h ∈Rp 为已知的向量和矩
+ 阵，x = (x1, x2, · · · , xn) ∈Rn是自变量．
+   半定规划（SDP）是线性规划在矩阵空间中的一种推广．它的目标函数和等式约束
+   均为关于矩阵的线性函数，而它与线性规划不同的地方是其自变量取值于半正定矩
+   阵空间．
+   作为一种特殊的矩阵优化问题，半定规划在某些结构上和线性规划非常相似，很多
+   研究线性规划的方法都可以作为研究半定规划的基础．由于半定规划地位的特殊
+   性，我们将在本节中单独讨论半定规划的形式和应用．
+
+
+                                                                                                                                               34/54
+===== PDF PAGE 35 | FOOTER [] =====
+半定规划
+
+
+ 类似于线性规划问题，我们考虑半定规划的标准形式
+                             min   ⟨C, X⟩,
+                                                s.t.    ⟨A1, X⟩= b1,
+                                                                   · · ·                                        (14)
+                                        ⟨Am, X⟩= bm,
+                              X ⪰0,
+ 和对偶形式：
+                      min                            −bTy,                                            (15)
+                                      s.t.   y1A1 + y2A2 + · · · + ynAn ⪯C.
+ 形如(13) 式的优化问题都可以转化成(14) 式或者(15) 式的形式．
+
+
+
+                                                                                                                                               35/54
+===== PDF PAGE 36 | FOOTER [] =====
+LP,SOCP与SDP的比较
+
+
+ LP与SDP
+               LP:    min  cTx      SDP:    min  cTx
+                                 s.t.   Ax ≤b                   s.t.   diag(Ax −b) ⪯0
+
+ SOCP 与SDP
+           SOCP:    min    f Tx
+                             + di,    i = 1, ..., m                                    s.t.   ∥Aix + bi∥2 ≤cTx
+
+           SDP:     min    f Tx
+                                      (cTi x + di)I  Aix + bi                                    s.t.                                                        i = 1, ..., m                                     (Aix + bi)T  cTi x + di  ⪰0,
+
+
+
+                                                                                                                                               36/54
+===== PDF PAGE 37 | FOOTER [] =====
+二次约束二次规划问题的半定规划松弛
+
+   考虑二次约束二次规划问题
+                    min  xTA0x + 2bT0x + c0,
+                           x∈Rn                                                        (16)
+                                  s.t.   xTAix + 2bTi x + ci ≤0,    i                                = 1, 2, · · · , m,
+    其中Ai 为n × n 对称矩阵．当部分Ai为对称不定矩阵时，问题(16) 是NP 难的非凸优   化问题．
+   写出问题(16) 的半定规划松弛问题．对任意x ∈Rn以及A ∈Sn，有恒等式
+                         xTAx = Tr(xTAx) = Tr(AxxT) =  A, xxT  ,
+
+   因此问题(16) 中所有的二次项均可用下面的方式进行等价刻画：
+
+                           xTAix + 2bTi x + ci =  Ai, xxT + 2bTi x + ci.
+
+
+                                                                                                                                               37/54
+===== PDF PAGE 38 | FOOTER [] =====
+二次约束二次规划问题的半定规划松弛
+
+
+
+ 由上述分析，原始问题等价于
+
+                         + c0                  min   ⟨A0, X⟩+ 2bT0x                        x∈Rn
+                              s.t.    ⟨Ai, X⟩+ 2bT                                                                                       i x + ci ≤0,    i = 1, 2, · · · , m,                 (17)
+                     X = xxT.
+
+ 进一步地，
+                                                 Ai   bi    X   x                      xTAix + 2bTi x + ci =                   ,                  ,                                          bTi    ci     xT  1
+                                                         def
+                          ==  Ai, X  ,    i = 0, 1, · · · , m.
+
+
+
+
+
+                                                                                                                                               38/54
+===== PDF PAGE 39 | FOOTER [] =====
+二次约束二次规划问题的半定规划松弛
+
+
+ 接下来将等价问题(17) 松弛为半定规划问题．
+    在问题(17) 中，唯一的非线性部分是约束X = xxT，我们将其松弛成半正定约
+   束X ⪰xxT．可以证明，X ⪰0 与X ⪰xxT 是等价的．
+   因此这个问题的半定规划松弛可以写成
+
+                        min    A0, X
+                                         s.t.     Ai, X ≤0,    i = 1, 2, · · · , m,
+                          X ⪰0,
+                                    Xn+1,n+1 = 1.
+   其中“松弛”来源于我们将X = xxT 替换成了X ⪰xxT．
+
+
+
+
+                                                                                                                                               39/54
+===== PDF PAGE 40 | FOOTER [] =====
+最大割问题的半定规划松弛
+
+
+   令G 为一个无向图，其节点集合为V = {1, 2, · · · , n} 和边的集合为E．令wij = wji 为
+     边(i, j) ∈E 上的权重，并假设wij ≥0, (i, j) ∈E．最大割问题是找到节点集合V 的一   个子集S 使得S 与它的补集S 之间相连边的权重之和最大化．
+   可以将最大割问题写成如下整数规划的形式：令xj = 1,  j ∈S 和xj = −1,  j ∈S，则
+                                 1
+                      max            X (1 −xixj)wij                                 2                                                    i<j                                           (18)
+                                          s.t.    xj ∈{−1, 1},  j = 1, 2, · · · , n.
+    在问题(18) 中，只有当xi与xj不同时，目标函数中wij的系数非零．最大割问题是一个
+   离散优化问题，很难在多项式时间内找到它的最优解．
+
+
+
+
+
+                                                                                                                                               40/54
+===== PDF PAGE 41 | FOOTER [] =====
+二次约束二次规划问题的半定规划松弛
+
+ 接下来介绍如何将问题(18) 松弛成一个半定规划问题．
+                   =   令W = (wij) ∈Sn，并定义C                          −14(Diag(W1) −W)为图G的拉普拉斯矩阵的−14倍，则    问题(18) 可以等价地写为
+                           min  xTCx,
+                                                  s.t.  x2i = 1,  i = 1, 2,      , n.                                                                                        · · ·
+   由于目标函数是关于x的二次函数，可将其等价替换为 C, xxT ．
+   接下来令X = xxT，注意到约束x2i = 1，这意味着矩阵X对角线元素Xii = 1．因此利用
+   矩阵形式我们将最大割问题转化为
+                           min   ⟨C, X⟩,
+                                                  s.t.   Xii = 1,  i = 1, 2, · · · , n,                        (19)
+                             X ⪰0, rank(X) = 1.
+                                            = 1等价刻    问题(19) 和(18) 是等价的，这是因为X = xxT 可以用约束X ⪰0和rank(X)   画．                                                                                                                                               41/54
+===== PDF PAGE 42 | FOOTER [] =====
+极小化最大特征值
+
+   问题的形式可表示为：λmax(A0 + Pi xiAi):
+
+                            min  λmax(A0 + X xiAi)
+                                                                                                                    i
+
+   SDP形式：
+                          对偶问题形式：
+           min   z                          max   ⟨A0, Y⟩
+                   s.t.    zI − X xiAi ⪰A0                            s.t.    ⟨Ai, Y⟩= 0
+                                                         i                                               ⟨I, Y⟩= 1
+                                                   Y ⪰0
+   等价形式来源于：
+                                λmax(A) ≤t ⇐⇒A ⪯tI
+                                                                                                                                               42/54
+===== PDF PAGE 43 | FOOTER [] =====
+极小化二范数问题
+
+                 = A0 + Pi xiAi的二范数:    令Ai ∈Rm×n. 极小化A(x)
+
+                                min                                                         x    ∥A(x)∥2
+
+   该问题的SDP形式：
+                            min    t
+                                                                x,t
+                                                                 tI    A(x)
+                                               s.t.                                       A(x)⊤     tI  ⪰0
+
+   约束形式来源于：
+                          ∥A∥2 ≤t ⇐⇒ A⊤A ⪯t2I,    t ≥0
+                                                                        tI    A(x)
+                   ⇐⇒   A(x)⊤     tI  ⪰0
+
+
+                                                                                                                                               43/54
+===== PDF PAGE 44 | FOOTER [] =====
+特征值优化问题
+    令λ[i](A)为A第i大特征值，即λ[1](A) ≥λ[2](A) ≥. . . ≥λ[n](A). 极小化前k个最大特征   值之和可以写成:
+                                                         k
+                           min X λ[i](A0 + X zjAj)                                                        z
+                                              i=1                        j
+   根据第26页，它等价于
+                                                n
+                       min   kt + X ui
+                                                 z,u,t
+                                            i=1
+                                      s.t.    ui + t ≥λi(A0 + X zjAj),   ui ≥0                                                                                                                 j
+    设ui = λi(X)。上述问题写成SDP形式：
+                        min   kt + Tr(X)
+                                                z,X,t
+                                        s.t.    tI + X ⪰A0 + X zjAj,  X ⪰0                                                                                                               j
+                                                                                                                                               44/54
+===== PDF PAGE 45 | FOOTER ['3', '4', '5'] =====
+提纲
+
+
+
+ 1 凸优化
+
+
+ 2 线性规划
+
+ 3 二次锥规划
+
+
+ 4 半定规划
+
+ 5 典型优化算法软件与优化模型语言
+
+
+
+
+
+                                                                                                                                               45/54
+===== PDF PAGE 46 | FOOTER [] =====
+典型优化算法软件
+
+
+ 前面介绍了各种各样的优化问题．对于每一类优化问题，我们都有相应的求解算法以及
+ 一些流行的算法软件包．
+    SDPT3: 这个开源软件包的基本代码是用MATLAB 来写的，但是关键的子程序是
+   用FORTRAN 和C 语言通过MEX 文件来完成的．它可以求解锥规划问题，其中锥可
+   以是半定矩阵锥、二次锥和非负象限中的一个或者多个的乘积．这个软件主要实现
+   的算法是一种原始– 对偶内点法．
+    MOSEK: 这个商业软件包可以求解线性规划、二次锥规划、半定规划、二次规划等
+   凸优化问题，以及混合整数线性规划和混合整数二次规划等．它的重点是求解大规
+   模稀疏问题，尤其在求解线性规划、二次锥规划和半定规划的内点法设计上做得非
+   常有效．除了内点法之外，MOSEK 还实现了线性规划问题的单纯形算法，特殊网络
+   结构问题的网络单纯形算法以及针对混合整数规划问题的算法．它提供C, C#, Java,
+     Python, MATLAB 和R 等接口．
+
+
+
+
+                                                                                                                                               46/54
+===== PDF PAGE 47 | FOOTER [] =====
+典型优化算法软件
+
+
+
+
+    CPLEX: 这个商业软件可以求解整数规划问题，非常大规模的线性规划问题（使用单
+   纯形方法或者内点法），凸和非凸二次规划问题，二次锥规划问题．它提供C++,
+     C#, Java, Microsoft Excel 和MATLAB 接口，并且提供一个独立的交互式优化器可执
+   行文件，用于调试和其他目的．
+
+     Gurobi: 这个商业软件可以求解线性规划（单纯形法和并行的内点法），二次规划
+   （采用单纯形法和内点法），二次约束规划，混合整数线性规划，混合整数二次规
+   划，混合整数二次约束规划．它提供C, C++, Java, .NET, Python, MATLAB 和R 等接
+   口．
+
+
+
+
+
+                                                                                                                                               47/54
+===== PDF PAGE 48 | FOOTER [] =====
+典型优化算法软件
+
+
+
+     IPOPT: 这个开源软件可以求解大规模非线性规划问题，主要实现了原始– 对偶内点
+   法，并使用滤波（filter）方法代替线搜索．IPOPT 主要使用C++ 语言编写，并提
+    供C, C++, FORTRAN, Java, MATLAB 和R 等接口．
+      Knitro: 用来求解大规模非线性优化问题的商业软件．这个软件提供了四种不同的优
+   化方法，两种内点型方法和两种积极集（active set）方法，可以用来求解一般非凸
+   非线性规划问题，非线性方程组，线性规划，二次（线性）约束二次规划问题，线
+   性（非线性）最小二乘问题，混合整数规划问题以及无导数优化问题，等等．Knitro
+   支持的编程语言有C, FORTRAN, C++, C#, Java, MATLAB, R, Python 等，以及模型
+   语言AMPL，AIMMS，GAMS 和MPL 等．因其具有大量的用户友善的选项以及自动
+   调试器，全局优化的并行多重启动策略，导数逼近和检查以及内部预分解器，在实
+   际中被广泛采用．
+
+
+
+
+
+                                                                                                                                               48/54
+===== PDF PAGE 49 | FOOTER [] =====
+优化模型语言
+
+
+
+
+   模型语言的发展开始于19世纪70年代后期，其主要动因是计算机的出现．在优化模
+   型语言中，优化模型可以写成和数学表达式很类似的方式，以此给用户带来更便捷
+   的服务．
+
+   模型的表达式形式是与求解器无关的，不同的求解器需要用优化模型语言将给定的
+   模型和数据转为其求解的标准形式，然后再对其进行求解．这类工具有三个优点：
+   一是将容易出错的转化步骤交给计算机完成，降低错误率；二是在模型和算法之间
+   建立了一个清晰的界限；三是对于困难的问题，可以尝试不用的求解器，得到更好
+   的结果．
+
+
+
+
+
+                                                                                                                                               49/54
+===== PDF PAGE 50 | FOOTER [] =====
+CVX
+
+
+
+   CVX是以MATLAB 为基础的优化模型语言，用来求解凸优化问题．它允许将优化问
+   题的目标函数以及约束用MATLAB 语法写出．
+    CVX 采用了一种快速构造和识别凸性的准则，服从这个准则的凸问题都可以很快地
+   被识别出来．之后CVX 根据用户的选择调用已有软件包来求解变形后的凸优化问
+   题，这些软件包括免费软件SDPT3 和SeDuMi 以及商业软件Gurobi 和MOSEK 等．
+   除了一些典型问题外，CVX 还可以识别一些更复杂的凸优化问题，例如带ℓ1范数的
+   优化问题．目前CVX 还有Julia 语言版本和Python 语言版本CVXPY．
+   除CVX 外，还有很多发展成熟的优化模型语言可供我们使用，如AMPL，YALMIP
+   等．
+
+
+
+
+
+                                                                                                                                               50/54
+===== PDF PAGE 51 | FOOTER ['8', '9'] =====
+CVX
+
+ 考虑如下优化问题：
+                              min  ∥Ax −b∥2,
+                                                  s.t.  Cx = d,                                  (20)
+                               ∥x∥∞≤e,
+ 它可以写成:
+ 1 m = 20; n = 10; p = 4;
+ 2 A = randn(m,n); b = randn(m,1);
+ 3 C = randn(p,n); d = randn(p,1); e = rand;
+ 4 cvx_begin
+ 5    variable x(n)
+ 6    minimize( norm( A * x - b, 2 ) )
+ 7    subject to
+ 8    C * x == d
+ 9    norm( x, Inf ) <= e
+ 10 cvx_end
+                                                                                                                                               51/54
+===== PDF PAGE 52 | FOOTER [] =====
+CVX
+
+
+
+
+   代码中的前三行是关于A, b, C, d, e的构造．在调用CVX 求解的时候，对应的代码需要
+    以cvx_begin 开始，并且以cvx_end 结尾．在这两行语句之间，我们需要定义
+
+   要求解的优化问题．在上面的例子中，variable x(n) 表示决策变量x 为n 维空间
+                                      * x - b, 2 ) 来表示，minimize   中的向量．目标函数∥Ax −b∥2 则用norm( A   表示求解目标函数的极小值．最后以subject to 开始描述问题的约束，C * x
+    == d 和norm( x, Inf ) <= e 分别表示约束Cx = d 和∥x∥∞≤e．
+   执行上述代码，CVX 会选取默认的凸优化问题算法来返回上面问题的解．
+
+
+
+
+
+                                                                                                                                               52/54
+===== PDF PAGE 53 | FOOTER [] =====
+AMPL
+
+
+
+    AMPL（a mathematical programming language）是用来描述高复杂度的大规模优
+   化问题的模型语言．
+
+   几十个求解器支持AMPL，包含开源软件和商业软件，例如CBC, CPLEX, FortMP,
+     Gurobi, MINOS, IPOPT, SNOPT, Knitro 和LGO 等，因此可以支持一大类问题的求
+   解．它的一个优点是其语法与数学表达式非常类似，因此可对优化问题进行非常简
+   洁并且可读的定义．
+
+   对于优化模型语言，常用的还有YALMIP ．对于半定规划问题，最新的一些软件包
+    有SDPNAL，SDPNAL+ 和SSNSDP ．对于流形优化，软件包有OptM ，Manopt
+   和ARNT．
+
+
+
+
+
+                                                                                                                                               53/54
+===== PDF PAGE 54 | FOOTER [] =====
+AMPL
+
+ 考虑优化问题：
+                                                    2        2                             min    f1 (x) + f2 (x),                              (21)
+                                       x∈R2
+ 其中f1(x) = 10(x2 −x2                           1), f2(x) = 1 −x1．利用如下代码描述问题，其求解过程可以由支 持AMPL和非线性无约束优化的求解器自动完成．
+ 1 var x{1..2};
+ 2 var f1 = 10*(x[2] - x[1]ˆ 2);
+ 3 var f2 = 1 - x[1];
+ 4
+ 5 minimize norm:
+ 6 f1ˆ 2 + f2ˆ 2;
+ 7
+ 8 data;
+ 9 var x:=
+ 10 1 -1.2
+ 11 2 1;
+ 这里，var x{1..2} 表示决策变量是R2中的向量，第2，3 行用来定义函数f1 和f2，
+ 第5，6 行定义了优化问题(21)，以及第8—11 行表示选取的初始点为(−1.2, 1)T．            54/54

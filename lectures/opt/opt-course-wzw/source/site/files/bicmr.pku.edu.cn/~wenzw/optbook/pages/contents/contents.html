@@ -1,0 +1,360 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>&#12298;&#26368;&#20248;&#21270;&#65306;&#24314;&#27169;&#12289;&#31639;&#27861;&#19982;&#29702;&#35770;&#12299;&#12289;&#12298;&#26368;&#20248;&#21270;&#35745;&#31639;&#26041;&#27861;&#12299;&#20195;&#30721;&#23637;&#31034;</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-06-23"><meta name="DC.source" content="contents.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:11px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:170%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7;line-height:140%; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>&#12298;&#26368;&#20248;&#21270;&#65306;&#24314;&#27169;&#12289;&#31639;&#27861;&#19982;&#29702;&#35770;&#12299;&#12289;&#12298;&#26368;&#20248;&#21270;&#35745;&#31639;&#26041;&#27861;&#12299;&#20195;&#30721;&#23637;&#31034;</h1><!--introduction--><p>&#27492;&#31995;&#21015;&#39029;&#38754;&#20026;&#37197;&#22871;&#12298;&#26368;&#20248;&#21270;&#65306;&#24314;&#27169;&#12289;&#31639;&#27861;&#19982;&#29702;&#35770;&#12299;&#12289;&#12298;&#26368;&#20248;&#21270;&#35745;&#31639;&#26041;&#27861;&#12299;&#30340;&#20195;&#30721;&#23637;&#31034;&#65292; &#21253;&#21547;&#23436;&#25972;&#30340;&#31639;&#27861;&#21644;&#25968;&#20540;&#23454;&#39564;&#30340; MATLAB &#23454;&#29616;&#20197;&#21450;&#35814;&#32454;&#30340;&#27880;&#37322;&#12290; &#26377;&#20852;&#36259;&#30340;&#35835;&#32773;&#21487;&#20197;&#36890;&#36807;&#38405;&#35835;&#20195;&#30721;&#32454;&#33410;&#29702;&#35299;&#31639;&#27861;&#21450;&#20854;&#25968;&#20540;&#34920;&#29616;&#65292;&#24182;&#19988;&#25484;&#25569;&#20854;&#20013;&#30340;&#20195;&#30721;&#25216;&#24039;&#12290;</p><p>&#25353;&#29031;&#20070;&#20013;&#31639;&#27861;&#19982;&#24212;&#29992;&#23454;&#20363;&#20986;&#29616;&#30340;&#39034;&#24207;&#65292;&#23558;&#39029;&#38754;&#25972;&#29702;&#22914;&#19979;&#12290;&#20854;&#20013;&#26631;&#27880;&#8220;&#23454;&#20363;&#8221;&#30340;&#34920;&#31034;&#25968;&#20540;&#23454;&#39564;&#65292; &#20854;&#23427;&#21017;&#20026;&#31639;&#27861;&#23454;&#29616;&#12290;&#21516;&#26102;&#65292;&#22312;&#25968;&#20540;&#23454;&#39564;&#21644;&#30456;&#24212;&#30340;&#31639;&#27861;&#30340;&#39029;&#38754;&#20013;&#37117;&#25552;&#20379;&#20102;&#30456;&#20114;&#30340;&#38142;&#25509;&#20197;&#20379;&#21442;&#32771;&#12290; &#21478;&#22806;&#65292;&#25105;&#20204;&#36824;&#23558; LASSO &#38382;&#39064;&#27714;&#35299;&#19982;&#36923;&#36753;&#22238;&#24402;&#20004;&#20010;&#23454;&#20363;&#25972;&#29702;&#22312;&#26368;&#21518;&#12290;</p><!--/introduction--><h2>&#30446;&#24405;</h2><div><ul><li><a href="#1">&#31243;&#24207;&#19979;&#36733;</a></li><li><a href="#2">&#26080;&#32422;&#26463;&#20248;&#21270;&#31639;&#27861;</a></li><li><a href="#3">&#32422;&#26463;&#20248;&#21270;&#31639;&#27861;</a></li><li><a href="#4">&#22797;&#21512;&#20248;&#21270;&#31639;&#27861;</a></li><li><a href="#5">&#24212;&#29992;&#65306;LASSO &#38382;&#39064;&#27714;&#35299;</a></li><li><a href="#6">&#24212;&#29992;&#65306;&#36923;&#36753;&#22238;&#24402;&#38382;&#39064;&#27714;&#35299;</a></li><li><a href="#7">&#21442;&#32771;&#19982;&#29256;&#26435;&#20449;&#24687;</a></li></ul></div><h2 id="1">&#31243;&#24207;&#19979;&#36733;</h2><p>&#25152;&#26377;&#31639;&#27861;&#30340;&#28304;&#25991;&#20214;&#20197;&#21450;&#20854;&#23427;&#25968;&#25454;&#25991;&#20214;&#65292; <a href="../download_code/archive.zip">&#35831;&#19979;&#36733;&#35813;&#21387;&#32553;&#25991;&#20214;</a>&#12290;</p><p><b>&#26412;&#31995;&#21015;&#39029;&#38754;&#25152;&#21547;&#20195;&#30721;&#36866;&#29992;&#20110;&#25945;&#23398;&#30446;&#30340;&#12290;&#22312;&#31185;&#30740;&#12289;&#29983;&#20135;&#31561;&#29615;&#22659;&#20013;&#65292; &#35835;&#32773;&#36824;&#38656;&#36873;&#25321;&#19987;&#19994;&#30340;&#31639;&#27861;&#31243;&#24207;&#23436;&#25104;&#25152;&#38656;&#20219;&#21153;&#12290;</b></p><h2 id="2">&#26080;&#32422;&#26463;&#20248;&#21270;&#31639;&#27861;</h2><p>
+<ul>
+  <li>梯度类算法
+  <ul>
+  <li><a href="../lasso_grad/LASSO_grad_huber_inn.html">LASSO
+问题的梯度下降法</a></li>
+  <li><a href="../lasso_grad/demo.html">实例：利用梯度法解 LASSO
+问题</a></li>
+  <li><a href="../LASSO_con/LASSO_con.html">LASSO
+连续化策略</a>（此算法应用在梯度下降以及若干其它算法中）</li>
+  <li><a href="../TV_denoise/fminGBB.html">BB 步长梯度下降法</a></li>
+  <li><a href="../TV_denoise/demo_denoising.html">实例：Tikhonov 正则化模型用于图片去噪</a></li></ul></li>
+  <li>次梯度算法
+  <ul>
+  <li><a href="../lasso_subgrad/l1_subgrad.html">LASSO 问题的次梯度解法</a></li>
+  <li><a href="../lasso_subgrad/demo.html">实例：次梯度法解 LASSO 问题</a></li>
+  <li><a href="../lasso_subgrad/LASSO_subgrad_inn.html">LASSO 问题的连续化次梯度法</a></li>
+  <li><a href="../lasso_subgrad/demo_cont.html">实例：连续化次梯度法解 LASSO 问题</a></li></ul></li>
+  <li>牛顿类算法
+  <ul>
+  <li><a href="../newton/fminNewton.html">牛顿-共轭梯度法</a></li>
+  <li><a href="../newton/demo_lr_Newton.html">实例：牛顿-共轭梯度法解逻辑回归问题</a></li></ul></li>
+  <li>拟牛顿类算法
+  <ul>
+  <li><a href="../lbfgs/fminLBFGS_Loop.html">L-BFGS 算法</a></li>
+  <li><a href="../lbfgs/demo_bp_lbfgs.html">实例：L-BFGS算法解基追踪问题</a></li>
+  <li><a href="../lbfgs/demo_lr_lbfgs.html">实例：L-BFGS算法解逻辑回归问题</a></li></ul></li>
+  <li>信赖域算法
+  <ul>
+  <li><a href="../trust_region/fminTR.html">信赖域算法</a></li>
+  <li><a href="../trust_region/demo_lr_tr.html">实例：信赖域算法解逻辑回归问题</a></li></ul></li>
+  <li>非线性最小二乘问题
+  <ul>
+  <li><a href="../phase_LM/WF_C.html">编码衍射模型的 Wirtinger 梯度下降算法</a></li>
+  <li><a href="../phase_LM/Nes_C.html">编码衍射模型的 Nesterov 加速算法</a></li>
+  <li><a href="../phase_LM/LM_C.html">编码衍射模型的 LM 算法</a></li>
+  <li><a href="../phase_LM/demo.html">实例：编码衍射模型求解</a></li>
+  </ul></li>
+</ul>
+</p><h2 id="3">&#32422;&#26463;&#20248;&#21270;&#31639;&#27861;</h2><p>
+<ul>
+  <li>罚函数法
+  <ul>
+  <li><a href="../pm_bp/demo_cont.html">实例：罚函数法解基追踪问题</a></li>
+  </ul></li>
+  <li>增广拉格朗日函数法
+  <ul>
+  <li><a href="../alm_bp/BP_ALM.html">基追踪问题的增广拉格朗日函数法解法</a></li>
+  <li><a href="../alm_bp/demo_alm.html">实例：增广拉格朗日函数法解基追踪问题</a></li>
+  </ul></li>
+</ul>
+</p><h2 id="4">&#22797;&#21512;&#20248;&#21270;&#31639;&#27861;</h2><p>
+<ul>
+  <li>近似点梯度法
+  <ul>
+  <li><a href="../lasso_proxg/LASSO_proximal_grad_inn.html">LASSO
+问题的近似点梯度法</a></li>
+  <li><a href="../lasso_proxg/LASSO_Nesterov_inn.html">LASSO 问题的
+FISTA 算法</a></li>
+  <li><a href="../lasso_proxg/LASSO_Nesterov2nd_inn.html">LASSO
+问题的第二类 Nesterov 加速算法</a></li>
+  <li><a href="../lasso_proxg/demo_proxg.html">
+实例：近似点梯度法及其 Nesterov 加速算法求解 LASSO 问题</a></li>
+  </ul></li>
+  <li>近似点算法
+  <ul>
+  <li><a href="../lasso_ppa/LASSO_ppa.html">LASSO 问题的近似点算法</a></li>
+  <li><a href="../lasso_ppa/demo_ppa.html">实例：近似点算法解 LASSO 问题</a></li>
+  </ul></li>
+  <li>分块坐标下降法
+  <ul>
+  <li><a href="../lasso_bcd/LASSO_bcd_inn.html">LASSO 问题的分块坐标下降法</a></li>
+  <li><a href="../lasso_bcd/demo_bcd.html">实例：分块坐标下降法求解 LASSO 问题</a></li>
+  </ul></li>
+  <li>对偶算法
+  <ul>
+  <li><a href="../lasso_dualalg/LASSO_pdhg_inn.html">LASSO 问题的原始-对偶混合梯度算法</a></li>
+  <li><a href="../lasso_dualalg/demo_dualalg.html">实例：原始-对偶混合梯度算法求解 LASSO 问题</a></li>
+  </ul></li>
+  <li>交替方向乘子法
+  <ul>
+  <li><a href="../lasso_admm/LASSO_admm_primal.html">LASSO 原问题的交替方向乘子法</a></li>
+  <li><a href="../lasso_admm/LASSO_admm_dual.html">LASSO 对偶问题的交替方向乘子法</a></li>
+  <li><a href="../lasso_admm/demo_admm.html">实例：交替方向乘子法解 LASSO 问题</a></li>
+  </ul></li>
+  <li>随机优化算法
+  <ul>
+  <li><a href="../stograd/sgd.html">随机梯度下降算法</a></li>
+  <li><a href="../stograd/Adagrad.html">AdaGrad 算法</a></li>
+  <li><a href="../stograd/RMSProp.html">RMSProp 算法</a></li>
+  <li><a href="../stograd/AdaDelta.html">AdaDelta 算法</a></li>
+  <li><a href="../stograd/Adam.html">Adam 算法</a></li>
+  <li><a href="../stograd/demo_lr_sg.html">实例：随机优化算法求解逻辑回归问题</a></li>
+  </ul></li>
+</ul>
+</p><h2 id="5">&#24212;&#29992;&#65306;LASSO &#38382;&#39064;&#27714;&#35299;</h2><p>LASSO &#38382;&#39064;&#26159;&#22312;&#22810;&#20010;&#31639;&#27861;&#20013;&#20986;&#29616;&#30340;&#24212;&#29992;&#65292;&#29616;&#23558;&#20854;&#25972;&#29702;&#22914;&#19979;&#65306;</p><p>
+<ul>
+<li>使用<a href="../LASSO_con/LASSO_con.html">连续化策略</a>的 LASSO 问题求解
+  <ul>
+  <li><a href="../lasso_grad/demo.html">实例：利用梯度法解 LASSO 问题</a></li>
+  <li><a href="../lasso_subgrad/demo_cont.html">实例：连续化次梯度法解 LASSO 问题</a></li>
+  <li><a href="../lasso_proxg/demo_proxg.html">实例：近似点梯度法及其 Nesterov 加速算法求解 LASSO 问题</a></li>
+  <li><a href="../lasso_ppa/demo_ppa.html">实例：近似点法解 LASSO 问题</a></li>
+  <li><a href="../lasso_bcd/demo_bcd.html">实例：分块坐标下降法求解 LASSO 问题</a></li>
+  <li><a href="../lasso_dualalg/demo_dualalg.html">实例：原始-对偶混合梯度算法求解 LASSO 问题</a></li>
+  </ul></li>
+<li>不使用连续化策略的 LASSO 问题求解</li>
+  <ul>
+  <li><a href="../lasso_subgrad/demo.html">实例：次梯度法解 LASSO 问题</a></li>
+  <li><a href="../lasso_admm/demo_admm.html">实例：交替方向乘子法解 LASSO 问题</a></li>
+  </ul></li>
+</ul>
+</p><p>&#21487;&#20197;&#30475;&#20986; LASSO &#38382;&#39064;&#30340;&#36830;&#32493;&#21270;&#31574;&#30053;&#22312;&#20854;&#27714;&#35299;&#30340;&#36807;&#31243;&#20013;&#25198;&#28436;&#30528;&#37325;&#35201;&#30340;&#20316;&#29992;&#12290;</p><h2 id="6">&#24212;&#29992;&#65306;&#36923;&#36753;&#22238;&#24402;&#38382;&#39064;&#27714;&#35299;</h2><div><ul><li><a href="../newton/demo_lr_Newton.html">&#23454;&#20363;&#65306;&#29275;&#39039;-&#20849;&#36717;&#26799;&#24230;&#27861;&#35299;&#36923;&#36753;&#22238;&#24402;&#38382;&#39064;</a></li><li><a href="../lbfgs/demo_lr_lbfgs.html">&#23454;&#20363;&#65306;L-BFGS&#31639;&#27861;&#35299;&#36923;&#36753;&#22238;&#24402;&#38382;&#39064;</a></li><li><a href="../trust_region/demo_lr_tr.html">&#23454;&#20363;&#65306;&#20449;&#36182;&#22495;&#31639;&#27861;&#35299;&#36923;&#36753;&#22238;&#24402;&#38382;&#39064;</a></li><li><a href="../stograd/demo_lr_sg.html">&#23454;&#20363;&#65306;&#38543;&#26426;&#20248;&#21270;&#31639;&#27861;&#27714;&#35299;&#36923;&#36753;&#22238;&#24402;&#38382;&#39064;</a></li></ul></div><h2 id="7">&#21442;&#32771;&#19982;&#29256;&#26435;&#20449;&#24687;</h2><div><ul><li>&#21016;&#28009;&#27915;&#65292;&#25143;&#23558;&#65292;&#26446;&#21191;&#38155;&#65292;&#25991;&#20877;&#25991;&#65292;&#26368;&#20248;&#21270;&#65306;&#24314;&#27169;&#12289;&#31639;&#27861;&#19982;&#29702;&#35770;&#65288;&#35814;&#32454;&#29256;&#65289;</li><li>&#21016;&#28009;&#27915;&#65292;&#25143;&#23558;&#65292;&#26446;&#21191;&#38155;&#65292;&#25991;&#20877;&#25991;&#65292;&#26368;&#20248;&#21270;&#35745;&#31639;&#26041;&#27861;&#65288;&#31616;&#26126;&#29256;&#65289;</li><li><a href="http://bicmr.pku.edu.cn/~wenzw/optbook.html">&#26368;&#20248;&#21270;&#65306;&#24314;&#27169;&#12289;&#31639;&#27861;&#19982;&#29702;&#35770;/&#26368;&#20248;&#21270;&#35745;&#31639;&#26041;&#27861;</a> &#12290;</li></ul></div><p>&#38480;&#20110;&#20316;&#32773;&#30340;&#30693;&#35782;&#27700;&#24179;&#65292;&#31243;&#24207;&#20013;&#38590;&#20813;&#26377;&#19981;&#22949;&#21644;&#38169;&#35823;&#20043;&#22788;&#65292;&#24691;&#35831;&#35835;&#32773;&#19981;&#21533;&#25209;&#35780;&#21644;&#25351;&#27491;&#12290;</p><p>&#21208;&#35823;&#25910;&#38598;: <a href="https://docs.qq.com/form/page/DWWhDR2JySVFjQlNm">&#22914;&#26524;&#24744;&#21457;&#29616;&#20219;&#20309;&#19981;&#22949;&#21644;&#38169;&#35823;&#20043;&#22788;&#65292;&#40635;&#28902;&#24744;&#36890;&#36807;&#27492;&#38142;&#25509;&#21453;&#39304;&#12290;</a></p><p>&#20195;&#30721;&#20316;&#32773;&#65306;</p><div><ul><li>&#25991;&#20877;&#25991; (<a href="mailto:wenzw@pku.edu.cn">wenzw@pku.edu.cn</a>)</li><li>&#21016;&#28009;&#27915; (<a href="mailto:liuhaoyang@pku.edu.cn">liuhaoyang@pku.edu.cn</a>)</li><li>&#25143;&#23558; (<a href="mailto:jianghu@pku.edu.cn">jianghu@pku.edu.cn</a>)</li></ul></div><p>&#20195;&#30721;&#25972;&#29702;&#19982;&#32593;&#39029;&#21046;&#20316;&#65306;</p><div><ul><li>&#26472;&#26122;&#26704; (<a href="mailto:haotongyang@pku.edu.cn">haotongyang@pku.edu.cn</a>)</li></ul></div><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2020a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% 《最优化：建模、算法与理论》、《最优化计算方法》代码展示
+% 此系列页面为配套《最优化：建模、算法与理论》、《最优化计算方法》的代码展示，
+% 包含完整的算法和数值实验的 MATLAB 实现以及详细的注释。
+% 有兴趣的读者可以通过阅读代码细节理解算法及其数值表现，并且掌握其中的代码技巧。
+%
+% 按照书中算法与应用实例出现的顺序，将页面整理如下。其中标注“实例”的表示数值实验，
+% 其它则为算法实现。同时，在数值实验和相应的算法的页面中都提供了相互的链接以供参考。
+% 另外，我们还将 LASSO 问题求解与逻辑回归两个实例整理在最后。
+%% 程序下载
+% 所有算法的源文件以及其它数据文件， <../download_code/archive.zip 请下载该压缩文件>。
+%
+% *本系列页面所含代码适用于教学目的。在科研、生产等环境中，
+% 读者还需选择专业的算法程序完成所需任务。*
+%
+%% 无约束优化算法
+%
+% <html>
+% <ul>
+%   <li>梯度类算法
+%   <ul>
+%   <li><a href="../lasso_grad/LASSO_grad_huber_inn.html">LASSO
+% 问题的梯度下降法</a></li>
+%   <li><a href="../lasso_grad/demo.html">实例：利用梯度法解 LASSO
+% 问题</a></li>
+%   <li><a href="../LASSO_con/LASSO_con.html">LASSO
+% 连续化策略</a>（此算法应用在梯度下降以及若干其它算法中）</li>
+%   <li><a href="../TV_denoise/fminGBB.html">BB 步长梯度下降法</a></li>
+%   <li><a href="../TV_denoise/demo_denoising.html">实例：Tikhonov 正则化模型用于图片去噪</a></li></ul></li>
+%   <li>次梯度算法
+%   <ul> 
+%   <li><a href="../lasso_subgrad/l1_subgrad.html">LASSO 问题的次梯度解法</a></li>
+%   <li><a href="../lasso_subgrad/demo.html">实例：次梯度法解 LASSO 问题</a></li>
+%   <li><a href="../lasso_subgrad/LASSO_subgrad_inn.html">LASSO 问题的连续化次梯度法</a></li>
+%   <li><a href="../lasso_subgrad/demo_cont.html">实例：连续化次梯度法解 LASSO 问题</a></li></ul></li>
+%   <li>牛顿类算法
+%   <ul>
+%   <li><a href="../newton/fminNewton.html">牛顿-共轭梯度法</a></li>
+%   <li><a href="../newton/demo_lr_Newton.html">实例：牛顿-共轭梯度法解逻辑回归问题</a></li></ul></li>
+%   <li>拟牛顿类算法
+%   <ul>
+%   <li><a href="../lbfgs/fminLBFGS_Loop.html">L-BFGS 算法</a></li>
+%   <li><a href="../lbfgs/demo_bp_lbfgs.html">实例：L-BFGS算法解基追踪问题</a></li>
+%   <li><a href="../lbfgs/demo_lr_lbfgs.html">实例：L-BFGS算法解逻辑回归问题</a></li></ul></li>
+%   <li>信赖域算法
+%   <ul>
+%   <li><a href="../trust_region/fminTR.html">信赖域算法</a></li>
+%   <li><a href="../trust_region/demo_lr_tr.html">实例：信赖域算法解逻辑回归问题</a></li></ul></li>
+%   <li>非线性最小二乘问题
+%   <ul>
+%   <li><a href="../phase_LM/WF_C.html">编码衍射模型的 Wirtinger 梯度下降算法</a></li>
+%   <li><a href="../phase_LM/Nes_C.html">编码衍射模型的 Nesterov 加速算法</a></li>
+%   <li><a href="../phase_LM/LM_C.html">编码衍射模型的 LM 算法</a></li>
+%   <li><a href="../phase_LM/demo.html">实例：编码衍射模型求解</a></li>
+%   </ul></li>
+% </ul>
+% </html>
+% 
+%% 约束优化算法
+%
+% <html>
+% <ul>
+%   <li>罚函数法
+%   <ul>
+%   <li><a href="../pm_bp/demo_cont.html">实例：罚函数法解基追踪问题</a></li>
+%   </ul></li>
+%   <li>增广拉格朗日函数法
+%   <ul>
+%   <li><a href="../alm_bp/BP_ALM.html">基追踪问题的增广拉格朗日函数法解法</a></li>
+%   <li><a href="../alm_bp/demo_alm.html">实例：增广拉格朗日函数法解基追踪问题</a></li>
+%   </ul></li>
+% </ul>
+% </html>
+%
+%% 复合优化算法
+%
+% <html>
+% <ul>
+%   <li>近似点梯度法
+%   <ul>
+%   <li><a href="../lasso_proxg/LASSO_proximal_grad_inn.html">LASSO
+% 问题的近似点梯度法</a></li>
+%   <li><a href="../lasso_proxg/LASSO_Nesterov_inn.html">LASSO 问题的
+% FISTA 算法</a></li>
+%   <li><a href="../lasso_proxg/LASSO_Nesterov2nd_inn.html">LASSO
+% 问题的第二类 Nesterov 加速算法</a></li>
+%   <li><a href="../lasso_proxg/demo_proxg.html">
+% 实例：近似点梯度法及其 Nesterov 加速算法求解 LASSO 问题</a></li>
+%   </ul></li>
+%   <li>近似点算法
+%   <ul>
+%   <li><a href="../lasso_ppa/LASSO_ppa.html">LASSO 问题的近似点算法</a></li>
+%   <li><a href="../lasso_ppa/demo_ppa.html">实例：近似点算法解 LASSO 问题</a></li>
+%   </ul></li>
+%   <li>分块坐标下降法
+%   <ul>
+%   <li><a href="../lasso_bcd/LASSO_bcd_inn.html">LASSO 问题的分块坐标下降法</a></li>
+%   <li><a href="../lasso_bcd/demo_bcd.html">实例：分块坐标下降法求解 LASSO 问题</a></li>
+%   </ul></li>
+%   <li>对偶算法
+%   <ul>
+%   <li><a href="../lasso_dualalg/LASSO_pdhg_inn.html">LASSO 问题的原始-对偶混合梯度算法</a></li>
+%   <li><a href="../lasso_dualalg/demo_dualalg.html">实例：原始-对偶混合梯度算法求解 LASSO 问题</a></li>
+%   </ul></li>
+%   <li>交替方向乘子法
+%   <ul>
+%   <li><a href="../lasso_admm/LASSO_admm_primal.html">LASSO 原问题的交替方向乘子法</a></li>
+%   <li><a href="../lasso_admm/LASSO_admm_dual.html">LASSO 对偶问题的交替方向乘子法</a></li>
+%   <li><a href="../lasso_admm/demo_admm.html">实例：交替方向乘子法解 LASSO 问题</a></li>
+%   </ul></li>
+%   <li>随机优化算法
+%   <ul>
+%   <li><a href="../stograd/sgd.html">随机梯度下降算法</a></li>
+%   <li><a href="../stograd/Adagrad.html">AdaGrad 算法</a></li>
+%   <li><a href="../stograd/RMSProp.html">RMSProp 算法</a></li>
+%   <li><a href="../stograd/AdaDelta.html">AdaDelta 算法</a></li>
+%   <li><a href="../stograd/Adam.html">Adam 算法</a></li>
+%   <li><a href="../stograd/demo_lr_sg.html">实例：随机优化算法求解逻辑回归问题</a></li>
+%   </ul></li>
+% </ul>
+% </html>
+%
+%% 应用：LASSO 问题求解
+% LASSO 问题是在多个算法中出现的应用，现将其整理如下：
+%
+% <html>
+% <ul>
+% <li>使用<a href="../LASSO_con/LASSO_con.html">连续化策略</a>的 LASSO 问题求解
+%   <ul>
+%   <li><a href="../lasso_grad/demo.html">实例：利用梯度法解 LASSO 问题</a></li>
+%   <li><a href="../lasso_subgrad/demo_cont.html">实例：连续化次梯度法解 LASSO 问题</a></li>
+%   <li><a href="../lasso_proxg/demo_proxg.html">实例：近似点梯度法及其 Nesterov 加速算法求解 LASSO 问题</a></li>
+%   <li><a href="../lasso_ppa/demo_ppa.html">实例：近似点法解 LASSO 问题</a></li>
+%   <li><a href="../lasso_bcd/demo_bcd.html">实例：分块坐标下降法求解 LASSO 问题</a></li>
+%   <li><a href="../lasso_dualalg/demo_dualalg.html">实例：原始-对偶混合梯度算法求解 LASSO 问题</a></li>
+%   </ul></li>
+% <li>不使用连续化策略的 LASSO 问题求解</li>
+%   <ul>
+%   <li><a href="../lasso_subgrad/demo.html">实例：次梯度法解 LASSO 问题</a></li>
+%   <li><a href="../lasso_admm/demo_admm.html">实例：交替方向乘子法解 LASSO 问题</a></li>
+%   </ul></li>
+% </ul>
+% </html>
+%
+% 可以看出 LASSO 问题的连续化策略在其求解的过程中扮演着重要的作用。
+%% 应用：逻辑回归问题求解
+%
+% * <../newton/demo_lr_Newton.html 实例：牛顿-共轭梯度法解逻辑回归问题>
+% * <../lbfgs/demo_lr_lbfgs.html 实例：L-BFGS算法解逻辑回归问题>
+% * <../trust_region/demo_lr_tr.html 实例：信赖域算法解逻辑回归问题>
+% * <../stograd/demo_lr_sg.html 实例：随机优化算法求解逻辑回归问题>
+%% 参考与版权信息
+% 
+% * 刘浩洋，户将，李勇锋，文再文，最优化：建模、算法与理论（详细版）
+% * 刘浩洋，户将，李勇锋，文再文，最优化计算方法（简明版）
+% * <http://bicmr.pku.edu.cn/~wenzw/optbook.html
+% 最优化：建模、算法与理论/最优化计算方法> 。
+%
+%
+% 限于作者的知识水平，程序中难免有不妥和错误之处，恳请读者不吝批评和指正。
+%
+% 勘误收集: <https://docs.qq.com/form/page/DWWhDR2JySVFjQlNm 
+% 如果您发现任何不妥和错误之处，麻烦您通过此链接反馈。>
+%
+% 代码作者：
+%
+% * 文再文 (wenzw@pku.edu.cn)
+% * 刘浩洋 (liuhaoyang@pku.edu.cn)
+% * 户将 (jianghu@pku.edu.cn)
+%
+% 
+% 代码整理与网页制作：
+%
+% * 杨昊桐 (haotongyang@pku.edu.cn)
+%
+
+
+##### SOURCE END #####
+--></body></html>

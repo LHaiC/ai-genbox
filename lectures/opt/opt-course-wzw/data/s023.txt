@@ -1,0 +1,154 @@
+Zaiwen Wen
+Home
+Research
+Service
+Research
+Publications
+Recognition
+Recent Talks
+Seminars
+Group
+Optbook
+Databook
+Mathematical
+Formalization
+Workstation
+Guidance
+Software
+ReasLab
+OptSuite
+SSNCVX
+ReasBook
+ReasAtlas
+Teaching
+Optimization
+Methods
+(2026 Fall)
+Algorithms for
+Big Data
+Analysis
+(2026 Spring)
+Research summary
+Our group works broadly at the interface of optimization, operations research, machine learning, scientific computing, and mathematical formalization:
+Convex optimization and nonlinear programming
+Matrix optimization: manifold optimization, eigenvalue optimizations
+Optimization for AI: deep learning and reinforcement learning
+AI for optimization: learning-based optimization
+AI for mathematics: formalization, automatic theorem proving
+Applications in science and engineering
+We are interested in large-scale optimization models, algorithms, and theory, especially for problems with geometric constraints, nonsmooth or composite structure, and emerging applications in artificial intelligence and modern scientific computation. A recurring theme in our work is to combine rigorous mathematical analysis with scalable algorithm design and practical computational implementation. Over the years, we have developed methods for manifold-constrained optimization, composite and structured optimization, optimization for machine learning and large language models, learning-based optimization, and formal methods for optimization and applied mathematics. We are also interested in software development and in building integrated environments that connect modeling, algorithm design, computation, and verification.
+Manifold optimization
+Our group studies optimization problems with manifold and orthogonality constraints, which arise naturally in electronic structure calculation, Bose–Einstein condensation, signal processing, low-rank optimization, imaging, and machine learning. These problems are challenging because the feasible set has a nonlinear geometric structure, so standard Euclidean optimization techniques are often not directly applicable, while many Riemannian approaches rely on relatively expensive geometric operations such as geodesic computation, vector transport, and repeated projection. We have worked on algorithmic frameworks that preserve feasibility while remaining efficient and mathematically rigorous. In particular, we developed a Cayley-transform-based feasible gradient method with line search for optimization under orthogonality constraints; this approach avoids expensive projection and orthogonalization steps and has become widely known as the WY scheme. We have also developed regularized Newton-type methods for manifold optimization that combine Euclidean and Riemannian structures, exploit negative-curvature information to escape saddle points, and establish global convergence together with local superlinear convergence. More broadly, we have been interested in bringing a variety of structured problems into a unified manifold optimization framework and in developing practical software, including OptM and ARNT, for applications in electronic structure computation, phase retrieval, cryo-EM, and signal and image processing.
+Deng Kangkang, Hu Jiang, Wu Jiayuan, Wen Zaiwen, Oracle complexities of augmented Lagrangian methods for nonsmooth manifold optimization, Mathematics of Operations Research, arXiv:2404.05121
+Jiang Bo, Meng Xiang, Wen Zaiwen, Chen Xiaojun, An exact penalty approach for optimization with nonnegative orthogonality constraints, Mathematical Programming, Vol. 198, 855–897, 2023
+Zhang Haixiang, Andre Milzarek, Wen Zaiwen, Yin Wotao; On the geometric analysis of a quartic-quadratic optimization problem under a spherical constraint, Mathematical Programming, Vol. 195, 421-473, 2022
+Li Yongfeng, Liu Haoyang, Wen Zaiwen, and Yuan Yaxiang, Low-rank Matrix Optimization Using Polynomial-filtered Subspace Extraction, SIAM Journal on Scientific Computing, Vol 42, No. 3, A1686–A1713, 2020
+Tian Tonghua, Cai Yongyong, Wu Xinming, Wen Zaiwen, Ground States of Spin-F Bose–Einstein Condensates, SIAM Journal on Scientific Computing, Vol 42, No. 4, B983–B1013, 2020
+Hu Jiang, Liu Xin, Wen Zaiwen, Yuan Yaxiang, A Brief Introduction to Manifold Optimization, Journal of the Operations Research Society of China; Vol. 8, 199–248, 2020
+Hu Jiang, Jiang Bo, Lin Lin, Wen Zaiwen, Yuan Yaxiang, Structured Quasi-Newton Methods for Optimization with Orthogonality Constraints, SIAM Journal on Scientific Computing, Vol. 41, No. 4, pp. A2239-A2269, 2019
+Yuan Honglin, Gu Xiaoyi, Lai Rongjie, Wen Zaiwen; Global Optimization with Orthogonality Constraints via Stochastic Diffusion on Manifold, Journal of Scientific Computing, Vol 80, No 2, 2019, pp. 1139–1170
+Zhang Junyu, Liu Haoyang, Wen Zaiwen, Zhang Shuzhong; A Sparse Completely Positive Relaxation of the Modularity Maximization for Community Detection; SIAM Journal on Scientific Computing; Vol 40, No. 5, 2018, A3091–A3120.
+Hu Jiang, Andre Milzarek, Wen Zaiwen, Yuan Yaxiang; Adaptive Quadratically Regularized Newton Method for Riemannian Optimization; SIAM Journal on Matrix Analysis and Applications; Vol 39, No. 3, 2018, pp 1181-1207
+Wen Zaiwen, Zhang Yin; Accelerating Convergence by Augmented Rayleigh-Ritz Projections For Large-Scale Eigenpair Computation; SIAM Journal on Matrix Analysis and Applications; Vol 38, No. 2 (2017), pp. 273-296
+Wu Xinming, Wen Zaiwen, Bao Weizhu; A regularized Newton method for computing ground states of Bose-Einstein condensates; Journal of Scientific Computing; Vol. 73, No. 1, 2017, pp 303–329
+Zhang Junyu, Wen Zaiwen, Zhang Yin; Subspace Methods with Local Refinements for Eigenvalue Computation Using Low-Rank Tensor-Train Format; Journal of Scientific Computing; Vol 70, No. 2(2017), pp. 478-499
+Michael Ulbrich, Wen Zaiwen, Yang Chao, Dennis Klockner, Lu Zhaosong; A Proximal Gradient Method for Ensemble Density Functional Theory; SIAM Journal on Scientific Computing; Vol 37, No. 4 (2015), A1975–A2002
+Liu Xin, Wen Zaiwen, Wang Xiao, Michael Ulbrich, Yuan Yaxiang; On the Analysis of the Discretized Kohn-Sham Density Functional Theory; SIAM Journal on Numerical Analysis; Vol 53, No. 4 (2015), 1758–1785
+Wen Zaiwen, Yang Chao, Liu Xin, Zhang Yin; Trace-Penalty Minimization for Large-scale Eigenspace Computation; Journal of Scientfic Computing; Vol. 66, No. 3(2016), pp 1175-1203
+Liu Xin, Wang Xiao, Wen Zaiwen, Yuan Yaxiang; On the Convergence of the Self-Consistent Field Iteration in Kohn-Sham Density Functional Theory; SIAM Journal on Matrix Analysis and Applications; Vol. 35, No. 2(2014), pp. 546–558
+Zhang Xin, Zhu Jinwei, Wen Zaiwen, Zhou Aihui; Gradient-type Optimization Methods for Electronic Structure Calculation; SIAM Journal on Scientific Computing; Vol. 36, No. 3 (2014), pp. C265–C289
+Lai Rongjie, Wen Zaiwen, Yin Wotao, Gu Xianfeng, Lui Lok Ming; Folding-Free Global Conformal Mapping for Genus-0 Surfaces by Harmonic Energy Minimization; Journal of Scientific Computing; 58(2014), 705-725
+Wen Zaiwen, Michael Ulbrich, Andre Milzarek, Zhang Hongchao; Adaptive Regularized Self-Consistent Field Iteration with Exact Hessian for Electronic Structure Calculation; SIAM Journal on Scientific Computing; Vol 35, No. 3 (2013) A1299–A1324
+Liu Xin, Wen Zaiwen, Zhang Yin; Limited Memory Block Krylov Subspace Optimization for Computing Dominant Singular Value Decompositions; SIAM Journal on Scientific Computing; 35 (2013) A1641–A1668
+Wen Zaiwen, Yin Wotao; A Feasible method for Optimization with Orthogonality Constraints; Mathematical Programming; 142(2013), 397-434
+Donald Goldfarb, Wen Zaiwen, Yin Wotao; A Curvilinear Search Method for the p-Harmonic Flow on Spheres; SIAM Journal on Imaging Sciences; 2 (2009) 84-109.
+Composite and structured optimization
+Our group has long been interested in composite optimization, one of the most fundamental modeling paradigms in optimization, statistics, machine learning, imaging, control, and related areas. A typical composite model consists of a smooth objective together with a nonsmooth regularization or constraint-inducing term. One of  the main challenges is that the nonsmooth structure prevents the direct use of classical Newton methods, even though modern applications often require both high accuracy and high efficiency. We have developed several generations of semismooth Newton methods and augmented Lagrangian methods for such problems. One direction of our work reformulates composite optimization problems as structured semismooth nonlinear systems via fixed-point mappings induced by first-order methods, leading to regularized semismooth Newton algorithms that exploit sparsity and low-rank structure while achieving global convergence and local superlinear convergence. Another direction constructs primal-dual semismooth Newton frameworks based on new augmented Lagrangian formulations, where augmented Lagrangian duality is used to transform the original problem into a semismooth nonlinear system with strong local and global properties. These developments have led to practical solvers such as SSNCVX, which performs very competitively on benchmark semidefinite programming problems, and have also motivated our broader interest in the structure, theory, and modern variants of augmented Lagrangian methods, including recent survey work on this topic.
+Deng Kangkang, Wang Rui, Zhu Zhenyuan, Zhang Junyu, Wen Zaiwen, The Augmented Lagrangian Methods: Overview and Recent Advances, SIAM Review, 2025
+Hu Jiang, Tian Tonghua, Pan Shaohua, Wen Zaiwen, On the Analysis of Semismooth Newton-Type Methods for Composite Optimization, Journal of Scientific Computing, Vol. 103, No. 59, 2025, arXiv:2211.01127
+Deng Zhanwang, Deng Kangkang, Hu Jiang, Wen Zaiwen, An Augmented Lagrangian Primal-Dual Semismooth Newton method for multi-block composite optimization, Journal of Scientific Computing, Vol. 102, No. 65, 2025
+Wang Rui, Zhang Chuwen, Pu Shanwen, Gao Jianjun, Wen Zaiwen, A Customized Augmented Lagrangian Method for Block-Structured Integer Programming, IEEE Transactions on Pattern Analysis and Machine Intelligence, 2024
+Zhu Zhenyuan, Chen Fan, Zhang Junyu, Wen Zaiwen, A Unified Primal-Dual Algorithm Framework for Affinely Constrained Problem, Journal of Scientific Computing, Vol. 97, No. 2, 2023
+Chen Yiming, Wang Rui, Zhu Jinglong, Wen Zaiwen, Decoding LDPC Codes by Using Negative Proximal Regularization, IEEE Transactions on Communications, Vol. 71, No. 7, 3835-3846, 2023
+Wang Yifei, Deng Kangkang, Liu Haoyang, Wen Zaiwen, A Decomposition Augmented Lagrangian Method for Low-rank Semidefinite Programming, SIAM Journal on Optimization, Vol. 33, No. 3, 1361-1390, 2023
+Zhang Jiaqi, Jin Zeyu, Jiang Bo, Wen Zaiwen, Stochastic Augmented Projected Gradient methods for the Precoding Matrix Indicator Problem, IEEE Transactions on Wireless Communications, Vol. 21, No. 11, 9553 – 9565, 2022
+Liu Yiyang, Wen Zaiwen, Wotao Yin, A multiscale semi-smooth Newton method for Optimal Transport, Journal of Scientific Computing, Vol. 91, No. 2, 39, 2022
+Wang Yifei, Jia Zeyu, Wen Zaiwen, Search direction Correction with normalized gradient makes first-order methods faster, SIAM Journal on Scientific Computing, Vol. 43, No. 5, A3184–A3211, 2021
+Yang Minghan, Andre Milzarek, Wen Zaiwen, Zhang Tong; A Stochastic Extra-Step Quasi-Newton Method for Nonsmooth Nonconvex Optimization, Mathematical Programming, Vol. 194, 257-303, 2022
+Andre Milzarek, Xiao Xiantao, Cen Sicong, Wen Zaiwen, Michael Ulbrich; A stochastic semi-smooth Newton method for nonsmooth nonconvex optimization, SIAM Journal on Optimization, Vol 29, No. 4, pp. 2916–2948, 2019
+Xiao Xiantao, Li Yongfeng, Wen Zaiwen, Zhang Liwei; A Regularized Semi-Smooth Newton Method with Projection Steps for Composite Convex Programs; Journal of Scientific Computing; 2018, Vol 76, No. 1, pp 364-389
+Li Yongfeng, Wen Zaiwen, Yang Chao, Yuan Yaxiang; A Semi-smooth Newton Method For semidefinite programs and its applications in electronic structure calculations; SIAM Journal on Scientific Computing; Vol 40, No. 6, 2018, A4131–A4157
+Jiang Bo, Liu Yafeng, Wen Zaiwen; Lp-norm regularization algorithms for optimization over permutation matrices; SIAM Journal on Optimization; Vol 26, No. 4(2016), pp. 2284-2313
+Liu Xin, Wen Zaiwen, Zhang Yin; An Efficient Gauss-Newton Algorithm for Symmetric Low-Rank Product Matrix Approximations; SIAM Journal on Optimization; Vol. 25, No. 3 (2015), 1571–1608
+Shen Yuan, Wen Zaiwen, Zhang Yin; Augmented Lagrangian alternating direction method for matrix separation based on low-rank factorization; Optimization methods and Software; Vol. 29, No. 2 (2014), pp 239–263
+Ling Qing, Wen Zaiwen, Yin Wotao; Decentralized Jointly Sparse Optimization by Reweighted lq Minimization; IEEE Transactions on Signal Processing; 61 (2013) 1165 – 1170
+Wen Zaiwen, Yin Wotao, Zhang Yin; Solving A Low-Rank Factorization Model for Matrix Completion by A Nonlinear Successive Over-Relaxation Algorithm; Mathematical Programming Computation; 4 (2012), 333-361.
+Wen Zaiwen, Yin Wotao, Zhang Hongchao, Donald Goldfarb; On the convergence of an active set method for l1 minimization; Optimization methods and software; 27 (2012), 1127-1146.
+Jason N. Laska, Wen Zaiwen, Yin Wotao, Richard G. Baraniuk; Trust, but Verify: Fast and Accurate Signal Recovering from 1-bit Compressive Measurements; IEEE Transactions on Signal Processing; 59 (2011) 5289 – 5301.
+Wen Zaiwen, Yin Wotao, Donald Goldfarb, Zhang Yin; A fast algorithm for sparse reconstruction based on shrinkage, subspace optimization and continuation; SIAM Journal on Scientific Computing; 32 (2010) 1832-1857.
+Wen Zaiwen, Donald Goldfarb; A Line search Multigrid Method for Large-Scale Nonlinear Optimization; SIAM Journal on Optimization; 20 (2010) 1478-1503.
+Wen Zaiwen, Donald Goldfarb, Yin Wotao; Alternating Direction Augmented Lagrangian Methods for semidefinite programming; Mathematical Programming Computation; 2 (2010) 203-230.
+Wen Zaiwen, Donald Goldfarb, Katya Scheinberg; Block coordinate descent methods for semidefinite programming; in: M. Anjos, J. Lasserre (Eds.) Handbook on Semidefinite, Cone and Polynomial Optimization; 2012, pp 533-564.
+Zhu Zhenyuan, Chen Fan, Zhang Junyu, Wen Zaiwen, On the Optimal Lower and Upper Complexity Bounds for a Class of Composite Optimization Problems, arXiv:2308.06470
+Deng Zhanwang, Hu Jiang, Deng Kangkang, Wen Zaiwen, A Primal Dual Semismooth Newton Method for Semidefinite Programming, arXiv:2504.14333
+Deng Zhanwang, Wei Tao, Ma Jirui, Wen Zaiwen, SSNCVX: A primal-dual semismooth Newton method for convex composite optimization, 2025
+Optimization for machine learning and artificial intelligence
+Our group studies optimization algorithms motivated by modern machine learning and artificial intelligence, where optimization is often the main computational bottleneck. As models become larger and more structured, optimization methods must cope with unstable stochastic gradients, costly second-order information, nonconvex landscapes, and severe memory constraints. We have worked on a range of algorithms that exploit curvature, geometry, and low-rank structure while maintaining theoretical guarantees. For deep learning, we have developed matrix-based approximations of the Fisher information matrix, generalized natural gradient methods, adaptive regularization strategies, sketch-based empirical natural gradient methods, and stochastic quasi-Newton methods, with the goal of reducing the cost of storing and inverting large matrices while still capturing useful second-order information. For reinforcement learning, we have studied stochastic composite augmented Lagrangian methods and primal-dual methods for constrained Markov decision processes, including sample-complexity guarantees and structured convergence analysis. More recently, we have been interested in optimization methods for large language models, including randomized subspace methods for memory-efficient training and low-rank zeroth-order methods for gradient-free fine-tuning. Through these directions, we aim to connect modern large-scale learning problems with optimization models and algorithms that are both mathematically principled and computationally viable.
+Li Tianyou, Chen Fan, Chen Huajie, Wen Zaiwen, Convergence Analysis of Stochastic Gradient Descent with MCMC Estimators, Science in China Series A: Mathematics, arXiv:2303.10599
+Ke Zhifa, Junyu Zhang, Wen Zaiwen, Gauss-Newton Temporal Difference Learning with Nonlinear Function Approximation, IEEE Transactions on Neural Networks and Learning Systems, arXiv:2302.13087
+Chen Yiming, Zhang Yuan, Liu Yin, Yuan Kun, Wen Zaiwen, A Memory Efficient Randomized Subspace Optimization Method for Training Large Language Models, ICML 2025, arXiv:2502.07222
+Chen Yiming, Zhang Yuan, Cao Liyuan, Yuan Kun, Wen Zaiwen, Enhancing Zeroth-order Fine-tuning for Language Models with Low-rank Structures, ICLR 2025, arXiv:2410.07698
+Ke Zhifa, Zhang Junyu, Wen Zaiwen, An Improved Finite-time Analysis of Temporal Difference Learning with Deep Neural Networks, ICML 2024
+Wu Jiayuan, Hu Jiang, Hongchao Zhang, Wen Zaiwen, Convergence analysis of an adaptively regularized natural gradient method, IEEE Transactions on Signal Processing, Vol 72, 2527-2542, 2024
+Hu Jiang, Ao Ruicheng, Anthony Man-Cho So, Yang Minghang, Wen Zaiwen, Riemannian Natural Gradient Methods, SIAM Journal on Scientific Computing, Vol. 46, No. 1, A204-A231, 2024
+Li Yongfeng, Zhao Mingming, Chen Weijie, Wen Zaiwen, A Stochastic Composite Augmented Lagrangian Method For Reinforcement Learning, SIAM Journal on Optimization, Vol. 33, No.2, 921-949, 2023
+Yang Minghan, Xu Dong, Cui Qiwen, Wen Zaiwen, Xu Pengxiang, An Efficient Fisher Matrix Approximation Method for Large-Scale Neural Network Optimization, IEEE Transactions on Pattern Analysis and Machine Intelligence, Vol. 45, No. 5, 5391-5403, 2023
+Chen Fan, Zhang Junyu, Wen Zaiwen, A Near-Optimal Primal-Dual Method for Off-Policy Learning in CMDP, NeurIPS 2022, arXiv:2207.06147
+Yang Minghan, Xu Dong, Wen Zaiwen, Chen Mengyun, Xu Pengxiang, Sketchy Empirical Natural Gradient Methods for Deep Learning, Journal of Scientific Computing, Vol. 9, No. 2, 94, 2023
+Zhao Mingming, Li Yongfeng, Wen Zaiwen, A stochastic trust region framework for policy optimization, Journal of Computational Mathematics, Vol. 40, 1004-1030, 2022
+Yang Minghan, Xu Dong, Chen Hongyu, Wen Zaiwen, Chen Mengyun, Structured Stochastic Quasi-Newton Methods for Large-Scale Optimization Problems, 10654-10663, CVPR 2021
+Duan Yaqi, Wang Mengdi, Wen Zaiwen, Yuan Yaxiang; Adaptive Low Rank Approximation for State Aggregation of Markov Chain, SIAM Journal on Matrix Analysis and Applications, Vol 41, No. 1, pp. 244-278, 2020
+Jia Zeyu, Wen Zaiwen, Ye Yinyu, Toward Solving 2-TBSG Efficiently, Optimization Methods and Software, Vol. 35, No.4, 706-721, 2020
+Chen Yiming, Cao Liyuan, Yuan Kun, Wen Zaiwen, Sharper Convergence Guarantees for Federated Learning with Partial Model Personalization, arXiv: 2309.17409
+Li Chenyi, Zhu Shuchen, Xie Zhonglin, Wen Zaiwen, Accelerated Natural Gradient Method for Parametric Manifold Optimization, arXiv:2504.05753
+Liu Yin, Dai Qiming, Zhang Junyu, Wen Zaiwen, Non-Asymptotic Global Convergence of PPO-Clip, arXiv:2512.16565
+Zhu Shuchen, Hu Rizhen, Wang Mingze, Sun Mou, Wang Xue, Yuan Kun, Wen Zaiwen, Accelerating LLM Pre-training through Flat-Direction Dynamics Enhancement
+Learning-based optimization (Learn to optimize)
+Our group is also interested in learning-based optimization, namely, how optimization algorithms themselves can be designed, adapted, or accelerated through data and learning. Traditional optimization methods are typically derived from explicit mathematical structure and enjoy strong interpretability and rigorous analysis, but they often require substantial problem-specific design. We are interested in whether search, learning, and optimization can be combined in a more systematic way. Our work in this area includes data generation for optimization, continuous-time perspectives on learnable algorithms, and learning-driven methods for combinatorial and constrained optimization. We developed OptMATH, a scalable framework for synthesizing diverse optimization instances that can support the training and evaluation of learning-based methods. We have also studied ODE-based learning-to-optimize methods, where optimization algorithms are modeled and analyzed through continuous dynamical systems, as well as differentiable stopping-time methods that incorporate learned stopping policies into the optimization process. In addition, we have developed learning-based methods for discrete and constrained problems, including MCPG for binary optimization and LMask for constrained routing. More broadly, we view this direction as part of a larger effort to build foundational models for optimization and algorithmic frameworks that integrate structure, search, and learning for complex decision and computation tasks.
+Li Tianyou, Zou Haijun, Wu Jiayuan, Wen Zaiwen, LMask: Learn to Solve Constrained Routing Problems with Lazy Masking, ICLR 2026, arXiv:2505.17938
+Xie Zhonglin, Yin Wotao, Wen Zaiwen, ODE-based learning to optimize, Mathematical Programming, arXiv: 2406.02006, 2025/11
+Xie Zhonglin, Fong Yiman, Yuan Haoran, Wen Zaiwen, Accelerating Optimization via Differentiable Stopping Time, NeurIPS 2025 Spotlight
+Chen Cheng, Chen Ruitao, Li Tianyou, Ao Ruichen, Wen Zaiwen, A Monte Carlo Policy Gradient Method with Local Search for Binary Optimization, Mathematical Programming, arXiv: 2307.00783, 2025/09
+Lu Hongliang, Xie Zhonglin, Wu Yaoyu, Ren Can, Chen Yuxuan, Wen Zaiwen, OptMATH: A Scalable Bidirectional Data Synthesis Framework for Optimization Modeling, ICML 2025, arXiv:2502.11102
+Zhou Ruisong, Zou Haijun, Zhou Li, Sun Chumin, Wen Zaiwen, Reinforcement Learning for Heterogeneous DAG Scheduling with Weighted Cross-Attention
+Pan Yicheng, Zou Haijun, Zhou Ruisong, Li Tianyou, Wen Zaiwen, Learning the Quadratic Assignment Problem with Warm-Started MCMC Finetuning and Cross-Graph Attention
+Li Zhong, Lu Hongliang, Wei Tao, Liu Wenyu, Chen Yuxuan, Lan Yuan, Zhang Fan, Wen Zaiwen, Constructing Industrial-Scale Optimization Modeling Benchmark, arXiv:2602.10450
+Lu Hongliang, Li Zhong, Chen Yuxuan, Lan Yuan, Zhang Fan, Wen Zaiwen, PEARL: Interactive Optimization Modeling with Tool-Integrated Agentic Reinforcement Learning
+Huang Xin, Jiang Yifan, Luo Ziyan, Chen Wang, Wan Jinhui, Wang Xiangyi, Wen Zaiwen, Optimization Modular Modeling for Statistical Learning
+AI for Mathematics
+A more recent direction of our group is mathematical formalization and automated theorem proving, especially for optimization and applied mathematics. We are interested in turning mathematical definitions, algorithms, theorems, and proofs written in natural language into formal objects that are machine-checkable, reusable, and suitable for automation. This is particularly challenging in applied mathematics, where arguments often involve omitted steps, implicit assumptions, and a mixture of modeling, computation, and proof. Our work in this area includes the construction of formal libraries, large-scale formalization pipelines, benchmarks, and theorem-proving tools. We have developed Optlib as a formal library for mathematical optimization, including material in convex analysis, optimality conditions, and related topics; ReasBook as a Lean4-based project for formalizing textbooks and research papers at scale; M2F as an end-to-end framework for automated formalization of mathematical literature; and AMBER as a benchmark for applied mathematics formalization covering proofs, algorithms, computations, and formal translation tasks. We have also worked on premise selection, theorem retrieval in Lean, and domain-oriented automated provers such as OptProver, as well as multi-agent formalization systems such as SITA. Our long-term goal is to build scalable and verifiable mathematical infrastructure that can support both education and research in optimization and beyond.
+Li Chenyi, Wang Zichen, Bai Yifan, Duan Yunxi, Gao Yuqing, Hao Pengfei, Wen Zaiwen, Formalization of Algorithms for Optimization with Block Structures, Science in China Series A: Mathematics, arXiv:2503.18806
+Li Chenyi, Ma Wanli, Wang Zichen, Wen Zaiwen, SITA: A Framework for Structure-to-Instance Theorem Autoformalization, AAAI, 2025
+Li Chenyi, Wang Ziyu, He Wanyi, Wu Yuxuan, Xu Shengyang, Wen Zaiwen, Formalization of Convergence Rates of Four First-order Algorithms for Convex Optimization, Journal of Automated Reasoning, Vol. 69, No. 28, 2025
+Wang Zichen, Dong Anjie, Wen Zaiwen, Tree-Based Premise Selection for Lean4, NeurIPS 2025
+Li Chenyi, Wen Zaiwen, Introduction to Mathematical Formalization Based on Lean, Mathematica Numerica Sinica, Vol. 47, No. 2, 191-213, 2025
+Li Chenyi, Xu Shengyang, Sun Chumin, Zhou Li, Wen Zaiwen, Formalization of Optimality Conditions for Smooth Constrained Optimization Problems, arXiv:2503.18821
+Wang Ziyu, Yang Bowen, Zhou Shihao, Li Chenyi, Zhang Yuan, Dong Bin, Wen Zaiwen, Translating Informal Proofs into Formal Proofs Using a Chain of States
+Li Chenyi, Lai Zhijian, An Dong, Hu Jiang, Wen Zaiwen, Advancing Mathematical Research via Human-AI Interactive Theorem Proving, arXiv:2512.09443
+Yang Bowen, Yuan Yi, Li Chenyi, Wang Ziyu, Li Liangqi, Zhang Bo, Li Zhe, Wen Zaiwen, Construction-Verification: A Benchmark for Formalizing Applied Mathematics in Lean 4, arXiv:2602.01291
+Li Chenyi, Nie Yanchen, Ming Zhenyu, Zhang Gong, Yuan Kun, Wen Zaiwen, OptProver: Bridging Olympiad and Optimization through Continual Training in Formal Theorem Proving
+Miao Shu, Wang Zichen, Dong Anjie, Wu Yishan, Zhang Weixi, Wen Zaiwen, Directed Multi-Relational GCNs for Premise Selection
+Wang Zichen, Ma Wanli, Ming Zhenyu, Zhang Gong, Yuan Kun, Wen Zaiwen, M2F: Automated Formalization of Mathematical Literature at Scale, arXiv:2602.17016
+Optimization software and real-world applications
+Our group has tried to bring optimization methods into software and real applications. OptSuite is a collection of optimization software composed of multiple relatively independent modules, covering various research directions ranging from low-level algebraic libraries, convex optimization, nonlinear programming, manifold optimization, integer programming, to the integration of machine learning and optimization. Each module is designed for specific types of problems, featuring relatively independent code repositories, algorithm implementations, and usage interfaces. OptSuite has delivered core algorithmic technologies for Huawei, Alibaba, China Railway, Goertek, and other enterprises. This has led to collaborations on large-scale problems arising in communications, cloud computing, transportation, aerospace, and manufacturing. Examples include engineering optimization problems involving nonlinear and conic models, train timetable construction, spacecraft trajectory optimization, and intelligent scheduling for discrete manufacturing systems. These experiences have reinforced our view that optimization research is most effective when theory, algorithms, software, and applications inform one another in a sustained way, and that practical computational challenges often lead to new mathematical questions of independent theoretical interest.
+Link to our github page
+SSNCVX
+, A Semi-Smooth Newton method for Convex optimization problems, 2025 —
+code: “SSNCVX”
+ReasLab: intelligent mathematical reasoning system
+ReasLab is a one-stop intelligent mathematical reasoning engine oriented toward education, research, and complex decision-making. It is designed to move mathematical and applied research from a predominantly manual workflow toward a computable and verifiable digital infrastructure. Targeting the long-standing separation among mathematical modeling, algorithm design, computation, and theorem proving, ReasLab adopts a large-language-model-based multi-agent architecture and integrates mathematical model libraries, algorithm libraries, and theorem knowledge bases into a unified environment. It supports model construction, algorithm design, numerical solution, natural-language and formal proof generation, and automatic report generation in Markdown and LaTeX, thereby enabling coordinated transitions across multiple representations of mathematical objects. Delivered through cloud computing, ReasLab can be used online without local installation. It has already supported close to one thousand users in formalization, optimization modeling, mathematical contest training, and scientific writing; provided formalization teaching and research workspaces for many universities, including Peking University, Shanghai Jiao Tong University, Sichuan University, Wuhan University, and the National University of Singapore; and is being used to support practical needs from enterprises such as Huawei and Goertek. Its agent M2F has formalized books such as Tao's Analysis II and Rockafellar's Convex Analysis, producing more than 3,000,000 lines of Lean code.
+ReasLab
+: https://reaslab.io
+Page generated 2026-10-06 22:15:48 CST, by
+jemdoc+MathJax
+.

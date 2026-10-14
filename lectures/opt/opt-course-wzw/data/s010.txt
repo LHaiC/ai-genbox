@@ -1,0 +1,222 @@
+大数据分析中的算法 (2026年春季)
+Zaiwen Wen
+Home
+Research
+Service
+Research
+Publications
+Recognition
+Recent Talks
+Seminars
+Group
+Optbook
+Databook
+Mathematical
+Formalization
+Workstation
+Guidance
+Software
+ReasLab
+OptSuite
+SSNCVX
+ReasBook
+ReasAtlas
+Teaching
+Optimization
+Methods
+(2026 Fall)
+Algorithms for
+Big Data
+Analysis
+(2026 Spring)
+大数据分析中的算法 (2026年春季)
+本课程考核包括平时作业和程序，期中项目，期末考试，请谨慎选课
+上课地点：二教407
+外院系本科生未选上课的同学请邮件和微信告知学号
+2020年春季课程回放视频
+华文慕课平台，点击此链接
+课程代码：00136720 (本科生），00100863 （本研合）
+课程内容： 侧重数据分析中的数值代数和最优化算法
+教师信息： 文再文，wenzw at pku dot edu dot cn
+助教信息： 周瑞松
+课程微信群（下面二维码3月5日失效）
+上课时间：
+每周周一3~4节(10:10am - 12:00am)，双周周四1~2节(8:00am - 9:50am)
+老师答疑时间: 单独和老师联系或者每次课后
+助教答疑时间: 根据反馈待定
+北京大学校历
+先修课程要求:
+年级要求: 大三，大四，研究生
+不是必须先修但有帮助: 数值代数，最优化（凸优化），概率论
+会Matlab或者Python程序编写
+其它信息：
+大数据分析中的算法 (2025年春季)
+最优化方法 (2025年秋季)
+参考材料：
+“大数据分析中的算法”，文再文课题组
+“最优化: 建模、算法与理论”，刘浩洋, 户将, 李勇锋，文再文
+Dimitris Bertsimas, John N. Tsitsiklis, Introduction to linear optimizattion, Athena Scientific
+Michele Conforti, Gerard Cornuejols, Giacomo Zambelli, Integer Programming, Springer
+“Convex optimization”, Stephen Boyd and Lieven Vandenberghe
+“Numerical Optimization”, Jorge Nocedal and Stephen Wright, Springer, second edition
+“Optimization Theory and Methods”, Wenyu Sun, Ya-Xiang Yuan
+“Matrix Computations”, Gene H. Golub and Charles F. Van Loan, The Johns Hopkins University Press
+Deep Learning, Ian Goodfellow and Yoshua Bengio and Aaron Courville
+Richard S. Sutton
+and Andrew G. Barto, Reinforcement Learning: An Introduction
+课程信息 （大致安排）
+Acknowledgement: quite a few materials are taken from slides or lecture notes online.
+Please email me if the usage of any part is not appropriate and they will be deleted immediately.
+第1周，3月2日，课程简介:
+lecture notes
+第2周，3月9日，线性规划，二次锥规划，半定规划简介:
+lecture notes
+read:
+“Convex optimization”, Stephen Boyd and Lieven Vandenberghe, chapters 2 and 3
+思考题： 有哪些问题和应用可以化成线性规划，二次锥规划，半定规划？
+
+模型语言：
+CVX
+,
+YALMIP
+LP, SOCP, SDP典型算法软件:
+SDPT3
+,
+MOSEK
+,
+CPLEX
+,
+GUROBI
+Prof. Boyd lecture notes on Disciplined convex programming and CVX
+“Convex optimization”, Stephen Boyd and Lieven Vandenberghe, chapters 4 and 5
+第2周，3月12日，凸优化对偶理论:
+lecture notes
+第3周，3月16日，线性规划单纯形算法，内点算法:
+lecture notes
+“Numerical Optimization”, Jorge Nocedal and Stephen Wright, Springer, chapters 13 and 14
+第4周，3月23日，Primal-Dual Hybrid Gradient Algorithm for LP:
+lecture notes
+David Applegate, Mateo Diaz, Oliver Hinder, Haihao Lu, Miles Lubin, Brendan O'Donoghue, Warren Schudy, Practical Large-Scale Linear Programming using Primal-Dual Hybrid Gradient
+第4周，3月26日，压缩感知和稀疏优化基本理论:
+lecture notes
+references: An Introduction to Compressive Sensing
+E. Candes and T. Tao. Decoding by linear programming. IEEE Transactions on
+Information Theory, 51:4203–4215, 2005
+Compressive Sensing Resources
+第5周，3月30日，稀疏优化的算法
+lecture notes
+“Proximal Algorithms”, N. Parikh and S. Boyd, Foundations and Trends in Optimization, 1(3):123-231, 2014.
+Amir Beck, Marc Teboulle, A Fast Iterative Shrinkage-Thresholding Algorithm for Linear Inverse Problems
+“Distributed Optimization and Statistical Learning via the Alternating Direction Method of Multipliers”, S. Boyd, N. Parikh, E. Chu, B. Peleato, and J. Eckstein, Foundations and Trends in Machine Learning, 3(1):1–122, 2011
+Junfeng Yang, Yin Zhang, Alternating direction algorithms for
+l1-problems in Compressed Sensing, SIAM Journal on Scientific Computing
+Vishal Monga, Yuelong Li, Yonina C. Eldar, Algorithm Unrolling: Interpretable, Efficient Deep Learning for Signal and Image Processing
+第6周，4月6日（4月6日下午7-8节15:10-17:00 补6月1日课，理教307)，稀疏优化的算法
+第6周，4月9日，推荐系统与低秩矩阵恢复的算法
+lecture notes
+SVD: read section 2.5 in  “Matrix Computations”, Gene H. Golub and Charles F. Van Loan, The Johns Hopkins University Press
+chapter 9 in “Mining Massive Data Sets”, Stanford University
+“Guaranteed Minimum-Rank Solutions of Linear
+Matrix Equations via Nuclear Norm Minimization”, Benjamin Recht,
+Maryam Fazel, Pablo A. Parrilo
+第7周，4月13日， optimal transport,
+lecture notes
+slides and computational resources on optimal transport
+第8周，4月20日，线性整数规划选讲: 整数规划建模
+lecture notes
+Michele Conforti, Gerard Cornuejols, Giacomo Zambelli, Integer Programming, Springer
+第8周，4月23日，线性整数规划选讲: 分支定界方法，割平面法
+lecture notes
+网络流问题选讲
+lecture notes
+图和网络流问题: 最短路径问题
+lecture notes
+“Network Flows:  Theory, Algorithms, and Applications”, Ahuja, Magnanti, and Orlin
+图和网络流问题: 最大流问题，组合优化与线性规划
+lecture notes
+“Network Flows:  Theory, Algorithms, and Applications”, Ahuja, Magnanti, and Orlin
+链接分析： page rank
+lecture notes
+chapter 5, link analysis, Mining of Massive Datasets
+第9周，4月27日，大规模线性整数规划选讲: Lagrange relaxation, Benders decomposition
+lecture notes
+大规模线性整数规划的机器学习算法
+lecture notes
+第10周，5月4日, 放假取消
+第10周，5月7日，Submodular 优化与数据挖掘
+lecture notes
+Learning with Submodular Functions: A Convex Optimization Perspective, Francis Bach
+Learning with Submodular Functions, Francis Bach
+EE596B - Submodular Functions, Optimization, and Applications to Machine Learning, Prof. Jeff A. Bilmes
+第11周，5月11日， 随机优化算法
+lecture notes
+Joel A Tropp, An introduction to matrix concentration inequalities
+Optimization Methods for Large-Scale Machine Learning, Léon Bottou, Frank E. Curtis, Jorge Nocedal
+Introductory Lectures on Stochastic Optimization, by John Duchi
+Deep Learning, Ian Goodfellow and Yoshua Bengio and Aaron Courville
+Optimization for deep learning: theory and algorithms, Ruoyu Sun
+New insights and perspectives on the natural gradient method, James Martens
+第12周，5月18日， 随机优化算法，随机特征值分解算法
+第12周，5月21日， 随机特征值分解算法
+lecture notes
+Petros Drineas, Ravi Kannan, and Michael W. Mahoney, Fast Monte Carlo Algorithms for Matrices I: Approximating Matrix Multiplication, SIAM J. Comput., 36(1), 132–157
+Petros Drineas, Ravi Kannan, and Michael W. Mahoney, Fast Monte Carlo Algorithms for Matrices II: Computing a Low-Rank Approximation to a Matrix, SIAM J. Comput., 36(1), 158–183
+N. Halko, P. G. Martinsson, and J. A. Tropp, Finding Structure with Randomness: Probabilistic Algorithms for Constructing Approximate Matrix Decompositions,SIAM Rev., 53(2), 217–288.
+第13周，5月25日，相位恢复
+lecture notes
+E. J. Candes, Y. Eldar, T. Strohmer and V. Voroninski. Phase retrieval via matrix completion. SIAM J. on Imaging Sciences 6(1), 199–225.
+E. J. Candès, X. Li and M. Soltanolkotabi. Phase retrieval via Wirtinger flow: theory and algorithms. IEEE Transactions on Information Theory 61(4), 1985–2007.
+J. Sun, Q. Qu and J. Wright, A Geometric Analysis of Phase Retrieval, Foundations of Computational Mathematics, Vol. 18, pages 1131–1198
+第14周，6月1日（4月6日下午已补课），Markov Decision Process
+lecture notes
+Richard S. Sutton
+and Andrew G. Barto, Reinforcement Learning: An Introduction
+Prof. Dimitri Bertsekas's lecture slides
+Dimitri P. Bertsekas, Abstract Dynamic Programming
+第14周，6月4日（5月31日上午3-4节补6月4日课，二教407），TD learning and Q-Learning
+lecture notes
+第15周，6月8日，Policy gradient methods
+lecture notes
+作业和课程项目，重要日期和提交内容：
+如果没有明确作业文件和来源，下面习题选自教材1：
+“最优化：建模、算法与理论”，刘浩洋, 户将, 李勇锋，文再文
+，教材2:
+“大数据分析中的算法”，文再文课题组
+3月9日上课前,   教材1习题：4.2, 4.4, 4.6
+3月16日上课前,   教材1习题： 5.1,  5.7, 5.11
+3月23日上课前,
+homework-LP.pdf
+3月30日上课前, 教材2习题: 3.1, 3.2
+4月6日上课前, 教材2习题：3.6, 3.8
+4月13日, 教材2习题：4.1, 4.2
+4月27日, 教材2习题：5.2, 5.4
+5月7日,
+期中课程项目，建议提前开始做
+作业文件打包，文件名为 “proj1-name-ID.zip” ，发email给助教 (pkuopt@163.com)
+5月11日, 教材2习题：6.3, 6.7
+5月18日, 教材1习题：8.20, 8.21
+5月25日, 教材2习题：2.2, 2.5
+6月1日, 教材2习题：7.9, 7.11
+成绩评定
+迟交一天(24小时）打折10%， 不接受晚交4天的作业和项目（任何时候理由都不接受）
+大作业，包括习题和程序： 40%
+期中课程项目： 30%
+期末考试： 30%
+作业要求：i) 计算题要求写出必要的推算步骤，证明题要写出关键推理和论证。数值试验题应该同时提交书面报告和程序，其中书面报告有详细的推导和数值结果及分析。
+ii) 可以同学间讨论或者找助教答疑，但不允许在讨论中直接抄袭，应该过后自己独立完成。 iii) 严禁从其他学生，从互联网，从往年的答案，其它课程等等任何途径直接抄袭。iv) 如果有讨论或从其它任何途径取得帮助，请列出来源。
+期末考试
+课堂选做题，持续更新
+参考材料：课程作业题、讲义习题和课堂选做题
+闭卷考试： 2026年6月15日上午8：30－10：30，考场为二教309
+考试范围：课堂讲过的相关内容，包括但可能不限于以下典型内容
+对偶问题、最优性条件、典型简单问题的最优解推导
+压缩感知和稀疏优化基本理论、稀疏优化的算法
+推荐系统与低秩矩阵恢复的算法
+最优输运
+次模优化
+随机优化算法
+随机特征值分解算法
+相位恢复
+Page generated 2026-10-06 22:15:50 CST, by
+jemdoc+MathJax
+.

@@ -1,0 +1,52 @@
+Seminars
+Zaiwen Wen
+Home
+Research
+Service
+Research
+Publications
+Recognition
+Recent Talks
+Seminars
+Group
+Optbook
+Databook
+Mathematical
+Formalization
+Workstation
+Guidance
+Software
+ReasLab
+OptSuite
+SSNCVX
+ReasBook
+ReasAtlas
+Teaching
+Optimization
+Methods
+(2026 Fall)
+Algorithms for
+Big Data
+Analysis
+(2026 Spring)
+Seminars
+Regular seminar during each spring and fall semester at Quan 9 or 29, BICMR
+Seminar on Operations Research at BICMR
+Prof. Yuan Yaxiang's Group Meeting at LSEC
+Conferences and Workshops
+2025 PKU Workshop on Optimization Theory and Methods
+2022 PKU Workshop on Operations Research and Machine Learning
+2021 PKU Workshop on Optimization Theory and Methods
+2018 PKU Workshop on Optimization Theory and Methods
+2017 PKU Workshop on Computation and Big Data Analysis
+2016 Workshop on Optimization and Eigenvalue Computation
+2014 Workshop on Optimization for Modern Computation
+2013 PKU Workshop On Optimization and Data Sciences
+SPOC 2016
+SPOC 2015
+SPOC 2014
+SPOC 2013
+SPOC 2012
+Page generated 2026-10-06 22:15:50 CST, by
+jemdoc+MathJax
+.

@@ -1,0 +1,3856 @@
+{
+  "suite": "Large-type proof edition Chromium verification",
+  "timestamp": "2026-10-14T09:47:18.357588+00:00",
+  "browser": "144.0.7559.96",
+  "loading": "Exact standalone HTML via set_content; independent source entry via separate script/style injection",
+  "navigation": {
+    "file_navigation": "not_verified",
+    "reason": "Browser administrator policy blocked file navigation"
+  },
+  "not_tested": [
+    "Native PDF viewer",
+    "Firefox and Safari",
+    "Direct website downloads during browser tests"
+  ],
+  "tests": 310,
+  "passed": 310,
+  "failed": 0,
+  "duration_seconds": 75.86,
+  "console_errors": [],
+  "page_errors": [],
+  "network_requests": [],
+  "results": [
+    {
+      "name": "Self-contained entry renders both proof figure and algorithm experiment",
+      "status": "pass",
+      "seconds": 0.024,
+      "details": null
+    },
+    {
+      "name": "Complete proof and question / start",
+      "status": "pass",
+      "seconds": 0.122,
+      "details": {
+        "proofs": 1,
+        "visible_steps": 6,
+        "formula_count": 7
+      }
+    },
+    {
+      "name": "Proof navigation, figure slider, animation and rollback / start-proof-0",
+      "status": "pass",
+      "seconds": 1.221,
+      "details": {
+        "steps": 6,
+        "figure_min": 0,
+        "figure_max": 12,
+        "timer_advanced": true,
+        "rollback_exact": true
+      }
+    },
+    {
+      "name": "Algorithm controls, cases, history and reset / counterexample",
+      "status": "pass",
+      "seconds": 0.077,
+      "details": {
+        "controls": 2,
+        "step_and_exact_rollback": false
+      }
+    },
+    {
+      "name": "Complete proof and question / geometry",
+      "status": "pass",
+      "seconds": 0.114,
+      "details": {
+        "proofs": 1,
+        "visible_steps": 6,
+        "formula_count": 7
+      }
+    },
+    {
+      "name": "Proof navigation, figure slider, animation and rollback / geometry-proof-0",
+      "status": "pass",
+      "seconds": 0.811,
+      "details": {
+        "steps": 6,
+        "figure_min": 0.5,
+        "figure_max": 4,
+        "timer_advanced": true,
+        "rollback_exact": true
+      }
+    },
+    {
+      "name": "Algorithm controls, cases, history and reset / norms",
+      "status": "pass",
+      "seconds": 0.184,
+      "details": {
+        "controls": 3,
+        "step_and_exact_rollback": false
+      }
+    },
+    {
+      "name": "Complete proof and question / differentiation",
+      "status": "pass",
+      "seconds": 0.123,
+      "details": {
+        "proofs": 1,
+        "visible_steps": 6,
+        "formula_count": 7
+      }
+    },
+    {
+      "name": "Proof navigation, figure slider, animation and rollback / differentiation-proof-0",
+      "status": "pass",
+      "seconds": 0.839,
+      "details": {
+        "steps": 6,
+        "figure_min": -1.8,
+        "figure_max": 1.8,
+        "timer_advanced": true,
+        "rollback_exact": true
+      }
+    },
+    {
+      "name": "Algorithm controls, cases, history and reset / derivative",
+      "status": "pass",
+      "seconds": 0.191,
+      "details": {
+        "controls": 4,
+        "step_and_exact_rollback": false
+      }
+    },
+    {
+      "name": "Complete proof and question / convex",
+      "status": "pass",
+      "seconds": 0.113,
+      "details": {
+        "proofs": 1,
+        "visible_steps": 7,
+        "formula_count": 8
+      }
+    },
+    {
+      "name": "Proof navigation, figure slider, animation and rollback / convex-proof-0",
+      "status": "pass",
+      "seconds": 0.854,
+      "details": {
+        "steps": 7,
+        "figure_min": 0,
+        "figure_max": 1,
+        "timer_advanced": true,
+        "rollback_exact": true
+      }
+    },
+    {
+      "name": "Algorithm controls, cases, history and reset / convexity",
+      "status": "pass",
+      "seconds": 0.268,
+      "details": {
+        "controls": 4,
+        "step_and_exact_rollback": false
+      }
+    },
+    {
+      "name": "Complete proof and question / conjugacy",
+      "status": "pass",
+      "seconds": 0.127,
+      "details": {
+        "proofs": 1,
+        "visible_steps": 7,
+        "formula_count": 8
+      }
+    },
+    {
+      "name": "Proof navigation, figure slider, animation and rollback / conjugacy-proof-0",
+      "status": "pass",
+      "seconds": 0.827,
+      "details": {
+        "steps": 7,
+        "figure_min": -2.5,
+        "figure_max": 2.5,
+        "timer_advanced": true,
+        "rollback_exact": true
+      }
+    },
+    {
+      "name": "Algorithm controls, cases, history and reset / conjugate",
+      "status": "pass",
+      "seconds": 0.199,
+      "details": {
+        "controls": 3,
+        "step_and_exact_rollback": false
+      }
+    },
+    {
+      "name": "Complete proof and question / modeling",
+      "status": "pass",
+      "seconds": 0.149,
+      "details": {
+        "proofs": 1,
+        "visible_steps": 7,
+        "formula_count": 8
+      }
+    },
+    {
+      "name": "Proof navigation, figure slider, animation and rollback / modeling-proof-0",
+      "status": "pass",
+      "seconds": 0.917,
+      "details": {
+        "steps": 7,
+        "figure_min": 0,
+        "figure_max": 2.5,
+        "timer_advanced": true,
+        "rollback_exact": true
+      }
+    },
+    {
+      "name": "Algorithm controls, cases, history and reset / modeling",
+      "status": "pass",
+      "seconds": 0.257,
+      "details": {
+        "controls": 3,
+        "step_and_exact_rollback": false
+      }
+    },
+    {
+      "name": "Complete proof and question / cones",
+      "status": "pass",
+      "seconds": 0.139,
+      "details": {
+        "proofs": 2,
+        "visible_steps": 11,
+        "formula_count": 12
+      }
+    },
+    {
+      "name": "Proof navigation, figure slider, animation and rollback / cones-proof-0",
+      "status": "pass",
+      "seconds": 0.828,
+      "details": {
+        "steps": 6,
+        "figure_min": -1,
+        "figure_max": 3,
+        "timer_advanced": true,
+        "rollback_exact": true
+      }
+    },
+    {
+      "name": "Proof navigation, figure slider, animation and rollback / cones-proof-1",
+      "status": "pass",
+      "seconds": 0.904,
+      "details": {
+        "steps": 5,
+        "figure_min": -2,
+        "figure_max": 6,
+        "timer_advanced": true,
+        "rollback_exact": true
+      }
+    },
+    {
+      "name": "Algorithm controls, cases, history and reset / cones",
+      "status": "pass",
+      "seconds": 0.249,
+      "details": {
+        "controls": 3,
+        "step_and_exact_rollback": false
+      }
+    },
+    {
+      "name": "Complete proof and question / optimality",
+      "status": "pass",
+      "seconds": 0.113,
+      "details": {
+        "proofs": 1,
+        "visible_steps": 6,
+        "formula_count": 7
+      }
+    },
+    {
+      "name": "Proof navigation, figure slider, animation and rollback / optimality-proof-0",
+      "status": "pass",
+      "seconds": 0.773,
+      "details": {
+        "steps": 6,
+        "figure_min": -1.7,
+        "figure_max": 1.7,
+        "timer_advanced": true,
+        "rollback_exact": true
+      }
+    },
+    {
+      "name": "Algorithm controls, cases, history and reset / stationarity",
+      "status": "pass",
+      "seconds": 0.081,
+      "details": {
+        "controls": 2,
+        "step_and_exact_rollback": false
+      }
+    },
+    {
+      "name": "Complete proof and question / duality",
+      "status": "pass",
+      "seconds": 0.101,
+      "details": {
+        "proofs": 1,
+        "visible_steps": 7,
+        "formula_count": 8
+      }
+    },
+    {
+      "name": "Proof navigation, figure slider, animation and rollback / duality-proof-0",
+      "status": "pass",
+      "seconds": 0.856,
+      "details": {
+        "steps": 7,
+        "figure_min": -1.5,
+        "figure_max": 1.5,
+        "timer_advanced": true,
+        "rollback_exact": true
+      }
+    },
+    {
+      "name": "Algorithm controls, cases, history and reset / kkt",
+      "status": "pass",
+      "seconds": 0.146,
+      "details": {
+        "controls": 3,
+        "step_and_exact_rollback": false
+      }
+    },
+    {
+      "name": "Complete proof and question / line-search",
+      "status": "pass",
+      "seconds": 0.093,
+      "details": {
+        "proofs": 1,
+        "visible_steps": 6,
+        "formula_count": 7
+      }
+    },
+    {
+      "name": "Proof navigation, figure slider, animation and rollback / line-search-proof-0",
+      "status": "pass",
+      "seconds": 1.156,
+      "details": {
+        "steps": 6,
+        "figure_min": 0,
+        "figure_max": 2,
+        "timer_advanced": true,
+        "rollback_exact": true
+      }
+    },
+    {
+      "name": "Algorithm controls, cases, history and reset / linesearch",
+      "status": "pass",
+      "seconds": 0.459,
+      "details": {
+        "controls": 5,
+        "step_and_exact_rollback": true
+      }
+    },
+    {
+      "name": "Complete proof and question / gradient",
+      "status": "pass",
+      "seconds": 0.119,
+      "details": {
+        "proofs": 1,
+        "visible_steps": 6,
+        "formula_count": 7
+      }
+    },
+    {
+      "name": "Proof navigation, figure slider, animation and rollback / gradient-proof-0",
+      "status": "pass",
+      "seconds": 0.794,
+      "details": {
+        "steps": 6,
+        "figure_min": 0.1,
+        "figure_max": 2.4,
+        "timer_advanced": true,
+        "rollback_exact": true
+      }
+    },
+    {
+      "name": "Algorithm controls, cases, history and reset / gradient",
+      "status": "pass",
+      "seconds": 0.707,
+      "details": {
+        "controls": 4,
+        "step_and_exact_rollback": true
+      }
+    },
+    {
+      "name": "Complete proof and question / subgradient",
+      "status": "pass",
+      "seconds": 0.103,
+      "details": {
+        "proofs": 1,
+        "visible_steps": 6,
+        "formula_count": 7
+      }
+    },
+    {
+      "name": "Proof navigation, figure slider, animation and rollback / subgradient-proof-0",
+      "status": "pass",
+      "seconds": 1.156,
+      "details": {
+        "steps": 6,
+        "figure_min": 0,
+        "figure_max": 24,
+        "timer_advanced": true,
+        "rollback_exact": true
+      }
+    },
+    {
+      "name": "Algorithm controls, cases, history and reset / subgradient",
+      "status": "pass",
+      "seconds": 0.315,
+      "details": {
+        "controls": 2,
+        "step_and_exact_rollback": true
+      }
+    },
+    {
+      "name": "Complete proof and question / newton",
+      "status": "pass",
+      "seconds": 0.103,
+      "details": {
+        "proofs": 1,
+        "visible_steps": 7,
+        "formula_count": 8
+      }
+    },
+    {
+      "name": "Proof navigation, figure slider, animation and rollback / newton-proof-0",
+      "status": "pass",
+      "seconds": 1.255,
+      "details": {
+        "steps": 7,
+        "figure_min": 0,
+        "figure_max": 22,
+        "timer_advanced": true,
+        "rollback_exact": true
+      }
+    },
+    {
+      "name": "Algorithm controls, cases, history and reset / newton",
+      "status": "pass",
+      "seconds": 0.39,
+      "details": {
+        "controls": 2,
+        "step_and_exact_rollback": true
+      }
+    },
+    {
+      "name": "Complete proof and question / quasi-newton",
+      "status": "pass",
+      "seconds": 0.099,
+      "details": {
+        "proofs": 1,
+        "visible_steps": 7,
+        "formula_count": 8
+      }
+    },
+    {
+      "name": "Proof navigation, figure slider, animation and rollback / quasi-newton-proof-0",
+      "status": "pass",
+      "seconds": 0.857,
+      "details": {
+        "steps": 7,
+        "figure_min": 0.02,
+        "figure_max": 1.5,
+        "timer_advanced": true,
+        "rollback_exact": true
+      }
+    },
+    {
+      "name": "Algorithm controls, cases, history and reset / bfgs",
+      "status": "pass",
+      "seconds": 0.474,
+      "details": {
+        "controls": 3,
+        "step_and_exact_rollback": true
+      }
+    },
+    {
+      "name": "Complete proof and question / trust",
+      "status": "pass",
+      "seconds": 0.1,
+      "details": {
+        "proofs": 1,
+        "visible_steps": 7,
+        "formula_count": 8
+      }
+    },
+    {
+      "name": "Proof navigation, figure slider, animation and rollback / trust-proof-0",
+      "status": "pass",
+      "seconds": 0.839,
+      "details": {
+        "steps": 7,
+        "figure_min": 0.1,
+        "figure_max": 3,
+        "timer_advanced": true,
+        "rollback_exact": true
+      }
+    },
+    {
+      "name": "Algorithm controls, cases, history and reset / trustsub",
+      "status": "pass",
+      "seconds": 0.165,
+      "details": {
+        "controls": 2,
+        "step_and_exact_rollback": false
+      }
+    },
+    {
+      "name": "Algorithm controls, cases, history and reset / trust",
+      "status": "pass",
+      "seconds": 0.418,
+      "details": {
+        "controls": 2,
+        "step_and_exact_rollback": true
+      }
+    },
+    {
+      "name": "Complete proof and question / least-squares",
+      "status": "pass",
+      "seconds": 0.108,
+      "details": {
+        "proofs": 1,
+        "visible_steps": 6,
+        "formula_count": 7
+      }
+    },
+    {
+      "name": "Proof navigation, figure slider, animation and rollback / least-squares-proof-0",
+      "status": "pass",
+      "seconds": 1.155,
+      "details": {
+        "steps": 6,
+        "figure_min": 0,
+        "figure_max": 9,
+        "timer_advanced": true,
+        "rollback_exact": true
+      }
+    },
+    {
+      "name": "Algorithm controls, cases, history and reset / leastsquares",
+      "status": "pass",
+      "seconds": 0.327,
+      "details": {
+        "controls": 3,
+        "step_and_exact_rollback": true
+      }
+    },
+    {
+      "name": "Complete proof and question / alm",
+      "status": "pass",
+      "seconds": 0.086,
+      "details": {
+        "proofs": 1,
+        "visible_steps": 6,
+        "formula_count": 7
+      }
+    },
+    {
+      "name": "Proof navigation, figure slider, animation and rollback / alm-proof-0",
+      "status": "pass",
+      "seconds": 1.156,
+      "details": {
+        "steps": 6,
+        "figure_min": 0,
+        "figure_max": 24,
+        "timer_advanced": true,
+        "rollback_exact": true
+      }
+    },
+    {
+      "name": "Algorithm controls, cases, history and reset / alm",
+      "status": "pass",
+      "seconds": 0.519,
+      "details": {
+        "controls": 4,
+        "step_and_exact_rollback": true
+      }
+    },
+    {
+      "name": "Complete proof and question / interior",
+      "status": "pass",
+      "seconds": 0.101,
+      "details": {
+        "proofs": 1,
+        "visible_steps": 7,
+        "formula_count": 8
+      }
+    },
+    {
+      "name": "Proof navigation, figure slider, animation and rollback / interior-proof-0",
+      "status": "pass",
+      "seconds": 1.152,
+      "details": {
+        "steps": 7,
+        "figure_min": 0,
+        "figure_max": 24,
+        "timer_advanced": true,
+        "rollback_exact": true
+      }
+    },
+    {
+      "name": "Algorithm controls, cases, history and reset / interior",
+      "status": "pass",
+      "seconds": 0.294,
+      "details": {
+        "controls": 2,
+        "step_and_exact_rollback": true
+      }
+    },
+    {
+      "name": "Complete proof and question / prox",
+      "status": "pass",
+      "seconds": 0.089,
+      "details": {
+        "proofs": 2,
+        "visible_steps": 13,
+        "formula_count": 14
+      }
+    },
+    {
+      "name": "Proof navigation, figure slider, animation and rollback / prox-proof-0",
+      "status": "pass",
+      "seconds": 0.805,
+      "details": {
+        "steps": 7,
+        "figure_min": -3,
+        "figure_max": 3,
+        "timer_advanced": true,
+        "rollback_exact": true
+      }
+    },
+    {
+      "name": "Proof navigation, figure slider, animation and rollback / prox-proof-1",
+      "status": "pass",
+      "seconds": 0.818,
+      "details": {
+        "steps": 6,
+        "figure_min": -3,
+        "figure_max": 3,
+        "timer_advanced": true,
+        "rollback_exact": true
+      }
+    },
+    {
+      "name": "Algorithm controls, cases, history and reset / prox",
+      "status": "pass",
+      "seconds": 0.139,
+      "details": {
+        "controls": 3,
+        "step_and_exact_rollback": false
+      }
+    },
+    {
+      "name": "Complete proof and question / prox-gradient",
+      "status": "pass",
+      "seconds": 0.097,
+      "details": {
+        "proofs": 2,
+        "visible_steps": 12,
+        "formula_count": 13
+      }
+    },
+    {
+      "name": "Proof navigation, figure slider, animation and rollback / prox-gradient-proof-0",
+      "status": "pass",
+      "seconds": 0.789,
+      "details": {
+        "steps": 7,
+        "figure_min": -2,
+        "figure_max": 2,
+        "timer_advanced": true,
+        "rollback_exact": true
+      }
+    },
+    {
+      "name": "Proof navigation, figure slider, animation and rollback / prox-gradient-proof-1",
+      "status": "pass",
+      "seconds": 1.15,
+      "details": {
+        "steps": 5,
+        "figure_min": 1,
+        "figure_max": 40,
+        "timer_advanced": true,
+        "rollback_exact": true
+      }
+    },
+    {
+      "name": "Algorithm controls, cases, history and reset / proxgrad",
+      "status": "pass",
+      "seconds": 0.499,
+      "details": {
+        "controls": 3,
+        "step_and_exact_rollback": true
+      }
+    },
+    {
+      "name": "Complete proof and question / acceleration",
+      "status": "pass",
+      "seconds": 0.113,
+      "details": {
+        "proofs": 1,
+        "visible_steps": 9,
+        "formula_count": 10
+      }
+    },
+    {
+      "name": "Proof navigation, figure slider, animation and rollback / acceleration-proof-0",
+      "status": "pass",
+      "seconds": 1.172,
+      "details": {
+        "steps": 9,
+        "figure_min": 1,
+        "figure_max": 40,
+        "timer_advanced": true,
+        "rollback_exact": true
+      }
+    },
+    {
+      "name": "Algorithm controls, cases, history and reset / fista",
+      "status": "pass",
+      "seconds": 0.466,
+      "details": {
+        "controls": 3,
+        "step_and_exact_rollback": true
+      }
+    },
+    {
+      "name": "Complete proof and question / envelope",
+      "status": "pass",
+      "seconds": 0.089,
+      "details": {
+        "proofs": 1,
+        "visible_steps": 7,
+        "formula_count": 8
+      }
+    },
+    {
+      "name": "Proof navigation, figure slider, animation and rollback / envelope-proof-0",
+      "status": "pass",
+      "seconds": 0.772,
+      "details": {
+        "steps": 7,
+        "figure_min": 0.04,
+        "figure_max": 1.5,
+        "timer_advanced": true,
+        "rollback_exact": true
+      }
+    },
+    {
+      "name": "Algorithm controls, cases, history and reset / smoothing",
+      "status": "pass",
+      "seconds": 0.07,
+      "details": {
+        "controls": 2,
+        "step_and_exact_rollback": false
+      }
+    },
+    {
+      "name": "Complete proof and question / ppa",
+      "status": "pass",
+      "seconds": 0.107,
+      "details": {
+        "proofs": 1,
+        "visible_steps": 7,
+        "formula_count": 8
+      }
+    },
+    {
+      "name": "Proof navigation, figure slider, animation and rollback / ppa-proof-0",
+      "status": "pass",
+      "seconds": 1.206,
+      "details": {
+        "steps": 7,
+        "figure_min": 0,
+        "figure_max": 24,
+        "timer_advanced": true,
+        "rollback_exact": true
+      }
+    },
+    {
+      "name": "Algorithm controls, cases, history and reset / ppa",
+      "status": "pass",
+      "seconds": 0.507,
+      "details": {
+        "controls": 4,
+        "step_and_exact_rollback": true
+      }
+    },
+    {
+      "name": "Complete proof and question / bcd",
+      "status": "pass",
+      "seconds": 0.091,
+      "details": {
+        "proofs": 1,
+        "visible_steps": 7,
+        "formula_count": 8
+      }
+    },
+    {
+      "name": "Proof navigation, figure slider, animation and rollback / bcd-proof-0",
+      "status": "pass",
+      "seconds": 1.191,
+      "details": {
+        "steps": 7,
+        "figure_min": 0,
+        "figure_max": 24,
+        "timer_advanced": true,
+        "rollback_exact": true
+      }
+    },
+    {
+      "name": "Algorithm controls, cases, history and reset / bcd",
+      "status": "pass",
+      "seconds": 0.496,
+      "details": {
+        "controls": 3,
+        "step_and_exact_rollback": true
+      }
+    },
+    {
+      "name": "Complete proof and question / primal-dual",
+      "status": "pass",
+      "seconds": 0.118,
+      "details": {
+        "proofs": 2,
+        "visible_steps": 12,
+        "formula_count": 13
+      }
+    },
+    {
+      "name": "Proof navigation, figure slider, animation and rollback / primal-dual-proof-0",
+      "status": "pass",
+      "seconds": 1.314,
+      "details": {
+        "steps": 7,
+        "figure_min": 0,
+        "figure_max": 24,
+        "timer_advanced": true,
+        "rollback_exact": true
+      }
+    },
+    {
+      "name": "Proof navigation, figure slider, animation and rollback / primal-dual-proof-1",
+      "status": "pass",
+      "seconds": 1.226,
+      "details": {
+        "steps": 5,
+        "figure_min": 0,
+        "figure_max": 24,
+        "timer_advanced": true,
+        "rollback_exact": true
+      }
+    },
+    {
+      "name": "Algorithm controls, cases, history and reset / dual",
+      "status": "pass",
+      "seconds": 0.34,
+      "details": {
+        "controls": 3,
+        "step_and_exact_rollback": true
+      }
+    },
+    {
+      "name": "Algorithm controls, cases, history and reset / pdhg",
+      "status": "pass",
+      "seconds": 0.598,
+      "details": {
+        "controls": 5,
+        "step_and_exact_rollback": true
+      }
+    },
+    {
+      "name": "Complete proof and question / admm",
+      "status": "pass",
+      "seconds": 0.103,
+      "details": {
+        "proofs": 2,
+        "visible_steps": 17,
+        "formula_count": 18
+      }
+    },
+    {
+      "name": "Proof navigation, figure slider, animation and rollback / admm-proof-0",
+      "status": "pass",
+      "seconds": 1.223,
+      "details": {
+        "steps": 7,
+        "figure_min": 0,
+        "figure_max": 36,
+        "timer_advanced": true,
+        "rollback_exact": true
+      }
+    },
+    {
+      "name": "Proof navigation, figure slider, animation and rollback / admm-proof-1",
+      "status": "pass",
+      "seconds": 1.15,
+      "details": {
+        "steps": 10,
+        "figure_min": 1,
+        "figure_max": 40,
+        "timer_advanced": true,
+        "rollback_exact": true
+      }
+    },
+    {
+      "name": "Algorithm controls, cases, history and reset / admm",
+      "status": "pass",
+      "seconds": 0.519,
+      "details": {
+        "controls": 4,
+        "step_and_exact_rollback": true
+      }
+    },
+    {
+      "name": "Complete proof and question / stochastic",
+      "status": "pass",
+      "seconds": 0.116,
+      "details": {
+        "proofs": 1,
+        "visible_steps": 6,
+        "formula_count": 7
+      }
+    },
+    {
+      "name": "Proof navigation, figure slider, animation and rollback / stochastic-proof-0",
+      "status": "pass",
+      "seconds": 1.154,
+      "details": {
+        "steps": 6,
+        "figure_min": 0,
+        "figure_max": 24,
+        "timer_advanced": true,
+        "rollback_exact": true
+      }
+    },
+    {
+      "name": "Algorithm controls, cases, history and reset / stochastic",
+      "status": "pass",
+      "seconds": 0.394,
+      "details": {
+        "controls": 4,
+        "step_and_exact_rollback": true
+      }
+    },
+    {
+      "name": "Complete proof and question / manifold",
+      "status": "pass",
+      "seconds": 0.116,
+      "details": {
+        "proofs": 1,
+        "visible_steps": 7,
+        "formula_count": 8
+      }
+    },
+    {
+      "name": "Proof navigation, figure slider, animation and rollback / manifold-proof-0",
+      "status": "pass",
+      "seconds": 1.173,
+      "details": {
+        "steps": 7,
+        "figure_min": 0,
+        "figure_max": 24,
+        "timer_advanced": true,
+        "rollback_exact": true
+      }
+    },
+    {
+      "name": "Algorithm controls, cases, history and reset / manifold",
+      "status": "pass",
+      "seconds": 0.382,
+      "details": {
+        "controls": 3,
+        "step_and_exact_rollback": true
+      }
+    },
+    {
+      "name": "Complete proof and question / semismooth",
+      "status": "pass",
+      "seconds": 0.112,
+      "details": {
+        "proofs": 1,
+        "visible_steps": 8,
+        "formula_count": 9
+      }
+    },
+    {
+      "name": "Proof navigation, figure slider, animation and rollback / semismooth-proof-0",
+      "status": "pass",
+      "seconds": 1.221,
+      "details": {
+        "steps": 8,
+        "figure_min": 0,
+        "figure_max": 4,
+        "timer_advanced": true,
+        "rollback_exact": true
+      }
+    },
+    {
+      "name": "Algorithm controls, cases, history and reset / semismooth",
+      "status": "pass",
+      "seconds": 0.467,
+      "details": {
+        "controls": 3,
+        "step_and_exact_rollback": true
+      }
+    },
+    {
+      "name": "Complete proof and question / geometry-algorithms",
+      "status": "pass",
+      "seconds": 0.117,
+      "details": {
+        "proofs": 1,
+        "visible_steps": 7,
+        "formula_count": 8
+      }
+    },
+    {
+      "name": "Proof navigation, figure slider, animation and rollback / geometry-algorithms-proof-0",
+      "status": "pass",
+      "seconds": 1.156,
+      "details": {
+        "steps": 7,
+        "figure_min": 0,
+        "figure_max": 24,
+        "timer_advanced": true,
+        "rollback_exact": true
+      }
+    },
+    {
+      "name": "Algorithm controls, cases, history and reset / frankwolfe",
+      "status": "pass",
+      "seconds": 0.254,
+      "details": {
+        "controls": 1,
+        "step_and_exact_rollback": true
+      }
+    },
+    {
+      "name": "Algorithm controls, cases, history and reset / mirror",
+      "status": "pass",
+      "seconds": 0.292,
+      "details": {
+        "controls": 2,
+        "step_and_exact_rollback": true
+      }
+    },
+    {
+      "name": "Complete proof and question / matrix",
+      "status": "pass",
+      "seconds": 0.113,
+      "details": {
+        "proofs": 2,
+        "visible_steps": 12,
+        "formula_count": 13
+      }
+    },
+    {
+      "name": "Proof navigation, figure slider, animation and rollback / matrix-proof-0",
+      "status": "pass",
+      "seconds": 0.771,
+      "details": {
+        "steps": 6,
+        "figure_min": 0,
+        "figure_max": 3,
+        "timer_advanced": true,
+        "rollback_exact": true
+      }
+    },
+    {
+      "name": "Proof navigation, figure slider, animation and rollback / matrix-proof-1",
+      "status": "pass",
+      "seconds": 0.8,
+      "details": {
+        "steps": 6,
+        "figure_min": 0,
+        "figure_max": 3,
+        "timer_advanced": true,
+        "rollback_exact": true
+      }
+    },
+    {
+      "name": "Algorithm controls, cases, history and reset / nuclear",
+      "status": "pass",
+      "seconds": 0.141,
+      "details": {
+        "controls": 4,
+        "step_and_exact_rollback": false
+      }
+    },
+    {
+      "name": "Complete proof and question / maxcut",
+      "status": "pass",
+      "seconds": 0.103,
+      "details": {
+        "proofs": 1,
+        "visible_steps": 7,
+        "formula_count": 8
+      }
+    },
+    {
+      "name": "Proof navigation, figure slider, animation and rollback / maxcut-proof-0",
+      "status": "pass",
+      "seconds": 0.772,
+      "details": {
+        "steps": 7,
+        "figure_min": 0.05,
+        "figure_max": 3.14,
+        "timer_advanced": true,
+        "rollback_exact": true
+      }
+    },
+    {
+      "name": "Algorithm controls, cases, history and reset / maxcut",
+      "status": "pass",
+      "seconds": 0.095,
+      "details": {
+        "controls": 2,
+        "step_and_exact_rollback": false
+      }
+    },
+    {
+      "name": "Complete proof and question / group",
+      "status": "pass",
+      "seconds": 0.104,
+      "details": {
+        "proofs": 1,
+        "visible_steps": 6,
+        "formula_count": 7
+      }
+    },
+    {
+      "name": "Proof navigation, figure slider, animation and rollback / group-proof-0",
+      "status": "pass",
+      "seconds": 0.771,
+      "details": {
+        "steps": 6,
+        "figure_min": 0,
+        "figure_max": 3,
+        "timer_advanced": true,
+        "rollback_exact": true
+      }
+    },
+    {
+      "name": "Algorithm controls, cases, history and reset / groupprox",
+      "status": "pass",
+      "seconds": 0.128,
+      "details": {
+        "controls": 3,
+        "step_and_exact_rollback": false
+      }
+    },
+    {
+      "name": "Complete proof and question / complexity",
+      "status": "pass",
+      "seconds": 0.083,
+      "details": {
+        "proofs": 1,
+        "visible_steps": 6,
+        "formula_count": 7
+      }
+    },
+    {
+      "name": "Proof navigation, figure slider, animation and rollback / complexity-proof-0",
+      "status": "pass",
+      "seconds": 1.183,
+      "details": {
+        "steps": 6,
+        "figure_min": 1,
+        "figure_max": 40,
+        "timer_advanced": true,
+        "rollback_exact": true
+      }
+    },
+    {
+      "name": "Algorithm controls, cases, history and reset / complexity",
+      "status": "pass",
+      "seconds": 0.205,
+      "details": {
+        "controls": 4,
+        "step_and_exact_rollback": false
+      }
+    },
+    {
+      "name": "Large type and responsive 360px / start",
+      "status": "pass",
+      "seconds": 0.018,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 439,
+        "overflow": {
+          "width": 360,
+          "document": 360,
+          "body": 360
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 360px / geometry",
+      "status": "pass",
+      "seconds": 0.032,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 465,
+        "overflow": {
+          "width": 360,
+          "document": 360,
+          "body": 360
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 360px / differentiation",
+      "status": "pass",
+      "seconds": 0.013,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 465,
+        "overflow": {
+          "width": 360,
+          "document": 360,
+          "body": 360
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 360px / convex",
+      "status": "pass",
+      "seconds": 0.013,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 606,
+        "overflow": {
+          "width": 360,
+          "document": 360,
+          "body": 360
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 360px / conjugacy",
+      "status": "pass",
+      "seconds": 0.012,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 487,
+        "overflow": {
+          "width": 360,
+          "document": 360,
+          "body": 360
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 360px / modeling",
+      "status": "pass",
+      "seconds": 0.01,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 479,
+        "overflow": {
+          "width": 360,
+          "document": 360,
+          "body": 360
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 360px / cones",
+      "status": "pass",
+      "seconds": 0.023,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 685,
+        "overflow": {
+          "width": 360,
+          "document": 360,
+          "body": 360
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 360px / optimality",
+      "status": "pass",
+      "seconds": 0.011,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 461,
+        "overflow": {
+          "width": 360,
+          "document": 360,
+          "body": 360
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 360px / duality",
+      "status": "pass",
+      "seconds": 0.013,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 545,
+        "overflow": {
+          "width": 360,
+          "document": 360,
+          "body": 360
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 360px / line-search",
+      "status": "pass",
+      "seconds": 0.012,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 443,
+        "overflow": {
+          "width": 360,
+          "document": 360,
+          "body": 360
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 360px / gradient",
+      "status": "pass",
+      "seconds": 0.013,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 467,
+        "overflow": {
+          "width": 360,
+          "document": 360,
+          "body": 360
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 360px / subgradient",
+      "status": "pass",
+      "seconds": 0.021,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 497,
+        "overflow": {
+          "width": 360,
+          "document": 360,
+          "body": 360
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 360px / newton",
+      "status": "pass",
+      "seconds": 0.019,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 477,
+        "overflow": {
+          "width": 360,
+          "document": 360,
+          "body": 360
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 360px / quasi-newton",
+      "status": "pass",
+      "seconds": 0.016,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 482,
+        "overflow": {
+          "width": 360,
+          "document": 360,
+          "body": 360
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 360px / trust",
+      "status": "pass",
+      "seconds": 0.015,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 563,
+        "overflow": {
+          "width": 360,
+          "document": 360,
+          "body": 360
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 360px / least-squares",
+      "status": "pass",
+      "seconds": 0.012,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 448,
+        "overflow": {
+          "width": 360,
+          "document": 360,
+          "body": 360
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 360px / alm",
+      "status": "pass",
+      "seconds": 0.011,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 459,
+        "overflow": {
+          "width": 360,
+          "document": 360,
+          "body": 360
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 360px / interior",
+      "status": "pass",
+      "seconds": 0.029,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 481,
+        "overflow": {
+          "width": 360,
+          "document": 360,
+          "body": 360
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 360px / prox",
+      "status": "pass",
+      "seconds": 0.014,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 763,
+        "overflow": {
+          "width": 360,
+          "document": 360,
+          "body": 360
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 360px / prox-gradient",
+      "status": "pass",
+      "seconds": 0.015,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 759,
+        "overflow": {
+          "width": 360,
+          "document": 360,
+          "body": 360
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 360px / acceleration",
+      "status": "pass",
+      "seconds": 0.012,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 694,
+        "overflow": {
+          "width": 360,
+          "document": 360,
+          "body": 360
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 360px / envelope",
+      "status": "pass",
+      "seconds": 0.012,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 497,
+        "overflow": {
+          "width": 360,
+          "document": 360,
+          "body": 360
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 360px / ppa",
+      "status": "pass",
+      "seconds": 0.012,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 535,
+        "overflow": {
+          "width": 360,
+          "document": 360,
+          "body": 360
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 360px / bcd",
+      "status": "pass",
+      "seconds": 0.018,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 509,
+        "overflow": {
+          "width": 360,
+          "document": 360,
+          "body": 360
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 360px / primal-dual",
+      "status": "pass",
+      "seconds": 0.022,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 731,
+        "overflow": {
+          "width": 360,
+          "document": 360,
+          "body": 360
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 360px / admm",
+      "status": "pass",
+      "seconds": 0.027,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 902,
+        "overflow": {
+          "width": 360,
+          "document": 360,
+          "body": 360
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 360px / stochastic",
+      "status": "pass",
+      "seconds": 0.013,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 506,
+        "overflow": {
+          "width": 360,
+          "document": 360,
+          "body": 360
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 360px / manifold",
+      "status": "pass",
+      "seconds": 0.011,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 498,
+        "overflow": {
+          "width": 360,
+          "document": 360,
+          "body": 360
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 360px / semismooth",
+      "status": "pass",
+      "seconds": 0.012,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 597,
+        "overflow": {
+          "width": 360,
+          "document": 360,
+          "body": 360
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 360px / geometry-algorithms",
+      "status": "pass",
+      "seconds": 0.013,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 520,
+        "overflow": {
+          "width": 360,
+          "document": 360,
+          "body": 360
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 360px / matrix",
+      "status": "pass",
+      "seconds": 0.016,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 674,
+        "overflow": {
+          "width": 360,
+          "document": 360,
+          "body": 360
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 360px / maxcut",
+      "status": "pass",
+      "seconds": 0.01,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 465,
+        "overflow": {
+          "width": 360,
+          "document": 360,
+          "body": 360
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 360px / group",
+      "status": "pass",
+      "seconds": 0.01,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 418,
+        "overflow": {
+          "width": 360,
+          "document": 360,
+          "body": 360
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 360px / complexity",
+      "status": "pass",
+      "seconds": 0.011,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 460,
+        "overflow": {
+          "width": 360,
+          "document": 360,
+          "body": 360
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 360px / map",
+      "status": "pass",
+      "seconds": 0.012,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 345,
+        "overflow": {
+          "width": 360,
+          "document": 360,
+          "body": 360
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 360px / library",
+      "status": "pass",
+      "seconds": 0.02,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 495,
+        "overflow": {
+          "width": 360,
+          "document": 360,
+          "body": 360
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 360px / coverage",
+      "status": "pass",
+      "seconds": 0.019,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 1064,
+        "overflow": {
+          "width": 360,
+          "document": 360,
+          "body": 360
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 390px / start",
+      "status": "pass",
+      "seconds": 0.01,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 439,
+        "overflow": {
+          "width": 390,
+          "document": 390,
+          "body": 390
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 390px / geometry",
+      "status": "pass",
+      "seconds": 0.009,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 465,
+        "overflow": {
+          "width": 390,
+          "document": 390,
+          "body": 390
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 390px / differentiation",
+      "status": "pass",
+      "seconds": 0.012,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 465,
+        "overflow": {
+          "width": 390,
+          "document": 390,
+          "body": 390
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 390px / convex",
+      "status": "pass",
+      "seconds": 0.014,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 606,
+        "overflow": {
+          "width": 390,
+          "document": 390,
+          "body": 390
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 390px / conjugacy",
+      "status": "pass",
+      "seconds": 0.009,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 487,
+        "overflow": {
+          "width": 390,
+          "document": 390,
+          "body": 390
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 390px / modeling",
+      "status": "pass",
+      "seconds": 0.011,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 479,
+        "overflow": {
+          "width": 390,
+          "document": 390,
+          "body": 390
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 390px / cones",
+      "status": "pass",
+      "seconds": 0.013,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 685,
+        "overflow": {
+          "width": 390,
+          "document": 390,
+          "body": 390
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 390px / optimality",
+      "status": "pass",
+      "seconds": 0.01,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 461,
+        "overflow": {
+          "width": 390,
+          "document": 390,
+          "body": 390
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 390px / duality",
+      "status": "pass",
+      "seconds": 0.014,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 545,
+        "overflow": {
+          "width": 390,
+          "document": 390,
+          "body": 390
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 390px / line-search",
+      "status": "pass",
+      "seconds": 0.01,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 443,
+        "overflow": {
+          "width": 390,
+          "document": 390,
+          "body": 390
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 390px / gradient",
+      "status": "pass",
+      "seconds": 0.013,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 467,
+        "overflow": {
+          "width": 390,
+          "document": 390,
+          "body": 390
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 390px / subgradient",
+      "status": "pass",
+      "seconds": 0.015,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 497,
+        "overflow": {
+          "width": 390,
+          "document": 390,
+          "body": 390
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 390px / newton",
+      "status": "pass",
+      "seconds": 0.008,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 477,
+        "overflow": {
+          "width": 390,
+          "document": 390,
+          "body": 390
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 390px / quasi-newton",
+      "status": "pass",
+      "seconds": 0.01,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 482,
+        "overflow": {
+          "width": 390,
+          "document": 390,
+          "body": 390
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 390px / trust",
+      "status": "pass",
+      "seconds": 0.012,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 563,
+        "overflow": {
+          "width": 390,
+          "document": 390,
+          "body": 390
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 390px / least-squares",
+      "status": "pass",
+      "seconds": 0.01,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 448,
+        "overflow": {
+          "width": 390,
+          "document": 390,
+          "body": 390
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 390px / alm",
+      "status": "pass",
+      "seconds": 0.011,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 459,
+        "overflow": {
+          "width": 390,
+          "document": 390,
+          "body": 390
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 390px / interior",
+      "status": "pass",
+      "seconds": 0.01,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 481,
+        "overflow": {
+          "width": 390,
+          "document": 390,
+          "body": 390
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 390px / prox",
+      "status": "pass",
+      "seconds": 0.013,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 763,
+        "overflow": {
+          "width": 390,
+          "document": 390,
+          "body": 390
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 390px / prox-gradient",
+      "status": "pass",
+      "seconds": 0.013,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 759,
+        "overflow": {
+          "width": 390,
+          "document": 390,
+          "body": 390
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 390px / acceleration",
+      "status": "pass",
+      "seconds": 0.013,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 694,
+        "overflow": {
+          "width": 390,
+          "document": 390,
+          "body": 390
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 390px / envelope",
+      "status": "pass",
+      "seconds": 0.015,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 497,
+        "overflow": {
+          "width": 390,
+          "document": 390,
+          "body": 390
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 390px / ppa",
+      "status": "pass",
+      "seconds": 0.016,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 535,
+        "overflow": {
+          "width": 390,
+          "document": 390,
+          "body": 390
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 390px / bcd",
+      "status": "pass",
+      "seconds": 0.011,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 509,
+        "overflow": {
+          "width": 390,
+          "document": 390,
+          "body": 390
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 390px / primal-dual",
+      "status": "pass",
+      "seconds": 0.014,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 731,
+        "overflow": {
+          "width": 390,
+          "document": 390,
+          "body": 390
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 390px / admm",
+      "status": "pass",
+      "seconds": 0.021,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 902,
+        "overflow": {
+          "width": 390,
+          "document": 390,
+          "body": 390
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 390px / stochastic",
+      "status": "pass",
+      "seconds": 0.011,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 506,
+        "overflow": {
+          "width": 390,
+          "document": 390,
+          "body": 390
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 390px / manifold",
+      "status": "pass",
+      "seconds": 0.011,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 498,
+        "overflow": {
+          "width": 390,
+          "document": 390,
+          "body": 390
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 390px / semismooth",
+      "status": "pass",
+      "seconds": 0.014,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 597,
+        "overflow": {
+          "width": 390,
+          "document": 390,
+          "body": 390
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 390px / geometry-algorithms",
+      "status": "pass",
+      "seconds": 0.012,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 520,
+        "overflow": {
+          "width": 390,
+          "document": 390,
+          "body": 390
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 390px / matrix",
+      "status": "pass",
+      "seconds": 0.013,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 674,
+        "overflow": {
+          "width": 390,
+          "document": 390,
+          "body": 390
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 390px / maxcut",
+      "status": "pass",
+      "seconds": 0.022,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 465,
+        "overflow": {
+          "width": 390,
+          "document": 390,
+          "body": 390
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 390px / group",
+      "status": "pass",
+      "seconds": 0.01,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 418,
+        "overflow": {
+          "width": 390,
+          "document": 390,
+          "body": 390
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 390px / complexity",
+      "status": "pass",
+      "seconds": 0.01,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 460,
+        "overflow": {
+          "width": 390,
+          "document": 390,
+          "body": 390
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 390px / map",
+      "status": "pass",
+      "seconds": 0.008,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 345,
+        "overflow": {
+          "width": 390,
+          "document": 390,
+          "body": 390
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 390px / library",
+      "status": "pass",
+      "seconds": 0.012,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 495,
+        "overflow": {
+          "width": 390,
+          "document": 390,
+          "body": 390
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 390px / coverage",
+      "status": "pass",
+      "seconds": 0.013,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 1064,
+        "overflow": {
+          "width": 390,
+          "document": 390,
+          "body": 390
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 768px / start",
+      "status": "pass",
+      "seconds": 0.012,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 448,
+        "overflow": {
+          "width": 768,
+          "document": 768,
+          "body": 768
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 768px / geometry",
+      "status": "pass",
+      "seconds": 0.011,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 474,
+        "overflow": {
+          "width": 768,
+          "document": 768,
+          "body": 768
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 768px / differentiation",
+      "status": "pass",
+      "seconds": 0.013,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 474,
+        "overflow": {
+          "width": 768,
+          "document": 768,
+          "body": 768
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 768px / convex",
+      "status": "pass",
+      "seconds": 0.015,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 615,
+        "overflow": {
+          "width": 768,
+          "document": 768,
+          "body": 768
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 768px / conjugacy",
+      "status": "pass",
+      "seconds": 0.011,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 496,
+        "overflow": {
+          "width": 768,
+          "document": 768,
+          "body": 768
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 768px / modeling",
+      "status": "pass",
+      "seconds": 0.01,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 488,
+        "overflow": {
+          "width": 768,
+          "document": 768,
+          "body": 768
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 768px / cones",
+      "status": "pass",
+      "seconds": 0.02,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 698,
+        "overflow": {
+          "width": 768,
+          "document": 768,
+          "body": 768
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 768px / optimality",
+      "status": "pass",
+      "seconds": 0.016,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 470,
+        "overflow": {
+          "width": 768,
+          "document": 768,
+          "body": 768
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 768px / duality",
+      "status": "pass",
+      "seconds": 0.01,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 554,
+        "overflow": {
+          "width": 768,
+          "document": 768,
+          "body": 768
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 768px / line-search",
+      "status": "pass",
+      "seconds": 0.01,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 452,
+        "overflow": {
+          "width": 768,
+          "document": 768,
+          "body": 768
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 768px / gradient",
+      "status": "pass",
+      "seconds": 0.011,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 476,
+        "overflow": {
+          "width": 768,
+          "document": 768,
+          "body": 768
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 768px / subgradient",
+      "status": "pass",
+      "seconds": 0.011,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 506,
+        "overflow": {
+          "width": 768,
+          "document": 768,
+          "body": 768
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 768px / newton",
+      "status": "pass",
+      "seconds": 0.01,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 486,
+        "overflow": {
+          "width": 768,
+          "document": 768,
+          "body": 768
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 768px / quasi-newton",
+      "status": "pass",
+      "seconds": 0.011,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 491,
+        "overflow": {
+          "width": 768,
+          "document": 768,
+          "body": 768
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 768px / trust",
+      "status": "pass",
+      "seconds": 0.012,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 576,
+        "overflow": {
+          "width": 768,
+          "document": 768,
+          "body": 768
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 768px / least-squares",
+      "status": "pass",
+      "seconds": 0.012,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 457,
+        "overflow": {
+          "width": 768,
+          "document": 768,
+          "body": 768
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 768px / alm",
+      "status": "pass",
+      "seconds": 0.011,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 468,
+        "overflow": {
+          "width": 768,
+          "document": 768,
+          "body": 768
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 768px / interior",
+      "status": "pass",
+      "seconds": 0.009,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 490,
+        "overflow": {
+          "width": 768,
+          "document": 768,
+          "body": 768
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 768px / prox",
+      "status": "pass",
+      "seconds": 0.012,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 776,
+        "overflow": {
+          "width": 768,
+          "document": 768,
+          "body": 768
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 768px / prox-gradient",
+      "status": "pass",
+      "seconds": 0.023,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 772,
+        "overflow": {
+          "width": 768,
+          "document": 768,
+          "body": 768
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 768px / acceleration",
+      "status": "pass",
+      "seconds": 0.019,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 703,
+        "overflow": {
+          "width": 768,
+          "document": 768,
+          "body": 768
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 768px / envelope",
+      "status": "pass",
+      "seconds": 0.011,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 506,
+        "overflow": {
+          "width": 768,
+          "document": 768,
+          "body": 768
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 768px / ppa",
+      "status": "pass",
+      "seconds": 0.012,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 544,
+        "overflow": {
+          "width": 768,
+          "document": 768,
+          "body": 768
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 768px / bcd",
+      "status": "pass",
+      "seconds": 0.011,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 518,
+        "overflow": {
+          "width": 768,
+          "document": 768,
+          "body": 768
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 768px / primal-dual",
+      "status": "pass",
+      "seconds": 0.015,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 748,
+        "overflow": {
+          "width": 768,
+          "document": 768,
+          "body": 768
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 768px / admm",
+      "status": "pass",
+      "seconds": 0.014,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 915,
+        "overflow": {
+          "width": 768,
+          "document": 768,
+          "body": 768
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 768px / stochastic",
+      "status": "pass",
+      "seconds": 0.01,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 515,
+        "overflow": {
+          "width": 768,
+          "document": 768,
+          "body": 768
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 768px / manifold",
+      "status": "pass",
+      "seconds": 0.011,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 507,
+        "overflow": {
+          "width": 768,
+          "document": 768,
+          "body": 768
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 768px / semismooth",
+      "status": "pass",
+      "seconds": 0.013,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 606,
+        "overflow": {
+          "width": 768,
+          "document": 768,
+          "body": 768
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 768px / geometry-algorithms",
+      "status": "pass",
+      "seconds": 0.013,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 533,
+        "overflow": {
+          "width": 768,
+          "document": 768,
+          "body": 768
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 768px / matrix",
+      "status": "pass",
+      "seconds": 0.018,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 687,
+        "overflow": {
+          "width": 768,
+          "document": 768,
+          "body": 768
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 768px / maxcut",
+      "status": "pass",
+      "seconds": 0.015,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 474,
+        "overflow": {
+          "width": 768,
+          "document": 768,
+          "body": 768
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 768px / group",
+      "status": "pass",
+      "seconds": 0.013,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 427,
+        "overflow": {
+          "width": 768,
+          "document": 768,
+          "body": 768
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 768px / complexity",
+      "status": "pass",
+      "seconds": 0.012,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 469,
+        "overflow": {
+          "width": 768,
+          "document": 768,
+          "body": 768
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 768px / map",
+      "status": "pass",
+      "seconds": 0.011,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 346,
+        "overflow": {
+          "width": 768,
+          "document": 768,
+          "body": 768
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 768px / library",
+      "status": "pass",
+      "seconds": 0.009,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 496,
+        "overflow": {
+          "width": 768,
+          "document": 768,
+          "body": 768
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 768px / coverage",
+      "status": "pass",
+      "seconds": 0.013,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 1065,
+        "overflow": {
+          "width": 768,
+          "document": 768,
+          "body": 768
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1440px / start",
+      "status": "pass",
+      "seconds": 0.011,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 447,
+        "overflow": {
+          "width": 1440,
+          "document": 1440,
+          "body": 1440
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1440px / geometry",
+      "status": "pass",
+      "seconds": 0.012,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 473,
+        "overflow": {
+          "width": 1440,
+          "document": 1440,
+          "body": 1440
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1440px / differentiation",
+      "status": "pass",
+      "seconds": 0.012,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 473,
+        "overflow": {
+          "width": 1440,
+          "document": 1440,
+          "body": 1440
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1440px / convex",
+      "status": "pass",
+      "seconds": 0.012,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 614,
+        "overflow": {
+          "width": 1440,
+          "document": 1440,
+          "body": 1440
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1440px / conjugacy",
+      "status": "pass",
+      "seconds": 0.011,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 495,
+        "overflow": {
+          "width": 1440,
+          "document": 1440,
+          "body": 1440
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1440px / modeling",
+      "status": "pass",
+      "seconds": 0.014,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 487,
+        "overflow": {
+          "width": 1440,
+          "document": 1440,
+          "body": 1440
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1440px / cones",
+      "status": "pass",
+      "seconds": 0.015,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 697,
+        "overflow": {
+          "width": 1440,
+          "document": 1440,
+          "body": 1440
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1440px / optimality",
+      "status": "pass",
+      "seconds": 0.02,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 469,
+        "overflow": {
+          "width": 1440,
+          "document": 1440,
+          "body": 1440
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1440px / duality",
+      "status": "pass",
+      "seconds": 0.015,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 553,
+        "overflow": {
+          "width": 1440,
+          "document": 1440,
+          "body": 1440
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1440px / line-search",
+      "status": "pass",
+      "seconds": 0.013,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 451,
+        "overflow": {
+          "width": 1440,
+          "document": 1440,
+          "body": 1440
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1440px / gradient",
+      "status": "pass",
+      "seconds": 0.012,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 475,
+        "overflow": {
+          "width": 1440,
+          "document": 1440,
+          "body": 1440
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1440px / subgradient",
+      "status": "pass",
+      "seconds": 0.014,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 505,
+        "overflow": {
+          "width": 1440,
+          "document": 1440,
+          "body": 1440
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1440px / newton",
+      "status": "pass",
+      "seconds": 0.01,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 485,
+        "overflow": {
+          "width": 1440,
+          "document": 1440,
+          "body": 1440
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1440px / quasi-newton",
+      "status": "pass",
+      "seconds": 0.011,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 490,
+        "overflow": {
+          "width": 1440,
+          "document": 1440,
+          "body": 1440
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1440px / trust",
+      "status": "pass",
+      "seconds": 0.012,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 575,
+        "overflow": {
+          "width": 1440,
+          "document": 1440,
+          "body": 1440
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1440px / least-squares",
+      "status": "pass",
+      "seconds": 0.011,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 456,
+        "overflow": {
+          "width": 1440,
+          "document": 1440,
+          "body": 1440
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1440px / alm",
+      "status": "pass",
+      "seconds": 0.014,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 467,
+        "overflow": {
+          "width": 1440,
+          "document": 1440,
+          "body": 1440
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1440px / interior",
+      "status": "pass",
+      "seconds": 0.013,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 489,
+        "overflow": {
+          "width": 1440,
+          "document": 1440,
+          "body": 1440
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1440px / prox",
+      "status": "pass",
+      "seconds": 0.016,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 775,
+        "overflow": {
+          "width": 1440,
+          "document": 1440,
+          "body": 1440
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1440px / prox-gradient",
+      "status": "pass",
+      "seconds": 0.017,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 771,
+        "overflow": {
+          "width": 1440,
+          "document": 1440,
+          "body": 1440
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1440px / acceleration",
+      "status": "pass",
+      "seconds": 0.018,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 702,
+        "overflow": {
+          "width": 1440,
+          "document": 1440,
+          "body": 1440
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1440px / envelope",
+      "status": "pass",
+      "seconds": 0.014,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 505,
+        "overflow": {
+          "width": 1440,
+          "document": 1440,
+          "body": 1440
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1440px / ppa",
+      "status": "pass",
+      "seconds": 0.014,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 543,
+        "overflow": {
+          "width": 1440,
+          "document": 1440,
+          "body": 1440
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1440px / bcd",
+      "status": "pass",
+      "seconds": 0.014,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 517,
+        "overflow": {
+          "width": 1440,
+          "document": 1440,
+          "body": 1440
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1440px / primal-dual",
+      "status": "pass",
+      "seconds": 0.026,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 747,
+        "overflow": {
+          "width": 1440,
+          "document": 1440,
+          "body": 1440
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1440px / admm",
+      "status": "pass",
+      "seconds": 0.016,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 914,
+        "overflow": {
+          "width": 1440,
+          "document": 1440,
+          "body": 1440
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1440px / stochastic",
+      "status": "pass",
+      "seconds": 0.017,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 514,
+        "overflow": {
+          "width": 1440,
+          "document": 1440,
+          "body": 1440
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1440px / manifold",
+      "status": "pass",
+      "seconds": 0.013,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 506,
+        "overflow": {
+          "width": 1440,
+          "document": 1440,
+          "body": 1440
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1440px / semismooth",
+      "status": "pass",
+      "seconds": 0.017,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 605,
+        "overflow": {
+          "width": 1440,
+          "document": 1440,
+          "body": 1440
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1440px / geometry-algorithms",
+      "status": "pass",
+      "seconds": 0.015,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 532,
+        "overflow": {
+          "width": 1440,
+          "document": 1440,
+          "body": 1440
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1440px / matrix",
+      "status": "pass",
+      "seconds": 0.015,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 686,
+        "overflow": {
+          "width": 1440,
+          "document": 1440,
+          "body": 1440
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1440px / maxcut",
+      "status": "pass",
+      "seconds": 0.013,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 473,
+        "overflow": {
+          "width": 1440,
+          "document": 1440,
+          "body": 1440
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1440px / group",
+      "status": "pass",
+      "seconds": 0.015,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 426,
+        "overflow": {
+          "width": 1440,
+          "document": 1440,
+          "body": 1440
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1440px / complexity",
+      "status": "pass",
+      "seconds": 0.013,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 468,
+        "overflow": {
+          "width": 1440,
+          "document": 1440,
+          "body": 1440
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1440px / map",
+      "status": "pass",
+      "seconds": 0.013,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 345,
+        "overflow": {
+          "width": 1440,
+          "document": 1440,
+          "body": 1440
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1440px / library",
+      "status": "pass",
+      "seconds": 0.009,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 495,
+        "overflow": {
+          "width": 1440,
+          "document": 1440,
+          "body": 1440
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1440px / coverage",
+      "status": "pass",
+      "seconds": 0.034,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 1064,
+        "overflow": {
+          "width": 1440,
+          "document": 1440,
+          "body": 1440
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1920px / start",
+      "status": "pass",
+      "seconds": 0.015,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 447,
+        "overflow": {
+          "width": 1920,
+          "document": 1920,
+          "body": 1920
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1920px / geometry",
+      "status": "pass",
+      "seconds": 0.014,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 473,
+        "overflow": {
+          "width": 1920,
+          "document": 1920,
+          "body": 1920
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1920px / differentiation",
+      "status": "pass",
+      "seconds": 0.016,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 473,
+        "overflow": {
+          "width": 1920,
+          "document": 1920,
+          "body": 1920
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1920px / convex",
+      "status": "pass",
+      "seconds": 0.016,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 614,
+        "overflow": {
+          "width": 1920,
+          "document": 1920,
+          "body": 1920
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1920px / conjugacy",
+      "status": "pass",
+      "seconds": 0.011,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 495,
+        "overflow": {
+          "width": 1920,
+          "document": 1920,
+          "body": 1920
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1920px / modeling",
+      "status": "pass",
+      "seconds": 0.01,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 487,
+        "overflow": {
+          "width": 1920,
+          "document": 1920,
+          "body": 1920
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1920px / cones",
+      "status": "pass",
+      "seconds": 0.014,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 697,
+        "overflow": {
+          "width": 1920,
+          "document": 1920,
+          "body": 1920
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1920px / optimality",
+      "status": "pass",
+      "seconds": 0.01,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 469,
+        "overflow": {
+          "width": 1920,
+          "document": 1920,
+          "body": 1920
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1920px / duality",
+      "status": "pass",
+      "seconds": 0.013,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 553,
+        "overflow": {
+          "width": 1920,
+          "document": 1920,
+          "body": 1920
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1920px / line-search",
+      "status": "pass",
+      "seconds": 0.01,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 451,
+        "overflow": {
+          "width": 1920,
+          "document": 1920,
+          "body": 1920
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1920px / gradient",
+      "status": "pass",
+      "seconds": 0.014,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 475,
+        "overflow": {
+          "width": 1920,
+          "document": 1920,
+          "body": 1920
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1920px / subgradient",
+      "status": "pass",
+      "seconds": 0.011,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 505,
+        "overflow": {
+          "width": 1920,
+          "document": 1920,
+          "body": 1920
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1920px / newton",
+      "status": "pass",
+      "seconds": 0.011,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 485,
+        "overflow": {
+          "width": 1920,
+          "document": 1920,
+          "body": 1920
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1920px / quasi-newton",
+      "status": "pass",
+      "seconds": 0.018,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 490,
+        "overflow": {
+          "width": 1920,
+          "document": 1920,
+          "body": 1920
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1920px / trust",
+      "status": "pass",
+      "seconds": 0.019,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 575,
+        "overflow": {
+          "width": 1920,
+          "document": 1920,
+          "body": 1920
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1920px / least-squares",
+      "status": "pass",
+      "seconds": 0.013,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 456,
+        "overflow": {
+          "width": 1920,
+          "document": 1920,
+          "body": 1920
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1920px / alm",
+      "status": "pass",
+      "seconds": 0.01,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 467,
+        "overflow": {
+          "width": 1920,
+          "document": 1920,
+          "body": 1920
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1920px / interior",
+      "status": "pass",
+      "seconds": 0.01,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 489,
+        "overflow": {
+          "width": 1920,
+          "document": 1920,
+          "body": 1920
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1920px / prox",
+      "status": "pass",
+      "seconds": 0.014,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 775,
+        "overflow": {
+          "width": 1920,
+          "document": 1920,
+          "body": 1920
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1920px / prox-gradient",
+      "status": "pass",
+      "seconds": 0.016,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 771,
+        "overflow": {
+          "width": 1920,
+          "document": 1920,
+          "body": 1920
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1920px / acceleration",
+      "status": "pass",
+      "seconds": 0.014,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 702,
+        "overflow": {
+          "width": 1920,
+          "document": 1920,
+          "body": 1920
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1920px / envelope",
+      "status": "pass",
+      "seconds": 0.013,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 505,
+        "overflow": {
+          "width": 1920,
+          "document": 1920,
+          "body": 1920
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1920px / ppa",
+      "status": "pass",
+      "seconds": 0.012,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 543,
+        "overflow": {
+          "width": 1920,
+          "document": 1920,
+          "body": 1920
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1920px / bcd",
+      "status": "pass",
+      "seconds": 0.012,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 517,
+        "overflow": {
+          "width": 1920,
+          "document": 1920,
+          "body": 1920
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1920px / primal-dual",
+      "status": "pass",
+      "seconds": 0.016,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 747,
+        "overflow": {
+          "width": 1920,
+          "document": 1920,
+          "body": 1920
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1920px / admm",
+      "status": "pass",
+      "seconds": 0.018,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 914,
+        "overflow": {
+          "width": 1920,
+          "document": 1920,
+          "body": 1920
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1920px / stochastic",
+      "status": "pass",
+      "seconds": 0.012,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 514,
+        "overflow": {
+          "width": 1920,
+          "document": 1920,
+          "body": 1920
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1920px / manifold",
+      "status": "pass",
+      "seconds": 0.012,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 506,
+        "overflow": {
+          "width": 1920,
+          "document": 1920,
+          "body": 1920
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1920px / semismooth",
+      "status": "pass",
+      "seconds": 0.015,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 605,
+        "overflow": {
+          "width": 1920,
+          "document": 1920,
+          "body": 1920
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1920px / geometry-algorithms",
+      "status": "pass",
+      "seconds": 0.015,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 532,
+        "overflow": {
+          "width": 1920,
+          "document": 1920,
+          "body": 1920
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1920px / matrix",
+      "status": "pass",
+      "seconds": 0.017,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 686,
+        "overflow": {
+          "width": 1920,
+          "document": 1920,
+          "body": 1920
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1920px / maxcut",
+      "status": "pass",
+      "seconds": 0.012,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 473,
+        "overflow": {
+          "width": 1920,
+          "document": 1920,
+          "body": 1920
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1920px / group",
+      "status": "pass",
+      "seconds": 0.017,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 426,
+        "overflow": {
+          "width": 1920,
+          "document": 1920,
+          "body": 1920
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1920px / complexity",
+      "status": "pass",
+      "seconds": 0.016,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 468,
+        "overflow": {
+          "width": 1920,
+          "document": 1920,
+          "body": 1920
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1920px / map",
+      "status": "pass",
+      "seconds": 0.012,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 345,
+        "overflow": {
+          "width": 1920,
+          "document": 1920,
+          "body": 1920
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1920px / library",
+      "status": "pass",
+      "seconds": 0.013,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 495,
+        "overflow": {
+          "width": 1920,
+          "document": 1920,
+          "body": 1920
+        }
+      }
+    },
+    {
+      "name": "Large type and responsive 1920px / coverage",
+      "status": "pass",
+      "seconds": 0.016,
+      "details": {
+        "minimum_px": 22,
+        "text_nodes": 1064,
+        "overflow": {
+          "width": 1920,
+          "document": 1920,
+          "body": 1920
+        }
+      }
+    },
+    {
+      "name": "Mobile drawer navigation",
+      "status": "pass",
+      "seconds": 0.397,
+      "details": null
+    },
+    {
+      "name": "Animation terminal state and chapter change stop timers",
+      "status": "pass",
+      "seconds": 0.749,
+      "details": null
+    },
+    {
+      "name": "Proof-reading timer advances and pauses",
+      "status": "pass",
+      "seconds": 3.021,
+      "details": null
+    },
+    {
+      "name": "Actual JSON and CSV export",
+      "status": "pass",
+      "seconds": 0.239,
+      "details": {
+        "actual_downloads": 2,
+        "states": 11
+      }
+    },
+    {
+      "name": "Original website attribution, physical/printed pages and source reader",
+      "status": "pass",
+      "seconds": 0.433,
+      "details": null
+    },
+    {
+      "name": "All 65 records, 64 public-source links, corpus search",
+      "status": "pass",
+      "seconds": 0.438,
+      "details": null
+    },
+    {
+      "name": "266 textbook section references and filtering",
+      "status": "pass",
+      "seconds": 0.02,
+      "details": null
+    },
+    {
+      "name": "Readable dependency graph and complete accessible alternative",
+      "status": "pass",
+      "seconds": 0.013,
+      "details": null
+    },
+    {
+      "name": "Larger font modes and dark/light themes",
+      "status": "pass",
+      "seconds": 0.613,
+      "details": null
+    },
+    {
+      "name": "Reduced-motion preference respected; no autoplay",
+      "status": "pass",
+      "seconds": 0.078,
+      "details": null
+    },
+    {
+      "name": "Source-tree entry matches standalone bundle",
+      "status": "pass",
+      "seconds": 0.739,
+      "details": {
+        "separate_scripts": 12
+      }
+    },
+    {
+      "name": "No console or application errors",
+      "status": "pass",
+      "seconds": 0.013,
+      "details": null
+    },
+    {
+      "name": "No external network requests initiated by lecture",
+      "status": "pass",
+      "seconds": 0.0,
+      "details": null
+    }
+  ]
+}

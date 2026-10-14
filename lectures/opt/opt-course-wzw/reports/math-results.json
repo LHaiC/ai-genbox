@@ -1,0 +1,351 @@
+{
+  "suite": "DOM-free numerical and structural verification",
+  "timestamp": "2026-10-14T09:38:29.404Z",
+  "node": "v22.16.0",
+  "tests": 68,
+  "assertions": 24743,
+  "passed": 68,
+  "failed": 0,
+  "results": [
+    {
+      "name": "Gaussian elimination: pivoting, dimensions, singular guards",
+      "status": "pass",
+      "ms": 0.8599749999999986
+    },
+    {
+      "name": "Symmetric eigensystem: eigenpairs and reconstruction, including repeated/indefinite",
+      "status": "pass",
+      "ms": 1.3243640000000028
+    },
+    {
+      "name": "Analytic gradients/Hessians vs central finite differences",
+      "status": "pass",
+      "ms": 0.6910810000000005
+    },
+    {
+      "name": "Soft threshold satisfies complete nonsmooth optimality, Moreau identity",
+      "status": "pass",
+      "ms": 0.2845779999999998
+    },
+    {
+      "name": "Group shrinkage: zero, rotation invariance and KKT",
+      "status": "pass",
+      "ms": 0.27761800000000036
+    },
+    {
+      "name": "Simplex projection: feasibility, common active multiplier, inactive inequality",
+      "status": "pass",
+      "ms": 0.49243200000000087
+    },
+    {
+      "name": "LASSO exhaustive active sets: KKT and all neighboring perturbations",
+      "status": "pass",
+      "ms": 3.2002690000000023
+    },
+    {
+      "name": "Armijo: every acceptance satisfies inequality, rejects ascent",
+      "status": "pass",
+      "ms": 0.3416739999999976
+    },
+    {
+      "name": "Gradient quadratic recurrence, exact line search orthogonality, stability boundary",
+      "status": "pass",
+      "ms": 1.4222609999999989
+    },
+    {
+      "name": "Subgradient counterexample and oracle-informed Polyak step",
+      "status": "pass",
+      "ms": 0.1557550000000063
+    },
+    {
+      "name": "Inverse BFGS: secant, symmetry, SPD, curvature skip",
+      "status": "pass",
+      "ms": 0.7027879999999982
+    },
+    {
+      "name": "L-BFGS two-loop exactly equals reconstructed inverse updates with same H0",
+      "status": "pass",
+      "ms": 0.26802299999999946
+    },
+    {
+      "name": "Trust-region global certificates: SPD, indefinite, hard and zero-gradient cases",
+      "status": "pass",
+      "ms": 5.847163999999999
+    },
+    {
+      "name": "Trust region: rejected states keep x; accepted states decrease actual f",
+      "status": "pass",
+      "ms": 0.9206260000000057
+    },
+    {
+      "name": "Gauss–Newton Jacobian/gradient, LM exact-data recovery",
+      "status": "pass",
+      "ms": 0.5863030000000009
+    },
+    {
+      "name": "ALM fixed penalty converges; plain quadratic penalty closed-form residual",
+      "status": "pass",
+      "ms": 0.385150000000003
+    },
+    {
+      "name": "Barrier center stable formula, gradient zero and strictly feasible iterates",
+      "status": "pass",
+      "ms": 0.9779630000000026
+    },
+    {
+      "name": "PG/FISTA first iteration, extrapolation state, convergence to independent oracle",
+      "status": "pass",
+      "ms": 97.49147099999999
+    },
+    {
+      "name": "PG/FISTA explicit convex complexity bounds at every tested k",
+      "status": "pass",
+      "ms": 3.677328000000017
+    },
+    {
+      "name": "PPA exact subproblem optimality and descent inequality",
+      "status": "pass",
+      "ms": 0.6534839999999917
+    },
+    {
+      "name": "BCD updates exactly one coordinate and is monotone",
+      "status": "pass",
+      "ms": 0.19908000000000925
+    },
+    {
+      "name": "ADMM individual x/z/u stages, scaled dual residual and limiting solution",
+      "status": "pass",
+      "ms": 22.689315000000022
+    },
+    {
+      "name": "PDHG prox equations and extrapolation for K=I",
+      "status": "pass",
+      "ms": 0.21185900000000402
+    },
+    {
+      "name": "Semismooth Jacobian finite difference away from active boundaries",
+      "status": "pass",
+      "ms": 0.1875129999999956
+    },
+    {
+      "name": "RNG and stochastic rollback deterministic; SGD/SVRG estimators exactly unbiased",
+      "status": "pass",
+      "ms": 0.9926949999999977
+    },
+    {
+      "name": "Riemannian tangent, unit constraint, Rayleigh monotonicity and repeated eigenvalues",
+      "status": "pass",
+      "ms": 2.9205180000000155
+    },
+    {
+      "name": "Frank–Wolfe and mirror feasibility; FW gap is a valid upper bound",
+      "status": "pass",
+      "ms": 3.7491150000000175
+    },
+    {
+      "name": "Nuclear threshold zero/rank-one cases and Frobenius proximal perturbation check",
+      "status": "pass",
+      "ms": 1.6898750000000007
+    },
+    {
+      "name": "Stable LSE upper/lower bounds and smoothing derivative",
+      "status": "pass",
+      "ms": 0.19459299999999757
+    },
+    {
+      "name": "MAX-CUT triangle: exact enumeration, SDP bound, angular integration expectation",
+      "status": "pass",
+      "ms": 10.065936999999991
+    },
+    {
+      "name": "Source formula rendering, references within actual file bounds, prerequisite DAG",
+      "status": "pass",
+      "ms": 60.56617899999998
+    },
+    {
+      "name": "Boundary/case smoke + immutability: norms",
+      "status": "pass",
+      "ms": 0.9116229999999916
+    },
+    {
+      "name": "Boundary/case smoke + immutability: convexity",
+      "status": "pass",
+      "ms": 1.1255250000000103
+    },
+    {
+      "name": "Boundary/case smoke + immutability: derivative",
+      "status": "pass",
+      "ms": 1.4450860000000034
+    },
+    {
+      "name": "Boundary/case smoke + immutability: conjugate",
+      "status": "pass",
+      "ms": 0.6707399999999666
+    },
+    {
+      "name": "Boundary/case smoke + immutability: modeling",
+      "status": "pass",
+      "ms": 0.958122000000003
+    },
+    {
+      "name": "Boundary/case smoke + immutability: cones",
+      "status": "pass",
+      "ms": 0.9394139999999993
+    },
+    {
+      "name": "Boundary/case smoke + immutability: stationarity",
+      "status": "pass",
+      "ms": 0.29370199999999613
+    },
+    {
+      "name": "Boundary/case smoke + immutability: kkt",
+      "status": "pass",
+      "ms": 0.4995920000000069
+    },
+    {
+      "name": "Boundary/case smoke + immutability: gradient",
+      "status": "pass",
+      "ms": 4.313306000000011
+    },
+    {
+      "name": "Boundary/case smoke + immutability: linesearch",
+      "status": "pass",
+      "ms": 3.216212999999982
+    },
+    {
+      "name": "Boundary/case smoke + immutability: subgradient",
+      "status": "pass",
+      "ms": 2.89702299999999
+    },
+    {
+      "name": "Boundary/case smoke + immutability: newton",
+      "status": "pass",
+      "ms": 2.2897480000000314
+    },
+    {
+      "name": "Boundary/case smoke + immutability: bfgs",
+      "status": "pass",
+      "ms": 6.51131399999997
+    },
+    {
+      "name": "Boundary/case smoke + immutability: trustsub",
+      "status": "pass",
+      "ms": 0.8666650000000118
+    },
+    {
+      "name": "Boundary/case smoke + immutability: trust",
+      "status": "pass",
+      "ms": 4.802582000000029
+    },
+    {
+      "name": "Boundary/case smoke + immutability: leastsquares",
+      "status": "pass",
+      "ms": 3.73738800000001
+    },
+    {
+      "name": "Boundary/case smoke + immutability: alm",
+      "status": "pass",
+      "ms": 1.9424549999999954
+    },
+    {
+      "name": "Boundary/case smoke + immutability: interior",
+      "status": "pass",
+      "ms": 2.7315230000000383
+    },
+    {
+      "name": "Boundary/case smoke + immutability: prox",
+      "status": "pass",
+      "ms": 0.2915289999999686
+    },
+    {
+      "name": "Boundary/case smoke + immutability: groupprox",
+      "status": "pass",
+      "ms": 0.23936099999997396
+    },
+    {
+      "name": "Boundary/case smoke + immutability: proxgrad",
+      "status": "pass",
+      "ms": 7.02851400000003
+    },
+    {
+      "name": "Boundary/case smoke + immutability: fista",
+      "status": "pass",
+      "ms": 9.056257000000016
+    },
+    {
+      "name": "Boundary/case smoke + immutability: ppa",
+      "status": "pass",
+      "ms": 10.069392999999991
+    },
+    {
+      "name": "Boundary/case smoke + immutability: bcd",
+      "status": "pass",
+      "ms": 5.135933999999963
+    },
+    {
+      "name": "Boundary/case smoke + immutability: dual",
+      "status": "pass",
+      "ms": 3.6668809999999894
+    },
+    {
+      "name": "Boundary/case smoke + immutability: pdhg",
+      "status": "pass",
+      "ms": 8.535843
+    },
+    {
+      "name": "Boundary/case smoke + immutability: admm",
+      "status": "pass",
+      "ms": 5.483627000000013
+    },
+    {
+      "name": "Boundary/case smoke + immutability: smoothing",
+      "status": "pass",
+      "ms": 0.5778609999999844
+    },
+    {
+      "name": "Boundary/case smoke + immutability: semismooth",
+      "status": "pass",
+      "ms": 0.9339760000000297
+    },
+    {
+      "name": "Boundary/case smoke + immutability: stochastic",
+      "status": "pass",
+      "ms": 2.224538999999993
+    },
+    {
+      "name": "Boundary/case smoke + immutability: manifold",
+      "status": "pass",
+      "ms": 4.608519000000001
+    },
+    {
+      "name": "Boundary/case smoke + immutability: frankwolfe",
+      "status": "pass",
+      "ms": 0.8980720000000133
+    },
+    {
+      "name": "Boundary/case smoke + immutability: mirror",
+      "status": "pass",
+      "ms": 0.9083880000000022
+    },
+    {
+      "name": "Boundary/case smoke + immutability: nuclear",
+      "status": "pass",
+      "ms": 0.9804159999999911
+    },
+    {
+      "name": "Boundary/case smoke + immutability: maxcut",
+      "status": "pass",
+      "ms": 0.356817000000035
+    },
+    {
+      "name": "Boundary/case smoke + immutability: complexity",
+      "status": "pass",
+      "ms": 8.210833000000036
+    },
+    {
+      "name": "Boundary/case smoke + immutability: counterexample",
+      "status": "pass",
+      "ms": 0.49161000000003696
+    }
+  ]
+}

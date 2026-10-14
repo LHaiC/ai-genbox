@@ -1,0 +1,724 @@
+
+===== PDF PAGE 1 | FOOTER ['1/31'] =====
+    近似点算法
+
+      文再文
+
+  北京大学北京国际数学研究中心
+
+教材《最优化：建模、算法与理论》配套电子教案
+
+       http://bicmr.pku.edu.cn/~wenzw/optbook.html
+
+致谢：本教案由陈乐恒、邓展望协助准备
+
+
+
+
+
+                                                                                                        1/31
+===== PDF PAGE 2 | FOOTER ['3', '4', '5'] =====
+提纲
+
+
+
+ 1 近似点算法
+
+
+ 2 与增广拉格朗日函数法的关系
+
+
+ 3 应用举例: LASSO问题
+
+
+ 4 收敛性分析
+
+
+ 5  Moreau-Yosida 正则化
+
+
+
+
+
+                                                                                                                     2/31
+===== PDF PAGE 3 | FOOTER ['2', '2'] =====
+近似点算法
+
+
+ 考虑一般形式的优化问题：
+
+                        min  ψ(x)                             (1)
+                                            x
+
+ 其中ψ是一个适当的闭凸函数，并不要求连续或可微。
+ 对于不可微的情形，可以使用次梯度法求解，但这种方式收敛较慢，
+ 且收敛条件苛刻。我们考虑用近似点梯度法做隐性的梯度下降：
+
+                 xk+1 = proxtkψ  xk
+                                     1            2                (2)
+            = arg min  ψ(u) +     u −xk                                                               2                                 u               2tk
+
+   ψ(x)的邻近算子一般需要通过迭代求解
+   迭代格式(2)的目标函数强凸，相比原问题更利于迭代法的求解
+
+
+
+                                                                                                                     3/31
+===== PDF PAGE 4 | FOOTER [] =====
+FISTA算法加速
+
+
+ 可以用FISTA算法对近似点算法进行加速，其迭代格式为：
+
+                               1 −γk−1
+               xk = proxtkψ  xk−1 + γk          xk−1 −xk−2                                    γk−1
+
+ 第二类Nesterov加速算法的迭代格式可以写成：
+
+             vk = prox(tk/γk)ψ  vk−1  ,   xk = (1 −γk) xk−1 + γkvk
+
+ 关于算法参数的选择有两种策略：
+   固定步长tk = t 以及γk = k+1;2
+    可变步长tk, 当k = 1 时取γ1 = 1; 当k > 1 时,γk 来自下面的方程
+
+                             (1 −γk) tk    tk−1
+                       =
+                               γ2k       γ2k−1
+
+
+
+
+                                                                                                                     4/31
+===== PDF PAGE 5 | FOOTER ['3', '4', '5'] =====
+提纲
+
+
+
+ 1 近似点算法
+
+
+ 2 与增广拉格朗日函数法的关系
+
+
+ 3 应用举例: LASSO问题
+
+
+ 4 收敛性分析
+
+
+ 5  Moreau-Yosida 正则化
+
+
+
+
+
+                                                                                                                     5/31
+===== PDF PAGE 6 | FOOTER [] =====
+考虑具有如下形式的优化问题：
+
+                    min   f(x) + h(Ax)                         (3)
+                           x∈Rn
+
+其中f, h 为适当的闭凸函数, A ∈Rm×n
+
+下面给出了优化问题(3)的一些常见例子：
+  当h 是单点集{b} 的示性函数时，等价于线性等式约束优化问题
+
+                   min   f(x),       s.t. Ax = b
+                         x∈Rn
+
+   当h 是凸集C 上的示性函数时，等价于凸集约束问题
+
+                   min   f(x)       s.t. Ax ∈C
+
+    当h(y) = ∥y −b∥时，等价于正则优化问题
+
+                     min   f(x) + ∥Ax −b∥
+
+
+
+
+                                                                                                                   6/31
+===== PDF PAGE 7 | FOOTER [] =====
+对偶问题
+
+
+
+
+ 写出上述优化问题的拉格朗日函数：
+
+                    L(x, y, z) = f(x) + h(y) + zT(Ax −y)
+
+ 则对偶问题为：
+
+         max   ψ(z) = inf L(x, y, z) = −f ∗(−ATz) −h∗(z)         (4)
+                                         x,y
+
+ 我们有以下结论：
+ 对对偶问题用近似点算法⇐⇒对原问题用增广拉格朗日函数法
+
+
+
+
+
+                                                                                                                     7/31
+===== PDF PAGE 8 | FOOTER ['2'] =====
+对偶函数的邻近算子
+
+
+
+ 对于对偶问题(4)，近似点算法迭代格式如下
+
+                                        ∗                 1           2
+    zk+1 = proxtψ  zk = arg min   f  −ATz + h∗(z) +      z −zk  2                                           z                               2tk
+
+ 事实上也可以写成：zk+1 = proxtψ(zk) = zk + tk(Aˆxk −ˆy), 其中
+
+                                                                                 t
+             (ˆx,ˆy) = argmin                                                                         2                          f(x) + g(y) + zT(Ax −y) + 2||Ax −y||2                            x,y
+
+ 也就是说，ˆx,ˆy 最小化增广拉格朗日函数，近似点算法迭代格式对应增
+ 广拉格朗日函数法中的乘子更新。
+
+
+
+
+
+                                                                                                                     8/31
+===== PDF PAGE 9 | FOOTER [] =====
+共轭函数性质
+
+引理
+ 设f(x) 是适当的闭凸函数，f ∗(y) 是其共轭函数，则对任意
+ 的y ∈dom f ∗和x ∈dom f 有
+
+                         y ∈∂f(x) ⇔x ∈∂f ∗(y)                       (5)
+
+
+ Proof.
+  由于f 是适当闭函数，因此有f ∗∗= f.
+ 根据f ∗(y) 的定义，y ∈∂f(x) 即表明x 满足最优性条件，因此
+
+                          xTy −f(x) = f ∗(y)
+
+ 由自共轭性得
+                                    f ∗∗(x) = f(x) = xTy −f ∗(y)
+ 这说明y 满足最优性条件，即x ∈∂f ∗(y).
+  另一方向结论同理可得.
+                                                                                                                     9/31
+===== PDF PAGE 10 | FOOTER [] =====
+定理证明
+
+
+ Proof.
+  首先写出最小化增广拉格朗日函数的优化问题:
+
+                                                                                t
+                        min  f(x) + h(y) +        2                                            x,y,w                  2||w||2
+                                          s.t.  Ax −y + z/t = w
+
+ 对约束Ax −y + zt = w 引入乘子u, 由最优性条件有:
+
+                              z
+                    Aˆx −ˆy + = w,  −ATu ∈∂f(ˆx),  u ∈∂h(ˆy),  tw = u
+                                         t
+ 消去w 得u = z + t(Ax −y). 又根据引理(5)得:
+
+                                                  ˆx ∈∂f ∗ −ATu  ,    ˆy ∈∂h∗(u)
+
+ 代入u 的表达式可得0 ∈−A∂f ∗(−ATu) + ∂h∗(u) + 1t (u −z), 这正是u = proxtψ(z) 的
+ 最优性条件.
+
+  另一方面，若有u = proxtψ(z), 则选取ˆx ∈∂f ∗ −ATu 及ˆy ∈∂h∗(u), 即可恢复出增
+ 广拉格朗日函数法中的变量
+
+
+                                                                                                                 10/31
+===== PDF PAGE 11 | FOOTER ['2'] =====
+增广拉格朗日函数法
+
+
+ 选择初始点z(0) 并迭代以下步骤:
+
+    1 最小化增广拉格朗日函数
+
+                                                               tk          1
+                    (ˆx,ˆy) = argmin  f(x) + h(y) +   ||Ax −y +   zk||22
+                                    x,y                2                tk
+
+    2 乘子更新
+                             zk+1 = zk + tk(Aˆx −ˆy)
+
+   这等价于对对偶问题使用近似点算法
+   (对偶问题)可以使用加速版本的近似点算法来加快收敛速度
+   通常第一步先求解一个较不精确的最优值
+
+
+
+
+
+                                                                                                                 11/31
+===== PDF PAGE 12 | FOOTER [] =====
+例子
+
+
+                     min   f(x) + h(Ax)
+
+   等式约束(h 是{b}点处的示性函数)
+
+                                                                             t
+                          ˆx = argmin                                                                       2                               f(x) + zT(Ax −b) + 2||Ax −b||2                                x
+             u = z + t(Aˆx −b)
+
+   凸集约束(h 是凸集C 上示性函数):
+
+                                                                 t
+                                     ˆx = argmin                                    f(x) + 2d(Ax + z/t)2                                       x
+                  u = z + t(Aˆx −P(Aˆx + z/t))
+
+    其中，P(u) 是u 在C 上的投影, d(u) = ||u −P(u)||2 是欧式距离
+
+
+
+
+                                                                                                                 12/31
+===== PDF PAGE 13 | FOOTER ['3', '4', '5'] =====
+提纲
+
+
+
+ 1 近似点算法
+
+
+ 2 与增广拉格朗日函数法的关系
+
+
+ 3 应用举例: LASSO问题
+
+
+ 4 收敛性分析
+
+
+ 5  Moreau-Yosida 正则化
+
+
+
+
+
+                                                                                                                 13/31
+===== PDF PAGE 14 | FOOTER [] =====
+LASSO
+
+ 考虑LASSO问题：
+
+                                    1
+                min  ψ(x) = µ∥x∥1 +     −b∥22.                 (6)                     x∈Rn              2∥Ax
+
+ 引入变量y = Ax −b，问题(6)可以等价地转化为
+
+                             1
+        min  f(x, y) = µ∥x∥1 +       2,    s.t.  Ax −y −b = 0.      (7)                 x,y                  2∥y∥2
+
+ 对于问题(7)，我们采用近似点算法进行求解，其第k步迭代为
+
+                                 1
+    (xk+1, yk+1) ≈argmin    f(x, y) +     ∥x −xk∥22 + ∥y −yk∥22     ,   (8)
+                      (x,y)∈D               2tk
+
+ 其中D = {(x, y) | Ax −y = b}为可行域，tk 为步长。由于问题(8)没有
+ 显式解，我们需要采用迭代算法来进行求解，比如罚函数法，增广拉
+ 格朗日方法等等。
+
+                                                                                                                 14/31
+===== PDF PAGE 15 | FOOTER ['1', '2'] =====
+LASSO
+
+
+ 除了直接求解问题(8)，一种比较实用的方式是通过对偶问题的解来构
+ 造(xk+1, yk+1)。引入拉格朗日乘子z，问题(8)的对偶函数为：
+
+                                  1
+         Φk(z) = inf  µ∥x∥1 + zTAx +   ∥x −xk∥22
+                         x                       2tk
+                      1            1
+          + inf         2 −zTy +   ∥y −yk∥22  −bTz                            y   2∥y∥2           2tk
+              =µΓµtk(xk −tkATz) −1   ∥xk −tkATz∥22 −∥xk∥22
+                                            2tk
+                     1
+          −                2 + 2(yk)Tz −∥yk∥22) −bTz.                        2(tk + 1)(∥z∥2
+
+ 这里，
+                                    1
+                   Γµtk(u) = inf  ∥x∥1 +     ∥x −u∥22   .
+                                      x           2µtk
+
+
+
+
+                                                                                                                 15/31
+===== PDF PAGE 16 | FOOTER ['1'] =====
+LASSO
+
+ 通过简单地计算，并记函数qµtk : R →R 为
+                 (  v2  ,         |v| ≤t,
+                        qµtk(v) =    2µtk
+                                           |v| −µtk ,   |v| > t,                                               2
+ 我们有Γµtk(u) = Pni=1 qµtk(ui), 其为极小点x = proxµtk∥x∥1(u) 处的目标
+ 函数值。易知Γµtk(u) 是关于u 的连续可微函数且导数为：
+
+                    ∇uΓµtk(u) = u −proxµtk∥x∥1(u).
+ 那么，问题(8)的对偶问题为
+
+                        min   Φk(z).
+                                                 z
+ 设对偶问题的逼近最优解为zk+1，那么根据问题(8)的最优性条件，我
+ 们有
+         xk+1 = proxµtk∥x∥1  xk −tkATzk+1  ,
+         
+                          1
+                     yk+1 =      + tkzk+1).                    tk + 1(yk
+                                                                                                                 16/31
+===== PDF PAGE 17 | FOOTER [] =====
+LASSO
+
+ 在第k 步迭代，LASSO (6) 问题的近似点算法的迭代格式写为：
+
+          zk+1 ≈argmax  Φk(z),
+                         z                           
+         xk+1 = proxµtk∥x∥1  xk −tkATzk+1  ,                (9)
+                 1                                       yk+1 =      + tkzk+1).                             tk + 1(yk
+
+ 根据Φk(z) 的连续可微性，我们可以调用梯度法进行求解。另外可以证
+ 明Φk(z)是半光滑的，从而调用半光滑牛顿法来更有效地求解。为了保
+ 证算法(9)的收敛性，我们采用以下zk+1满足以下不精确收敛准则：
+                    ∞
+ ∥∇Φk(zk+1)∥2 ≤ p α/tkϵk, ϵk ≥0, X ϵk < ∞,
+                                                k
+                                 ∞         (10)
+ ∥∇Φk(zk+1)∥2 ≤ pα/tkδk∥(xk+1, yk+1) −(xk, yk)∥2, δk ≥0, X δk < ∞,
+                                                                                k
+
+ 其中ϵk, δk是人为设定的参数,α 为Φk 的强凹参数(即−Φk 的强凸参数)。17/31
+===== PDF PAGE 18 | FOOTER ['3', '4', '5'] =====
+提纲
+
+
+
+ 1 近似点算法
+
+
+ 2 与增广拉格朗日函数法的关系
+
+
+ 3 应用举例: LASSO问题
+
+
+ 4 收敛性分析
+
+
+ 5  Moreau-Yosida 正则化
+
+
+
+
+
+                                                                                                                 18/31
+===== PDF PAGE 19 | FOOTER [] =====
+收敛性分析
+
+
+
+ 基本假设：
+    ψ 是闭凸函数(因此, proxtψ(x) 唯一确定,∀x)
+   最优值ψ∗有限且在x∗取到
+
+ 结论：
+                  ψ(x(k)) −ψ∗≤||x(0) −x∗||2                                                   2   ∀k ≥1
+                              2 Pki=1 ti
+
+  这表明，Pi ti →∞时收敛
+    若ti 固定或在一个正下界以上变化，则收敛速率为1/k
+          ti 可以任意选取，然而邻近算子的计算代价依赖于ti
+
+
+
+
+
+                                                                                                                 19/31
+===== PDF PAGE 20 | FOOTER ['2', '2'] =====
+收敛性分析
+
+ Proof.
+  对原问题应用近似点梯度法(即f(x) = 0 的情形)，则下式在t > 0的
+ 情形下自然满足：
+
+                                                                               t
+                   f (x −tGt(x)) ⩽f(x) + t∇f(x)TGt(x) +  ∥Gt(x)∥22                                            2
+
+ 根据近似点梯度法中定理1的证明，我们有
+
+                          −  xi −x∗  2               ⩽1    xi−1 −x∗  2                       ti ψ  xi −ψ∗                                                      2                           2                               2
+
+ 且 ψ  xi 是单调下降的序列. 因此
+
+             k  !                        k
+                           ⩽1  x0 −x∗  2   X ti  ψ  xk −ψ∗ ⩽ X ti ψ  xi −ψ∗
+                                               2            2
+          i=1                       i=1
+
+
+
+
+                                                                                                                 20/31
+===== PDF PAGE 21 | FOOTER [] =====
+加速版本的近似点算法
+
+
+ FISTA (令f(x) = 0): 取x(0) = x(−1) 且对于k > 1 有
+
+                               1 −θk−1
+               x(k) = proxtkf  x(k−1) + θk          (x(k−1) −x(k−2))                                     θk−1
+
+ 第二类Nesterov加速算法: 取x(0) = v(0) 且对于k ≥1
+
+           v(k) = prox(tk/θk)f (v(k−1)),   x(k) = (1 −θk)x(k−1) + θkv(k)
+
+ 参数选择策略
+   固定步长: tk = t 以及θk = 2/(k + 1)
+   变化步长: 选择任意的tk > 0, θ1 = 1，对于任意k > 1，从下面的方
+   程中解出θk
+                              (1 −θk)tk    tk−1
+                       =
+                                  θ2k       θ2k−1
+
+
+
+
+                                                                                                                 21/31
+===== PDF PAGE 22 | FOOTER [] =====
+收敛性分析
+
+
+
+ 基本假设：
+    ψ 是闭凸函数(因此，proxtψ(x) 对于所有的x 存在且唯一)
+   最优值ψ∗有限且在x∗取到
+
+
+
+ 结论：
+                                         2||x(0) −x∗||22                ψ(x(k) −ψ∗) ≤                               ,   k ≥1
+                            (2√t1 + Pki=2 √ti)2
+  这表明，若Pi √ti →∞，则保证收敛
+    步长ti 取固定值或有正下界时，其收敛速度可达到O  k21
+   (实际上也需控制ti 上界以便子问题可快速求解)
+
+
+
+
+
+                                                                                                                 22/31
+===== PDF PAGE 23 | FOOTER [] =====
+收敛性分析
+
+ Proof.
+   在f(x) = 0 的情况下使用Nesterov加速算法中的证明:
+ 由于f(x) = 0, 对任意的t > 0,
+
+                                     1
+             f(x) ⩽f(y) + ∇f(y)T(x −y) + 2t∥x −y∥22,   ∀x, y
+
+ 于是ψ  xk −ψ∗⩽γ2                                      k  x0 −x∗  2                                       2 成立，取固定步长tk = t 和γk = k+1,2                                 2tk
+
+                           γ2k       2                  =
+                                  2tk    (k + 1)2t
+
+ 对于变步长，
+                      γ2k ⩽         2
+                            2tk    2√t1 + Pki=2 √ti  2
+
+ 分别将对应不等式代入(23) 式就得到定理中的结论.
+
+                                                                                                                 23/31
+===== PDF PAGE 24 | FOOTER ['3', '4', '5'] =====
+提纲
+
+
+
+ 1 近似点算法
+
+
+ 2 与增广拉格朗日函数法的关系
+
+
+ 3 应用举例: LASSO问题
+
+
+ 4 收敛性分析
+
+
+ 5  Moreau-Yosida 正则化
+
+
+
+
+
+                                                                                                                 24/31
+===== PDF PAGE 25 | FOOTER ['2'] =====
+Moreau-Yosida 正则化
+
+
+
+ 闭凸函数f 的Moreau-Yosida正则化(又称为Moreau envelope) 定义为
+
+                               1
+                    f(t)(x) = inf  f(u) +     −x||22)   (t > 0)                              u           2t||u
+                                                                  (11)
+                                 1
+                                                                 2            = f(proxtf (x)) + 2t||proxtf (x) −x||2
+
+ 根据定义我们可以立刻得到：
+
+         f(t) 是凸函数(一个以x, u为自变量的凸函数对u取下确界)
+
+         f(t) 的定义域为Rn (回忆proxtf (x) 对于任意的x存在且唯一)
+
+
+
+
+
+                                                                                                                 25/31
+===== PDF PAGE 26 | FOOTER [] =====
+例子
+
+   示性函数: 光滑化后的f 是欧式距离的平方
+
+                                          1
+                       f(x) = IC(x),      f(t)(x) = 2td(x)2
+
+    ℓ1范数: 光滑化后的函数为Huber损失函数
+                                                         n
+                      f(x) = ||x||1,      f(t)(x) = X φt(xk)
+                                               k=1
+
+
+
+
+
+                                                                                                                 26/31
+===== PDF PAGE 27 | FOOTER ['2'] =====
+Moreau envelope的共轭函数
+
+
+
+                                   1
+                          f(t)(x) = inf  f(u) +     −x||22                                   u           2t||u
+
+         f(t) 是f(u) 与||v||22/(2t) 的卷积下确界:
+
+                                        1
+                              f(t)(x) =  inf   f(u) +        2                               u+v=x           2t||v||2
+
+         f(t) 的共轭是f(u) 的共轭与||v||22/(2t) 的和:
+
+                                                                       t
+                                                            2                                (f(t))∗(y) = f ∗(y) + 2||y||2
+
+    因此，f(t) 的共轭是t-强凸的
+
+
+
+
+                                                                                                                 27/31
+===== PDF PAGE 28 | FOOTER [] =====
+Moreau envelope的梯度
+
+           f(t)(x) = sup (xTy −(f(t))∗(y)) = sup(xTy −f ∗(y) −t    2)                         y                             y                   2||y||2
+
+   最大值点y 唯一且满足：
+         x −∂f ∗(y) −y = 0 ⇐⇒  y = argmin   f ∗(u) + 1  −x ||2              t           t                               u           t      2||u     t
+
+   同时有x ∈∂(f(t))∗(y) ⇐⇒y ∈∂f(t)(x), 根据唯一性，最大值点y
+    即是f(t) 的梯度:
+
+                                       1
+                   ∇f(t)(x) = prox(1/t)f ∗(x/t) =  (x −proxtf (x))                                                                       t
+
+    梯度∇f(t) 为(1/t)-利普希茨连续
+   (根据邻近算子性质: ∥proxh (x1) −proxh (x2)∥2 ≤∥x1 −x2∥2)
+
+                                                                                                                 28/31
+===== PDF PAGE 29 | FOOTER [] =====
+近似点算法的解释
+
+
+ 使用梯度法来最小化Moreau envelope
+
+                                      1
+             min   f(t)(x) = inf  f(u) +     −x||22             (12)                                       u           2t||u
+ 这是最小化f(x) 优化问题的光滑化形式，且满足:
+
+   问题(12)的最优值点x 同时也是原问题f 的最小值点
+
+         f(t) 可微且梯度利普希茨连续(L = 1/t)
+
+ 我们可以使用固定步长：tk = 1/L = t
+
+                   x(k) = x(k−1) −t∇f(t)(x(k−1)) = proxtf (x(k−1))
+
+ 这就是固定步长近似点算法的迭代格式
+
+
+
+                                                                                                                 29/31
+===== PDF PAGE 30 | FOOTER ['x'] =====
+增广拉格朗日函数法的解释
+
+
+
+                                                                 t
+               (ˆx,ˆy) = argmin                                                                       2                             f(x) + g(y) + 2||Ax −y + (1/t)z||2                                 x,y
+
+                 z = z + t(Aˆx −ˆy)
+
+   固定步长t , 对偶乘子更新即为对光滑化的对偶问题使用梯度下降
+   如果我们消去y , 关键变量x 的更新可以理解为光滑化g :
+
+                                  ˆx = argmin  f(x) + g(1/t)(Ax + (1/t)z)
+                                    x
+
+ 例子: 最小化f(x) + ||Ax −b||1
+
+                            ˆx = argmin  f(x) + φ1/t(Ax −b + (1/t)z)
+                               x
+
+ 其中φ1/t 表示将Huber损失函数应用到各分量
+
+                                                                                                                 30/31
+===== PDF PAGE 31 | FOOTER [] =====
+附录
+
+
+
+
+ proximal point algorithm and fast proximal point algorithm
+
+     O. Güler, On the convergence of the proximal point algorithm for
+     convex minimization, SIAM J. Control and Optimization (1991)
+
+     O. Güler, New proximal point algorithms for convex minimization,
+    SIOPT (1992)
+
+     O. Güler, Augmented Lagrangian algorithm for linear
+     programming, JOTA (1992)
+
+ augmented Lagrangian algorithm
+
+      D.P. Bertsekas, Constrained Optimization and Lagrange
+      Multiplier Methods (1982)
+
+
+
+
+
+                                                                                                                 31/31

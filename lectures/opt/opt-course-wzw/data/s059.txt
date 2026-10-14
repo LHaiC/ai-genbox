@@ -1,0 +1,1211 @@
+
+===== PDF PAGE 1 | FOOTER ['1/51'] =====
+    对偶算法
+
+      文再文
+
+  北京大学北京国际数学研究中心
+
+教材《最优化：建模、算法与理论》配套电子教案
+
+       http://bicmr.pku.edu.cn/~wenzw/optbook.html
+
+  致谢：本教案由朱桢源协助准备
+
+
+
+
+
+                                                                                                        1/51
+===== PDF PAGE 2 | FOOTER ['3', '4', '5'] =====
+提纲
+
+
+
+ 1 对偶近似点梯度法
+
+
+ 2 应用举例
+
+
+ 3 原始– 对偶混合梯度算法
+
+
+ 4 应用举例
+
+
+ 5 收敛性分析
+
+
+
+
+
+                                                                                                                     2/51
+===== PDF PAGE 3 | FOOTER [] =====
+对偶方法
+
+ 次梯度法：速度慢，步长选择困难
+
+ 梯度法：需要对偶函数可微
+
+   对偶函数可能不可微，或定义域非平凡
+
+   对原始函数加小的强凸项，将对偶函数光滑化
+
+ 增广拉格朗日法：
+
+   等价于对光滑化的对偶问题做梯度上升
+
+   但是光滑化会破坏可分结构
+
+ 近似点梯度法（本讲）：对偶函数分裂成两项
+
+   一项是梯度利普希茨连续函数
+
+   另一项有方便计算的近似点算子
+
+
+                                                                                                                     3/51
+===== PDF PAGE 4 | FOOTER [] =====
+对偶问题
+
+ 设f，h 是闭凸函数，考虑如下形式的问题:
+
+                      (P)  min  ψ(x) = f(x) + h(Ax).
+                           x∈Rn
+
+ 引入新变量y = Ax，考虑问题:
+
+                (P)  min  ψ(x) = f(x) + h(y),  s.t. Ax = y.
+                      x∈Rn
+
+ 拉格朗日函数为:
+
+                    L(x, y, z) = f(x) + g(y) + zT(Ax −y)
+
+ 对偶问题
+
+                (D)  max   φ(z) = −f ∗(−ATz) −h∗(z).
+                                      z
+
+
+
+
+                                                                                                                     4/51
+===== PDF PAGE 5 | FOOTER [] =====
+Dual methods
+
+
+
+
+
+ apply ﬁrst-order method to dual problem
+
+                 max  −f ∗(−ATz) −h∗(z)
+
+ reasons why dual problem may be easier for ﬁrst-order method:
+
+     dual problem is unconstrained or has simple constraints
+
+     dual objective is differentiable or has a simple nondifferentiable
+     term
+
+     decomposition: exploit separable structure
+
+
+
+
+
+                                                                                                                     5/51
+===== PDF PAGE 6 | FOOTER ['x'] =====
+(Sub-)gradients of conjugate function
+
+
+ assume f  : Rn →R is closed and convex with conjugate
+
+                                       f ∗(y) = sup(yTx −f(x))
+                                              x
+
+ subgradient
+         f ∗is subdifferentiable on (at least) int dom f ∗
+     maximizers in the deﬁnition of f ∗(y) are subgradients at y
+
+               y ∈∂f(x) ⇔yTx −f(x) = f ∗(y) ⇔x ∈∂f ∗(y)
+
+ gradient: for strictly convex f  , maximizer in deﬁnition is unique if it
+ exists
+
+       ∇f ∗(y) = argmax(yTx −f(x))  (if maximum is attained)
+                              x
+
+
+
+
+                                                                                                                     6/51
+===== PDF PAGE 7 | FOOTER ['x'] =====
+Equality constraints
+
+
+
+
+              min   f(x)      min   f ∗(−ATz) + bTz
+                        s.t.  Ax = b
+ dual gradient ascent (assuming dom f ∗= Rn):
+
+                         ˆx = argmin(f(x) + zTAx), z+ = z + t(Aˆx −b)
+                             x
+
+
+          ˆx is a subgradient of f ∗at −ATz ( i.e.,ˆx ∈∂f ∗(−ATz))
+     b −Aˆx is a subgradient of f ∗(−ATz) + bTz at z
+ of interest if calculation of ˆx is inexpensive (for example, f is
+ separable)
+
+
+
+
+
+                                                                                                                     7/51
+===== PDF PAGE 8 | FOOTER ['2'] =====
+Alternating minimization framework
+
+ The Lagrangian function is
+
+                        L(x, z) = f(x) + z⊤(Ax −b).
+
+ The problem is equivalent to
+
+                  max  min   L(x, z).
+                                           z        x
+
+ The dual gradient ascent method is equivalent to the following
+ alternating minimization scheme:
+
+                xk+1 =  argmin L(x, zk)
+                                       x
+            =  argmin(f(x) + (zk)TAx)
+                                       x
+                zk+1 =  argmax L(xk+1, z) −1   −zk∥22                                             z                2t∥z
+            =   zk + t(Axk+1 −b)
+
+                                                                                                                     8/51
+===== PDF PAGE 9 | FOOTER [] =====
+Dual decomposition
+
+
+
+ convex problem with separable objective
+
+                    min   f1(x1) + f2(x2)
+                                  s.t.   A1x1 + A2x2 ≤b
+
+ constraint is complicating or coupling constraint
+
+ dual problem
+
+             max  −f1∗ (−AT1z) −f2∗ (−AT2z) −bTz
+                          s.t.   z ≥0
+
+ can be solved by (sub-)gradient projection if z ≥0 is the only
+ constraint
+
+
+
+
+
+                                                                                                                     9/51
+===== PDF PAGE 10 | FOOTER [] =====
+Dual subgradient projection
+
+ subproblems: to calculate fj∗ (−ATj z) and a (sub-) gradient for it,
+
+                  min (over xj)  fj(xj) + zTAjxj
+
+ optimal value is fj∗ (−ATj z); minimizer ˆxj is in ∂f j∗ (−ATj z)
+
+ dual subgradient projection method
+
+                                  ˆxj =  argmin(fj(xj) + zTAjxj),   j = 1, 2
+                                                   xj
+               z+ =  (z + t(A1ˆx1 + A2ˆx2 −b))+
+
+
+     minimization problems over x1, x2 are independent
+     z-update is projected subgradient step (u+ = max{u, 0}
+     elementwise)
+
+
+                                                                                                                 10/51
+===== PDF PAGE 11 | FOOTER [] =====
+强凸函数共轭函数的性质
+
+ 设f(x)是适当且闭的强凸函数，强凸参数为µ > 0，则f ∗(y)在全空
+ 间Rn上有定义，f ∗(y)是梯度1µ-利普希茨连续的可微函数．
+ 证明：
+   对任意的y ∈Rn，f(x) −xTy是强凸函数，因此对任意的y ∈Rn，
+   存在唯一的x ∈dom f，使得f ∗(y) = xTy −f(x)．根据最优性条件
+
+                       y ∈∂f(x) ⇔f ∗(y) = xTy −f(x).
+
+   由于f(x)是闭凸函数，二次共轭为其本身，于是对同一组x, y有
+
+              xTy −f ∗(y) = f(x) = f ∗∗(x) = sup  xTy −f ∗(y)   .
+                                                             y
+
+   这说明y也使得xTy −f ∗(y)取到最大值．根据一阶最优性条件，
+
+                                 x ∈∂f ∗(y).
+
+   再根据x的唯一性容易推出∂f ∗(y)中只含一个元素，故f ∗(y)可微．
+
+                                                                                                                 11/51
+===== PDF PAGE 12 | FOOTER [] =====
+下证f ∗(y)为梯度1µ-利普希茨连续的．对任意的y1, y2，存在唯一
+的x1, x2 ∈dom f使得
+
+                      y1 ∈∂f(x1),   y2 ∈∂f(x2).
+
+根据次梯度性质以及f(x) −µ ∥x∥2是凸函数，                                 2
+
+                f(x2) ≥f(x1) + (y1 −µx1)T(x2 −x1),
+                f(x1) ≥f(x2) + (y2 −µx2)T(x1 −x2),
+
+将上述两式相加得
+
+                  (y1 −y2)T(x1 −x2) ≥µ∥x1 −x2∥2.
+
+根据x和y的关系我们有x1 = ∇f ∗(y1), x2 = ∇f ∗(y2)，代入上式可得
+
+     (y1 −y2)T(∇f ∗(y1) −∇f ∗(y2)) ≥µ∥∇f ∗(y1) −∇f ∗(y2)∥2.
+
+这正是∇f ∗(y)的余强制性，可知∇f ∗(y)是1µ-利普希茨连续的．
+
+                                                                                                       12/51
+===== PDF PAGE 13 | FOOTER ['2'] =====
+对偶问题中的复合结构
+
+
+
+ 为了在对偶问题上使用近似点梯度法，φ(z) 需要满足“可微函数+ 凸函
+ 数” 的复合形式：
+
+     h 或h∗的近似点算子容易计算（有闭形式或简单算法）
+
+         f 是闭的强凸函数
+   我们下面证明这意味着f ∗(−ATz) 是梯度利普希茨连续函数：
+
+           ∥A∇f ∗(−ATz1) −A∇f ∗(−ATz2)∥2 ≤∥A∥22 ∥z1 −z2∥2
+                                     µ
+
+
+
+
+
+                                                                                                                 13/51
+===== PDF PAGE 14 | FOOTER [] =====
+对偶近似点梯度更新
+
+ 考虑在对偶问题上应用近似点梯度算法，每次迭代更新如下：
+
+                    zk+1 = proxth∗ zk+tA∇f ∗ −ATzk
+
+ 对偶问题是取最大值，因此邻近算子内部应该取上升方向.
+ 进一步引入变量xk+1 = ∇f ∗(−ATzk)，迭代格式等价于
+
+    xk+1 = arg min nf(x) + ATzk T x o ,   zk+1 = proxth∗  zk + tAxk+1
+                    x
+
+   如果f 可分, x 的计算可分解为多个独立的问题
+
+   步长t 可取常数或采取回溯线搜索法
+
+   可使用加速近似点梯度法
+
+ 下面我们将提供另一种角度来理解对偶近似点梯度法．
+
+                                                                                                                 14/51
+===== PDF PAGE 15 | FOOTER [] =====
+Moreau 分解
+
+
+
+   设f是定义在Rn上的适当的闭凸函数，则对任意的x ∈Rn，
+
+                          x = proxf (x) + proxf ∗(x);
+
+   或更一般地，
+
+                                                  x
+                      x = proxλf (x) + λproxλ−1f ∗         ,                                      λ
+
+   其中λ > 0为任意正实数．
+
+    Moreau 分解的结论表明：对任意的闭凸函数f，空间Rn上的恒等
+   映射总可以分解成两个函数f与f ∗邻近算子的和．
+
+
+
+
+
+                                                                                                                 15/51
+===== PDF PAGE 16 | FOOTER ['2'] =====
+交替极小的解释
+
+   取λ = t, f = h∗，并注意到h∗∗= h，我们有
+
+                                                                    zk
+            zk + tAxk+1 = proxth∗(zk + tAxk+1) + tproxt−1h   + Axk+1                                                                                        t
+            = zk+1 + tproxt−1h(zk + Axk+1),                                                               t
+
+   由此给出对偶近似点梯度法等价的针对原始问题的更新格式：
+
+         xk+1 = argmin  f(x) + (zk)TAx   ,
+                           x
+                                 zk
+         yk+1 = proxt−1h   + Axk+1                                           t
+                                                                                 t                n                          o        = argmin                                                                             2   ,                          h(y) −(zk)T(y −Axk+1) + 2∥Axk+1 −y∥2                           y
+          zk+1 = zk + t(Axk+1 −yk+1).
+
+
+
+                                                                                                                 16/51
+===== PDF PAGE 17 | FOOTER [] =====
+交替极小方法
+
+   考虑等价问题:
+
+                  min f(x) + h(y),    s.t.  y = Ax
+                                     x,y
+
+   定义拉格朗日函数和增广拉格朗日函数:
+
+               L(x, y, z) = f(x) + h(y) −zT(y −Ax)
+                                                                                  t
+                Lt(x, y, z) = f(x) + h(y) −zT(y −Ax) + 2∥y −Ax∥2
+
+   等价的交替极小格式是
+
+                       xk+1 =  arg min L(x, yk, zk)
+                                                    x
+                       yk+1 =  arg min Lt(xk+1, y, zk)
+                                                    y
+                        zk+1 =   zk + t(Axk+1 −yk+1)
+
+   对偶近似点梯度法等价于对原始约束问题使用交替极小化方法
+                                                                                                                 17/51
+===== PDF PAGE 18 | FOOTER ['3', '4', '5'] =====
+提纲
+
+
+
+ 1 对偶近似点梯度法
+
+
+ 2 应用举例
+
+
+ 3 原始– 对偶混合梯度算法
+
+
+ 4 应用举例
+
+
+ 5 收敛性分析
+
+
+
+
+
+                                                                                                                 18/51
+===== PDF PAGE 19 | FOOTER ['x'] =====
+正则化范数近似
+
+ 假设f是强凸函数，∥· ∥是任意一种范数，考虑
+
+                     min f(x) + ∥Ax −b∥
+
+ 对应原始问题我们有h(y) = ∥y −b∥
+
+         (bTz  ∥z∥∗≤1
+        h∗(z) =                        proxth∗(x) = P∥z∥∗≤1(x −tb)         +∞ 其他
+
+ 其中∥· ∥∗表示∥· ∥的对偶范数. 从而对偶问题为：
+
+                 max   −f ∗(−ATz) −bTz
+                          ∥z∥∗≤1
+
+ 应用对偶近似点梯度法，更新如下：
+
+                    xk+1 = argmin  f(x) + (ATzk)Tx
+                                         x
+                     zk+1 = P∥z∥∗≤1(zk + t(Axk+1 −b))
+
+                                                                                                                 19/51
+===== PDF PAGE 20 | FOOTER ['2'] =====
+正则化范数近似
+
+
+
+
+ 考虑等价问题
+                min f(x) + ∥y∥,    s.t. Ax −b = y
+                                x,y
+
+ 交替极小化格式是
+
+ xk+1 = argmin f(x) + ∥yk∥+ (zk)T(Ax −b −yk)
+               x
+                                                                                       t
+ yk+1 = argmin                                                                                      2                 f(xk+1) + ∥y∥+ (zk)T(Axk+1 −b −y) + 2∥Axk+1 −b −y∥2               y
+ zk+1 = zk + t(Axk+1 −b −yk+1)
+
+
+
+
+
+                                                                                                                 20/51
+===== PDF PAGE 21 | FOOTER ['i'] =====
+例
+
+ 假设f是强凸函数，考虑
+
+                                              p
+                   min   f(x) + X ∥Bix∥2,
+                                          i=1
+ 即h(y1, y2, · · · , yp) = pP ∥yi∥2，且
+                        i=1
+
+                                              T
+                 A = BT1  BT1    · · ·  BTp    .
+ 根据∥· ∥2的共轭函数定义，对偶问题形式如下：
+                                                 p   !
+                 max   −f ∗ − X BTi zi    ,
+                           ∥zi∥2≤1
+                                            i=1
+ 记Ci是Rmi中的单位欧几里得球，对偶近似点梯度法更新如下：
+                 (          p     )
+                 xk+1 = argmin  f(x) + (X BTi zi)Tx    ,
+                                     x
+                                              i=1
+                  zk+1i  = PCi(zki + tBixk+1), i = 1, 2, · · · , p.                        21/51
+===== PDF PAGE 22 | FOOTER ['0'] =====
+数值实验
+
+
+                              1
+                                                     2                             f(x) = 2||Cx −d||2
+ 随机生成C ∈R2000×1000, Bi ∈R10×1000, p = 500
+
+                      100
+                                                                                      gradient
+                                                                                FISTA
+                     10-1
+
+                     10-2                                                                    objective ⋆       -3         f 10
+
+                                           -4                       ⋆−dual   10
+        f
+                     10-5
+
+                     10-6 0   100 200  300 400  500  600  700  800  900
+                                     k
+
+
+                                                                                                                 22/51
+===== PDF PAGE 23 | FOOTER ['i', 'i'] =====
+在凸集交上的极小化
+
+ 假设f是强凸函数，集合Ci为闭凸集，且易于计算投影，考虑
+
+                    min   f(x),
+                                      s.t.  x ∈C1 ∩C2 ∩· · · ∩Cm,
+ 我们有h(y1, y2, · · · , ym) = mP ICi(yi)，A =  I   I   · · ·   I T , 对偶问题为
+                               i=1
+                             m  !   m
+             max  −f ∗ − X zi − X I∗Ci(zi),
+                         zi∈Ci
+                                      i=1        i=1
+ I∗Ci(zi)是集合Ci的支撑函数，其显式表达式不易求出．因此我们利
+ 用Moreau 分解将迭代格式写成交替极小化方法的形式：
+                        m  !T 
+                  xk+1 = argmin   + X zi   x 
+                                        x                            f(x)      i=1    ,
+                                       zki                  yk+1i  = PCi   + xk+1   ,    i = 1, 2, · · · , m,                                                 t
+                   zk+1i  = zki + t(xk+1 −yk+1i   ),    i = 1, 2, · · · , m.
+                                                                                                                 23/51
+===== PDF PAGE 24 | FOOTER [] =====
+可分问题的拆分
+
+ 假设fi是强凸函数，h∗i 有易于计算的邻近算子．考虑
+
+                      n        m
+        min X fj(xj) + X hi(Ai1x1 + Ai2x2 + · · · + AinxN),
+                    j=1         i=1
+
+ 其对偶问题形式如下：
+
+               m             n
+      max − X h∗i (zi) − X fj∗ (−AT1jz1 −AT2jz2 −· · · −ATmjzm).
+                   i=1          j=1
+
+ 对偶近似点梯度法更新如下：
+
+            (        m     )
+        xk+1j  = argmin   fj(xj) + (X Aijzki )Txj    ,    j = 1, 2, · · · , n,
+                                 xj                                     i=1
+                   n    
+
+                                                                              j         zk+1i   =proxth∗i zi + t X Aijxk+1                          ,    i = 1, 2, · · · , m.
+                                 j=1
+
+                                                                                                                 24/51
+===== PDF PAGE 25 | FOOTER ['3', '4', '5'] =====
+提纲
+
+
+
+ 1 对偶近似点梯度法
+
+
+ 2 应用举例
+
+
+ 3 原始– 对偶混合梯度算法
+
+
+ 4 应用举例
+
+
+ 5 收敛性分析
+
+
+
+
+
+                                                                                                                 25/51
+===== PDF PAGE 26 | FOOTER [] =====
+鞍点问题
+
+ 令f, h是适当的闭凸函数. 考虑原始问题：
+
+                     min   f(x) + h(Ax),
+
+   由于h有自共轭性，我们将问题变形为
+
+                                                          def
+            (LPD) min max   ψPD(x, z) == f(x) −h∗(z) + zTAx.     (1)
+                             x       z
+
+   可以看到此时问题变成了一个极小– 极大问题，即关于变量x求极
+   小，关于变量z求极大，这是一个典型的鞍点问题．
+   另一种常用的鞍点问题定义方式构造拉格朗日函数．问题
+
+                  min     f(x) + h(y),    s.t.  y = Ax.
+                     x∈Rn,y∈Rm
+
+   相应的鞍点问题形式如下：
+
+                 (LP) min max   f(x) + h(y) + zT(Ax −y).          (2)
+                                     x,y      z
+
+                                                                                                                 26/51
+===== PDF PAGE 27 | FOOTER [] =====
+PDHG 算法
+
+   PDHG 算法的思想就是分别对两类变量应用近似点梯度算法．
+
+   以求解问题(1) 为例，PDHG 算法交替更新原始变量以及对偶变
+   量，其迭代格式如下：
+           zk+1 = argmax  −h∗(z) +  Axk, z −zk −1 ∥z −zk∥22
+                                z                               2δk
+         = proxδkh∗(zk + δkAxk),
+                                               1
+          xk+1 = argmin  f(x) + (zk+1)TA(x −xk) +    ∥x −xk∥22
+                            x                           2αk
+         = proxαkf (xk −αkATzk+1),
+    其中αk, δk分别为原始变量和对偶变量的更新步长．
+
+   它在第一步固定原始变量xk针对对偶变量做梯度上升，在第二步
+   固定更新后的对偶变量zk+1针对原始变量做梯度下降．在这里注
+   意，原始变量和对偶变量的更新顺序是无关紧要的，若先更新原
+   始变量，其等价于在另一初值下先更新对偶变量．
+                                                                                                                 27/51
+===== PDF PAGE 28 | FOOTER [] =====
+Chambolle-Pock算法
+
+
+
+
+   PDHG 算法的收敛性需要比较强的条件，有些情形下未必收敛．
+
+    Chambolle-Pock算法与PDHG 算法的区别在于多了一个外推步
+
+   具体的迭代格式如下：
+
+                        zk+1 = proxδkh∗(zk + δkAyk),
+                        xk+1 = proxαkf (xk −αkATzk+1),
+                        yk+1 = 2xk+1 −xk.
+
+
+
+
+
+                                                                                                                 28/51
+===== PDF PAGE 29 | FOOTER ['1'] =====
+三项函数拆分
+
+
+ 考虑
+                   min f1(x) + f2(Bx) + f3(x),
+                                  x
+ 其中f1, f2, f3是三个下半连续的凸函数，且f1具有Lipschitz连续常
+ 数1β，β ∈[0, ∞)，B ∈Rm×n。
+ Saddle point 问题形式：
+
+             min max   f1(x) + ⟨z, Bx⟩−f 2∗ (z) + f3(x)                         x      z
+
+ PDFP算法更新如下：
+
+       yk+1 = proxγf3(xk −γ∇f1(xk) −λBTzk),                              zk+1 = (I −prox                                        γ f2)(Byk+1 + zk),                                   λ
+              xk+1 = proxγf3(xk −γ∇f1(xk) −λBTzk+1).
+
+ 其中0 < λ < λmax(BBT)，01    < γ < 2β。
+
+                                                                                                                 29/51
+===== PDF PAGE 30 | FOOTER ['3', '4', '5'] =====
+提纲
+
+
+
+ 1 对偶近似点梯度法
+
+
+ 2 应用举例
+
+
+ 3 原始– 对偶混合梯度算法
+
+
+ 4 应用举例
+
+
+ 5 收敛性分析
+
+
+
+
+
+                                                                                                                 30/51
+===== PDF PAGE 31 | FOOTER [] =====
+LASSO问题求解
+
+ 考虑LASSO问题
+
+                                           def         1
+               min  ψ(x) == µ∥x∥1 +     −b∥22.                    x∈Rn                2∥Ax
+ 取f(x) = µ∥x∥1 和h(x) = 12∥x −b∥22，相应的鞍点问题：
+                min max   f(x) −h∗(z) + zTAx.
+                      x∈Rn z∈Rm
+
+ 根据共轭函数的定义，
+            h∗(z) = sup     yTz −1  −b∥22 = 1    2 + bTz.                   y∈Rm         2∥y          2∥z∥2
+
+ 应用PDHG算法, xk+1 和zk+1 的更新格式分别为
+
+                                    1
+         zk+1 = proxδkh∗(zk + δkAxk) =          zk + δkAxk −δkb  ,                                            δk + 1
+         xk+1 = proxαkµ∥·∥1(xk −αkATzk+1).
+ 这里δk, αk 为步长．                                                                               31/51
+===== PDF PAGE 32 | FOOTER [] =====
+LASSO问题求解
+
+ Chambolle-Pock算法格式为
+
+                          1
+                    zk+1 =          zk + δkAyk −δkb  ,
+                               δk + 1
+                    xk+1 = proxαkµ∥·∥1(xk −αkATzk+1),
+                    yk+1 = 2xk+1 −xk.
+
+
+
+                                        10 8
+
+                                                                          PDHG
+                                        10 6                                                   Chambolle-Pock
+
+
+                                        10 4
+
+
+                                        10 2
+
+
+                                        10 0
+
+
+                                       10 -2
+
+
+                                       10 -4
+
+
+                                       10 -6
+                                           0            500           1000          1500          2000
+
+
+                                                                                                                 32/51
+===== PDF PAGE 33 | FOOTER [] =====
+TV-L1模型
+
+ 考虑去噪情形下的TV-L1模型（即A为矩阵空间的恒等算子）:
+
+                  min   ∥U∥TV + λ∥U −B∥1,
+                     U∈Rn×n
+
+ 其中∥U∥TV 为全变差，即可以用离散的梯度（线性）算
+ 子D : Rn×n →Rn×n×2 表示为
+
+                    ∥U∥TV = X  ∥(DU)ij∥2.
+                                       1≤i,j≤n
+
+ 对任意的W, V ∈Rn×n×2，记
+
+      ∥W∥= X  ∥wij∥2,  ⟨W, V⟩= X       wi,j,kvi,j,k,
+                     1≤i,j≤n                     1≤i,j≤n,1≤k≤2
+
+ 其中wij ∈R2且∥· ∥定义了Rn×n×2 上的一种范数．利用∥· ∥的定义，有
+
+                        ∥U∥TV = ∥DU∥.
+
+                                                                                                                 33/51
+===== PDF PAGE 34 | FOOTER [] =====
+TV-L1模型
+
+ 我们取D 为相应的线性算子，并取
+
+      f(U) = λ∥U −B∥1, U ∈Rn×n,  h(W) = ∥W∥, W ∈Rn×n×2.
+
+ 相应的鞍点问题(1) 如下：
+
+            (LPD)  min  max  f(U) −h∗(V) + ⟨V, DU⟩.
+                    U∈Rn×n V∈Rn×n×2
+
+ 根据共轭函数的定义，
+
+                                                                       0,    max ∥vij∥2 ≤1,
+     h∗(V) =   sup    {⟨U, V⟩−∥U∥} =                   i,j
+              U∈Rn×n×2              +∞, 其他.                     
+
+ 记V = {V ∈Rn×n×2 : max ∥vij∥2 ≤1}，其示性函数记为IV(V)，则问
+                                                    ij
+ 题(LPD)可以整理为
+
+              min max  f(U) + ⟨V, DU⟩−IV(V).
+                U    V
+
+                                                                                                                 34/51
+===== PDF PAGE 35 | FOOTER [] =====
+TV-L1模型
+
+
+ 应用PDHG算法，则Vk+1的更新为
+
+            Vk+1 = proxsIV(Vk + sDUk) = PV(Vk + sDUk),          (3)
+
+ 即Vk + sDUk 在V上的投影，而Uk+1的更新如下：
+
+      Uk+1 = proxtf (Uk + tGVk+1)
+                                             1
+       = argmin                                                              F                 λ∥U −B∥1 + Vk+1, DU + 2t∥U −Uk∥2               U
+
+ 其中G : Rn×n×2 →Rn×n为离散的散度算子，其满足
+
+           ⟨V, DU⟩= −⟨GV, U⟩, ∀U ∈Rn×n, V ∈Rn×n×2.
+
+ 若应用Chambolle-Pock算法，那么Uk+1的更新保持不变，仅需调
+ 整Vk+1的更新为Vk + sD(2Uk+1 −Uk)在V上的投影．
+
+
+
+                                                                                                                 35/51
+===== PDF PAGE 36 | FOOTER [] =====
+图像填充模型
+
+ 考虑问题
+                              λ
+                  min   ∥U∥TV +  ∥U −B∥2F.
+                     U∈Rn×n           2
+ 类似于上一个例子中的分析，我们取D 为相应的线性算子，并取
+           λ
+      f(U) =  ∥U −B∥2F, U ∈Rn×n, h(W) = ∥W∥, W ∈Rn×n×2.
+             2
+ 一般的鞍点问题叙述如下：
+
+              (LPD) min max  f(U) + ⟨V, DU⟩−IV(V),
+                   U    V
+ 其中V 与TV-L1模型中的定义一致．应用PDHG算法，则Vk+1的更新
+ 为(3) 式．引入离散的散度算子G，Uk+1的更新如下：
+     Uk+1 = proxtf (Uk + tGVk+1)
+                 λ                        1
+      = argmin   ∥U −B∥2F + Vk+1, DU +     −Uk∥2F    .              U     2                      2t∥U
+
+ 同样地，Chambolle-Pock算法的更新表达式也可类似地推出．           36/51
+===== PDF PAGE 37 | FOOTER [] =====
+图像反卷积模型
+
+
+ 考虑问题
+                             λ
+                 min   ∥U∥TV +  ∥AU −B∥2F,
+                    U∈Rn×n           2
+ 其中AU = KA ∗U为卷积算子，且KA是A的卷积核对应的矩阵．
+ 类似于TV-L1模型中的分析，取D为相应的线性算子，并取
+
+           λ
+      f(U) =  ∥AU −B∥2F, U ∈Rn×n, h(W) = ∥W∥, W ∈Rn×n×2.
+            2
+
+ 类似地，一般的鞍点问题叙述如下：
+
+             (LPD) min max    f(U) + ⟨V, DU⟩−IV(V),
+                  U    V
+
+ 其中V 与TV-L1模型中的定义一致．
+
+
+
+
+
+                                                                                                                 37/51
+===== PDF PAGE 38 | FOOTER [] =====
+图像反卷积模型
+
+
+
+ 应用PDHG算法，则Vk+1的更新仍为(3) 式，而Uk+1的更新为：
+
+     Uk+1 = proxtf (Uk + tGVk+1)
+                  λ             1
+       = argmin   ∥AU −B∥2F +    −(Uk + tGVk+1)∥2F    ,              U     2            2t∥U
+
+ 其中G 为离散的散度算子．可知Uk+1满足如下方程：
+
+                           1
+         λA∗(AUk+1 −B) +  (Uk+1 −(Uk + tGVk+1)) = 0,
+                                                  t
+
+ 其中A∗是A的共轭算子，且其卷积核对应的矩阵为KA∗．由
+ 于AU = KA ∗U 具有卷积的形式，我们可以利用快速傅里叶变换F 和
+ 其逆变换F−1 来快速求解上面的线性方程组．
+
+
+
+
+
+                                                                                                                 38/51
+===== PDF PAGE 39 | FOOTER [] =====
+图像反卷积模型
+
+ 根据
+
+           F(AU) = F(KA ∗U) = F(KA) ⊙F(U),
+ 其中⊙表示逐分量相乘, 我们有
+
+             F(KA∗) ⊙ F(KA) ⊙F(Uk+1) −F(B) +
+
+              1
+             tλF(Uk+1 −(Uk + tGVk+1)) = 0.
+
+ 利用关系式F(KA∗) = F(KA)，可得Uk+1 的显式表达式
+
+                   F(Uk + tGVk+1) + tλF(B) ⊙F(KA) !        Uk+1 = F−1                                                               ,
+                              1 + tλ|F(KA)|2
+
+ 以上表达式中除F, F−1, G外，其余均为逐分量的运算
+
+
+                                                                                                                 39/51
+===== PDF PAGE 40 | FOOTER [] =====
+三项函数拆分例子
+
+
+
+     Fused Lasso:
+
+                      1
+                min     −b∥2 + µ1∥Bx∥1 + µ2∥x∥1                              x  2∥Ax
+
+     即f1(x) = 12∥Ax −b∥2，f2 = µ1∥· ∥1，f3 = µ2∥· ∥1。
+   图像恢复：
+                          1
+                    min     −b∥2 + µ∥Dx∥1                          x∈C 2∥Ax
+     即f1(x) = 12∥Ax −b∥2，f2 = µ∥· ∥1，f3 = 1C(·). 在医学核共振图像
+   重建问题中，A = (AT1, ..., ATN)，其中Aj由一个对角下采样算子D，
+   傅里叶变换F，对角的圈灵敏度映射Sj构成，即Aj = DFSj，通
+   常Sj是事先估计好的。
+
+
+
+
+
+                                                                                                                 40/51
+===== PDF PAGE 41 | FOOTER ['3', '4', '5'] =====
+提纲
+
+
+
+ 1 对偶近似点梯度法
+
+
+ 2 应用举例
+
+
+ 3 原始– 对偶混合梯度算法
+
+
+ 4 应用举例
+
+
+ 5 收敛性分析
+
+
+
+
+
+                                                                                                                 41/51
+===== PDF PAGE 42 | FOOTER [] =====
+Chambolle-Pock 算法的收敛性
+
+    设X, Z分别为变量x, z的取值空间，若点(ˆx,ˆz)满足
+
+               ψPD(x,ˆz) ≥ψPD(ˆx,ˆz) ≥ψPD(ˆx, z),  ∀x ∈X, z ∈Z,
+
+   称(ˆx,ˆz)是问题(1)的一个鞍点，其中ψPD的定义见该问题．
+
+   对任意子集B1 × B2 ⊂X × Z，定义部分原始– 对偶间隙为
+
+                GB1×B2(x, z) = max ψPD(x, z′) −min ψPD(x′, z).
+                                     z′∈B2               x′∈B1
+
+ 不难验证，只要鞍点(ˆx,ˆz) ∈B1 × B2，就有
+
+    GB1×B2(x, z) ≥ψPD(x,ˆz) −ψPD(ˆx, z)
+         = (ψPD(x,ˆz) −ψPD(ˆx,ˆz)) + (ψPD(ˆx,ˆz) −ψPD(ˆx, z)) ≥0,
+
+ 并且在鞍点处GB1×B2(ˆx,ˆz) = 0. 此外，容易验证当
+ 点(ˆx,ˆz) ∈int(B1 × B2)且满足GB1×B2(ˆx,ˆz) = 0 时，(ˆx,ˆz)是一个鞍点．
+                                                                                                                 42/51
+===== PDF PAGE 43 | FOOTER [] =====
+Chambolle-Pock 算法的收敛性
+
+ 设f, h为闭凸函数，原问题存在鞍点(ˆx,ˆz)．在Chambolle-Pock迭代格
+ 式中取步长αk = t, δk = s，且满足st < L（L1   = ∥A∥22），则序
+ 列{(xk, zk)}具有：
+  (a) 令常数C ≤(1 −Lst)−1. ∀k，(xk, zk)有界，且满足
+
+             ∥xk −ˆx∥2    ∥zk −ˆz∥2       ∥x0 −ˆx∥2    ∥z0 −ˆz∥2
+             +     ≤C       +                   ,
+                  2t          2s                2t          2s
+
+                         × B2 ⊂X × Z，有  (b) 记xN = N1                 1             NP xk，zN = N NP zk，则对B1
+                k=1            k=1
+
+                         GB1×B2(xN, zN) ≤D(B1, B2) ,                  (4)
+                              N
+
+                         +                                                                                      ;    其中D(B1, B2) = sup(x,z)∈B1×B2 n ∥x−x0∥22t       ∥z−z0∥2 o                                                                  2s
+   进一步地，序列{(xN, zN)}∞N=1的聚点为问题(1)的一个鞍点；
+  (c) 存在问题(1)一个鞍点(x∗, z∗)使得xk →x∗, zk →z∗．
+                                                                                                                 43/51
+===== PDF PAGE 44 | FOOTER [] =====
+收敛性分析
+
+ 为了方便推导，首先考虑算法的一般格式：
+                         zk+1 =proxsh∗(zk + sA¯x),
+                        xk+1 =proxtf (xk −tAT¯z).
+ 这里和Chambolle-Pock算法不同的是，我们使用¯x,¯z来表示更新x, z时
+ 的参考点．当它们取特定值时，以上格式可以为PDHG 算法
+ 或Chambolle-Pock 算法．根据邻近算子的性质，
+                                 xk −xk+1
+                    −AT¯z +          ∈∂f(xk+1),
+                                                     t
+                                    zk −zk+1
+                             A¯x +         ∈∂h∗(zk+1).
+                                      s
+ 根据次梯度的定义，对于任意的(x, z) ∈X × Z有
+
+                     1
+         f(x) ≥f(xk+1) +  (x −xk+1)T(xk −xk+1) −(x −xk+1)TAT¯z,
+                                       t
+                      1
+        h∗(z) ≥h∗(zk+1) +  (z −zk+1)T(zk −zk+1) + (z −zk+1)TA¯x.
+                             s
+                                                                                                                 44/51
+===== PDF PAGE 45 | FOOTER [] =====
+收敛性分析
+
+ 将上述两个不等式相加，并引入二次项可整理得到
+          ∥x −xk∥2                       ∥z −zk∥2 −∥x −xk+1∥2 −∥z −zk+1∥2           +
+                2t          2s             2t            2s
+     ≥ f(xk+1) −h∗(z) + (xk+1)TATz −  f(x) −h∗(zk+1) + xTATzk+1
+                                                                                 (5)
+              ∥xk −xk+1∥2    ∥zk −zk+1∥2
+      +        +
+                     2t             2s
+      + (xk+1 −¯x)TAT(zk+1 −z) −(xk+1 −x)TAT(zk+1 −¯z).
+
+ 将Chambolle-Pock格式代入(5) ，即取¯x = 2xk −xk−1, ¯z = zk+1，那么
+
+                 (xk+1 −¯x)TAT(zk+1 −z) −(xk+1 −x)TAT(zk+1 −¯z)
+             =(xk+1 −xk −(xk −xk−1))TAT(zk+1 −z)
+             =(xk+1 −xk)TAT(zk+1 −z) −(xk −xk−1)TAT(zk −z)
+                                                                                 (6)
+              −(xk −xk−1)TAT(zk+1 −zk)
+             ≥(xk+1 −xk)TAT(zk+1 −z) −(xk −xk−1)TAT(zk −z)
+          √
+          −  L∥xk −xk−1∥∥zk+1 −zk∥,
+ 应用柯西不等式即得到最后的不等号                                                   45/51
+===== PDF PAGE 46 | FOOTER [] =====
+收敛性分析
+
+                   > 0均成立，有 又利用2ab ≤αa2 + b2α 对任意的α
+          √
+                   L∥xk −xk−1∥∥zk+1 −zk∥
+          √          √
+                  Lαt                Ls
+         ≤      ∥xk −xk−1∥2 +     ∥zk+1 −zk∥2,
+                       2t               2αs
+ 取α = ps ，则
+                       t      √   √  s  √
+                      Lαt =  L =   Lst < 1,
+                        α
+ 从而合并(5) 式和(6) 式得到，对于任意的(x, z) ∈X × Z，
+
+     ∥x −xk∥2                 ∥z −zk∥2 −∥x −xk+1∥2 −∥z −zk+1∥2         +
+          2t          2s             2t            2s
+  ≥ f(xk+1) −h∗(z) + (xk+1)TATz −  f(x) −h∗(zk+1) + xTATzk+1
+                                                                          (7)
+       √      −zk+1∥2    ∥xk −xk+1∥2  √       −xk∥2   + (1 −   Lst)∥zk     +        −  Lst∥xk−1
+                       2s               2t                     2t
+   + (xk+1 −xk)TAT(zk+1 −z) −(xk −xk−1)TAT(zk −z).
+
+                                                                                                                 46/51
+===== PDF PAGE 47 | FOOTER [] =====
+收敛性分析
+
+ 将上述不等式中的k从0遍历至N −1并求和，消掉不等式两边共同项后
+ 有
+
+            N
+    X   f(xk) −h∗(z) + (xk)TATz −  f(x) −h∗(zk) + xTATzk
+
+            k=1
+              ∥x −xN∥2   ∥z −zN∥2    √     N  ∥zk −zk−1∥2       +      +      + (1 −   Lst) X
+                     2t          2s                          2s
+                                                   k=1                       (8)
+          √    N−1 ∥xk −xk−1∥2   ∥xN −xN−1∥2       + (1 −   Lst) X        +
+                                       2t                2t
+                          k=1
+       ≤∥x −x0∥2 + ∥z −z0∥2 + (xN −xN−1)TAT(zN −z),
+                 2t          2s
+ 其中约定x−1 = x0．再一次应用柯西不等式，以及2ab ≤αa2 + b2α 对任
+ 意的α > 0均成立，可以得到
+                         √
+         (xN −xN−1)TAT(zN −z) ≤∥xN −xN−1∥(  L∥zN −z∥)
+                      ≤∥xN −xN−1∥2 + Lst∥z −zN∥2 .
+                                             2t              2s
+                                                                                                                 47/51
+===== PDF PAGE 48 | FOOTER [] =====
+收敛性分析
+
+ 不等式(8)可进一步整理为
+
+     N
+ X   f(xk) −h∗(z) + (xk)TATz −  f(x) −h∗(zk) + xTATzk
+
+     k=1
+       ∥x −xN∥2           −zN∥2    √     N  ∥zk −zk−1∥2   +      + (1 −Lst)∥z    + (1 −   Lst) X
+            2t                   2s                          2s
+                                                    k=1               (9)
+      √    N−1 ∥xk −xk−1∥2
+   + (1 −   Lst) X
+                              2t
+                  k=1
+  ≤∥x −x0∥2 + ∥z −z0∥2 .
+         2t          2s
+
+ 若取(x, z) = (ˆx,ˆz)，则由鞍点性质可知
+
+          [f(xk) −h∗(ˆz) + (xk)TATˆz] −[f(ˆx) −h∗(zk) + ˆxTATzk] ≥0.
+
+ 进而(9)左边每一项都是正的，结论(a)成立．
+                                                                                                                 48/51
+===== PDF PAGE 49 | FOOTER ['i'] =====
+收敛性分析
+
+ 从(9)出发，利用f, h∗的凸性，以及xN, zN的定义，有
+
+      f(xN) −h∗(z) + (xN)TATz −  f(x) −h∗(zN) + xTATzN
+
+        N
+  ≤1 X   f(xk) −h∗(z) + (xk)TATz −  f(x) −h∗(zk) + xTATzk
+   N                                                           (10)
+        k=1
+  ≤1   ∥x −x0∥2 + ∥z −z0∥2    .
+   N       2t          2s
+
+ 从而结论(b)中(4)式成立．由(1) 知{(xk, zk)}是有界序列，因此其均值
+ 列{(xN, zN)}也为有界序列．记(x♯, z♯)为序列{(xN, zN)}的聚点，利
+ 用f, h∗的凸性以及闭性（下半连续性），对(10) 式左右同时取下极
+ 限，可知对任意的(x, z) ∈X × Z，
+
+       h f(x♯) −h∗(z) + (x♯)TATzi − h f(x) −h∗(z♯) + xTATz♯i ≤0.
+
+ 从而(x♯, z♯)也是问题(1)的一个鞍点．
+                                                                                                                 49/51
+===== PDF PAGE 50 | FOOTER [] =====
+收敛性分析
+
+ 为了证明{(xk, zk)}全序列收敛到问题(1)的鞍点，我们采用的大致思路
+ 为：先说明其子列收敛，然后再利用(7) 式估计序列中其他点到子列极
+ 限点的误差（进而证明全序列收敛），最后说明该极限点是鞍点．根
+ 据结论(1)，{(xk, zk)}是有界点列，因此存在子列{(xkl, zkl)}收敛
+ 于(x∗, z∗)．在(7) 式中令(x, z) = (x∗, z∗)，并将k从kl取至N −1, N > kl并
+ 求和，有
+        ∥x∗−xN∥2   ∥z∗−zN∥2
+            +
+                 2t           2s
+          √      N   ∥zk −zk−1∥2       −xkl−1∥2      + (1 −   Lst) X            −∥xkl
+                                   2s               2t
+                          k=kl+1
+          √    N−1 ∥xk −xk−1∥2   ∥xN −xN−1∥2
+      + (1 −   Lst) X        +
+                                      2t                2t
+                              k=kl
+      + (xN −xN−1)TAT(zN −z∗) −(xkl −xkl−1)TAT(zkl −z∗)
+       ≤∥x∗−xkl∥2 + ∥z∗−zkl∥2 .
+                 2t           2s                                                                50/51
+===== PDF PAGE 51 | FOOTER [] =====
+收敛性分析
+
+ 去掉上式中不等式左边的求和项（正项），我们有如下估计：
+
+       ∥x∗−xN∥2   ∥z∗−zN∥2
+           +
+               2t           2s
+      ≤∥x∗−xkl∥2 + ∥z∗−zkl∥2 + ∥xkl −xkl−1∥2 −∥xN −xN−1∥2
+               2t           2s              2t                2t
+     + (xkl −xkl−1)TAT(zkl −z∗) −(xN −xN−1)TAT(zN −z∗).
+
+ 注意到
+                               xkl →x∗,  （xkl 的定义）
+               xN −xN−1 →0,  （由(9) 式推出）
+                {zk}有界, （本定理中(a) 的结论）
+
+ 所以当N →∞时有，xN →x∗, zN →z∗，全序列收敛性得证．最后，
+ 由全序列收敛可知均值(xN, zN)也收敛到(x∗, z∗)，根据(a) 的结论和极限
+ 的唯一性立即得到(x♯, z♯) = (x∗, z∗)，即收敛到问题(1)的一个鞍点
+
+
+                                                                                                                 51/51

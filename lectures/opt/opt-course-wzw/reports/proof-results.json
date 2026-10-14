@@ -1,0 +1,210 @@
+{
+  "suite": "Expanded proof and intuition verification",
+  "timestamp": "2026-10-14T09:38:29.679Z",
+  "tests": 50,
+  "assertions": 9894,
+  "passed": 50,
+  "failed": 0,
+  "results": [
+    {
+      "name": "All 40 proof panels have assumptions, intuition, source references and 264 fully rendered steps",
+      "status": "pass"
+    },
+    {
+      "name": "Computed proof scene: start / start",
+      "status": "pass"
+    },
+    {
+      "name": "Computed proof scene: geometry / geometry",
+      "status": "pass"
+    },
+    {
+      "name": "Computed proof scene: differentiation / differentiation",
+      "status": "pass"
+    },
+    {
+      "name": "Computed proof scene: convex / convex",
+      "status": "pass"
+    },
+    {
+      "name": "Computed proof scene: conjugacy / conjugacy",
+      "status": "pass"
+    },
+    {
+      "name": "Computed proof scene: modeling / modeling",
+      "status": "pass"
+    },
+    {
+      "name": "Computed proof scene: cones / cones",
+      "status": "pass"
+    },
+    {
+      "name": "Computed proof scene: cones / topk",
+      "status": "pass"
+    },
+    {
+      "name": "Computed proof scene: optimality / optimality",
+      "status": "pass"
+    },
+    {
+      "name": "Computed proof scene: duality / duality",
+      "status": "pass"
+    },
+    {
+      "name": "Computed proof scene: line-search / line-search",
+      "status": "pass"
+    },
+    {
+      "name": "Computed proof scene: gradient / gradient",
+      "status": "pass"
+    },
+    {
+      "name": "Computed proof scene: subgradient / subgradient",
+      "status": "pass"
+    },
+    {
+      "name": "Computed proof scene: newton / newton",
+      "status": "pass"
+    },
+    {
+      "name": "Computed proof scene: quasi-newton / quasi-newton",
+      "status": "pass"
+    },
+    {
+      "name": "Computed proof scene: trust / trust",
+      "status": "pass"
+    },
+    {
+      "name": "Computed proof scene: least-squares / least-squares",
+      "status": "pass"
+    },
+    {
+      "name": "Computed proof scene: alm / alm",
+      "status": "pass"
+    },
+    {
+      "name": "Computed proof scene: interior / interior",
+      "status": "pass"
+    },
+    {
+      "name": "Computed proof scene: prox / prox",
+      "status": "pass"
+    },
+    {
+      "name": "Computed proof scene: prox / nonexpansive",
+      "status": "pass"
+    },
+    {
+      "name": "Computed proof scene: prox-gradient / prox-gradient",
+      "status": "pass"
+    },
+    {
+      "name": "Computed proof scene: prox-gradient / rates",
+      "status": "pass"
+    },
+    {
+      "name": "Computed proof scene: acceleration / acceleration",
+      "status": "pass"
+    },
+    {
+      "name": "Computed proof scene: envelope / envelope",
+      "status": "pass"
+    },
+    {
+      "name": "Computed proof scene: ppa / ppa",
+      "status": "pass"
+    },
+    {
+      "name": "Computed proof scene: bcd / bcd",
+      "status": "pass"
+    },
+    {
+      "name": "Computed proof scene: primal-dual / primal-dual",
+      "status": "pass"
+    },
+    {
+      "name": "Computed proof scene: primal-dual / dual",
+      "status": "pass"
+    },
+    {
+      "name": "Computed proof scene: admm / admm",
+      "status": "pass"
+    },
+    {
+      "name": "Computed proof scene: admm / admm-energy",
+      "status": "pass"
+    },
+    {
+      "name": "Computed proof scene: stochastic / stochastic",
+      "status": "pass"
+    },
+    {
+      "name": "Computed proof scene: manifold / manifold",
+      "status": "pass"
+    },
+    {
+      "name": "Computed proof scene: semismooth / semismooth",
+      "status": "pass"
+    },
+    {
+      "name": "Computed proof scene: geometry-algorithms / geometry-algorithms",
+      "status": "pass"
+    },
+    {
+      "name": "Computed proof scene: matrix / matrix",
+      "status": "pass"
+    },
+    {
+      "name": "Computed proof scene: matrix / nuclear",
+      "status": "pass"
+    },
+    {
+      "name": "Computed proof scene: maxcut / maxcut",
+      "status": "pass"
+    },
+    {
+      "name": "Computed proof scene: group / group",
+      "status": "pass"
+    },
+    {
+      "name": "Computed proof scene: complexity / rates",
+      "status": "pass"
+    },
+    {
+      "name": "FISTA potential: exact q identity, non-increasing energy and bound across 9 inputs",
+      "status": "pass"
+    },
+    {
+      "name": "ADMM potential drop covers residual budget; monotonicity begins after first full cycle",
+      "status": "pass"
+    },
+    {
+      "name": "Gradient modal picture equals independently stepped diagonal quadratic",
+      "status": "pass"
+    },
+    {
+      "name": "Nonexpansive, Jensen and proximal majorization gaps never negative in dense sweeps",
+      "status": "pass"
+    },
+    {
+      "name": "Top-k threshold epigraph lower bound and entire equality interval",
+      "status": "pass"
+    },
+    {
+      "name": "Actual PG/FISTA gaps below separate displayed theoretical curves",
+      "status": "pass"
+    },
+    {
+      "name": "All archived sources retained byte-for-byte; every course file has public origin",
+      "status": "pass"
+    },
+    {
+      "name": "Editorial content contains no conversational provenance or machine-specific paths",
+      "status": "pass"
+    },
+    {
+      "name": "Zero-penalty soft threshold is the identity; singular affine input still has a valid Newton model",
+      "status": "pass"
+    }
+  ]
+}

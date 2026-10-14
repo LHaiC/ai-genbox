@@ -1,0 +1,144 @@
+
+===== PDF PAGE 1 | FOOTER ['1'] =====
+          Homework 5 for “Convex Optimization”
+
+
+                                  Zaiwen Wen
+                    Beijing International Center for Mathematical Research
+                                  Peking University
+
+                              November 21, 2021
+
+
+1  Algorithms for the group LASSO problem
+
+Consider the group LASSO problem
+
+                                         1
+(1.1)                           min        −b∥2F + µ∥x∥1,2                                     x∈Rn×l  2∥Ax
+
+where the data A ∈Rm×n, b ∈Rm×l and µ > 0 are given, and
+
+
+                                             n
+                                         ∥x∥1,2 = X ∥x(i, 1 : l)∥2.
+                                                   i=1
+
+Note that x(i, 1 : l) is the i-th row of the matrix x. Here, both x and b are matrices but they are written in small letters
+
+for the convenience of coding. The test data are generated as follows:
+
+    seed = 97006855;
+
+    ss = RandStream(’mt19937ar’,’Seed’,seed);
+
+    RandStream.setGlobalStream(ss);
+
+    n = 512;
+
+    m = 256;
+
+    A = randn(m,n);
+    k = round(n*0.1); l = 2;
+    A = randn(m,n);
+
+    p = randperm(n); p = p(1:k);
+
+    u = zeros(n,l);  u(p,:) = randn(k,l);
+    b = A*u;
+    mu = 1e-2;
+See http://bicmr.pku.edu.cn/˜wenzw/courses/Test_group_lasso.m
+
+   1. Solve (1.1) using CVX by calling different solvers mosek and gurobi.
+
+   2. First write down an equivalent model of (1.1) which can be solved by calling mosek and gurobi directly, then
+
+     implement the codes.
+
+   3. First write down, then implement the following algorithms in Matlab (or Python):
+
+
+
+                                              1
+===== PDF PAGE 2 | FOOTER ['2'] =====
+     (a) Subgradient method for the primal problem.
+
+       Read the subgradient method in
+      http://bicmr.pku.edu.cn/˜wenzw/opt2015/lect-sgm.pdf
+
+     (b) Gradient method for the smoothed primal problem.
+
+       Read the smoothing technique in
+      http://bicmr.pku.edu.cn/˜wenzw/opt2015/Smoothing.pdf
+
+     (c) Fast (Nesterov/accelerated) gradient method for the smoothed primal problem.
+
+       Read the acceleration techniques in
+      http://bicmr.pku.edu.cn/˜wenzw/opt2015/slides-fgrad.pdf
+
+     (d) Proximal gradient method for the primal problem.
+       Read http://bicmr.pku.edu.cn/˜wenzw/opt2015/lect-proxg.pdf
+
+     (e) Fast proximal gradient method for the primal problem.
+
+       Read the acceleration techniques in
+      http://bicmr.pku.edu.cn/˜wenzw/opt2015/slides-fgrad.pdf
+
+      (f) Augmented Lagrangian method for the dual problem.
+
+       Read the augmented Lagrangian method in
+      http://bicmr.pku.edu.cn/˜wenzw/opt2015/lect-prox-point.pdf
+
+     (g) Alternating direction method of multipliers for the dual problem.
+
+       Read the augmented Lagrangian method in
+      http://bicmr.pku.edu.cn/˜wenzw/opt2015/lect-prox-point.pdf
+
+     (h) Alternating direction method of multipliers with linearization for the primal problem.
+       Read the ADMM in http://bicmr.pku.edu.cn/˜wenzw/opt2015/lect-admm.pdf.
+       Read the ADMM with a single gradient (or proximal graident) step in pages 15 and 16 in
+      http://bicmr.pku.edu.cn/˜wenzw/opt2015/lect-admm-part2.pdf
+
+      (i) Proximal point method for the dual problem
+
+      (j) Block coordinate method for the primal problem
+
+4. Requirement:
+
+     (a) The interface of each method should be written in the following format
+
+      [x, iter, out] = method_name(x0, A, b, mu, opts);
+
+        Here, x0 is a given input initial solution, A, b and mu are given data, opts is a struct which stores the
+
+        options of the algorithm, iter is the number of iterations when the termination condition of the algorithm
+
+          is satisﬁed, out is a struct which saves all other output information.
+
+     (b) Compare the efﬁciency (cpu time) and accuracy (checking optimality condition) in the format as
+      http://bicmr.pku.edu.cn/˜wenzw/courses/Test_group_lasso.m
+
+     (c) Prepare a report including
+
+         • detailed answers to each question
+
+         • numerical results and their interpretation
+
+     (d) Pack the report and all of your codes in one ﬁle named as “gl-StudentID-date.zip” and send it to TA:
+
+       pkuopt@163.com
+
+
+                                            2
+===== PDF PAGE 3 | FOOTER ['3'] =====
+(e)  If you get signiﬁcant help from others on one routine, write down the source of references at the beginning
+
+    of this routine.
+
+(f) Due date: see https://bicmr.pku.edu.cn/˜wenzw/opt-2021-fall.html
+
+
+
+
+
+                                        3

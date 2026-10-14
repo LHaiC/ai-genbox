@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta name="generator" content="jemdoc, see http://jemdoc.jaboc.net/" />
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link rel="stylesheet" href="jemdoc.css" type="text/css" />
+<title>Software: OptSuite</title>
+<!-- MathJax -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async>
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+	  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+<!-- End MathJax -->
+</head>
+<body>
+<table summary="Table for page layout." id="tlayout">
+<tr valign="top">
+<td id="layout-menu">
+<div class="menu-category">Zaiwen Wen</div>
+<div class="menu-item"><a href="index.html">Home</a></div>
+<div class="menu-category">Research</div>
+<div class="menu-item"><a href="service.html">Service</a></div>
+<div class="menu-item"><a href="mresearch.html">Research</a></div>
+<div class="menu-item"><a href="pub.html">Publications</a></div>
+<div class="menu-item"><a href="recognition.html">Recognition</a></div>
+<div class="menu-item"><a href="talks.html">Recent&nbsp;Talks</a></div>
+<div class="menu-item"><a href="seminar.html">Seminars</a></div>
+<div class="menu-item"><a href="group.html">Group</a></div>
+<div class="menu-item"><a href="optbook.html">Optbook</a></div>
+<div class="menu-item"><a href="databook.html">Databook</a></div>
+<div class="menu-item"><a href="formal/index.html">Mathematical<br /> Formalization</a></div>
+<div class="menu-item"><a href="guide/index.html">Workstation<br /> Guidance</a></div>
+<div class="menu-category">Software</div>
+<div class="menu-item"><a href="https://reaslab.io">ReasLab</a></div>
+<div class="menu-item"><a href="softwares.html" class="current">OptSuite</a></div>
+<div class="menu-item"><a href="ssncvx/index.html">SSNCVX</a></div>
+<div class="menu-item"><a href="http://github.com/optpku/ReasBook">ReasBook</a></div>
+<div class="menu-item"><a href="https://atlas.reaslab.io">ReasAtlas</a></div>
+<div class="menu-category">Teaching</div>
+<div class="menu-item"><a href="opt-2026-fall.html">Optimization&nbsp;<br /> Methods&nbsp;<br /> (2026&nbsp;Fall)</a></div>
+<div class="menu-item"><a href="bigdata2026.html">Algorithms&nbsp;for&nbsp;<br /> Big&nbsp;Data&nbsp;<br /> Analysis&nbsp;<br />(2026&nbsp;Spring)</a></div>
+</td>
+<td id="layout-content">
+<div id="toptitle">
+<h1>Software: OptSuite</h1>
+</div>
+<p>OptSuite is a collection of optimization software composed of multiple relatively independent modules, covering various research directions ranging from low-level algebraic libraries, convex optimization, nonlinear programming, manifold optimization, integer programming, to the integration of machine learning and optimization. Each module is designed for specific types of problems, featuring relatively independent code repositories, algorithm implementations, and usage interfaces. Users can select individual modules based on their research needs or combine multiple modules to construct more complex solving workflows.
+</p>
+<ul>
+<li><p><a href="https://github.com/optsuite" target=&ldquo;blank&rdquo;>Link to our github page</a>
+</p>
+</li>
+</ul>
+<p>The following is a list of packages in OptSuite:
+</p>
+<h2>Convex Optimization</h2>
+<ul>
+<li><p><b>SSNCVX</b>, A Semi-Smooth Newton method for Convex optimization problems, 2025 — <a href="http://faculty.bicmr.pku.edu.cn/~wenzw/ssncvx/index.html" target=&ldquo;blank&rdquo;>code: &ldquo;SSNCVX&rdquo;</a>
+</p>
+</li>
+<li><p><b>SDPDAL</b>, A Decomposition-based Augmented Lagrangian method for low-rank Semi-Definite Programming, 2023 — <a href="http://github.com/optsuite/SDPDAL" target=&ldquo;blank&rdquo;>code: &ldquo;SDPDAL&rdquo;</a>
+</p>
+</li>
+<li><p><b>SSNLP</b>, A Semi-smooth Newton Method for Linear Programming (with Y. Liu), 2017 — <a href="http://github.com/optsuite/SSNLP" target=&ldquo;blank&rdquo;>code: &ldquo;SSNLP&rdquo;</a>
+</p>
+</li>
+<li><p><b>LMaFit</b>, A MATLAB solver for low-rank matrix fitting (with Y. Zhang &amp; W. Yin), 2010 — <a href="http://github.com/optsuite/LMaFit" target=&ldquo;blank&rdquo;>code: &ldquo;LMaFit&rdquo;</a>
+</p>
+</li>
+<li><p><b>FPC_AS</b>, A MATLAB solver for L1 regularization problems (with W. Yin), 2008 — <a href="http://www.caam.rice.edu/~optimization/L1/FPC_AS/" target=&ldquo;blank&rdquo;>code: &ldquo;FPC_AS&rdquo;</a>
+</p>
+</li>
+</ul>
+<h2>Formalization</h2>
+<ul>
+<li><p><b>optlib</b>, A collection of codes in Lean for the formalization of mathematical optimization, ongoing — <a href="http://github.com/optsuite/optlib" target=&ldquo;blank&rdquo;>code: &ldquo;optlib&rdquo;</a>
+</p>
+</li>
+<li><p><b>ReasBook</b>, A Lean 4 project for formalizing mathematics from textbooks and research papers, ongoing — <a href="https://github.com/optpku/ReasBook" target=&ldquo;blank&rdquo;>code: &ldquo;ReasBook&rdquo;</a>
+</p>
+</li>
+<li><p><b>AMBER</b>, A benchmark for applied mathematics in Lean 4,  2025, - <a href="https://github.com/optsuite/AMBER" target=&ldquo;blank&rdquo;>code: &ldquo;AMBER&rdquo;</a>
+</p>
+</li>
+<li><p><b>SITA</b>, A framework that automates the formalization of mathematical theorems in Lean by bridging abstract structures and their concrete instances, 2025 - <a href="https://github.com/optsuite/SITA" target=&ldquo;blank&rdquo;>code: &ldquo;SITA&rdquo;</a>
+</p>
+</li>
+<li><p><b>M2F</b>, a framework for translating textbook- and paper-level mathematics into Lean projects that pass machine verification at scale, 2026 - <a href="https://github.com/optsuite/M2F" target=&ldquo;blank&rdquo;>code: &ldquo;M2F&rdquo;</a> 
+</p>
+</li>
+</ul>
+<h2>Learn to Optimize</h2>
+<ul>
+<li><p><b>O2O</b>, ODE-based learning to optimize, 2024 — <a href="http://github.com/optsuite/O2O" target=&ldquo;blank&rdquo;>code: &ldquo;O2O&rdquo;</a>
+</p>
+</li>
+<li><p><b>MCPG</b>, A Monte Carlo Policy Gradient Method for binary optimization (with C. Chen, R. Chen, T. Li), 2023 — <a href="http://github.com/optsuite/MCPG" target=&ldquo;blank&rdquo;>code: &ldquo;MCPG&rdquo;</a>
+</p>
+</li>
+<li><p><b>LMask</b>, A learning framework that utilizes dynamic masking to generate high-quality feasible solutions for constrained routing problems, 2025 - <a href="https://github.com/optsuite/LMask" target=&ldquo;blank&rdquo;>code: &ldquo;LMask&rdquo;</a>
+</p>
+</li>
+</ul>
+<h2>LLM Modeling</h2>
+<ul>
+<li><p><b>OptMATH</b>, A Scalable Bidirectional Data Synthesis Framework for Optimization Modeling, 2025 — <a href="http://github.com/optsuite/OptMATH" target=&ldquo;blank&rdquo;>code: &ldquo;OptMATH&rdquo;</a>
+</p>
+</li>
+<li><p><b>MIPLIB-NL</b>, A dataset of large-scale natural language optimization problems derived and reverse-engineered from the MIPLIB 2017 collection, 2026 - <a href="https://github.com/optsuite/MIPLIB-NL" target=&ldquo;blank&rdquo;>code: &ldquo;MIPLIB-NL&rdquo;</a>
+</p>
+</li>
+</ul>
+<h2>LLM Training and Deep Learning</h2>
+<ul>
+<li><p><b>RSO</b>, A memory efficient Randomized Subspace Optimization method for training large language models, 2025 — <a href="http://github.com/optsuite/RSO" target=&ldquo;blank&rdquo;>code: &ldquo;RSO&rdquo;</a>
+</p>
+</li>
+<li><p><b>LOZO</b>, Enhancing Zeroth-order fine-tuning for language models with low-rank structures, 2024 — <a href="http://github.com/optsuite/LOZO" target=&ldquo;blank&rdquo;>code: &ldquo;LOZO&rdquo;</a>
+</p>
+</li>
+<li><p><b>SENG</b>, A Sketchy Empirical Natural Gradient methods (SENG) for solving large-scale deep learning problems, 2021 — <a href="http://github.com/optsuite/SENG" target=&ldquo;blank&rdquo;>code: &ldquo;SENG&rdquo;</a>
+</p>
+</li>
+<li><p><b>NGPlus</b>, A new second-order optimizer for deep learning, 2021 — <a href="http://github.com/optsuite/NGPlus" target=&ldquo;blank&rdquo;>code: &ldquo;NGPlus&rdquo;</a>
+</p>
+</li>
+</ul>
+<h2>Manifold Optimization</h2>
+<ul>
+<li><p><b>RNGD</b>, Riemannian Natural Gradient Descent methods, 2023 — <a href="http://github.com/optsuite/RNGD" target=&ldquo;blank&rdquo;>code: &ldquo;RNGD&rdquo;</a>
+</p>
+</li>
+<li><p><b>ASQN</b>, A Structured Quasi-Newton method for solving optimization with orthogonality constraint, 2019 — <a href="http://github.com/optsuite/ASQN" target=&ldquo;blank&rdquo;>code: &ldquo;ASQN&rdquo;</a>
+</p>
+</li>
+<li><p><b>RBR</b>, A Row-By-Row Method for Community Detection (with J. Zhang &amp; H. Liu), 2017 — <a href="http://github.com/optsuite/RBR" target=&ldquo;blank&rdquo;>code: &ldquo;RBR&rdquo;</a>
+</p>
+</li>
+<li><p><b>ARNT</b>, Adaptive Regularized Newton Method for Riemannian Optimization (with J. Hu), 2017 — <a href="http://github.com/optsuite/ARNT/" target=&ldquo;blank&rdquo;>code: &ldquo;ARNT&rdquo;</a>
+</p>
+</li>
+<li><p><b>OptM</b>, Optimization with Orthogonality Constraints (with W. Yin), 2010 — <a href="http://github.com/optsuite/OptM" target=&ldquo;blank&rdquo;>code</a>
+</p>
+</li>
+</ul>
+<h2>Nonlinear Programming</h2>
+<ul>
+<li><p><b>MGLS</b>, A multigrid optimization method, 2008 — <a href="http://github.com/optsuite/MGLS" target=&ldquo;blank&rdquo;>code</a>
+</p>
+</li>
+</ul>
+<h2>Numerical Linear Algebra</h2>
+<ul>
+<li><p><b>PFOpt</b>, A polynomial-filtered subspace extraction for low-rank optimization (with H. Liu), 2019 — <a href="http://github.com/optsuite/PFOpt" target=&ldquo;blank&rdquo;>code: &ldquo;PFOpt&rdquo;</a>
+</p>
+</li>
+<li><p><b>Arrabit</b>, Augmented Rayleigh-Ritz (ARR) And Block Iteration for large-scale eigenpair computation (with Y. Zhang), 2015 — <a href="http://bicmr.pku.edu.cn/~wenzw/arrabit.html" target=&ldquo;blank&rdquo;>code</a>
+</p>
+</li>
+<li><p><b>LMSVD</b>, Limited Memory Block Krylov Subspace Optimization for Computing Dominant Singular Value Decompositions (with X. Liu &amp; Y. Zhang), 2012 — <a href="http://lsec.cc.ac.cn/~liuxin/lmsvd.html" target=&ldquo;blank&rdquo;>code</a>
+</p>
+</li>
+<li><p><a href="http://faculty.bicmr.pku.edu.cn/~wenzw/misc.html" target=&ldquo;blank&rdquo;>miscellaneous</a>
+</p>
+</li>
+</ul>
+<h2>Demo codes for education</h2>
+<ul>
+<li><p>刘浩洋, 户将, 李勇锋，文再文，最优化：建模、算法与理论, 高教出版社， 书号978-7-04-055035-1 <br />
+H. Liu, J. Hu, Y. Li, <b>Z. Wen</b>, Optimization: Model, Algorithm and Theory (in Chinese)<br />
+<a href="http://bicmr.pku.edu.cn/~wenzw/optbook/pages/index.html" target=&ldquo;blank&rdquo;>(点击此链接访问详细代码和注释)</a>
+</p>
+</li>
+</ul>
+<div id="footer">
+<div id="footer-text">
+Page generated 2026-10-06 22:15:50 CST, by <a href="https://github.com/wsshin/jemdoc_mathjax" target="blank">jemdoc+MathJax</a>.
+</div>
+</div>
+</td>
+</tr>
+</table>
+</body>
+</html>

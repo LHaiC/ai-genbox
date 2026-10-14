@@ -1,0 +1,1127 @@
+
+===== PDF PAGE 1 | FOOTER ['1/48'] =====
+ 拟牛顿法、最小二乘问题
+
+      文再文
+
+  北京大学北京国际数学研究中心
+
+教材《最优化：建模、算法与理论》配套电子教案
+
+      http://bicmr.pku.edu.cn/~wenzw/optbook.html
+
+致谢：本教案由丁思哲、张轩熙协助准备
+
+
+
+
+
+                                                                                                       1/48
+===== PDF PAGE 2 | FOOTER ['2', '3', '4'] =====
+提纲
+
+
+
+
+ 1 拟牛顿矩阵
+
+
+ 2 拟牛顿类算法的收敛性和收敛速度
+
+
+ 3 有限内存BFGS方法
+
+
+ 4 非线性最小二乘问题
+
+
+
+
+
+                                                                                                                     2/48
+===== PDF PAGE 3 | FOOTER [] =====
+割线方程的推导
+
+
+ 设f(x)是二阶连续可微函数. 对∇f(x)在点xk+1处一阶泰勒近似, 得
+
+      ∇f(x) = ∇f(xk+1) + ∇2f(xk+1)(x −xk+1) + O( x −xk+1  2),
+
+ 令x = xk, 且sk = xk+1 −xk为点差, yk = ∇f(xk+1) −∇f(xk)为梯度差, 得
+
+                     ∇2f(xk+1)sk + O(  sk  2) = yk.
+
+ 现忽略高阶项  sk  2, 只希望近似海瑟矩阵的矩阵Bk+1满足方程
+
+                              Bk+1sk = yk,
+
+ 或其逆矩阵Hk+1满足
+                           Hk+1yk = sk.
+ 上述两个方程即称为割线方程.
+
+
+
+                                                                                                                     3/48
+===== PDF PAGE 4 | FOOTER [] =====
+曲率条件
+
+ 由于近似矩阵必须保证迭代收敛, 正如牛顿法要求海瑟矩阵正定, Bk正
+ 定也是必须的, 即有必要条件
+
+                          sk T Bk+1sk > 0 =⇒  sk T yk > 0,
+
+
+定义
+ 曲率条件 在迭代过程中满足 sk T yk > 0, ∀k ∈N+.
+
+ 如果线搜索使用Wolfe准则:
+
+                   ∇f(xk + αdk)Tdk ⩾c2∇f(xk)Tdk,
+
+ 其中c2 ∈(0, 1). 上式即∇f(xk+1)Tsk ⩾c2∇f(xk)Tsk. 在不等式两边同时
+ 减去∇f(xk)Tsk, 由于c2 −1 < 0且sk是下降方向, 因此最终有
+
+                      (yk)Tsk ⩾(c2 −1)∇f(xk)Tsk > 0.
+
+
+                                                                                                                     4/48
+===== PDF PAGE 5 | FOOTER [] =====
+拟牛顿算法的基本框架
+
+
+ 拟牛顿算法的基本框架为:
+
+ 算法1 拟牛顿算法框架
+ Require: 初始坐标x0 ∈Rn, 初始矩阵B0 ∈Rn×n(或H0), k = 0.
+ Ensure: xK, BK(或HK).
+   1: 检查初始元素.
+   2: while 未达到停机准则do
+   3:  计算方向dk = −(Bk)−1∇f(xk)或dk = −Hk∇f(xk).
+   4:  通过线搜索(Wolfe)产生步长αk > 0, 令xk+1 = xk + αkdk.
+   5:  更新海瑟矩阵的近似矩阵Bk+1或其逆矩阵Hk+1.
+   6:   k ←k + 1.
+   7: end while
+
+
+
+
+
+                                                                                                                     5/48
+===== PDF PAGE 6 | FOOTER [] =====
+秩一更新(SR1)
+
+
+定义
+ 秩一更新 对于拟牛顿矩阵Bk ∈Rn×n, 设0 ̸= u ∈Rn且a ∈R待定,
+ 则uuT是秩一矩阵, 且有秩一更新
+
+                         Bk+1 = Bk + auuT.
+
+ 根据割线方程Bk+1sk = yk, 代入秩一更新的结果, 得到
+
+                           (Bk + auuT)sk = yk,
+
+ 整理得
+                    auuTsk = (a · uTsk)u = yk −Bksk.
+ 由于a · uTsk是标量, 因此上式表明u和yk −Bksk同向. 简单考虑不妨就
+ 令u和yk −Bksk相等, 即u = yk −Bksk. 代入上式得
+
+                (a · (yk −Bksk)Tsk)(yk −Bksk) = yk −Bksk.
+
+
+                                                                                                                     6/48
+===== PDF PAGE 7 | FOOTER [] =====
+秩一更新公式
+
+ 再令(a · (yk −Bksk)Tsk) ̸= 0, 则可以确定a为
+
+                                 1
+                        a =                       .
+                                    (yk −Bksk)Tsk
+
+ 由同样的过程可以推出基于Hk的秩一更新公式.
+
+定理
+ 拟牛顿算法的秩一更新公式 拟牛顿矩阵Bk的秩一更新公式为
+
+                             uuT
+                  Bk+1 = Bk +        ,  u = yk −Bksk,
+                                 uTsk
+
+ 拟牛顿矩阵Hk的秩一更新公式为
+
+                                vvT
+                Hk+1 = Hk +        ,   v = sk −Hkyk.
+                                 vTyk
+
+ Bk和Hk的公式在形式上互为对偶. 实际上Hk = (Bk)−1, 利用秩一更新
+ 的SMW公式即可推出基于Hk的公式, 反之亦然.                                      7/48
+===== PDF PAGE 8 | FOOTER [] =====
+秩一更新公式的缺陷
+
+
+ 即使Bk正定，由秩一公式更新的Bk+1无法保证正定.
+
+定理
+ 秩一更新公式使Bk+1正定的充分条件 使用秩一更新公式从Bk更
+ 新Bk+1, Bk+1正定的充分条件可以是:
+ (1) Bk正定;
+ (2) uTsk > 0.
+
+ 证明: 设0 ̸= w ∈Rn, 则
+
+                        wTuuTw            (uTw)2
+        wTBk+1w = wTBkw +     = wTBkw +     > 0.
+                                 uTsk                uTsk
+
+ 同样地, 将上述定理中B换成H, uTsk换成vTyk, 仍然成立. 因此, 由于无法
+ 保证uTsk或vTyk恒大于0, 上述的秩一更新公式一般不用.
+
+
+
+
+                                                                                                                     8/48
+===== PDF PAGE 9 | FOOTER [] =====
+BFGS公式
+
+ BFGS公式的核心思想是对Bk进行秩二更新.
+
+定义
+ 秩二更新 对于拟牛顿矩阵Bk ∈Rn×n, 设0 ̸= u, v ∈Rn且a, b ∈R待定,
+ 则有秩二更新形式
+
+                      Bk+1 = Bk + auuT + bvvT.
+
+ 根据割线方程, 将秩二更新的待定参量式代入, 得
+
+                  Bk+1sk = (Bk + auuT + bvvT)sk = yk,
+
+ 整理可得
+                   (a · uTsk)u + (b · vTsk)v = yk −Bksk.
+ 简单的取法是令(a · uTsk)u对应yk相等, (b · vTsk)v对应−Bksk相等, 即有
+
+           a · uTsk = 1,  u = yk,  b · vTsk = −1,   v = Bksk.
+
+
+                                                                                                                     9/48
+===== PDF PAGE 10 | FOOTER [] =====
+BFGS公式
+
+ 将上述参量代入割线方程, 即得BFGS更新公式
+
+                                 uuT      vvT
+                    Bk+1 = Bk +    −                                    (sk)Tu    (sk)Tv.
+
+ 利用SMW公式以及Hk = (Bk)−1, 可以推出关于Hk的BFGS公式.
+
+定义
+ BFGS公式 在拟牛顿类算法中, 基于Bk的BFGS公式为
+                                   yk  yk T −Bksk  Bksk T ,                 Bk+1 = Bk +
+                                  (sk)T yk     (sk)T Bksk
+
+ 基于Hk的BFGS公式为
+        Hk+1 =   I −sk  yk T ! Hk   I −yk  sk T ! + sk  sk T .
+                          (sk)T yk             (sk)T yk      (sk)T yk
+
+
+                                                                                                                 10/48
+===== PDF PAGE 11 | FOOTER [] =====
+推导Hk的BFGS公式之提示
+
+ 对于可逆矩阵B ∈Rn×n与矩阵U ∈Rn×m, V ∈Rn×m，SMW公式为：
+
+                   −1                           −1
+        B + UVT  = B−1 −B−1U  I + VTB−1U   VTB−1.
+
+ 在BFGS的推导中，关于Bk的更新公式为：
+
+                ykyT                            (Bksk)T                                                           Bk                          k                                                                sTk                −Bksk                                                                                                            .   Bk+1 = Bk +                    = Bk +  −BksksTk Bksk    sTkykyk                                                             yT                             Bksk                                                                                     k                 sTk yk                           sTk
+ 对照SMW公式，令式中B = Bk，且
+
+                                                          ,  Vk =  Bksk   yk  ,             Uk =  −BksksTk Bksk    sTkykyk
+
+ 此时公式的左端就等于B−1k+1，且右端只需计算一个2阶矩阵的逆．假
+ 设B−1k = Hk，由SMW公式就得到
+
+                                                                   sksTk                                                                          k  +                                                                                                       .                                                      k  Hk   I −yksT      Hk+1 =  Bk + UkVTk −1 =   I −skyT
+                                       sTk yk           sTk yk     sTk yk
+
+                                                                                                                 11/48
+===== PDF PAGE 12 | FOOTER [] =====
+BFGS公式的有效性
+
+
+
+ BFGS公式产生的Bk+1或Hk+1是否正定呢?
+
+定理
+ BFGS公式使拟牛顿矩阵正定的充分条件 使用秩二更新公式
+ 从Bk或Hk更新Bk+1或Hk+1, 拟牛顿矩阵正定的充分条件可以是:
+ (1) Bk或Hk正定;
+ (2) 满足曲率条件 sk T yk > 0, ∀k ∈N+.
+
+ 证明上述定理, 只需要从基于Hk的BFGS公式分析即可, 从而得
+ 到Hk+1和其逆Bk+1均正定.
+ 因为在确定步长时使用某一Wolfe准则线搜索即可满足曲率条件, 因
+ 此BFGS公式产生的拟牛顿矩阵有望保持正定, 是有效算法.
+
+
+
+
+
+                                                                                                                 12/48
+===== PDF PAGE 13 | FOOTER [] =====
+从优化意义理解BFGS格式
+
+ 基于Hk的BFGS格式恰好是优化问题
+
+                  min OPT = H −Hk     ,
+                    H               W
+                                   s.t.   H = HT,
+                           Hyk = sk.
+
+ 的解. 上式中∥·∥W是加权范数, 定义为
+
+                  ∥H∥W =  W1/2HW1/2     ,
+                                             F
+
+ 且W满足割线方程, 即Wsk = yk.
+ 注意Hyk = sk是割线方程, 因此优化问题的意义是在满足割线方程的对
+ 称矩阵中找到距离Hk最近的矩阵H作为Hk+1. 因此我们可以进一步认
+ 知, BFGS格式更新的拟牛顿矩阵是正定对称的, 且在满足割线方程的
+ 条件下采取的是最佳逼近策略.
+
+
+                                                                                                                 13/48
+===== PDF PAGE 14 | FOOTER [] =====
+DFP公式
+
+ DFP公式利用与BFGS公式类似的推导方法, 不同的是其以割线方
+ 程Hk+1yk = sk为基础进行对Hk的秩二更新.
+ 基于Hk满足的DFP公式, 利用SMW公式以及Bk = (Hk)−1, 可以推出关
+ 于Bk的DFP公式. (关键的推导步骤仍然可以参考推导BFGS公式时给
+ 出的提示)
+
+定义
+ DFP公式 基于Hk的DFP更新公式为
+               Hk+1 = Hk −Hkyk(Hkyk)T + sk(sk)T ,
+                                (yk)THkyk     (yk)Tsk
+
+ 基于Bk的DFP更新公式为
+           Bk+1 =   I −yk(sk)T  Bk   I −sk(yk)T + yk(yk)T .
+                           (sk)Tyk            (sk)Tyk      (sk)Tyk
+
+
+
+                                                                                                                 14/48
+===== PDF PAGE 15 | FOOTER [] =====
+从优化意义上理解DFP公式
+
+
+ 有了BFGS公式的优化意义做铺垫, 讨论DFP公式的优化意义显得十分
+ 简单. 利用对偶性质, 基于Bk的DFP格式将是优化问题
+
+                  min OPT = B −Bk     ,
+                        B               W
+                                    s.t.   B = BT,
+                               Bsk = yk.
+
+ 的解. 上式中∥·∥W是加权范数, 定义为
+
+                   ∥B∥W =  W1/2BW1/2     ,
+                                             F
+
+ 且W满足另一割线方程, 即Wyk = sk.
+ 注意Bsk = yk是另一割线方程, 因此优化问题的意义是在满足割线方程
+ 的对称矩阵中找到距离Bk最近的矩阵B作为Bk+1.
+
+
+
+                                                                                                                 15/48
+===== PDF PAGE 16 | FOOTER [] =====
+DFP公式的缺陷
+
+
+ 尽管DFP格式与BFGS对偶, 但从实际效果而言, DFP格式的求解效率
+ 整体上不如BFGS格式. M.J.D. Powell曾求解问题
+
+                                   1
+                    min    f (x) =   ∥x∥22 .                            x∈R2         2
+
+ 设置初始值
+                       1  0             cos ψ
+                 B0 =              ,   x1 =                  ,
+                       0  λ              sin ψ
+
+ 其中tan2 ψ = λ. 当误差阈ϵ = 10−4时, 分别取λ为不同的值, 使
+ 用BFGS算法与DFP算法所产生的迭代步数分别如下表(见下页)所示.
+ 由此看出, 在本问题中, BFGS算法的求解效率要远高于DFP算法.
+ (参考文献: Powell M J D. How bad are the BFGS and DFP methods
+ when the objective function is quadratic?[J]. Mathematical
+ Programming, 1986, 34(1): 34-47.)
+
+
+
+
+                                                                                                                 16/48
+===== PDF PAGE 17 | FOOTER ['313', '103', '787', '958', '1006', '1014'] =====
+DFP公式的缺陷
+
+
+                         Table: BFGS方法的迭代次数
+
+                                     ϵ
+                                         0.1   0.01   10−4   10−8
+                      λ
+                           10       5    6     8     10
+                           100      7    8     10     12
+                             104     12   13    15     17
+                             106     17   18    20     22
+                             109     24   25    27     29
+
+
+                          Table: DFP方法的迭代次数
+
+                                    ϵ
+                                         0.1    0.01   10−4   10−8
+                     λ
+                          10      10    13    16     19
+                          30      25    32    37     40
+                          100      80    99    107    111
+                          300     237   290   307    313
+                             103     787   958   1006   1014
+
+
+                                                                                                                 17/48
+===== PDF PAGE 18 | FOOTER ['2', '3', '4'] =====
+提纲
+
+
+
+
+ 1 拟牛顿矩阵
+
+
+ 2 拟牛顿类算法的收敛性和收敛速度
+
+
+ 3 有限内存BFGS方法
+
+
+ 4 非线性最小二乘问题
+
+
+
+
+
+                                                                                                                 18/48
+===== PDF PAGE 19 | FOOTER [] =====
+BFGS全局收敛性
+
+ 我们利用Zoutendijk条件得到基本收敛性. 需要复习的读者可参看纸质
+ 本Page 213的定理6.1.
+ 根据对BFGS格式有效性的分析, 我们先确保初始矩阵B0是对称正定的.
+
+定理
+ BFGS全局收敛性 设初始矩阵B0是对称正定矩阵, 目标函数f(x)是二
+ 阶连续可微函数, 下水平集
+
+               L = {x ∈Rn|f(x) ⩽f(x0)}
+
+ 凸, 且存在m, M ∈R+使得对∀z ∈Rn, x ∈L满足
+
+             m ∥z∥2 ⩽zT∇2f(x)z ⩽M ∥z∥2
+
+ (即zT∇2f(x)z被∥z∥控制), 那么BFGS格式结合Wolfe线搜索的拟牛顿算
+ 法全局收敛到f(x)的极小值点x∗.
+
+
+
+                                                                                                                 19/48
+===== PDF PAGE 20 | FOOTER [] =====
+BFGS全局收敛性的证明
+
+
+ 通过Zoutendijk条件来证明收敛性. 因为BFGS拟牛顿矩阵在定理条件
+ 下对称正定，每个拟牛顿方向是下降方向. 因此, 只需要证明搜索方向
+ 与负梯度的夹角不太差。
+ 基于Bk的BFGS格式为
+                                   yk  yk T −Bksk  Bksk T ,                 Bk+1 = Bk +
+                                  (sk)T yk     (sk)T Bksk
+
+ 通过这一公式, 我们可以说明:
+      (a) Tr Bk+1 = Tr Bk −∥Bksk∥ 2 + ∥yk∥2 ,                                           (sk)TBksk     (sk)Tyk
+                                         (sk)Tyk      (b) det Bk+1 = det Bk              .                                           (sk)TBksk
+ 关于迹的公式是显然的, 因为迹的运算保和. 我们主要说明为何关于行
+ 列式的结论成立(习题6.11).
+
+
+
+                                                                                                                 20/48
+===== PDF PAGE 21 | FOOTER [] =====
+BFGS全局收敛性的证明
+
+
+
+ 为说明(b)式成立, 先证明结论: 设x, y, u, v ∈Rn, 则
+
+       det In×n + xyT + uvT = 1 + yTx  1 + vTu − xTv  yTu  .
+
+ Proof: 令U = (x, u)，V = (yT; vT)。构造分块矩阵A = (In×n, U; V, I2×2).
+ 利用Schur补的性质成立
+
+    det In×n + xyT + uvT = det (In×n + UV) = det I2×2 + UTVT  .
+
+ 利用上述定理, 将BFGS公式的左右两边乘以(Bk)−1(Bk正定), 并
+            −sk                Bksk          (Bk)−1yk             yk 设x = √           , y = √           , u = √        , v = √        , 代入即可证明
+             (sk)TBksk           (sk)TBksk           (yk)Tsk           (yk)Tsk
+ 结论成立.
+
+
+
+
+
+                                                                                                                 21/48
+===== PDF PAGE 22 | FOOTER ['2'] =====
+BFGS全局收敛性的证明
+
+
+                   (sk)TBksk
+ 定义cos θk = ∥sk∥∥Bksk∥是欲求夹角的余弦. 这是因为
+
+                       sk = xk+1 −xk = −αk Bk −1 ∇f  xk  ,
+                 Bksk = −αk∇f  xk  .
+
+ 再设
+                      sk T Bksk            yk T sk            yk T yk
+            qk =                 ,  mk =             ,  Mk =             ,
+                    (sk)T sk            (sk)T sk           (yk)T sk
+ 将上述定义代入(b)式以及余弦式, 得到
+ (c)  det Bk+1 = det Bk  mk .                                        qk
+       ∥Bksk∥2        qk (d)     =          .        (sk)TBksk     cos2 θk
+ 上述(a),(b),(c),(d)均是准备公式.
+
+
+
+
+                                                                                                                 22/48
+===== PDF PAGE 23 | FOOTER [] =====
+BFGS全局收敛性的证明
+
+ 我们目标是构造一个不等式, 使得cos θk > 0, k →∞. 设
+
+                Ψ (B) = Tr (B) −ln (det (B)) ,
+
+ 注意上式成立Ψ (B) > 0.
+ 在上式中代入B = Bk+1以及上述准备公式, 成立
+
+       Ψ  Bk+1 = Tr Bk+1 −ln det Bk+1
+          ⩽Ψ  Bk + (Mk −ln (mk) −1) + 2 ln (cos θk) .
+
+ 同时注意到mk ⩾m, Mk ⩽M, 所以又有
+
+    Ψ  Bk+1 ⩽Ψ  Bk + (Mk −ln (mk) −1) + 2 ln (cos θk)
+
+                                                                          k
+        ⩽Ψ  B0 + (k + 1) (M −ln (m) −1) + 2 X ln (cos θj).
+                                                             j=0
+
+ 如果我们假设迭代将不会停止, 则右式若无界, 将导出矛盾.
+                                                                                                                 23/48
+===== PDF PAGE 24 | FOOTER [] =====
+BFGS全局收敛性的证明
+
+ 不妨设cosθk →0，因此有ln(cos2 θk) →−∞. 这意味着, 存在K ∈N+,
+ 使得对∀j ⩾K, 均成立
+
+               ln(cos2 θj) < −2(M −ln(m) −1) = −2C < 0,
+
+ 联立上述两个最近的控制式, 注意Ψ  Bk+1 > 0, 则有k →∞时
+
+
+                             K                     k
+    0 < Ψ  B0 + (k + 1) C + 2 X ln (cos θj) + X (−2C) →−∞,
+                                    j=0            j=K+1
+
+ 这就导出了矛盾. 因此cos θk →0是不成立的. 换句话说, 存在子
+ 列{jk}k=1,2,..., 使得cos θjk ⩾δ > 0. 根据Zoutendijk条件, 又可以得到
+
+                     k→∞inflim    ∇f  xk  →0.
+
+ 结合上述问题对x ∈L是强凸的, 所以导出xk →x∗.
+
+                                                                                                                 24/48
+===== PDF PAGE 25 | FOOTER [] =====
+BFGS方法的收敛速度之例
+
+ 例 考虑极小化问题
+
+                                          500
+                 min   cTx − X ln  bi −aTi x  ,
+                         x∈R100
+                                       i=1
+ 下图展示了误差f(xk) −f ∗与迭代次数k之间的关系(k是迭代次数). 虽然
+ BFGS方法的迭代次数显著得多, 但由于牛顿法每次迭代的计算代价
+ 为O(n3)加上计算海瑟矩阵的代价, 而BFGS方法的每步计算代价仅
+ 为O(n2), 因此BFGS算法可能更快取得优势解.
+
+
+
+
+
+                                                                                                                 25/48
+===== PDF PAGE 26 | FOOTER ['2', '3', '4'] =====
+提纲
+
+
+
+
+ 1 拟牛顿矩阵
+
+
+ 2 拟牛顿类算法的收敛性和收敛速度
+
+
+ 3 有限内存BFGS方法
+
+
+ 4 非线性最小二乘问题
+
+
+
+
+
+                                                                                                                 26/48
+===== PDF PAGE 27 | FOOTER ['1'] =====
+有限内存方法的基本思路
+
+ 基本思路 标准的拟牛顿近似矩阵的更新公式可以记为
+
+      Bk+1 = g(Bk, sk, yk), sk = xk+1 −xk, yk = ∇f(xk+1) −∇f(xk).
+
+ 如果只保存最近的m组数据, 那么迭代公式可以写成
+
+              Bk+1 = g(g(· · · g(Bk−m+1, sk−m+1, yk−m+1))).
+
+ 考虑BFGS方法：
+
+                    dk = −(Bk)−1∇f(xk) = −Hk∇f(xk).
+
+ 重写BFGS更新公式为
+
+                  Hk+1 = (Vk)THkVk + ρksk(sk)T,
+
+ 其中
+                       1
+                  ρk =            ,  Vk = In×n −ρkyk(sk)T.
+                         (yk)Tsk
+
+                                                                                                                 27/48
+===== PDF PAGE 28 | FOOTER [] =====
+有限内存BFGS方法
+
+
+ 将上式递归地展开m次, 即
+
+        k−1  T    k−1  
+       Hk = Y Vj   Hk−m Y Vj                   +
+                j=k−m             j=k−m
+          k−1   T        k−1  
+          ρk−m  Y   Vj   sk−m sk−m T Y Vj        · · · +                        +
+                 j=k−m+1                    j=k−m
+           ρk−1sk−1  sk−1 T .
+
+ 为了节省内存, 我们只展开m次, 利用Hk−m进行计算, 即可求出Hk+1.
+
+ 下面介绍一种不计算Hk, 只利用展开式计算dk = −Hk∇f(xk)的巧妙算
+ 法: 双循环递归算法. 它利用迭代式的结构尽量节省计算dk的开销.
+
+
+
+
+                                                                                                                 28/48
+===== PDF PAGE 29 | FOOTER [] =====
+有限内存BFGS方法
+
+
+ 将等式两边同右乘∇f(xk), 则等式左侧为−dk. 观察等式右侧需要计算
+
+                Vk−1∇f(xk), · · · , Vk−m · · · Vk−1∇f(xk).
+
+ 这些计算可以递归地进行. 同时在计算Vk−l · · · Vk−1∇f(xk)的过程中, 可
+ 以计算上一步的ρk−l(sk−l)T[Vk−l+1 · · · Vk−1∇f(xk)], 这是一个标量. 记
+
+                     q = Vk−m · · · Vk−1∇f(xk),
+
+                αk−l = ρk−l(sk−l)T[Vk−l+1 · · · Vk−1∇f(xk)],
+ 因此递归公式可化为如下的形式:
+
+        k−1  T      k−1  T
+ Hk∇f(xk) = Y Vj   Hk−mq+ Y   Vj   sk−mαk−m+· · ·+sk−1αk−1                     
+               j=k−m               j=k−m+1
+
+
+
+
+
+                                                                                                                 29/48
+===== PDF PAGE 30 | FOOTER [] =====
+有限内存BFGS方法
+
+
+
+ 在双循环递归算法中, 除了上述第一个循环递归过程(自下而上)外, 还
+ 有以下第二个循环递归过程. 我们需要在公式中自上而下合并每一项.
+ 以前两项为例, 它们有公共的因子(Vk−m+1 · · · Vk−1)T, 提取后可以将前
+ 两项写为(注意将Vk−m的定义回代)
+
+             Vk−m+1 · · · Vk−1 T h Vk−m T r + αk−msk−mi
+
+                                  T
+        = Vk−m+1 · · · Vk−1    r + (αk−m −β) sk−m  ,
+
+ 这正是第二个循环的迭代格式. 注意合并后原递归式的结构仍不变, 因
+ 此可以递归地计算下去. 最后, 变量r就是我们期望的结果Hk∇f(xk).
+
+
+
+
+
+                                                                                                                 30/48
+===== PDF PAGE 31 | FOOTER [] =====
+L-BFGS双循环递归算法
+
+ 拟牛顿算法的基本框架为:
+
+ 算法2 L-BFGS双循环递归
+ Require: 初始化q ←∇f(xk).
+ Ensure: r, 即Hk∇f(xk).
+   1: 检查初始元素.
+   2: for i = k −1, · · · , k −m do
+   3:  计算并保存αi ←ρi(si)Tq.
+   4:  更新q ←q −αiyi.
+   5: end for
+   6: 初始化r ←ˆHk−mq, 其中ˆHk−m是Hk−m的近似矩阵.
+   7: for i = k −m, · · · , k −1 do
+   8:  计算β ←ρi(yi)Tr.
+   9:  更新r ←r + (αi −β)si.
+  10: end for
+
+
+
+                                                                                                                 31/48
+===== PDF PAGE 32 | FOOTER [] =====
+算法分析
+
+
+
+ L-BFGS双循环递归算法约需要4mn次乘法运算, 2mn次加法运算; 若近
+ 似矩阵ˆHk−m是对角矩阵, 则额外需要n次乘法运算. 由于m不会很大, 因
+ 此算法的复杂度是O(mn). 算法需要的额外存储为临时变量αi, 其大小
+ 是O(m).
+
+ ˆHk−m的一种取法可以是取对角矩阵
+
+                                       sk−1 T yk−1
+                   ˆHk−m = γkIn×n ≜              In×n.
+                                     (yk−1)T yk−1
+
+ 这恰好是BB方法的第一个步长.
+
+
+
+
+
+                                                                                                                 32/48
+===== PDF PAGE 33 | FOOTER ['2', '3', '4'] =====
+提纲
+
+
+
+
+ 1 拟牛顿矩阵
+
+
+ 2 拟牛顿类算法的收敛性和收敛速度
+
+
+ 3 有限内存BFGS方法
+
+
+ 4 非线性最小二乘问题
+
+
+
+
+
+                                                                                                                 33/48
+===== PDF PAGE 34 | FOOTER ['2'] =====
+最小二乘问题
+
+
+
+
+
+                                  m
+                                 1
+                   min   f(x) = X r2j (x)                      (1)
+                                   x          2
+                                             j=1
+
+    其中rj : Rn →R 是光滑函数，并且假设m ≥n. 称rj 为残差.
+
+    记r : Rn →Rm
+
+                         r(x) = (r1(x), r2(x), ..., rm(x))T.
+
+   问题可以表述为min  f(x) = 2∥r(x)∥21        2
+   一般情况下不是凸问题
+
+   问题(1)是无约束优化问题，可以直接使用线搜索或信赖域法求解
+
+
+
+
+
+                                                                                                                 34/48
+===== PDF PAGE 35 | FOOTER ['m'] =====
+最小二乘问题
+
+     记J(x) ∈Rm×n是向量值函数r(x) 在点x 处的雅可比矩阵：
+
+                         ∇r1(x)T 
+                                   ∇r2(x)T
+                              J(x) =                            ...                                                                                                              .
+                                 ∇rm(x)T
+
+   f(x)的梯度和海瑟矩阵：
+
+                       m
+                ∇f(x) = X rj(x)∇rj(x) = J(x)Tr(x),              (2a)
+                              j=1
+                       m               m
+               ∇2f(x) = X ∇rj(x)∇rj(x) + X ri(x)∇2ri(x)       (2b)
+                              j=1                  i=1
+                                 m
+              = J(x)TJ(x) + X ri(x)∇2ri(x),              (2c)
+                                           i=1
+
+                                                                                                                 35/48
+===== PDF PAGE 36 | FOOTER [] =====
+高斯-牛顿方法
+
+
+   使用近似∇2fk ≈JTk Jk. 省略∇2rj 的计算，减少了计算量。其
+    中Jk、rk分别是J(xk)、r(xk)的简写。
+   高斯-牛顿法的迭代方向dGNk 满足：
+
+                             JTk JkdGNk = −JTk rk.                       (3)
+
+   另一种理解: 在点xk处，考虑近似r(xk + d) ≈rk + Jkd 得到：
+
+                             1
+            min   f(xk + d) =                      + d)∥2 ≈1   + rk∥2.                   d               2∥r(xk         2∥Jkd
+
+   求解该问题时也可对Jk做QR分解或SVD分解，无需计算出JTk Jk。
+   然后更新xk+1 = xk + αkdk.
+
+
+
+
+
+                                                                                                                 36/48
+===== PDF PAGE 37 | FOOTER [] =====
+Levenberg-Marquardt (LM) 方法
+
+
+
+   当Jk不满秩时，(3)有很多个解，应该怎么更新？
+
+   LM方法本质为信赖域方法，更新方向为如下问题的解
+
+                       1
+                min     + rk∥2,    s.t.  ∥d∥≤∆k.            (4)                          d    2∥Jkd
+
+    LM 方法将如下近似当作信赖域方法中的mk:
+
+                       1                  1
+                mk(d) = 2∥rk∥2 + dT(Jk)Trk + 2dT(Jk)TJkd.         (5)
+
+   同样使用(Jk)TJk来近似海瑟矩阵.
+
+
+
+
+
+                                                                                                                 37/48
+===== PDF PAGE 38 | FOOTER [] =====
+Levenberg-Marquardt 方法
+
+
+
+   类似信赖域方法，引入如下定义来衡量mk(d)近似程度的好坏：
+
+                                                  f  xk −f  xk + dk
+                            ρk =                                        (6)
+                            mk (0) −mk (dk)
+
+   为函数值实际下降量与预估下降量（即二阶近似模型下降量）的
+   比值．
+   如果ρk接近1，说明mk(d)来近似f(x)是比较成功的，则应该扩
+   大∆k；如果ρk非常小甚至为负，就说明我们过分地相信了二阶模
+   型mk(d)，此时应该缩小∆k．
+   只有当ρk足够大，也就是对模型拟合较好时，才进行一步更新，
+   否则不更新。
+
+
+
+
+
+                                                                                                                 38/48
+===== PDF PAGE 39 | FOOTER [] =====
+Levenberg-Marquardt 方法
+
+ Algorithm 3 Levenberg-Marquardt 方法
+
+  1: 给定最大半径∆max，初始半径∆0，初始点x0，k ←0．
+  2: 给定参数0 ≤η < ¯ρ1 < ¯ρ2 < 1，γ1 < 1 < γ2．
+  3: while 未达到收敛准则do
+  4:  计算子问题(4)得到迭代方向dk．
+  5:   根据(6) 计算下降率ρk．
+  6:  更新信赖域半径：
+
+             γ1∆k,                ρk < ¯ρ1,
+                             ∆k+1 =  min{γ2∆k, ∆max},  ρk > ¯ρ2 以及∥dk∥= ∆k,
+             ∆k,          其他.
+
+  7:  更新自变量：
+
+           (xk + dk,  ρk > η,     /* 只有下降比例足够大才更新*/              xk+1 =
+                           xk,    其他.
+
+  8:    k ←k + 1．
+  9: end while
+
+
+                                                                                                                 39/48
+===== PDF PAGE 40 | FOOTER ['2'] =====
+子问题求解
+
+
+ Corollary
+ 向量d∗是信赖域子问题
+
+                       1
+               min     + r∥2,    s.t. ∥d∥≤∆                         d    2∥Jd
+
+ 的解当且仅当d∗是可行解并且存在数λ ≥0使得
+
+                         (JTJ + λI)d∗= −JTr,                       (7)
+                   λ(∆−∥d∗∥) = 0.                            (8)
+
+   问题(7)等价于线性最小二乘问题，具体实现时可利用系数矩阵的
+   结构
+                                                            2
+                           1     J         r
+                    min    √   p +          .
+                                d    2     λI      0
+
+
+
+                                                                                                                 40/48
+===== PDF PAGE 41 | FOOTER [] =====
+子问题求解
+
+
+
+
+
+                                                         2
+                         1     J         r
+                  min    √   p +          .
+                             d    2     λI      0
+
+   在试探λ的值时，J的块不变，设J = QR，则
+
+                     J      QR     Q  0    R          √   =  √   =       √        .
+                    λI         λI       0   I       λI
+
+          R
+   矩阵 √  有较多的零元素，可以使用Household变换
+              λI
+   或Givens变换完成QR分解。
+
+   如果矩阵J 没有显式形式，只能提供矩阵乘法，则仍然可以用截
+   断共轭梯度法。
+
+
+
+
+                                                                                                                 41/48
+===== PDF PAGE 42 | FOOTER [] =====
+收敛性分析
+
+
+
+ Theorem
+ 假设常数η ∈  0, 1                     4 ，下水平集L是有界的且每个ri(x)在下水平集L的一
+ 个邻域N内是利普希茨连续可微的．假设对于任意的k，子问题(4)的近
+ 似解dk满足
+
+                                              ∥JTk rk∥             mk(0) −mk(dk) ≥c1∥JTk rk∥min  ∆k,              ,
+                                             ∥JTk Jk∥
+
+ 其中c1 > 0且∥dk∥≤γ∆k, γ ≥1，则
+
+                                                         k rk = 0.                  k→∞∇f(xk)lim     = k→∞JTlim
+
+   根据rj(x)的连续性，存在M > 0，使得∥JTk Jk∥≤M对任意的k成
+   立。由于f有下界，可以直接套用信赖域算法全局收敛性的证明。
+
+
+
+
+                                                                                                                 42/48
+===== PDF PAGE 43 | FOOTER [] =====
+LMF
+
+   信赖域型LM 方法本质上是固定信赖域半径∆, 通过迭代寻找满足
+   条件的乘子λ, 每一步迭代需要求解线性方程组
+
+                           JTJ + λI d = −JTr
+
+   调整λ的大小等价于调整信赖域半径的大小，∆被λ隐式决定。
+
+   LM的更新基于∆，LMF的更新直接基于λ，每一步求解子问题：
+
+                     min  ∥Jd + r∥22 + λ∥d∥22.
+                                 d
+
+   调整λ的原则可以参考信赖域半径的调整原则
+
+   考虑参数ρk
+                                                   f (xk) −f (xk + dk)
+                            ρk =                                        (9)
+                               mk(0) −mk (dk)
+   较大可以减小下一步的λ，较小可以增大下一步的λ。
+
+                                                                                                                 43/48
+===== PDF PAGE 44 | FOOTER [] =====
+LMF
+
+ Algorithm 4 LMF 方法
+
+  1: 给定初始点x0，初始乘子λ0，k ←0．
+  2: 给定参数0 ≤η < ¯ρ1 < ¯ρ2 < 1，γ1 < 1 < γ2．
+  3: while 未达到收敛准则do
+  4:  求解LM 方程((Jk)TJk + λI)d = −(Jk)Trk得到迭代方向dk．
+  5:  根据(9)式计算下降率ρk．
+  6:  更新乘子：
+
+          γ2λk,  ρk < ¯ρ1,     /* 扩大乘子（缩小信赖域半径）*/                      λk+1 =   γ1λk,  ρk > ¯ρ2,     /* 缩小乘子（扩大信赖域半径）*/
+          λk,   其他.                      /* 乘子不变*/
+
+  7:  更新自变量：
+
+           (xk + dk,  ρk > η,     /* 只有下降比例足够大才更新*/              xk+1 =
+                           xk,    其他.
+
+  8:    k ←k + 1．
+  9: end while
+
+
+                                                                                                                 44/48
+===== PDF PAGE 45 | FOOTER ['m'] =====
+大残量问题的拟牛顿算法
+
+
+
+   大残量问题中，海瑟矩阵的第二部分不可忽视，此时高斯– 牛顿
+   法和LM 方法可能只有线性的收敛速度。
+
+   此时如果直接使用牛顿法，则开销太大；直接使用拟牛顿法，又
+   似乎忽略了问题的特殊结构。
+
+   重新写出海瑟矩阵：
+
+                                   m
+                  ∇2f(x) = J(x)TJ(x) + X ri(x)∇2ri(x)
+                                               i=1
+
+   第一项是容易求解，可以保留。第二项不易求解但不可忽略，用
+   拟牛顿法进行近似。
+
+
+
+
+
+                                                                                                                 45/48
+===== PDF PAGE 46 | FOOTER [] =====
+大残量问题的拟牛顿算法
+
+   使用Bk来表示∇2f(xk)的近似矩阵，Tk表示Pmj=1 rj(xk)∇2rj(xk)的近
+   似，即
+                             Bk = JTk Jk + Tk,
+
+   目标为
+                           m
+                      Tk+1 ≈ X rj (xk+1) ∇2rj (xk+1)
+                                   j=1
+
+    记sk = xk+1 −xk，Tk + 1 应该尽量保留原海瑟矩阵的性质
+
+                       m
+                  Tk+1sk ≈ X rj(xk+1)∇2rj(xk+1)sk
+                               j=1
+                       m
+              ≈ X rj(xk+1)(∇rj(xk+1) −∇rj(xk))
+                               j=1
+              = JTk+1rk+1 −JTk rk+1.
+
+
+                                                                                                                 46/48
+===== PDF PAGE 47 | FOOTER [] =====
+大残量问题的拟牛顿算法
+
+
+   拟牛顿条件为：
+
+                         Tk+1sk = JTk+1rk+1 −JTk rk+1
+
+     Dennis, Gay, 和Welsch给出的一种更新格式为：
+
+                y# −Tksk  yT + y y# −Tksk T    y# −Tksk T sk
+      Tk+1 = Tk +                  −                yyT
+                                  yTsk                      (yTs)2
+
+   其中
+                                  sk = xk+1 −xk
+                            y = JTk+1rk+1 −JTk rk
+                      y# = JTk+1rk+1 −JTk rk+1
+
+
+
+
+
+                                                                                                                 47/48
+===== PDF PAGE 48 | FOOTER [] =====
+大残量问题的拟牛顿算法2
+
+
+
+
+   原始问题的拟牛顿公式：
+
+                    (JTk+1Jk+1 + Tk+1)sk = JTk+1rk+1 −JTk rk.
+
+   改写上式得到
+                                 Tk+1sk = ˜yk,
+   其中
+                                    ˜yk = JTk+1rk+1 −JTk rk −JTk+1Jk+1sk.
+   再利用拟牛顿公式更新
+
+
+
+
+
+                                                                                                                 48/48
