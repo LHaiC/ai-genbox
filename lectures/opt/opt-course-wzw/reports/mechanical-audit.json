@@ -1,0 +1,37 @@
+{
+  "status": "PASS",
+  "generatedAt": "2026-10-15T06:54:01.370Z",
+  "katexVersion": "0.16.27",
+  "modules": 8,
+  "lessons": 34,
+  "proofSteps": 258,
+  "mainPathMinutes": 420,
+  "renderedMathExpressions": 1147,
+  "assertions": 10331,
+  "numericalAssertions": 15,
+  "sources": [
+    "https://faculty.bicmr.pku.edu.cn/~wenzw/optbook.html",
+    "https://faculty.bicmr.pku.edu.cn/~wenzw/optbook/opt2.pdf",
+    "https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf",
+    "https://faculty.bicmr.pku.edu.cn/~wenzw/optbook/lect/lect-newton-TR.pdf",
+    "https://web.stanford.edu/~boyd/cvxbook/",
+    "https://faculty.bicmr.pku.edu.cn/~wenzw/optbook/lect/24-lect-admm-chhyx.pdf"
+  ],
+  "usedAnimations": [
+    "convex-chord",
+    "supporting-plane",
+    "projection",
+    "kkt",
+    "gradient",
+    "prox",
+    "newton",
+    "admm"
+  ],
+  "errors": [],
+  "warnings": [],
+  "limitations": [
+    "Schema and KaTeX checks are exhaustive over loaded JSON.",
+    "Numerical tests validate the named independent reference calculations only.",
+    "Mathematical theorem validity, all example arithmetic, source support, prose originality, visual layout, and runtime interactions require separate review."
+  ]
+}

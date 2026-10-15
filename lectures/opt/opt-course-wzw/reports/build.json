@@ -1,0 +1,19 @@
+{
+  "output": "Convex_Optimization_One_Day.html",
+  "bytes": 1586524,
+  "megabytes": 1.587,
+  "sha256": "550ec21826f6af97542178151aa547bdf6573ce1392579f4beab4ae2944888f5",
+  "modules": 8,
+  "lessons": 34,
+  "proof_steps": 258,
+  "illustrated_lessons": 34,
+  "inline_formula_figures": 195,
+  "default_open_figures": 68,
+  "three_formula_model_families": 34,
+  "three_version": "0.186.1",
+  "study_minutes": 420,
+  "break_minutes": 60,
+  "embedded_woff2_fonts": 20,
+  "external_runtime_requests": 0,
+  "qa_harness": "Convex_Optimization_One_Day.html?qa=1"
+}

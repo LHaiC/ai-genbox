@@ -1,0 +1,972 @@
+{
+  "m1": {
+    "lessons": [
+      {
+        "id": "m1-l1",
+        "proof_steps": 7,
+        "symbols": 4,
+        "keys": [
+          "animation",
+          "checks",
+          "example",
+          "formal",
+          "id",
+          "intuition",
+          "pitfalls",
+          "proof",
+          "source",
+          "symbols",
+          "title"
+        ],
+        "proof_titles": [
+          "1. 最优的量词覆盖全域 · Quantifiers",
+          "2. 下界与可行点形成证书 · Optimality certificate",
+          "3. 下确界可以无法取得 · Unattained infimum",
+          "4. 紧性先排除向下无界 · Bounded below",
+          "5. 用最小化序列找到可行极限 · Minimizing sequence",
+          "6. 非紧集合也能缩到紧水平集 · Compact sublevel set",
+          "7. 水平集上的解就是原问题的解 · Global attainment"
+        ]
+      },
+      {
+        "id": "m1-l2",
+        "proof_steps": 6,
+        "symbols": 4,
+        "keys": [
+          "animation",
+          "checks",
+          "example",
+          "formal",
+          "id",
+          "intuition",
+          "pitfalls",
+          "proof",
+          "source",
+          "symbols",
+          "title"
+        ],
+        "proof_titles": [
+          "1. 从非负平方开始 · Nonnegative square",
+          "2. 选最好的倍数得到柯西不等式 · Cauchy–Schwarz",
+          "3. 控制交叉项得到三角不等式 · Triangle inequality",
+          "4. 比较不同误差尺度 · Norm comparison",
+          "5. 单位方向控制所有输入 · Operator norm",
+          "6. 求欧氏单位球里的最陡一阶方向 · Steepest direction"
+        ]
+      },
+      {
+        "id": "m1-l3",
+        "proof_steps": 7,
+        "symbols": 4,
+        "keys": [
+          "animation",
+          "checks",
+          "example",
+          "formal",
+          "id",
+          "intuition",
+          "pitfalls",
+          "proof",
+          "source",
+          "symbols",
+          "title"
+        ],
+        "proof_titles": [
+          "1. 将变化放到一条路径上 · Line restriction",
+          "2. 链式法则给出一阶与二阶变化 · Chain rule",
+          "3. 对导数的变化两次积分 · Double integration",
+          "4. 得到精确积分余项 · Integral remainder",
+          "5. 短位移时Hessian接近起点值 · Taylor expansion",
+          "6. 负梯度只保证足够短的下降 · Short-step descent",
+          "7. 二次函数没有高阶余项 · Quadratic model"
+        ]
+      },
+      {
+        "id": "m1-l4",
+        "proof_steps": 8,
+        "symbols": 4,
+        "keys": [
+          "animation",
+          "checks",
+          "example",
+          "formal",
+          "id",
+          "intuition",
+          "pitfalls",
+          "proof",
+          "source",
+          "symbols",
+          "title"
+        ],
+        "proof_titles": [
+          "1. 展开新旧残差的差 · Residual expansion",
+          "2. 梯度必须回到变量空间 · Gradient dimensions",
+          "3. 平方长度保证半正定 · PSD curvature",
+          "4. 法方程解存在：先确定像空间 · Null space",
+          "5. 右端恰在像空间中 · Solvability",
+          "6. 法方程提供全局最优证书 · Global certificate",
+          "7. 零空间恰好描述全部解 · Uniqueness",
+          "8. 特征值界给出最缓与最陡曲率 · Spectral bounds"
+        ]
+      }
+    ]
+  },
+  "m2": {
+    "lessons": [
+      {
+        "id": "m2-l1",
+        "proof_steps": 7,
+        "symbols": 4,
+        "keys": [
+          "animation",
+          "checks",
+          "example",
+          "formal",
+          "id",
+          "intuition",
+          "pitfalls",
+          "proof",
+          "source",
+          "symbols",
+          "title"
+        ],
+        "proof_titles": [
+          "1. 仿射等式保留插值 · Affine equality",
+          "2. 半空间不会被线段穿出 · Half-space",
+          "3. 同时满足多个凸约束仍保留线段 · Intersection",
+          "4. 仿射原像保凸 · Affine preimage",
+          "5. 范数球也是凸的 · Norm ball",
+          "6. 从两个点推广到有限多个点 · Finite combinations",
+          "7. 用一个中点反例否定凸性 · Counterexample"
+        ]
+      },
+      {
+        "id": "m2-l2",
+        "proof_steps": 7,
+        "symbols": 4,
+        "keys": [
+          "animation",
+          "checks",
+          "example",
+          "formal",
+          "id",
+          "intuition",
+          "pitfalls",
+          "proof",
+          "source",
+          "symbols",
+          "title"
+        ],
+        "proof_titles": [
+          "1. 从函数凸性推出上方图凸 · Convex epigraph",
+          "2. 从上方图凸反推函数凸 · Reverse implication",
+          "3. 所有范数都提供凸函数 · Convex norms",
+          "4. 平方长度给出可见的弦间隙 · Squared norm",
+          "5. 凸函数的下水平集凸 · Sublevel sets",
+          "6. 示性函数把约束装进目标 · Indicator function",
+          "7. 下水平集凸不能替代弦不等式 · Converse fails"
+        ]
+      },
+      {
+        "id": "m2-l3",
+        "proof_steps": 7,
+        "symbols": 3,
+        "keys": [
+          "animation",
+          "checks",
+          "example",
+          "formal",
+          "id",
+          "intuition",
+          "pitfalls",
+          "proof",
+          "source",
+          "symbols",
+          "title"
+        ],
+        "proof_titles": [
+          "1. 从凸弦不等式出发 · Chord inequality",
+          "2. 整理成割线斜率的界 · Secant bound",
+          "3. 缩短割线得到切线 · Directional limit",
+          "4. 反向证明：在插值点同时支撑两个端点 · Two supporting planes",
+          "5. 按同样权重加起来 · Weighted sum",
+          "6. 两个支撑式推出梯度单调 · Monotone gradient",
+          "7. 梯度单调也足够恢复支撑式 · Recover support"
+        ]
+      },
+      {
+        "id": "m2-l4",
+        "proof_steps": 8,
+        "symbols": 4,
+        "keys": [
+          "animation",
+          "checks",
+          "example",
+          "formal",
+          "id",
+          "intuition",
+          "pitfalls",
+          "proof",
+          "source",
+          "symbols",
+          "title"
+        ],
+        "proof_titles": [
+          "1. 凸性迫使对称小步的总变化非负 · Symmetric increments",
+          "2. 二阶展开抽出方向曲率 · Directional curvature",
+          "3. 反向用积分余项推出一阶下界 · Sufficiency",
+          "4. 减去统一二次曲率 · Subtract curvature",
+          "5. 把q的切平面下界翻回f · Quadratic support",
+          "6. 将强凸写成弦间隙 · Strong convexity",
+          "7. 唯一性不能代替存在性 · Uniqueness vs existence",
+          "8. 最优性给出距离误差界 · Distance bound"
+        ]
+      },
+      {
+        "id": "m2-l5",
+        "proof_steps": 8,
+        "symbols": 4,
+        "keys": [
+          "animation",
+          "checks",
+          "example",
+          "formal",
+          "id",
+          "intuition",
+          "pitfalls",
+          "proof",
+          "source",
+          "symbols",
+          "title"
+        ],
+        "proof_titles": [
+          "1. 非负加权和逐项使用凸性 · Weighted sum",
+          "2. 仿射复合保留同一个插值参数 · Affine composition",
+          "3. 最大值由同一个端点上界控制 · Pointwise maximum",
+          "4. 非线性复合需要两次不同理由 · Monotone composition",
+          "5. 内层最小值不取得时选近似最优点 · Approximate minimizers",
+          "6. 联合凸性让两个变量同步插值 · Joint convexity",
+          "7. 让近似误差归零 · Vanishing error",
+          "8. 用反例守住规则边界 · Counterexamples"
+        ]
+      }
+    ]
+  },
+  "m3": {
+    "lessons": [
+      {
+        "id": "m3-l1",
+        "proof_steps": 7,
+        "symbols": 4,
+        "keys": [
+          "animation",
+          "checks",
+          "example",
+          "formal",
+          "id",
+          "intuition",
+          "pitfalls",
+          "proof",
+          "source",
+          "symbols",
+          "title"
+        ],
+        "proof_titles": [
+          "1. 假设局部最优点远处还有改进 · Contradiction setup",
+          "2. 凸性把远处改进带回近处 · Convex segment",
+          "3. 可微时局部最优限制每条可行弦 · Feasible direction",
+          "4. 缩短步长得到变分不等式 · Variational inequality",
+          "5. 凸目标将一阶必要条件升级为充分条件 · Sufficiency",
+          "6. 全空间时只剩零梯度 · Unconstrained case",
+          "7. 边界最优允许非零梯度 · Boundary optimum"
+        ]
+      },
+      {
+        "id": "m3-l2",
+        "proof_steps": 8,
+        "symbols": 3,
+        "keys": [
+          "animation",
+          "checks",
+          "example",
+          "formal",
+          "id",
+          "intuition",
+          "pitfalls",
+          "proof",
+          "source",
+          "symbols",
+          "title"
+        ],
+        "proof_titles": [
+          "1. 最优性恰好是零斜率支撑 · Zero subgradient",
+          "2. 可微点不能藏着另一条支撑斜率 · Differentiable case",
+          "3. 绝对值在正点与负点的次梯度 · Absolute value",
+          "4. 零点从正侧限制上界 · Right-side bound",
+          "5. 负侧限制下界并验证充分性 · Left-side bound",
+          "6. 1范数的必要条件逐坐标得到 · Coordinate necessity",
+          "7. 各坐标条件也充分 · Coordinate sufficiency",
+          "8. 边界次梯度不保证存在 · Empty subdifferential"
+        ]
+      },
+      {
+        "id": "m3-l3",
+        "proof_steps": 7,
+        "symbols": 4,
+        "keys": [
+          "animation",
+          "checks",
+          "example",
+          "formal",
+          "id",
+          "intuition",
+          "pitfalls",
+          "proof",
+          "source",
+          "symbols",
+          "title"
+        ],
+        "proof_titles": [
+          "1. 先证明抵消条件足够 · Sufficient condition",
+          "2. 加起来得到全局证书 · Global certificate",
+          "3. 必要性从最优点沿线段出发 · Necessary condition",
+          "4. 用惩罚的弦上界夹住总变化 · Chord bound",
+          "5. 缩短步长得到一个全局h支撑式 · Directional limit",
+          "6. 将1范数条件逐坐标展开 · Coordinate conditions",
+          "7. 标量二次损失给出精确阈值 · Scalar threshold"
+        ]
+      },
+      {
+        "id": "m3-l4",
+        "proof_steps": 8,
+        "symbols": 4,
+        "keys": [
+          "animation",
+          "checks",
+          "example",
+          "formal",
+          "id",
+          "intuition",
+          "pitfalls",
+          "proof",
+          "source",
+          "symbols",
+          "title"
+        ],
+        "proof_titles": [
+          "1. 先把搜寻范围限制到一个球 · Bounded search",
+          "2. 连续性保证距离最小值取得 · Existence",
+          "3. 两个不同最近点会被中点击败 · Uniqueness",
+          "4. 最近点必须抵抗所有可行短步 · Necessary inequality",
+          "5. 这个内积条件也足够 · Sufficiency",
+          "6. 得到投影的勾股不等式 · Pythagorean inequality",
+          "7. 半空间公式从法向方向推出 · Half-space projection",
+          "8. 把内外两种情形合并 · Piecewise formula"
+        ]
+      },
+      {
+        "id": "m3-l5",
+        "proof_steps": 8,
+        "symbols": 4,
+        "keys": [
+          "animation",
+          "checks",
+          "example",
+          "formal",
+          "id",
+          "intuition",
+          "pitfalls",
+          "proof",
+          "source",
+          "symbols",
+          "title"
+        ],
+        "proof_titles": [
+          "1. 示性函数的次微分就是外法锥 · Indicator subdifferential",
+          "2. 内点与边界有不同法向空间 · Interior vs boundary",
+          "3. 最优性是梯度与外法向平衡 · Normal balance",
+          "4. 最优点等价于投影固定点 · Fixed point",
+          "5. 比较两个投影的内积条件 · Two projections",
+          "6. 组合两式得到牢固非扩张性 · Firm nonexpansiveness",
+          "7. 再用柯西不等式得到距离控制 · Distance stability",
+          "8. 用零映射衡量一阶最优性 · Gradient mapping"
+        ]
+      }
+    ]
+  },
+  "m4": {
+    "lessons": [
+      {
+        "id": "m4-l1",
+        "proof_steps": 7,
+        "symbols": 3,
+        "keys": [
+          "animation",
+          "checks",
+          "example",
+          "formal",
+          "id",
+          "intuition",
+          "pitfalls",
+          "proof",
+          "source",
+          "symbols",
+          "title"
+        ],
+        "proof_titles": [
+          "1. 把“所有位置都托得住”写成量词 · Supporting intercept",
+          "2. 用上确界定义得到 Fenchel 不等式 · Fenchel inequality",
+          "3. 解释共轭为什么凸 · Convexity",
+          "4. 从次梯度推出等号 · Subgradient implies equality",
+          "5. 从等号反推次梯度 · Equality implies subgradient",
+          "6. 算一遍二次共轭 · Quadratic conjugate",
+          "7. 算一遍绝对值共轭 · Absolute-value conjugate"
+        ]
+      },
+      {
+        "id": "m4-l2",
+        "proof_steps": 8,
+        "symbols": 3,
+        "keys": [
+          "animation",
+          "checks",
+          "example",
+          "formal",
+          "id",
+          "intuition",
+          "pitfalls",
+          "proof",
+          "source",
+          "symbols",
+          "title"
+        ],
+        "proof_titles": [
+          "1. 先统一不等式方向 · Sign convention",
+          "2. 解释等式乘子为什么自由 · Equality multiplier",
+          "3. 写出下界链 · Lower-bound chain",
+          "4. 从单个下界到最佳下界 · Dual maximization",
+          "5. 证明对偶函数凹 · Dual concavity",
+          "6. 把上下界相减成为误差证书 · Gap certificate",
+          "7. 完整消去一个原变量 · Eliminate primal variable",
+          "8. 用零间隙同时认证两端 · Zero-gap certificate"
+        ]
+      },
+      {
+        "id": "m4-l3",
+        "proof_steps": 9,
+        "symbols": 3,
+        "keys": [
+          "animation",
+          "checks",
+          "example",
+          "formal",
+          "id",
+          "intuition",
+          "pitfalls",
+          "proof",
+          "source",
+          "symbols",
+          "title"
+        ],
+        "proof_titles": [
+          "1. 把所有可能的扰动画在一个集合里 · Perturbation set",
+          "2. 证明它凸且开 · Convexity and openness",
+          "3. 把最优值点放在集合边界 · Boundary point",
+          "4. 应用有限维凸集分离定理 · Separation theorem",
+          "5. 由上闭方向确定符号 · Multiplier signs",
+          "6. 用 Slater 排除零目标系数 · Nonzero objective coefficient",
+          "7. 归一化并让严格上界收紧 · Normalization",
+          "8. 夹住对偶值，得到可达性 · Dual attainment",
+          "9. 说明原始可达性仍是另一件事 · Primal nonattainment"
+        ]
+      },
+      {
+        "id": "m4-l4",
+        "proof_steps": 8,
+        "symbols": 3,
+        "keys": [
+          "animation",
+          "checks",
+          "example",
+          "formal",
+          "id",
+          "intuition",
+          "pitfalls",
+          "proof",
+          "source",
+          "symbols",
+          "title"
+        ],
+        "proof_titles": [
+          "1. 写齐四组条件 · Four conditions",
+          "2. 利用凸性把驻点变成全局极小 · Lagrangian minimum",
+          "3. 互补松弛消去额外项 · Complementarity",
+          "4. 反向从最优解与 Slater 出发 · Necessity under Slater",
+          "5. 从总和等号恢复逐项互补 · Termwise equality",
+          "6. 从拉格朗日极小恢复驻点 · Stationarity",
+          "7. 用对偶价格给资源扰动一个全局界 · Sensitivity bound",
+          "8. 只有可微时才称为导数 · Differentiable value function"
+        ]
+      }
+    ]
+  },
+  "m5": {
+    "lessons": [
+      {
+        "id": "m5-l1",
+        "proof_steps": 8,
+        "symbols": 3,
+        "keys": [
+          "animation",
+          "checks",
+          "example",
+          "formal",
+          "id",
+          "intuition",
+          "pitfalls",
+          "proof",
+          "source",
+          "symbols",
+          "title"
+        ],
+        "proof_titles": [
+          "1. 沿线段使用微积分基本定理 · Line integral",
+          "2. 剥离线性预测 · Linear model",
+          "3. 用 Lipschitz 性控制余项 · Lipschitz bound",
+          "4. 积分得到下降引理 · Quadratic upper bound",
+          "5. 代入梯度更新 · Gradient step",
+          "6. 提取常用充分下降式 · Sufficient decrease",
+          "7. L 未知时用回溯验证 · Backtracking test",
+          "8. 证明回溯会结束 · Finite termination"
+        ]
+      },
+      {
+        "id": "m5-l2",
+        "proof_steps": 8,
+        "symbols": 3,
+        "keys": [
+          "animation",
+          "checks",
+          "example",
+          "formal",
+          "id",
+          "intuition",
+          "pitfalls",
+          "proof",
+          "source",
+          "symbols",
+          "title"
+        ],
+        "proof_titles": [
+          "1. 先拿到下降量 · Descent amount",
+          "2. 用凸性把当前误差换成内积 · Convexity bound",
+          "3. 合并前两式 · Combine bounds",
+          "4. 展开新距离平方 · Distance identity",
+          "5. 得到单步付账关系 · One-step inequality",
+          "6. 望远镜求和 · Telescoping sum",
+          "7. 单调性把累计界压到最后一个点 · Last-iterate bound",
+          "8. 把速率翻译成迭代预算 · Iteration complexity"
+        ]
+      },
+      {
+        "id": "m5-l3",
+        "proof_steps": 7,
+        "symbols": 3,
+        "keys": [
+          "animation",
+          "checks",
+          "example",
+          "formal",
+          "id",
+          "intuition",
+          "pitfalls",
+          "proof",
+          "source",
+          "symbols",
+          "title"
+        ],
+        "proof_titles": [
+          "1. 先确认最优解存在且唯一 · Existence and uniqueness",
+          "2. 写出任意点处的二次下界 · Quadratic lower model",
+          "3. 最小化这个下界模型 · Gradient domination",
+          "4. 把梯度下降量换成当前误差比例 · Gap contraction",
+          "5. 递推得到几何界 · Geometric rate",
+          "6. 读出精度与条件数的代价 · Condition number",
+          "7. 另外建立点距离界 · Distance bound"
+        ]
+      },
+      {
+        "id": "m5-l4",
+        "proof_steps": 8,
+        "symbols": 3,
+        "keys": [
+          "animation",
+          "checks",
+          "example",
+          "formal",
+          "id",
+          "intuition",
+          "pitfalls",
+          "proof",
+          "source",
+          "symbols",
+          "title"
+        ],
+        "proof_titles": [
+          "1. 把迭代中心移到最优点 · Error coordinates",
+          "2. 进入特征坐标 · Eigenbasis",
+          "3. 确定稳定区间 · Stability interval",
+          "4. 求最坏模态因子 · Worst-case factor",
+          "5. 平衡快慢两个端点 · Optimal fixed step",
+          "6. 分别报告距离与目标因子 · Distance vs objective",
+          "7. 换变量查看新曲率 · Change of variables",
+          "8. 把缩放写回原变量 · Preconditioned update"
+        ]
+      }
+    ]
+  },
+  "m6": {
+    "lessons": [
+      {
+        "id": "m6-l1",
+        "proof_steps": 8,
+        "symbols": 3,
+        "keys": [
+          "animation",
+          "checks",
+          "example",
+          "formal",
+          "id",
+          "intuition",
+          "pitfalls",
+          "proof",
+          "source",
+          "symbols",
+          "title"
+        ],
+        "proof_titles": [
+          "1. 找到一个有限比较点 · Finite comparison",
+          "2. 给 h 一个仿射下界 · Affine minorant",
+          "3. 证明目标在无穷远增长 · Coercivity",
+          "4. 用闭性得到存在，用强凸性得到唯一 · Existence and uniqueness",
+          "5. 写出次梯度最优性条件 · Optimality condition",
+          "6. 从两个最优性条件推出稳定性 · Monotonicity",
+          "7. 得到牢固非扩张关系 · Firm nonexpansiveness",
+          "8. 用示性函数恢复投影 · Projection special case"
+        ]
+      },
+      {
+        "id": "m6-l2",
+        "proof_steps": 7,
+        "symbols": 3,
+        "keys": [
+          "animation",
+          "checks",
+          "example",
+          "formal",
+          "id",
+          "intuition",
+          "pitfalls",
+          "proof",
+          "source",
+          "symbols",
+          "title"
+        ],
+        "proof_titles": [
+          "1. 利用逐坐标可分性 · Separability",
+          "2. 先写统一最优性条件 · Subgradient condition",
+          "3. 假设解在正半轴 · Positive branch",
+          "4. 假设解在负半轴 · Negative branch",
+          "5. 检查零能否平衡 · Zero branch",
+          "6. 合并三种情况 · Unified formula",
+          "7. 和平方惩罚做数学比较 · Quadratic penalty comparison"
+        ]
+      },
+      {
+        "id": "m6-l3",
+        "proof_steps": 10,
+        "symbols": 3,
+        "keys": [
+          "animation",
+          "checks",
+          "example",
+          "formal",
+          "id",
+          "intuition",
+          "pitfalls",
+          "proof",
+          "source",
+          "symbols",
+          "title"
+        ],
+        "proof_titles": [
+          "1. 建立保留非光滑结构的模型 · Composite upper model",
+          "2. 配方得到更新公式 · Complete the square",
+          "3. 提取新点处的合法次梯度 · Valid subgradient",
+          "4. 分别控制光滑与非光滑项 · Two convexity bounds",
+          "5. 让梯度项抵消并展开内积 · Three-point inequality",
+          "6. 先取 z=x 得到单调下降 · Descent",
+          "7. 再取 z=x* 得到距离预算 · Distance budget",
+          "8. 求和并调用单调性 · Last-iterate rate",
+          "9. 解释零梯度映射的含义 · Gradient mapping",
+          "10. 恢复约束算法 · Projected gradient"
+        ]
+      },
+      {
+        "id": "m6-l4",
+        "proof_steps": 10,
+        "symbols": 3,
+        "keys": [
+          "animation",
+          "checks",
+          "example",
+          "formal",
+          "id",
+          "intuition",
+          "pitfalls",
+          "proof",
+          "source",
+          "symbols",
+          "title"
+        ],
+        "proof_titles": [
+          "1. 求出光滑梯度并核对曲率 · Smooth curvature",
+          "2. 写出可执行更新 · ISTA update",
+          "3. 写出坐标最优性，解释零坐标 · Coordinate optimality",
+          "4. 引入残差变量得到等式约束 · Residual constraint",
+          "5. 形成拉格朗日函数并消去 r · Eliminate residual",
+          "6. 消去 x 时得到对偶约束 · Dual constraint",
+          "7. 得到对偶并说明零间隙可达 · Strong duality",
+          "8. 把任意残差缩放成对偶可行点 · Dual feasible scaling",
+          "9. 用原始—对偶间隙停止 · Gap stopping rule",
+          "10. 用零点检验建立参数尺度感 · Zero-solution threshold"
+        ]
+      }
+    ]
+  },
+  "m7": {
+    "lessons": [
+      {
+        "id": "m7-l1",
+        "proof_steps": 7,
+        "symbols": 4,
+        "keys": [
+          "animation",
+          "checks",
+          "example",
+          "formal",
+          "id",
+          "intuition",
+          "pitfalls",
+          "proof",
+          "source",
+          "symbols",
+          "title"
+        ],
+        "proof_titles": [
+          "1. 建立要最小化的局部二次式 · Local quadratic model",
+          "2. 对方向求极小值 · Newton equation",
+          "3. 证明这个方向确实下降 · Descent direction",
+          "4. 把下一步误差改写成曲率误差 · Error identity",
+          "5. 沿线段积出真实梯度变化 · Gradient integral",
+          "6. 计算误差界中的二分之一 · Quadratic error bound",
+          "7. 说明为什么初值要近 · Local invariant region"
+        ]
+      },
+      {
+        "id": "m7-l2",
+        "proof_steps": 7,
+        "symbols": 4,
+        "keys": [
+          "animation",
+          "checks",
+          "example",
+          "formal",
+          "id",
+          "intuition",
+          "pitfalls",
+          "proof",
+          "source",
+          "symbols",
+          "title"
+        ],
+        "proof_titles": [
+          "1. 先限定定义域 · Strict domain",
+          "2. 对障碍函数求梯度 · Barrier gradient",
+          "3. 从中心点读出乘子 · Central-path multipliers",
+          "4. 明确偏离互补条件多少 · Perturbed complementarity",
+          "5. 构造真正的下界 · Dual lower bound",
+          "6. 用弱对偶夹住未知最优值 · Gap certificate",
+          "7. 转成一个可执行的外层循环 · Outer iteration"
+        ]
+      },
+      {
+        "id": "m7-l3",
+        "proof_steps": 7,
+        "symbols": 4,
+        "keys": [
+          "animation",
+          "checks",
+          "example",
+          "formal",
+          "id",
+          "intuition",
+          "pitfalls",
+          "proof",
+          "source",
+          "symbols",
+          "title"
+        ],
+        "proof_titles": [
+          "1. 证明复制没有改变问题 · Consensus reformulation",
+          "2. 加上乘子与二次罚项 · Augmented Lagrangian",
+          "3. 第一块更新只管f · First block",
+          "4. 第二块使用刚更新的x · Second block",
+          "5. 累积本轮分歧 · Dual update",
+          "6. 从子问题最优性推导第二种残差 · Dual residual",
+          "7. 检查z侧的驻点条件 · Stationarity check"
+        ]
+      },
+      {
+        "id": "m7-l4",
+        "proof_steps": 7,
+        "symbols": 3,
+        "keys": [
+          "animation",
+          "checks",
+          "example",
+          "formal",
+          "id",
+          "intuition",
+          "pitfalls",
+          "proof",
+          "source",
+          "symbols",
+          "title"
+        ],
+        "proof_titles": [
+          "1. 用结构确认问题类型 · Problem structure",
+          "2. 梯度法使用一个统一的曲率上界 · Uniform upper model",
+          "3. 牛顿模型使用真实曲率 · True curvature model",
+          "4. 用数字说明两种投影为何不同 · Two metrics",
+          "5. 拆分是否真的降低每步成本 · Per-step cost",
+          "6. 选择与方法一致的停止量 · Stopping criterion",
+          "7. 用相同证书比较终点 · Comparable certificates"
+        ]
+      }
+    ]
+  },
+  "m8": {
+    "lessons": [
+      {
+        "id": "m8-l1",
+        "proof_steps": 7,
+        "symbols": 4,
+        "keys": [
+          "animation",
+          "checks",
+          "example",
+          "formal",
+          "id",
+          "intuition",
+          "pitfalls",
+          "proof",
+          "source",
+          "symbols",
+          "title"
+        ],
+        "proof_titles": [
+          "1. 列出模型与允许的点 · Model",
+          "2. 把存在、唯一、凸性分开检查 · Existence and uniqueness",
+          "3. 写出完整拉格朗日函数 · Lagrangian",
+          "4. 提出活动约束猜测并求候选 · Active-set candidate",
+          "5. 解出并核验全部KKT条件 · KKT verification",
+          "6. 不依赖猜测，再直接证明全局最优 · Direct global proof",
+          "7. 从证书读出唯一性与距离控制 · Distance certificate"
+        ]
+      },
+      {
+        "id": "m8-l2",
+        "proof_steps": 8,
+        "symbols": 3,
+        "keys": [
+          "animation",
+          "checks",
+          "example",
+          "formal",
+          "id",
+          "intuition",
+          "pitfalls",
+          "proof",
+          "source",
+          "symbols",
+          "title"
+        ],
+        "proof_titles": [
+          "1. 把投影本身写成优化问题 · Projection problem",
+          "2. 逐分量消去非负约束乘子 · Coordinate elimination",
+          "3. 根据总量决定阈值 · Threshold selection",
+          "4. 从边界点写出梯度建议 · Gradient proposal",
+          "5. 验证本轨迹处于同一投影分支 · Projection branch",
+          "6. 减去不动点得到精确收缩 · Exact contraction",
+          "7. 把位置误差换成目标误差 · Objective gap",
+          "8. 用梯度映射验证停止 · Gradient mapping"
+        ]
+      },
+      {
+        "id": "m8-l3",
+        "proof_steps": 8,
+        "symbols": 4,
+        "keys": [
+          "animation",
+          "checks",
+          "example",
+          "formal",
+          "id",
+          "intuition",
+          "pitfalls",
+          "proof",
+          "source",
+          "symbols",
+          "title"
+        ],
+        "proof_titles": [
+          "1. 活动集牛顿保留可行切空间 · Active-set tangent",
+          "2. 解方程并核验活动集 · Verify active set",
+          "3. 写出障碍路线的精确计算对象 · Barrier objective",
+          "4. 推导障碍的梯度和海瑟矩阵 · Gradient and Hessian",
+          "5. 一步障碍牛顿不是一个中心点 · Inexact center",
+          "6. 从精确中心点得到三个乘子 · Barrier certificate",
+          "7. 对ADMM固定点做独立验算 · ADMM fixed point",
+          "8. 统一三条路线的最后检查 · Unified checks"
+        ]
+      },
+      {
+        "id": "m8-l4",
+        "proof_steps": 6,
+        "symbols": 3,
+        "keys": [
+          "animation",
+          "checks",
+          "example",
+          "formal",
+          "id",
+          "intuition",
+          "pitfalls",
+          "proof",
+          "source",
+          "symbols",
+          "title"
+        ],
+        "proof_titles": [
+          "1. 凸性变式：半正定不等于正定 · PSD vs PD",
+          "2. KKT变式：一维上限约束 · One-dimensional KKT",
+          "3. 梯度变式：不能沿用上一题的L · Step-size test",
+          "4. 近端变式：软阈值允许恰好变成零 · Soft thresholding",
+          "5. 投影变式：负分量改变活动集 · Projection active set",
+          "6. 约束资格变式：有最优点却没有KKT乘子 · Constraint qualification"
+        ]
+      }
+    ]
+  }
+}

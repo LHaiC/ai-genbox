@@ -1,0 +1,41 @@
+/* Interactive figures belong to the reading flow, without a dashboard shell. */
+.ca-root{--ca-ink:#203843;--ca-muted:#52656e;--ca-border:#d8dfdf;min-width:0;color:var(--ca-ink)}
+.ca-teaching{font:inherit;font-size:18px;line-height:1.65;min-width:0}
+.ca-title,.ca-stage-title{font-size:18px;line-height:1.5;font-weight:650;letter-spacing:0;margin:12px 0 6px}
+.ca-intro,.ca-context,.ca-caption,.ca-reason,.ca-contrast{font-size:18px;line-height:1.7;margin:8px 0;overflow-wrap:break-word}
+.ca-context,.ca-reason{color:var(--ca-muted)}
+.ca-model{margin:0 0 10px;padding:0;border:0}
+.ca-model summary,.ca-laboratory summary{font-size:15px;line-height:1.5;cursor:pointer;color:var(--ca-muted)}
+.ca-model-summary{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 20px;margin:8px 0 12px;font-size:18px;line-height:1.6;min-width:0}
+.ca-model-term{min-width:0;max-width:100%;overflow-x:auto;padding:2px 0}
+.ca-model-term .katex{font-size:1em}.ca-model-term .katex-display{margin:0;text-align:left}
+.ca-slider{display:block;max-width:480px;margin:8px 0;font-size:15px;line-height:1.5;font-weight:500}
+.ca-slider output{float:right;font-variant-numeric:tabular-nums;color:#225b9b}
+.ca-slider input{display:block;width:100%;height:28px;margin:2px 0;accent-color:#225b9b;cursor:pointer}
+.ca-cases,.ca-controls{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.ca-cases button,.ca-controls button{font:inherit;font-size:15px;line-height:1.4;padding:5px 10px;border:1px solid #b6c7cc;border-radius:3px;background:transparent;color:var(--ca-ink);cursor:pointer;box-shadow:none;white-space:normal}
+.ca-cases button[aria-pressed=true],.ca-controls button[data-ca=play][aria-pressed=true]{border-color:#225b9b;background:#edf3f8;color:#164776}
+.ca-controls button:disabled{opacity:.42;cursor:default}
+.ca-root button:focus-visible,.ca-slider input:focus-visible,.ca-svg-scroll:focus-visible,.ca-formula:focus-visible,.ca-root summary:focus-visible{outline:2px solid #af4d20;outline-offset:3px}
+.ca-progress-row{display:flex;align-items:center;gap:12px;max-width:480px;font-size:14px;font-variant-numeric:tabular-nums;margin:6px 0 12px;color:var(--ca-muted)}
+.ca-count{white-space:nowrap}.ca-progress-row progress{flex:1;width:1px;height:4px;accent-color:#225b9b}
+.ca-play-state{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;margin:0;padding:0}
+.ca-svg-scroll{max-width:100%;overflow:hidden;background:transparent}
+.ca-svg-scroll svg{display:block;width:100%;min-width:0;max-width:440px;margin:0 auto;height:auto;overflow:hidden}
+.ca-svg-scroll text{font-family:inherit;font-size:28px;font-weight:500}
+.ca-svg-scroll .ca-line{stroke-width:3.5;stroke-linejoin:round;stroke-linecap:round}
+.ca-svg-scroll .ca-point{stroke:#fff;stroke-width:2.5}.ca-svg-scroll .ca-dashed{stroke-dasharray:9 10}
+.ca-legend{display:flex;flex-wrap:wrap;gap:4px 16px;padding:0;margin:8px 0;list-style:none;font-size:15px;line-height:1.5}
+.ca-legend li{display:flex;gap:6px;align-items:baseline;margin:0;padding:0}
+.ca-legend li>span{display:inline-block;background:var(--ca-key);width:9px;height:9px;border-radius:50%;flex:0 0 9px}
+.ca-explanation{min-width:0;margin:12px 0 0;padding:0;border:0}
+.ca-formula{overflow-x:auto;max-width:100%;padding:5px 0;font-size:18px;line-height:1.6;margin:8px 0;overscroll-behavior-inline:contain}
+.ca-formula .katex-display{margin:0;text-align:left}.ca-formula .katex{font-size:1em}
+.ca-values,.ca-live-values{display:flex;flex-wrap:wrap;gap:8px 24px;margin:10px 0;font-size:16px;line-height:1.5}
+.ca-values[hidden]{display:none}.ca-values>div,.ca-live-values>div{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 8px;min-width:0;max-width:100%}
+.ca-values dt,.ca-live-values dt{color:var(--ca-muted);margin:0}.ca-values dd,.ca-live-values dd{font-weight:550;margin:0;font-variant-numeric:tabular-nums;overflow-wrap:break-word}
+.ca-laboratory{border-top:1px solid var(--ca-border);padding-top:10px;margin-top:16px}
+.ca-rule{font-size:16px;font-family:ui-monospace,monospace;line-height:1.6;overflow-wrap:break-word;margin:10px 0}
+.ca-footnote,.ca-result-label{font-size:15px;line-height:1.6;color:var(--ca-muted);margin:10px 0 0}
+@media(max-width:480px){.ca-svg-scroll text{font-size:36px}.ca-model-summary{gap:4px 12px}.ca-values,.ca-live-values{gap:6px 16px}}
+@media(prefers-reduced-motion:reduce){.ca-root *{scroll-behavior:auto!important;transition:none!important}}

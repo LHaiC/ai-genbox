@@ -1,0 +1,834 @@
+[
+  {
+    "id": "m7",
+    "title": "曲率、边界与拆分 · Algorithm selection",
+    "minutes": 50,
+    "goals": [
+      "从二次模型推导牛顿（Newton）方向，并说清局部二次（local quadratic）收敛的条件。",
+      "解释障碍参数、严格可行（strict feasibility）性与对偶间隙（duality gap）的关系。",
+      "手算一轮ADMM，用两种残差（residual）检查不同错误。",
+      "依据结构与每步成本选方法，而不是按算法名字排序。"
+    ],
+    "prerequisites": [
+      "能求梯度（gradient）、海瑟矩阵（Hessian），理解正定（positive definite, PD）矩阵与线性方程组。",
+      "理解KKT、法锥（normal cone）、投影与近端算子（proximal operator）。",
+      "知道光滑（smooth）常数与步长（step size）对梯度下降（gradient descent）的影响。"
+    ],
+    "summary": "先掌握三个动作：用曲率修正方向，用障碍留在可行域（feasible set）内部，用变量复制拆开难题。50分钟是主线阅读与手算预算；展开证明用于进一步核对，不表示已掌握所有二阶法与分裂算法。",
+    "lessons": [
+      {
+        "id": "m7-l1",
+        "title": "牛顿法 · Newton’s method",
+        "intuition": "梯度（gradient）只说哪里上升；曲率还说明每个方向上弯得多厉害。牛顿法（Newton’s method）把当前位置附近的曲面暂时当成一个碗，直接走到这个碗的最低点。碗越接近真实曲面，一步越可靠；离解很远时通常要缩短步长（step size）。",
+        "formal": "条件 / Assumptions：先考虑无约束问题。在最优点 \\(x^*\\) 附近的一个凸球内：1. \\(f\\) 二阶连续可微（twice continuously differentiable），且 \\(\\nabla f(x^*)=0\\)。2. Hessian 满足 \\(H(x)=\\nabla^2f(x)\\succeq\\mu I\\)，其中 \\(\\mu>0\\)。3. \\(H\\) 以常数 \\(M\\) 利普希茨连续（Lipschitz continuous）。\n\n结论 / Claim：初值足够近时，精确全步牛顿法（full-step Newton’s method）满足局部二次收敛（local quadratic convergence）：\\[\\|x^{k+1}-x^*\\|\\le\\frac{M}{2\\mu}\\|x^k-x^*\\|^2.\\]范围 / Scope：仅有凸性、甚至强凸性（strong convexity），都不足以保证任意初值下的全步牛顿法收敛。",
+        "symbols": [
+          {
+            "symbol": "\\(H(x)\\)",
+            "meaning": "Hessian · 当前位置的海瑟矩阵，描述二阶曲率"
+          },
+          {
+            "symbol": "\\(p\\)",
+            "meaning": "Newton direction · 本轮牛顿方向"
+          },
+          {
+            "symbol": "\\(M\\)",
+            "meaning": "Hessian Lipschitz constant · 海瑟矩阵变化速度的上界，不是梯度光滑常数"
+          },
+          {
+            "symbol": "\\(\\mu\\)",
+            "meaning": "Curvature lower bound · 本节邻域内曲率的正下界"
+          }
+        ],
+        "proof": [
+          {
+            "title": "1. 建立要最小化的局部二次式 · Local quadratic model",
+            "body": "记当前位置梯度为 \\(g\\)。二阶模型保留常数项、线性项和二次项；这里只是局部近似，除非原目标本来就是二次函数（quadratic function）。",
+            "formula": "m_x(p)=f(x)+g^Tp+\\frac12p^TH(x)p",
+            "reason": "二阶泰勒展开说明被忽略部分比 \\(\\|p\\|^2\\) 更小。"
+          },
+          {
+            "title": "2. 对方向求极小值 · Newton equation",
+            "body": "若 \\(H(x)\\succ0\\)，模型严格凸（strict convexity），因此模型梯度为零不仅必要，而且给出唯一最小点。实现时求解线性方程组，无需显式求逆。",
+            "formula": "\\nabla_pm_x(p)=g+H(x)p=0 \\Longrightarrow H(x)p=-g",
+            "reason": "正定（positive definite, PD）线性系统可以用Cholesky等方法求解。"
+          },
+          {
+            "title": "3. 证明这个方向确实下降 · Descent direction",
+            "body": "只要梯度非零，方向也非零。把牛顿方程左乘 \\(p^T\\)，得到严格负的方向导数（directional derivative）。",
+            "formula": "g^Tp=-p^TH(x)p<0\\quad(g\\ne0)",
+            "reason": "方向下降保证足够小的正步长能降目标，不保证步长1总能降目标。"
+          },
+          {
+            "title": "4. 把下一步误差改写成曲率误差 · Error identity",
+            "body": "令 \\(e=x-x^*\\)，全步更新为 \\(x^+=x+p\\)。用 \\(\\nabla f(x^*)=0\\) 抵消最优点梯度。",
+            "formula": "x^+-x^*=H(x)^{-1} \\cdot\\bigl[H(x)e -(\\nabla f(x)-\\nabla f(x^*))\\bigr]",
+            "reason": "若梯度差恰好等于当前曲率乘误差，下一步误差就是零。"
+          },
+          {
+            "title": "5. 沿线段积出真实梯度变化 · Gradient integral",
+            "body": "在连接 \\(x^*\\) 与 \\(x\\) 的线段上使用微积分基本定理，再比较线段上的曲率与终点曲率。",
+            "formula": "\\nabla f(x)-\\nabla f(x^*) = \\int_0^1H(x^*+\\tau e)e\\,d\\tau",
+            "reason": "凸邻域保证整条线段都在假设有效的地方。"
+          },
+          {
+            "title": "6. 计算误差界中的二分之一 · Quadratic error bound",
+            "body": "曲率差上界为 \\(M(1-\\tau)\\|e\\|\\)，再乘一个 \\(\\|e\\|\\) 并积分。正定下界给出逆矩阵范数（norm）上界。",
+            "formula": "\\|x^+-x^*\\| \\le \\frac1\\mu\\int_0^1M(1-\\tau)\\|e\\|^2d\\tau = \\frac{M}{2\\mu}\\|e\\|^2",
+            "reason": "二次误差来自“曲率差一阶小”再乘“位置误差（iterate error）一阶小”。"
+          },
+          {
+            "title": "7. 说明为什么初值要近 · Local invariant region",
+            "body": "取半径 \\(r\\) 使球包含在上述邻域内，且 \\(Mr/(2\\mu)<1\\)。若误差不超过 \\(r\\)，误差界保证下一步更近，迭代一直留在球内。远处则通常采用回溯（backtracking）。",
+            "formula": "\\begin{aligned}&\\alpha\\in\\{1,\\beta,\\beta^2,\\ldots\\}\\\\&f(x+\\alpha p)\\le f(x)+c\\alpha g^Tp\\\\&0<c<1,\\ 0<\\beta<1\\end{aligned}",
+            "reason": "局部误差递推证明局部收敛；回溯是额外保护，不能凭这一个式子省略全局收敛所需的水平集（level set）等条件。"
+          }
+        ],
+        "example": {
+          "problem": "无约束地最小化 \\(f(x)=\\tfrac12(x_1-2)^2+2(x_2-1)^2\\)，从 \\(x^0=(0,0)\\) 出发。",
+          "steps": [
+            "梯度为 \\((-2,-4)\\)，海瑟矩阵为 \\(\\operatorname{diag}(1,4)\\)。",
+            "解 \\(Hp=(2,4)\\)，得到 \\(p=(2,1)\\)。",
+            "全步到 \\((2,1)\\)，目标从4降到0；因为目标本身就是二次模型，剩余误差恰好为零。",
+            "若另有 \\(x_1+x_2\\le2\\)，这个点不再可行。此时必须把约束放进子问题或改用适配约束的方法。"
+          ],
+          "answer": "无约束二次问题一步求解；不能将这一步原样当作约束问题的答案。"
+        },
+        "pitfalls": [
+          "“牛顿一步到解”只对正定二次目标及精确线性求解成立，不是一般非线性函数的性质。",
+          "海瑟矩阵奇异时牛顿方程可能无解或多解；海瑟矩阵不正定时方向可能上升。",
+          "二次收敛（quadratic convergence）描述足够靠近解时的误差递推，不表示每次计算便宜，也不表示全程都比梯度法快。"
+        ],
+        "checks": [
+          {
+            "question": "为什么不建议在代码里直接形成 \\(H^{-1}\\)？",
+            "answer": "只需解 \\(Hp=-g\\)。直接求逆通常更费存储和运算，也没有数值稳定性优势。"
+          },
+          {
+            "question": "本例 \\(M=0\\) 意味着什么？",
+            "answer": "海瑟矩阵恒定，因此误差界的右端为0；精确全步后到达无约束最优点。"
+          }
+        ],
+        "animation": "newton",
+        "source": {
+          "label": "原理参照：作者教材第6.4节与牛顿法讲义；本课为独立教学推导",
+          "url": "https://faculty.bicmr.pku.edu.cn/~wenzw/optbook/lect/lect-newton-TR.pdf"
+        }
+      },
+      {
+        "id": "m7-l2",
+        "title": "障碍法 · Barrier method",
+        "intuition": "硬约束说“不能越界”。对数障碍（logarithmic barrier）则在接近边界时把代价推向无穷大，让算法始终从内部行走。随着原目标的权重增大，障碍影响相对减弱，解逐渐接近真正的边界最优点。",
+        "formal": "模型 / Model：最小化 \\(f(x)\\)，约束 \\(g_i(x)\\le0\\)，\\(i=1,\\ldots,m\\)。本节无等式约束。条件 / Assumptions：\\(f,g_i\\) 在共同的开放凸域 \\(D\\subseteq\\mathbb R^n\\) 内可微且凸；存在严格可行点（strictly feasible point），且原问题最优值有限。另需明确假设：对所讨论的每个 \\(t>0\\)，障碍问题（barrier problem）有达到的精确最小点 \\(x(t)\\)。严格可行性本身不保证这件事。\n\n定义 / Definition：仅在 \\(g_i(x)<0\\) 的点上最小化：\\[\\phi_t(x)=tf(x)-\\sum_{i=1}^m\\log[-g_i(x)].\\]结论 / Claim：乘子 \\(\\lambda_i(t)=1/[t(-g_i(x(t)))]\\) 对偶可行（dual feasible），并给出证书：\\[0\\le f(x(t))-f^*\\le\\frac mt.\\]",
+        "symbols": [
+          {
+            "symbol": "\\(t>0\\)",
+            "meaning": "Barrier parameter · 原目标在障碍子问题中的权重；越大越接近原模型"
+          },
+          {
+            "symbol": "\\(s_i=-g_i(x)>0\\)",
+            "meaning": "Slack · 第i条不等式的严格正松弛量"
+          },
+          {
+            "symbol": "\\(\\lambda_i(t)\\)",
+            "meaning": "Dual multiplier · 由松弛量构造的对偶乘子"
+          },
+          {
+            "symbol": "\\(d(\\lambda)\\)",
+            "meaning": "Dual function · 对拉格朗日函数关于原变量取下确界所得的对偶函数"
+          }
+        ],
+        "proof": [
+          {
+            "title": "1. 先限定定义域 · Strict domain",
+            "body": "对数只能作用于正数。约束边界不是一个可以代入后“继续算”的普通位置；它是障碍定义域的边缘。",
+            "formula": "\\begin{aligned}&\\operatorname{dom}\\phi_t=\\{x\\in D:g_i(x)<0\\ \\forall i\\}\\\\&-\\log s_i\\longrightarrow +\\infty\\ (s_i\\downarrow0)\\end{aligned}",
+            "reason": "这解释了严格内部起点与保持可行的线搜索为什么不可省。"
+          },
+          {
+            "title": "2. 对障碍函数求梯度 · Barrier gradient",
+            "body": "链式法则（chain rule）中的两个负号要仔细处理：\\(-\\log[-g_i]\\) 的梯度（gradient）是 \\(\\nabla g_i/(-g_i)\\)。在精确中心点（central-path point），梯度为零。",
+            "formula": "0=t\\nabla f(x(t)) +\\sum_{i=1}^m\\frac{\\nabla g_i(x(t))}{-g_i(x(t))}",
+            "reason": "这是无约束光滑（smooth）凸子问题在开放定义域内部的最优性条件。"
+          },
+          {
+            "title": "3. 从中心点读出乘子 · Central-path multipliers",
+            "body": "把上式除以 \\(t\\)，每个正系数正好可解释为原问题的不等式乘子（equality multiplier）。",
+            "formula": "\\begin{aligned}&\\lambda_i(t)=\\frac1{t[-g_i(x(t))]}>0\\\\&\\nabla f(x(t)) +\\sum_i\\lambda_i(t)\\nabla g_i(x(t))=0\\end{aligned}",
+            "reason": "得到对偶可行性与拉格朗日（Lagrangian）站立性，但互补条件仍是近似的。"
+          },
+          {
+            "title": "4. 明确偏离互补条件多少 · Perturbed complementarity",
+            "body": "每一项乘子乘松弛量都相同。有限 \\(t\\) 下不会等于零，因此一般还不是原问题的KKT点。",
+            "formula": "\\begin{aligned}&\\lambda_i(t)[-g_i(x(t))]=\\frac1t\\\\&\\sum_i\\lambda_i(t)[-g_i(x(t))]=\\frac mt\\end{aligned}",
+            "reason": "中心路径把难以兼顾的严格可行与互补条件，用一个受控误差连接起来。"
+          },
+          {
+            "title": "5. 构造真正的下界 · Dual lower bound",
+            "body": "拉格朗日函数 \\(\\mathcal L(x,\\lambda)=f(x)+\\sum_i\\lambda_i g_i(x)\\) 关于 \\(x\\) 凸。刚才的零梯度说明 \\(x(t)\\) 是该拉格朗日函数的全局最小点。",
+            "formula": "d(\\lambda(t)) = \\inf_{x\\in D}\\mathcal L(x,\\lambda(t)) = \\mathcal L(x(t),\\lambda(t))=f(x(t))-\\frac mt",
+            "reason": "这里必须用到凸性（convexity）与精确站立性，不能对任意内部点套用这个等号。"
+          },
+          {
+            "title": "6. 用弱对偶夹住未知最优值 · Gap certificate",
+            "body": "原始点 \\(x(t)\\) 可行给上界，对偶可行给下界。把两端相减，就得到无需知道最优解的证书。",
+            "formula": "d(\\lambda(t))\\le f^*\\le f(x(t)) \\Longrightarrow 0\\le f(x(t))-f^*\\le\\frac mt",
+            "reason": "这一步只需弱对偶（weak duality）；不是通过把计算出来的目标值猜成最优值。"
+          },
+          {
+            "title": "7. 转成一个可执行的外层循环 · Outer iteration",
+            "body": "先找严格可行点；用适合的凸子问题方法充分求解当前 \\(\\phi_t\\)；增大 \\(t\\)，以上次解热启动。若使用阻尼牛顿法（Newton’s method），另需二阶可微与可求解的正定（positive definite, PD）牛顿（Newton）系统等条件。每步先确认所有松弛量仍为正，再检查下降。实际内层未精确求解时，还必须控制站立残差（residual）或计算有效对偶下界。",
+            "formula": "\\begin{aligned}&t_{j+1}=\\gamma t_j,\\quad\\gamma>1\\\\&t_j\\ge m/\\varepsilon\\\\&\\text{exact center required}\\end{aligned}",
+            "reason": "仅把参数设得很大，不代表已经把对应子问题解好。"
+          }
+        ],
+        "example": {
+          "problem": "最小化 \\(f(x)=x^2/2\\)，约束 \\(x\\ge1\\)。取 \\(g(x)=1-x\\)，用 \\(t=2\\) 的障碍问题。",
+          "steps": [
+            "原问题最优解为 \\(x^*=1\\)，最优值为 \\(1/2\\)。障碍目标为 \\(x^2-\\log(x-1)\\)，定义域 \\(x>1\\)。",
+            "一阶条件 \\(2x-1/(x-1)=0\\)，整理为 \\(x(x-1)=1/2\\)。",
+            "取定义域内的根 \\(x(2)=(1+\\sqrt3)/2\\approx1.3660\\)，另一根为负，不可用。",
+            "乘子 \\(\\lambda=1/[2(x-1)]=x\\)。对偶函数为 \\(d(\\lambda)=\\lambda-\\lambda^2/2\\)。",
+            "中心点原始值约0.9330，对偶值约0.4330，二者差恰好0.5；真实目标间隙约0.4330，小于0.5。"
+          ],
+          "answer": "\\(m/t=1/2\\) 是可验证的上界，不是本例真实目标误差（objective gap）的精确值。"
+        },
+        "pitfalls": [
+          "边界最优点不能作为对数障碍的初始点；必要时先解寻找严格可行点的辅助问题。",
+          "障碍法（barrier method）不会在有限参数下自动精确满足互补条件。",
+          "有限精度下，仅报告 \\(m/t\\) 而不检查内层求解精度，可能夸大准确性。"
+        ],
+        "checks": [
+          {
+            "question": "有3条不等式，想让精确中心点误差不超过0.01，\\(t\\) 至少多少？",
+            "answer": "至少300，因为 \\(3/t\\le0.01\\)。这不包含近似求解中心点的额外误差。"
+          },
+          {
+            "question": "某个点严格可行，就一定有 \\(f(x)-f^*\\le m/t\\) 吗？",
+            "answer": "没有。还需它是对应障碍问题的精确中心点，或另外给出控制近似误差的证书。"
+          }
+        ],
+        "animation": null,
+        "source": {
+          "label": "补充参照：Boyd与Vandenberghe《Convex Optimization》第11章，障碍法与中心路径；算例为本课自拟",
+          "url": "https://web.stanford.edu/~boyd/cvxbook/"
+        }
+      },
+      {
+        "id": "m7-l3",
+        "title": "ADMM：交替方向乘子法 · Alternating direction method of multipliers",
+        "intuition": "同一个变量有时同时承担两种难以一起处理的要求。复制一份后，让一份处理目标，一份处理约束，再用等式要求它们一致。ADMM每轮各解决一个容易的子问题，并累积两份变量的分歧；这个累积量就是乘子（multiplier）。",
+        "formal": "模型 / Model：两块一致性形式（consensus form）\\(\\min_{x,z}f(x)+h(z)\\)，约束 \\(x=z\\)。条件 / Assumptions：1. \\(f,h\\) 适当（proper）、闭（closed）且凸；未增广拉格朗日函数（unaugmented Lagrangian）存在鞍点（saddle point）。2. 固定 \\(\\rho>0\\)；每轮两个子问题均有最小点，并被精确求解。\n\n结论 / Claim：经典两块 ADMM 保证原始残差（primal residual）趋于零、目标值趋于最优值，并且对偶变量（dual variable）收敛。范围 / Scope：不能据此断言一般模型中任意原变量（primal variable）序列都收敛。特例 / Special case：若 \\(h=\\delta_C\\)，其中 \\(C\\) 非空、闭、凸，则 \\(z\\) 子问题就是欧氏投影（Euclidean projection）。",
+        "symbols": [
+          {
+            "symbol": "\\(z\\)",
+            "meaning": "Consensus variable · 复制变量，独立处理另一块目标或约束"
+          },
+          {
+            "symbol": "\\(\\rho>0\\)",
+            "meaning": "Penalty parameter · 固定增广惩罚参数"
+          },
+          {
+            "symbol": "\\(u=y/\\rho\\)",
+            "meaning": "Scaled multiplier · 缩放乘子；y是等式约束乘子"
+          },
+          {
+            "symbol": "\\(r^k,s^k\\)",
+            "meaning": "Primal and dual residuals · 原始一致性残差与对偶残差"
+          }
+        ],
+        "proof": [
+          {
+            "title": "1. 证明复制没有改变问题 · Consensus reformulation",
+            "body": "若 \\(x=z\\)，拆开的目标就是原来的 \\(f(x)+h(x)\\)。反过来，任何原问题可行点都对应复制问题中的 \\((x,x)\\)。",
+            "formula": "\\min_x[f(x)+h(x)] \\equiv\\min_{x,z}\\{f(x)+h(z): x-z=0\\}",
+            "reason": "等价性依赖保留等式；只复制变量却删掉一致性约束会改变模型。"
+          },
+          {
+            "title": "2. 加上乘子与二次罚项 · Augmented Lagrangian",
+            "body": "乘子记录约束的方向信息，二次项惩罚本轮分歧。通过配平方，可以把乘子放进平方中心。",
+            "formula": "\\mathcal L_\\rho=f(x)+h(z) +y^T(x-z)+\\frac\\rho2\\|x-z\\|^2 =f(x)+h(z) +\\frac\\rho2\\|x-z+u\\|^2-\\frac\\rho2\\|u\\|^2",
+            "reason": "最后一项对本轮x、z最小化是常数，但不能把乘子更新也删掉。"
+          },
+          {
+            "title": "3. 第一块更新只管f · First block",
+            "body": "固定上一轮的 \\(z,u\\)，求一个加了二次项的最小化问题。若f是二次函数（quadratic function），常常变成可复用分解的线性系统。",
+            "formula": "x^{k+1} = \\arg\\min_x\\left[f(x)+\\frac\\rho2\\|x-z^k+u^k\\|^2\\right]",
+            "reason": "本步不要求x满足原来的集合约束，那是另一块负责的事。"
+          },
+          {
+            "title": "4. 第二块使用刚更新的x · Second block",
+            "body": "固定新的x，再更新z。若h是集合示性函数（indicator function），就把 \\(x^{k+1}+u^k\\) 投到C。",
+            "formula": "\\begin{aligned}&z^{k+1} = \\operatorname{prox}_{h/\\rho}(x^{k+1}+u^k)\\\\&h=\\delta_C \\Rightarrow  z^{k+1}=\\Pi_C(x^{k+1}+u^k)\\end{aligned}",
+            "reason": "这是顺序更新；擅自让两块都使用旧值，并不是同一个标准算法。"
+          },
+          {
+            "title": "5. 累积本轮分歧 · Dual update",
+            "body": "两份变量尚未一致时，乘子会把这次分歧传给下一轮。固定罚参数也能逐渐逼近一致，不必每轮把罚参数放大到无穷。",
+            "formula": "u^{k+1}=u^k+r^{k+1},\\qquad r^{k+1}=x^{k+1}-z^{k+1}",
+            "reason": "仅做两个交替最小化而不更新u，通常只能求到固定二次罚问题的解。"
+          },
+          {
+            "title": "6. 从子问题最优性推导第二种残差 · Dual residual",
+            "body": "为解释残差，暂设f可微（differentiable）。x子问题的一阶条件配合乘子更新，得到原问题站立条件（stationarity condition）的剩余量。",
+            "formula": "\\begin{aligned}&\\nabla f(x^{k+1})+y^{k+1}=-s^{k+1}\\\\&s^{k+1}=\\rho(z^{k+1}-z^k)\\\\&y^{k+1}=\\rho u^{k+1}\\end{aligned}",
+            "reason": "只有r小表示两份变量一致；还需s小，说明目标与乘子也接近平衡。"
+          },
+          {
+            "title": "7. 检查z侧的驻点条件 · Stationarity check",
+            "body": "z子问题精确求解还给出 \\(y^{k+1}\\in\\partial h(z^{k+1})\\)。若h是示性函数，这就是 \\(y^{k+1}\\in N_C(z^{k+1})\\)。",
+            "formula": "\\begin{aligned}&r=0,\\ s=0 \\Longrightarrow x=z\\\\&0=\\nabla f(x)+y\\\\&y\\in\\partial h(z)\\end{aligned}",
+            "reason": "这些正是复制问题的KKT条件。有限容差时得到近似证据，不是无需条件的精确最优证明。"
+          }
+        ],
+        "example": {
+          "problem": "使用 \\(f(x)=\\tfrac12(x_1-2)^2+2(x_2-1)^2\\)，\\(C=\\{z\\ge0:z_1+z_2\\le2\\}\\)。取 \\(\\rho=1,z^0=(1,1),u^0=(0,0)\\)。",
+          "steps": [
+            "第一步解 \\((H+I)x=Ha+z^0-u^0\\)，其中 \\(H=\\operatorname{diag}(1,4),a=(2,1)\\)，得到 \\(x^1=(1.5,1)\\)。",
+            "把 \\((1.5,1)\\) 投到C：总和超过2，两个分量各减0.25，得 \\(z^1=(1.25,0.75)\\)。",
+            "乘子更新为 \\(u^1=(0.25,0.25)\\)。原始残差 \\(r^1=(0.25,0.25)\\)，对偶残差 \\(s^1=(0.25,-0.25)\\)。",
+            "核对 \\(\\nabla f(x^1)+y^1=(-0.25,0.25)=-s^1\\)。z位于总和约束的边界，\\(y^1=0.25(1,1)\\) 属于该点的外法锥（outward normal cone）。"
+          ],
+          "answer": "一轮后z已经可行，但两种残差都不为零，所以不能宣称已求到最优解。"
+        },
+        "pitfalls": [
+          "ADMM的x中间点可能不可行，不能只拿它较低的目标值与可行算法比较。",
+          "标准两块收敛结论不能直接推广为任意多块依次更新的收敛保证。",
+          "随意改变惩罚参数、近似求解子问题或处理非凸（nonconvex）目标，需要重新核对相应理论。"
+        ],
+        "checks": [
+          {
+            "question": "若 \\(r^k=0\\) 而 \\(s^k\\ne0\\)，还欠什么？",
+            "answer": "两份变量已经一致，但目标梯度（gradient）与乘子尚未平衡；仍未满足完整KKT条件。"
+          },
+          {
+            "question": "\\(h=\\lambda\\|z\\|_1\\) 时z更新是什么？",
+            "answer": "对 \\(x^{k+1}+u^k\\) 逐分量软阈值（soft thresholding），阈值为 \\(\\lambda/\\rho\\)。这是同一拆分框架对另一类结构的利用。"
+          }
+        ],
+        "animation": "admm",
+        "source": {
+          "label": "原理参照：作者教材第8.6节与ADMM讲义；本课采用两块一致性形式重新推导",
+          "url": "https://faculty.bicmr.pku.edu.cn/~wenzw/optbook/lect/24-lect-admm-chhyx.pdf"
+        }
+      },
+      {
+        "id": "m7-l4",
+        "title": "算法选择 · Choosing an algorithm",
+        "intuition": "一种方法每轮做得少，可能要走很多轮；另一种每轮解大线性系统，可能只需少量轮。正确比较要先固定同一个模型、同一种误差要求，再比较实际需要的梯度（gradient）、投影、分解、存储与通信。对二维教学题，闭式（closed form）推导往往比部署通用算法更直接。",
+        "formal": "以 \\(f(x)=\\tfrac12(x-a)^TH(x-a)\\)、\\(H\\succ0\\)、非空闭凸集（convex set）\\(C\\) 为共同模型；若讨论全局解存在，可用f的强制性（coercivity）与C闭性（closedness）保证。设 \\(\\mu I\\preceq H\\preceq LI\\)。下面推导不同方法实际解的子问题，不宣称存在对所有规模都最好的算法。投影与近端（proximal）必须能准确计算；采用障碍法（barrier method）还要有适合的严格内部表示。",
+        "symbols": [
+          {
+            "symbol": "\\(\\|v\\|_H^2=v^THv\\)",
+            "meaning": "Squared H-norm · 由曲率矩阵定义的平方长度"
+          },
+          {
+            "symbol": "\\(\\Pi_C\\)",
+            "meaning": "Euclidean projection · 欧氏投影，不同于一般H度量投影"
+          },
+          {
+            "symbol": "\\(G_\\alpha(x)\\)",
+            "meaning": "Projected gradient mapping · 投影梯度映射，用来检查约束最优性"
+          }
+        ],
+        "proof": [
+          {
+            "title": "1. 用结构确认问题类型 · Problem structure",
+            "body": "正定（positive definite, PD）二次目标给强凸性（strong convexity），闭凸集给凸约束。先检查最优解与可行集，再决定所需原语。",
+            "formula": "\\begin{aligned}&\\nabla f(x)=H(x-a)\\\\&\\mu=\\lambda_{\\min}(H)\\\\&L=\\lambda_{\\max}(H)\\end{aligned}",
+            "reason": "特征值（eigenvalue）既决定模型几何，也影响梯度步长（step size）和条件数（condition number）。"
+          },
+          {
+            "title": "2. 梯度法使用一个统一的曲率上界 · Uniform upper model",
+            "body": "用 \\(LI\\) 代替真实曲率，得到容易最小化的上界模型。对C最小化这个模型就是投影梯度一步。",
+            "formula": "x^+=\\operatorname*{argmin}_{z\\in C} \\left[\\nabla f(x)^T(z-x)\\right. \\left.+\\frac L2\\|z-x\\|^2\\right] =\\Pi_C\\!\\left(x-\\frac1L\\nabla f(x)\\right)",
+            "reason": "当梯度与投影便宜时，每步成本低，适合先作为可靠基线。"
+          },
+          {
+            "title": "3. 牛顿模型使用真实曲率 · True curvature model",
+            "body": "二次目标的牛顿（Newton）模型就是原目标。带约束时，它要求解一个带H度量的约束二次问题；不能先做无约束牛顿再随手欧氏投影。",
+            "formula": "x^+=\\arg\\min_{z\\in C}\\frac12\\|z-a\\|_H^2",
+            "reason": "保留精确曲率也保留了约束求解的工作；“二阶”不会让困难凭空消失。"
+          },
+          {
+            "title": "4. 用数字说明两种投影为何不同 · Two metrics",
+            "body": "在 \\(H=\\operatorname{diag}(1,4),a=(2,1)\\) 和三角形C中，欧氏投影把两个分量同等缩减；真实目标更不愿偏离第二个分量。",
+            "formula": "\\begin{aligned}&\\Pi_C(a)=(1.5,0.5)\\\\&f(1.5,0.5)=0.625\\\\&\\operatorname*{argmin}_{z\\in C}\\tfrac12\\|z-a\\|_H^2 =(1.2,0.8),\\quad f=0.4\\end{aligned}",
+            "reason": "度量改变了距离的含义。只有某些特殊情况，例如H为正数乘单位阵，欧氏投影才与H投影普遍一致。"
+          },
+          {
+            "title": "5. 拆分是否真的降低每步成本 · Per-step cost",
+            "body": "ADMM把目标放在x块、集合放在z块。本例x更新只解固定矩阵系统，z更新只做欧氏投影。大规模时可尝试复用固定矩阵的分解。",
+            "formula": "\\begin{aligned}&(H+\\rho I)x^{k+1}=Ha+\\rho(z^k-u^k)\\\\&z^{k+1}=\\Pi_C(x^{k+1}+u^k)\\end{aligned}",
+            "reason": "若分解昂贵、矩阵经常变化或通信很慢，这个优势可能减小；不能仅凭“可拆分”就断言更快。"
+          },
+          {
+            "title": "6. 选择与方法一致的停止量 · Stopping criterion",
+            "body": "无约束问题看梯度；投影问题看梯度映射（gradient mapping）；ADMM看两种残差（residual）；障碍法还看中心求解精度与对偶间隙（duality gap）。共同底线是先检查原模型可行性。",
+            "formula": "\\begin{aligned}&G_\\alpha(x) = \\frac{x-\\Pi_C(x-\\alpha\\nabla f(x))}{\\alpha}\\\\&G_\\alpha(x^*)=0\\end{aligned}",
+            "reason": "约束最优点梯度往往不为零。以梯度范数（norm）强行停止，可能永远停不下来。"
+          },
+          {
+            "title": "7. 用相同证书比较终点 · Comparable certificates",
+            "body": "若两种方法都返回可行点，并有同一个有效对偶下界 \\(d\\)，就能比较原目标上界与该下界的差。没有可用下界时，如实报告残差与容差，不虚构目标误差（objective gap）。",
+            "formula": "d\\le f^*\\le f(x) \\Longrightarrow f(x)-f^*\\le f(x)-d",
+            "reason": "先统一“算得够好”的含义，才有意义比较运行时间和资源成本。"
+          }
+        ],
+        "example": {
+          "problem": "同样从 \\((1,1)\\) 开始，比较本例的投影梯度与 \\(\\rho=1\\) 的ADMM。",
+          "steps": [
+            "投影梯度用 \\(\\alpha=1/4\\)：先到 \\((1.25,1)\\)，再投影为 \\((1.125,0.875)\\)，目标为0.4140625。",
+            "ADMM第一轮的可行点 \\(z^1=(1.25,0.75)\\)，目标为0.40625，看上去更接近0.4。",
+            "第二轮ADMM得到 \\(x^2=(1.5,0.9),z^2=(1.3,0.7),u^2=(0.45,0.45)\\)，此时可行目标为0.425，反而升高。",
+            "但残差范数从 \\(\\|r^1\\|\\approx0.3536\\) 降到 \\(\\|r^2\\|\\approx0.2828\\)，\\(\\|s^2\\|\\approx0.0707\\)。ADMM的收敛机制不要求可行点目标每轮单调下降。"
+          ],
+          "answer": "两轮数据足以否定“ADMM每轮目标必降”，却不足以给算法做普遍速度排名。"
+        },
+        "pitfalls": [
+          "一次梯度（subgradient）与一次矩阵分解不能都按“一轮”视为相同成本。",
+          "可行目标下降不等于已经知道距离最优值多远；不可行目标更低也不是进步证书。",
+          "“先牛顿再欧氏投影”不是一般约束牛顿法（Newton’s method）。"
+        ],
+        "checks": [
+          {
+            "question": "本例最优点梯度为 \\((-0.8,-0.8)\\)，为什么仍然最优？",
+            "answer": "沿可行方向不能再增加总和；负梯度的下降意图由边界法向量抵消，满足KKT。投影梯度映射为零。"
+          },
+          {
+            "question": "什么时候优先尝试投影梯度？",
+            "answer": "目标梯度易算、L可估计或可回溯（backtracking）、C的投影便宜，且希望每轮工作与存储较少时。具体效果仍需用同一准确性标准验证。"
+          }
+        ],
+        "animation": null,
+        "source": {
+          "label": "原理参照：刘浩洋、户将、李勇锋、文再文《最优化：建模、算法与理论》作者网站；本课文字、算例与推导重新编写",
+          "url": "https://faculty.bicmr.pku.edu.cn/~wenzw/optbook.html"
+        }
+      }
+    ],
+    "takeaways": [
+      "牛顿法（Newton’s method）解的是局部二次（local quadratic）模型；正定性（positive definiteness）给下降方向，局部条件给二次收敛（quadratic convergence），二者都不能替代约束。",
+      "障碍法（barrier method）每个有限参数对应严格内部的近似解；精确中心点（central-path point）的对偶间隙（duality gap）提供停止依据。",
+      "ADMM的两块交替更新必须配合乘子（multiplier）更新；同时检查一致性与站立性残差（residual）。",
+      "先问梯度（gradient）、投影、近端（proximal）、线性求解分别有多贵，再选算法；不同方法的一轮不能直接按同等成本比较。"
+    ]
+  },
+  {
+    "id": "m8",
+    "title": "把一题做透，再换一题独立做 · Worked examples",
+    "minutes": 40,
+    "goals": [
+      "独立完成建模、凸性（convexity）、存在唯一性、KKT与数值检查的完整链条。",
+      "在同一个约束二次问题上手算投影梯度（projected gradient）、约束牛顿（Newton）、障碍与ADMM所做的工作。",
+      "能指出“梯度（gradient）为零”“投影一次”“目标下降”各自何时不能证明最优。",
+      "遮住解答完成变式检索题，发现自己尚未掌握的环节。"
+    ],
+    "prerequisites": [
+      "已完成前七模块主线，至少亲手算过一次梯度（subgradient）、投影和软阈值（soft thresholding）。",
+      "能解两个未知量的线性方程组，并理解KKT四组条件。"
+    ],
+    "summary": "本模块只围绕一个二维模型串起整条推理，再用六道新变式检验迁移。40分钟用于核心例题和主动检索；如果某一步无法独立写出，就回到对应模块补练。观看动画与跟读公式可以辅助理解，但不能替代独立计算。",
+    "lessons": [
+      {
+        "id": "m8-l1",
+        "title": "综合题：最优证书 · Worked optimality certificate",
+        "intuition": "设两个决策量都想接近各自理想值，但共享总量上限。第二个量偏离理想值的代价更高，所以最优解不会平均让步。我们先把解算出来，再证明它胜过所有可行点，而不是只胜过几个试过的点。",
+        "formal": "本节固定 \\(f(x)=\\tfrac12(x_1-2)^2+2(x_2-1)^2\\)。可行域为：\n\n\\[C=\\{x\\in\\mathbb R^2: x_1\\ge0,\\quad x_2\\ge0, x_1+x_2\\le2\\}\\]\n\nC非空、紧且凸，f连续且1-强凸（strong convexity），因此最优解存在且唯一。约束均仿射，\\((1/2,1/2)\\) 严格可行（strict feasibility），Slater成立。KKT因此可用于寻找解；找到可行乘子（multiplier）后，凸性（convexity）又使KKT足以证明全局最优（global optimality）。",
+        "symbols": [
+          {
+            "symbol": "\\(a=(2,1)\\)",
+            "meaning": "Unconstrained target · 不受总量约束时的理想选择"
+          },
+          {
+            "symbol": "\\(H=\\operatorname{diag}(1,4)\\)",
+            "meaning": "Hessian · 误差代价的曲率矩阵"
+          },
+          {
+            "symbol": "\\(\\lambda\\)",
+            "meaning": "Inequality multiplier · 总量上限 \\(x_1+x_2\\le2\\) 的乘子"
+          },
+          {
+            "symbol": "\\(\\eta_1,\\eta_2\\)",
+            "meaning": "Nonnegativity multipliers · 两条非负约束 \\(-x_i\\le0\\) 的乘子"
+          }
+        ],
+        "proof": [
+          {
+            "title": "1. 列出模型与允许的点 · Model",
+            "body": "变量是两个可调数量，理想值与权重都是固定数据。C是含边界的三角形，\\((0,0)\\) 可行。",
+            "formula": "\\begin{aligned}&\\min_{x\\in C}f(x)\\\\&C=\\{x:-x_1\\le0,\\ -x_2\\le0, x_1+x_2-2\\le0\\}\\end{aligned}",
+            "reason": "每个不等式都写成小于等于零，后面乘子的符号就不会混乱。"
+          },
+          {
+            "title": "2. 把存在、唯一、凸性分开检查 · Existence and uniqueness",
+            "body": "C闭有界且非空，故连续目标取得最小值。海瑟矩阵（Hessian）特征值（eigenvalue）为1与4，给强凸性（strong convexity），因此最优点至多一个。",
+            "formula": "\\begin{aligned}&\\nabla f(x)=(x_1-2,4(x_2-1))\\\\&\\nabla^2f(x)=\\begin{pmatrix}1&0\\\\0&4\\end{pmatrix} \\succeq I\\end{aligned}",
+            "reason": "紧性（compactness）负责本例的存在性，强凸性负责唯一性；两种责任不能混为一个结论。"
+          },
+          {
+            "title": "3. 写出完整拉格朗日函数 · Lagrangian",
+            "body": "总量约束与非负约束的乘子都必须非负。先保留所有项，不提前删掉看似无用的条件。",
+            "formula": "\\begin{aligned}&\\mathcal L=f(x)+\\lambda(x_1+x_2-2) -\\eta_1x_1-\\eta_2x_2\\\\&\\lambda,\\eta_1,\\eta_2\\ge0\\end{aligned}",
+            "reason": "负号来自约束 \\(-x_i\\le0\\)，不是乘子可以为负。"
+          },
+          {
+            "title": "4. 提出活动约束猜测并求候选 · Active-set candidate",
+            "body": "无约束理想点 \\((2,1)\\) 超过总量上限。尝试总量约束活动、两个分量严格为正，此时互补条件要求 \\(\\eta_1=\\eta_2=0\\)。",
+            "formula": "x_1=2-\\lambda,\\qquad x_2=1-\\lambda/4,\\qquad x_1+x_2=2",
+            "reason": "这只是候选活动集（active set），必须在求解后检查正性和乘子符号。"
+          },
+          {
+            "title": "5. 解出并核验全部KKT条件 · KKT verification",
+            "body": "代入总量等式得到 \\(3-5\\lambda/4=2\\)。结果两个分量为正，乘子也非负，因此候选活动集得到验证。",
+            "formula": "\\begin{aligned}&\\lambda^*=\\frac45\\\\&x^* = \\left(\\frac65,\\frac45\\right),\\quad\\eta_1^*=\\eta_2^*=0,\\quad f^*=\\frac25\\end{aligned}",
+            "reason": "原始可行（primal feasibility）、对偶可行（dual feasibility）、站立性与互补松弛（complementary slackness）四组条件全部满足。"
+          },
+          {
+            "title": "6. 不依赖猜测，再直接证明全局最优 · Direct global proof",
+            "body": "令 \\(d=x-x^*\\)。二次函数（quadratic function）可以精确展开，没有泰勒余项；最优点梯度（gradient）为 \\(-\\tfrac45(1,1)\\)。",
+            "formula": "f(x)-f(x^*)=\\frac12d_1^2+2d_2^2 +\\frac45(2-x_1-x_2)",
+            "reason": "对任何可行x，右侧三项都非负，因此覆盖整个可行集，而非只比较几处样本。"
+          },
+          {
+            "title": "7. 从证书读出唯一性与距离控制 · Distance certificate",
+            "body": "前两个平方项同时为零才可能等号成立。还可用较小曲率把它们下界为欧氏距离的平方。",
+            "formula": "\\begin{aligned}&f(x)-f^*\\ge\\frac12\\|x-x^*\\|^2\\\\&f(x)-f^*\\le\\varepsilon \\Rightarrow \\|x-x^*\\|\\le\\sqrt{2\\varepsilon}\\end{aligned}",
+            "reason": "最后一个推论需要x可行，而且需要一个可靠的目标间隙上界。"
+          }
+        ],
+        "example": {
+          "problem": "有人提交两个答案：\\(x_A=(1.5,0.5)\\) 与 \\(x_B=(2,1)\\)。如何审核？",
+          "steps": [
+            "\\(x_A\\) 可行，但目标为 \\(0.625\\)，高于0.4，故不是最优。",
+            "\\(x_B\\) 目标为0，看似更低，却因总量为3而不可行，不能参与原问题的最优比较。",
+            "提交 \\(x^*=(1.2,0.8)\\) 时，还给出乘子 \\((\\lambda,\\eta_1,\\eta_2)=(0.8,0,0)\\)，四组KKT条件可逐一核验。"
+          ],
+          "answer": "最优答案是决策向量（decision vector）\\((1.2,0.8)\\)，最优值是0.4；二者都必须附着于原可行域（feasible set）。"
+        },
+        "pitfalls": [
+          "活动约束（active constraint）表示等号成立，不表示它的乘子必定严格为正；本例恰好为正。",
+          "先猜活动集是计算技巧，验证全部KKT条件才是证明。",
+          "不能把 \\(\\nabla f(x^*)\\ne0\\) 误判为不最优；这里是受约束最小化。"
+        ],
+        "checks": [
+          {
+            "question": "本例严格可行点能否取 \\((1,1)\\)？",
+            "answer": "不能，因为总量约束取等号；\\((1/2,1/2)\\) 同时满足三条严格不等式。"
+          },
+          {
+            "question": "若可行点目标不超过0.405，距离最优解最远多少？",
+            "answer": "目标间隙至多0.005，所以距离至多 \\(\\sqrt{0.01}=0.1\\)。"
+          }
+        ],
+        "animation": null,
+        "source": {
+          "label": "原理参照：刘浩洋、户将、李勇锋、文再文《最优化：建模、算法与理论》作者网站；本课文字、算例与推导重新编写",
+          "url": "https://faculty.bicmr.pku.edu.cn/~wenzw/optbook.html"
+        }
+      },
+      {
+        "id": "m8-l2",
+        "title": "综合题：投影与速率 · Projection & rate",
+        "intuition": "梯度（gradient）希望同时增加两个变量，但总量上限只允许沿边界重新分配。投影梯度（projected gradient）先提出一个不受限制的建议，再找离建议最近的可行点。这一次我们不只画轨迹，还会算出误差每轮到底缩小多少。",
+        "formal": "共同模型：\\(f(x)=\\tfrac12(x_1-2)^2+2(x_2-1)^2\\)，\\(C=\\{x\\in\\mathbb R^2:x_1,x_2\\ge0,\\ x_1+x_2\\le2\\}\\)。欧氏投影（Euclidean projection）\\(\\Pi_C(y)\\) 对任何 \\(y\\in\\mathbb R^2\\) 存在且唯一，因为C非空闭凸，投影目标严格凸（strict convexity）。投影具有形式 \\(z_i=\\max(y_i-\\theta,0)\\)：若正部（positive part）总和不超过2，取 \\(\\theta=0\\)；否则唯一的 \\(\\theta>0\\) 使正部总和等于2。投影梯度取 \\(\\alpha=1/L=1/4\\)。从 \\(x^0=(1,1)\\) 出发，本例轨迹一直处于两分量为正的总量边界，位置误差（iterate error）精确按 \\(3/8\\) 递减；这是本例特定轨迹的精确结论，不是所有凸问题的统一率。",
+        "symbols": [
+          {
+            "symbol": "\\(\\theta\\)",
+            "meaning": "Projection threshold · 投影子问题总量约束的乘子或阈值"
+          },
+          {
+            "symbol": "\\(q_k=x_1^k\\)",
+            "meaning": "Boundary coordinate · 边界上的一个自由坐标；\\(x_2^k=2-q_k\\)"
+          },
+          {
+            "symbol": "\\(G_\\alpha\\)",
+            "meaning": "Gradient mapping · 可行约束问题的梯度映射"
+          }
+        ],
+        "proof": [
+          {
+            "title": "1. 把投影本身写成优化问题 · Projection problem",
+            "body": "投影最小化与给定y的欧氏距离，不是原目标f。给总量约束乘子 \\(\\theta\\)，给非负约束乘子 \\(\\xi_i\\)。",
+            "formula": "\\begin{aligned}&\\min_{z\\in C}\\frac12\\|z-y\\|^2\\\\&z_i-y_i+\\theta-\\xi_i=0\\\\&\\xi_i z_i=0\\end{aligned}",
+            "reason": "投影问题也可使用KKT，这样能推出公式而非死记阈值。"
+          },
+          {
+            "title": "2. 逐分量消去非负约束乘子 · Coordinate elimination",
+            "body": "若 \\(z_i>0\\)，则 \\(\\xi_i=0\\)，所以 \\(z_i=y_i-\\theta\\)；若该值不为正，非负约束把z固定在0。",
+            "formula": "z_i=\\max(y_i-\\theta,0),\\qquad\\theta\\ge0",
+            "reason": "这是同时处理平移与截零，不能只先截零再按固定比例缩放。"
+          },
+          {
+            "title": "3. 根据总量决定阈值 · Threshold selection",
+            "body": "若不加阈值就已满足上限，总量约束不必起作用。若超过上限，则互补松弛（complementary slackness）要求投影后总和正好为2。",
+            "formula": "\\begin{aligned}&\\sum_i\\max(y_i,0)\\le2 \\Rightarrow \\theta=0\\\\&\\text{否则}\\ \\sum_i\\max(y_i-\\theta,0)=2\\end{aligned}",
+            "reason": "超上限时左侧关于阈值连续且严格下降到目标水平，故阈值唯一。"
+          },
+          {
+            "title": "4. 从边界点写出梯度建议 · Gradient proposal",
+            "body": "把当前点写成 \\((q,2-q)\\)。代入梯度公式，再用四分之一步长（step size）。",
+            "formula": "\\begin{aligned}&\\nabla f(q,2-q)=(q-2,4(1-q))\\\\&y=x-\\frac14\\nabla f(x) = \\left(\\frac34q+\\frac12,1\\right)\\end{aligned}",
+            "reason": "二维迭代被化为一个标量递推，方便精确分析。"
+          },
+          {
+            "title": "5. 验证本轨迹处于同一投影分支 · Projection branch",
+            "body": "若 \\(1\\le q\\le6/5\\)，y总和大于2，且减去共同阈值后两分量仍为正，因此本轮不需要截零。",
+            "formula": "\\begin{aligned}&\\theta=\\frac{y_1+y_2-2}{2}=\\frac38q-\\frac14\\\\&q^+=y_1-\\theta=\\frac38q+\\frac34\\end{aligned}",
+            "reason": "递推把区间 \\([1,6/5]\\) 映到自身，故从q₀=1出发可一直使用这个分支。"
+          },
+          {
+            "title": "6. 减去不动点得到精确收缩 · Exact contraction",
+            "body": "解 \\(q=3q/8+3/4\\)，得到 \\(q^*=6/5\\)。从递推两侧同时减去它。",
+            "formula": "q_{k+1}-\\frac65 = \\frac38\\left(q_k-\\frac65\\right),\\qquad q_k=\\frac65-\\frac15\\left(\\frac38\\right)^k",
+            "reason": "这同时验证了不动点（fixed point）与前一节KKT解一致。"
+          },
+          {
+            "title": "7. 把位置误差换成目标误差 · Objective gap",
+            "body": "边界上总量松弛项为零，两个坐标误差大小相等、符号相反。代入上一节的精确目标差（objective gap）。",
+            "formula": "f(x^k)-f^* = \\frac52\\left(q_k-\\frac65\\right)^2=\\frac1{10}\\left(\\frac9{64}\\right)^k",
+            "reason": "目标误差（objective gap）的比例是位置误差比例的平方，二者不是同一种收敛量。"
+          },
+          {
+            "title": "8. 用梯度映射验证停止 · Gradient mapping",
+            "body": "在最优点，原梯度仍为 \\((-0.8,-0.8)\\)。但梯度建议 \\((1.4,1)\\) 投影后恰好回到 \\((1.2,0.8)\\)。",
+            "formula": "\\begin{aligned}&\\Pi_C\\left(x^*-\\frac14\\nabla f(x^*)\\right) =x^*\\\\&G_{1/4}(x^*)=0\\end{aligned}",
+            "reason": "约束问题应检查投影后的可改进量，而不是强求原梯度为零。"
+          }
+        ],
+        "example": {
+          "problem": "从 \\(x^0=(1,1)\\) 手算两步，并找使目标误差不超过 \\(10^{-4}\\) 的最小迭代次数（iteration count）。",
+          "steps": [
+            "第一步 \\(x^1=(1.125,0.875)\\)，目标间隙为0.0140625。",
+            "第二步 \\(x^2=(1.171875,0.828125)\\)，目标间隙为0.0019775390625。",
+            "第三步间隙约0.0002780914，仍大于 \\(10^{-4}\\)；第四步约0.0000391066，满足要求。",
+            "这里知道精确解，才能用真实目标间隙审核；实际未知解时应使用梯度映射或可计算对偶间隙（duality gap）。"
+          ],
+          "answer": "在精确算术与指定起点下，4步首次达到该目标间隙。"
+        },
+        "pitfalls": [
+          "一般y下不一定两个分量都为正，不能总用“各减同一个数”的未截零公式。",
+          "欧氏投影目标与原来的加权二次目标不同；投影梯度要反复更新，不是把理想点投影一次就完成。",
+          "本例的 \\(9/64\\) 是精确轨迹因子，不能拿去代替任意问题的理论上界。"
+        ],
+        "checks": [
+          {
+            "question": "\\(y=(3,-1)\\) 投影到C是多少？",
+            "answer": "\\((2,0)\\)。取 \\(\\theta=1\\)，正部为 \\((2,0)\\)；如果两分量都减1会得到负数，因而错误。"
+          },
+          {
+            "question": "从 \\((1,1)\\) 开始，第一轮梯度映射是什么？",
+            "answer": "\\(G_{1/4}=4[(1,1)-(1.125,0.875)]=(-0.5,0.5)\\)。它不为零，说明还可以改进。"
+          }
+        ],
+        "animation": null,
+        "source": {
+          "label": "原理参照：刘浩洋、户将、李勇锋、文再文《最优化：建模、算法与理论》作者网站；本课文字、算例与推导重新编写",
+          "url": "https://faculty.bicmr.pku.edu.cn/~wenzw/optbook.html"
+        }
+      },
+      {
+        "id": "m8-l3",
+        "title": "综合题：三条算法路线 · Three algorithm routes",
+        "intuition": "已有闭式（closed form）最优解，相当于有了一把可靠的尺。现在把二阶法、内部路线和拆分路线都放到同一个原问题上，逐项检查它们究竟计算了什么，以及什么信息能够证明结束。不是让三种方法在二维题上竞速，而是学会识别方法之间的接口。",
+        "formal": "共同模型：\\(f(x)=\\tfrac12(x_1-2)^2+2(x_2-1)^2\\)，\\(C=\\{x\\in\\mathbb R^2:x_1,x_2\\ge0,\\ x_1+x_2\\le2\\}\\)。活动集（active set）牛顿（Newton）计算暂时假设总量约束活动，之后检查正性与乘子（multiplier）符号；它不是未经验证的一般全局算法。障碍法（barrier method）使用三条不等式、\\(t>0\\)、严格内部起点，其目标强凸（strong convexity）且接近边界时趋于无穷，因此每个t都有唯一中心点（central-path point）。ADMM使用 \\(h=\\delta_C\\)、固定 \\(\\rho=1\\)、精确子问题，原模型有KKT点，满足本课程所列的两块收敛前提。所有比较都针对原问题的可行点和相同目标。",
+        "symbols": [
+          {
+            "symbol": "\\(A=(1,1)\\)",
+            "meaning": "Active-constraint matrix · 候选活动总量等式的行向量"
+          },
+          {
+            "symbol": "\\(\\nu\\)",
+            "meaning": "Equality multiplier · 活动等式子问题的乘子；最后须检查与原不等式符号相容"
+          },
+          {
+            "symbol": "\\(s=2-x_1-x_2\\)",
+            "meaning": "Slack · 总量约束的严格正松弛量"
+          },
+          {
+            "symbol": "\\(\\phi_t\\)",
+            "meaning": "Barrier objective · 将原目标与三项对数障碍合成的中心子问题"
+          }
+        ],
+        "proof": [
+          {
+            "title": "1. 活动集牛顿保留可行切空间 · Active-set tangent",
+            "body": "从 \\((1,1)\\) 出发，若总量继续取等号，方向必须满足 \\(Ap=0\\)。最小化二次模型并对这条等式引入乘子。",
+            "formula": "\\begin{pmatrix}H&A^T\\\\A&0\\end{pmatrix}\\begin{pmatrix}p\\\\\\nu\\end{pmatrix} =\\begin{pmatrix}-\\nabla f(1,1)\\\\0\\end{pmatrix}",
+            "reason": "这才是候选活动面上的约束牛顿方程；无约束牛顿方程缺少最后一行。"
+          },
+          {
+            "title": "2. 解方程并核验活动集 · Verify active set",
+            "body": "方程为 \\(p_1+\\nu=1\\)、\\(4p_2+\\nu=0\\)、\\(p_1+p_2=0\\)。解出方向后检查新点非负、总量等式以及乘子非负。",
+            "formula": "\\begin{aligned}&p=(1/5,-1/5)\\\\&\\nu=4/5\\\\&x^+=(6/5,4/5)\\end{aligned}",
+            "reason": "二次模型精确且猜对活动面，所以本例一步到解。换一个活动集或换一个目标，不能保证仍然如此。"
+          },
+          {
+            "title": "3. 写出障碍路线的精确计算对象 · Barrier objective",
+            "body": "用 \\(-\\log x_1\\)、\\(-\\log x_2\\) 保护非负约束，用 \\(-\\log s\\) 保护总量约束。起点必须三项均可取对数。",
+            "formula": "\\begin{aligned}&\\phi_t(x)=tf(x)-\\log x_1-\\log x_2-\\log s\\\\&s=2-x_1-x_2>0\\end{aligned}",
+            "reason": "边界点 \\((1,1)\\) 不能用作这条路线的起点，可改用 \\((1/2,1/2)\\)。"
+          },
+          {
+            "title": "4. 推导障碍的梯度和海瑟矩阵 · Gradient and Hessian",
+            "body": "每个单坐标障碍贡献一个正对角曲率，总量障碍贡献一个正半定的秩一矩阵。",
+            "formula": "\\begin{aligned}&\\nabla\\phi_t=t\\nabla f -\\begin{pmatrix}1/x_1\\\\1/x_2\\end{pmatrix}+\\frac1s\\begin{pmatrix}1\\\\1\\end{pmatrix}\\\\&\\nabla^2\\phi_t=tH +\\operatorname{diag}(x_1^{-2},x_2^{-2}) +\\frac1{s^2}\\begin{pmatrix}1&1\\\\1&1\\end{pmatrix}\\end{aligned}",
+            "reason": "该矩阵正定（positive definite, PD），牛顿方向存在；越靠近边界，障碍曲率越大，数值求解也越需要谨慎。"
+          },
+          {
+            "title": "5. 一步障碍牛顿不是一个中心点 · Inexact center",
+            "body": "取 \\(t=1,x=(1/2,1/2)\\)，梯度（gradient）为 \\((-5/2,-3)\\)，海瑟矩阵（Hessian）为 \\(\\bigl(\\begin{smallmatrix}6&1\\\\1&9\\end{smallmatrix}\\bigr)\\)。解出方向后仍要保持严格可行（strict feasibility）并检查下降。",
+            "formula": "\\begin{aligned}&p=(39/106,31/106)\\\\&x+p=(46/53,42/53)\\\\&s^+=18/53>0\\end{aligned}",
+            "reason": "新点严格可行不代表已求出精确中心点；只有充分完成中心求解后，才能使用对应精度的对偶证书。"
+          },
+          {
+            "title": "6. 从精确中心点得到三个乘子 · Barrier certificate",
+            "body": "总量乘子与两个非负约束乘子分别由三个松弛量构造。即使两个非负约束在最终解处不活动，有限t时它们的乘子也仍为正。",
+            "formula": "\\begin{aligned}&\\lambda(t)=\\frac1{ts}\\\\&\\eta_i(t)=\\frac1{tx_i}\\\\&f(x(t))-d(\\lambda(t),\\eta(t))=\\frac3t\\end{aligned}",
+            "reason": "当t增大，中心点趋近最优边界；最终 \\(\\lambda\\to0.8\\)，而 \\(\\eta_i\\to0\\)。"
+          },
+          {
+            "title": "7. 对ADMM固定点做独立验算 · ADMM fixed point",
+            "body": "令两份变量都等于最优点。\\(\\rho=1\\) 时，缩放乘子应为 \\(u^*=(0.8,0.8)\\)，以抵消目标梯度。把它们代回两块更新。",
+            "formula": "\\begin{aligned}&(H+I)x^*=Ha+z^*-u^*\\\\&\\Pi_C(x^*+u^*)=\\Pi_C(2,1.6)=(1.2,0.8)\\end{aligned}",
+            "reason": "更新后x、z、u均不变，因此两种残差（residual）都为零；这是可直接核对的算法终点。"
+          },
+          {
+            "title": "8. 统一三条路线的最后检查 · Unified checks",
+            "body": "最终都应回到原模型，检查非负性、总量上限与目标。用 \\((\\lambda,\\eta)=(0.8,0,0)\\) 构造的对偶下界是0.4。",
+            "formula": "\\begin{aligned}&\\max(-x_1,-x_2,x_1+x_2-2,0) \\le\\varepsilon_{\\rm feas}\\\\&f(x)-0.4\\le\\varepsilon_{\\rm gap}\\end{aligned}",
+            "reason": "这里0.4来自已经证明的对偶证书。通用问题不能把未知最优值直接写进停止程序。"
+          }
+        ],
+        "example": {
+          "problem": "已知三个候选输出：A为无约束牛顿点 \\((2,1)\\)；B为ADMM第一轮的 \\(z=(1.25,0.75)\\)；C为活动集牛顿点 \\((1.2,0.8)\\)。按同一标准审核。",
+          "steps": [
+            "A违反总量约束1个单位，尽管目标0，也不能作为可行上界。",
+            "B可行，目标0.40625，利用下界0.4可认证目标误差（objective gap）不超过0.00625；它还不是精确解。",
+            "C可行，目标与下界均为0.4，且KKT全部成立，因此得到全局最优（global optimality）证书。",
+            "若想比较运行时间，应另外计入准备活动集、矩阵分解、投影和内层迭代的成本，而非只数按钮次数。"
+          ],
+          "answer": "共同的证书比共同的迭代次数（iteration count）更有解释力。"
+        },
+        "pitfalls": [
+          "知道活动集之后容易，不等于在大问题中找出正确活动集也容易。",
+          "障碍中心点与原问题最优点属于不同参数化问题，不能混称同一个解。",
+          "ADMM的可行输出常取z，但必须同时检查一致性，不能完全忽略x。"
+        ],
+        "checks": [
+          {
+            "question": "本例障碍法为什么每个t都有中心点？",
+            "answer": "严格内部非空；接近三角形任一边界时至少一项负对数趋于无穷；目标强凸，故最小点在内部取得且唯一。"
+          },
+          {
+            "question": "ADMM极限缩放乘子为什么不是 \\((0,0)\\)？",
+            "answer": "边界最优点的梯度为 \\((-0.8,-0.8)\\)，等式乘子（equality multiplier）需抵消它。\\(\\rho=1\\) 时 \\(u^*=(0.8,0.8)\\)。"
+          }
+        ],
+        "animation": null,
+        "source": {
+          "label": "原理参照：刘浩洋、户将、李勇锋、文再文《最优化：建模、算法与理论》作者网站；本课文字、算例与推导重新编写",
+          "url": "https://faculty.bicmr.pku.edu.cn/~wenzw/optbook.html"
+        }
+      },
+      {
+        "id": "m8-l4",
+        "title": "闭卷练习 · Retrieval practice",
+        "intuition": "先把解答收起，在纸上写答案、适用假设和一个核验步骤。卡住时先标记卡在哪个环节，再展开对应推导。能跟着看懂和能独立完成是两种不同能力；这里刻意改变数字与约束，让你不能只凭记住综合题的轨迹回答。",
+        "formal": "范围 / Scope：以下六题均在有限维实数空间中。只使用题目明确给出的定义域与约束。\n\n核验清单 / Checklist：1. 凸性（convexity）：检查整个定义域。2. KKT：写出乘子（multiplier）的符号限制。3. 梯度法（gradient method）：核对步长（step size）。4. 近端（proximal）问题：核对次梯度（subgradient）条件。5. 投影（projection）：保留非负性约束。6. 反例（counterexample）：分清 KKT 的充分性（sufficiency）与必要性（necessity）。\n\n先独立做10分钟，再展开逐步解答。这组练习检验迁移能力，不是覆盖全部凸优化理论的考试。",
+        "symbols": [
+          {
+            "symbol": "\\(\\delta_C\\)",
+            "meaning": "Indicator function · 集合C的示性函数；它的近端算子就是投影"
+          },
+          {
+            "symbol": "\\(\\partial|x|\\)",
+            "meaning": "Subdifferential · 绝对值的次微分，零点处为区间[-1,1]"
+          },
+          {
+            "symbol": "\\(\\varepsilon\\)",
+            "meaning": "Tolerance · 自己指定的目标误差或残差容差，必须说明是哪一种"
+          }
+        ],
+        "proof": [
+          {
+            "title": "1. 凸性变式：半正定不等于正定 · PSD vs PD",
+            "body": "题目：在全空间最小化 \\(h(x)=x_1^2+2x_1x_2+x_2^2\\)。它凸吗、严格凸（strict convexity）吗、解唯一吗？先写成平方，再计算海瑟矩阵（Hessian）。",
+            "formula": "\\begin{aligned}&h(x)=(x_1+x_2)^2\\\\&\\nabla^2h=2\\begin{pmatrix}1&1\\\\1&1\\end{pmatrix}\\\\&\\operatorname{eig}(\\nabla^2h)=\\{0,4\\}\\end{aligned}",
+            "reason": "海瑟矩阵半正定（positive semidefinite, PSD），所以凸；沿 \\((1,-1)\\) 方向不变，所以不严格凸。所有 \\(x_1+x_2=0\\) 的点都是最优解，最优值0。"
+          },
+          {
+            "title": "2. KKT变式：一维上限约束 · One-dimensional KKT",
+            "body": "题目：最小化 \\((x-3)^2/2\\)，约束 \\(x\\le1\\)。写 \\(g=x-1\\)，取 \\(\\lambda\\ge0\\)。无约束最小点3不可行，尝试边界x=1。",
+            "formula": "\\begin{aligned}&x-3+\\lambda=0\\\\&\\lambda(x-1)=0 \\Longrightarrow x^*=1,\\ \\lambda^*=2,\\ f^*=2\\end{aligned}",
+            "reason": "原始可行（primal feasibility）、乘子非负、站立与互补均成立；凸性给全局最优（global optimality），强凸（strong convexity）给唯一。还可核对对偶函数（dual function）\\(d(\\lambda)=2\\lambda-\\lambda^2/2\\)，在2处达到同样的2。"
+          },
+          {
+            "title": "3. 梯度变式：不能沿用上一题的L · Step-size test",
+            "body": "题目：无约束最小化 \\(h(x)=x_1^2+4x_2^2\\)，从 \\((1,1)\\) 取 \\(\\alpha=1/8\\) 做一步。先求本题海瑟矩阵，而不是沿用综合题的4。",
+            "formula": "\\begin{aligned}&\\nabla h=(2x_1,8x_2)\\\\&H=\\operatorname{diag}(2,8),\\quad L=8\\\\&x^+=(1,1)-\\tfrac18(2,8) =(3/4,0)\\end{aligned}",
+            "reason": "新目标为9/16，旧目标为5。基本下降引理（descent lemma）给上界 \\(h(x^+)\\le h(x)-\\|\\nabla h(x)\\|^2/(2L)=3/4\\)，实测9/16确实不超过它。"
+          },
+          {
+            "title": "4. 近端变式：软阈值允许恰好变成零 · Soft thresholding",
+            "body": "题目：最小化 \\(\\|x-v\\|^2/2+(3/4)\\|x\\|_1\\)，其中 \\(v=(-3,0.4,2)\\)。三坐标可分；每个坐标满足 \\(0\\in x_i-v_i+(3/4)\\partial|x_i|\\)。",
+            "formula": "\\begin{aligned}&x_i=\\operatorname{sign}(v_i) \\cdot\\max(|v_i|-3/4,0)\\\\&x^*=(-9/4,0,5/4)\\end{aligned}",
+            "reason": "第一、第三个非零坐标可用普通导数核验；第二坐标为零，因为 \\(0.4\\in[-0.75,0.75]\\)。近端目标含平方项，因此解唯一。"
+          },
+          {
+            "title": "5. 投影变式：负分量改变活动集 · Projection active set",
+            "body": "题目：将 \\(y=(3,-1)\\) 投到 \\(C=\\{x\\ge0:x_1+x_2\\le2\\}\\)。若误用两坐标均正的分支，会保留负分量。正确使用正部（positive part）阈值。",
+            "formula": "\\begin{aligned}&z_i=\\max(y_i-\\theta,0)\\\\&\\theta=1 \\Rightarrow  z=(2,0)\\end{aligned}",
+            "reason": "取总量乘子1、非负乘子 \\((0,2)\\)，站立式 \\(z-y+\\theta(1,1)-\\xi=0\\) 成立；互补松弛（complementary slackness）也成立，因此投影已被认证。"
+          },
+          {
+            "title": "6. 约束资格变式：有最优点却没有KKT乘子 · Constraint qualification",
+            "body": "题目：最小化 \\(f(x)=x\\)，约束 \\(g(x)=x^2\\le0\\)。可行集只有0，所以最优点存在且唯一；但严格可行（strict feasibility）点不存在。",
+            "formula": "\\begin{aligned}&\\mathcal L(x,\\lambda)=x+\\lambda x^2\\\\&\\nabla_x\\mathcal L(0,\\lambda)=1\\ne0\\\\&\\text{对所有有限}\\ \\lambda\\ge0\\end{aligned}",
+            "reason": "没有乘子能满足站立性，因此不能在缺少约束资格条件（constraint qualification）时断言KKT必要。凸问题中满足KKT仍足以证明最优；本题否定的是无条件必要性。"
+          }
+        ],
+        "example": {
+          "problem": "检索任务：在展开六步解答前，分别写出①凸性与唯一性，②KKT解，③梯度一步，④近端解，⑤投影，⑥约束资格（constraint qualification）反例。每题写一句“为什么”。",
+          "steps": [
+            "①\\(h=(x_1+x_2)^2\\)：凸但不严格凸，最优集合是 \\(x_1+x_2=0\\)。",
+            "②\\((x-3)^2/2,x\\le1\\)：\\(x^*=1,\\lambda^*=2,f^*=2\\)。",
+            "③\\(x_1^2+4x_2^2\\)，起点 \\((1,1)\\)、步长1/8：新点 \\((3/4,0)\\)，新目标9/16。",
+            "④\\(v=(-3,0.4,2)\\)、阈值3/4：近端解 \\((-9/4,0,5/4)\\)。",
+            "⑤\\((3,-1)\\) 到总量不超过2的非负三角形：投影 \\((2,0)\\)。",
+            "⑥\\(\\min x\\) 且 \\(x^2\\le0\\)：解为0，但KKT乘子不存在，因为约束梯度在0处为0而目标梯度为1。"
+          ],
+          "answer": "核对数值只是第一遍；第二遍遮住答案，解释每一题的假设、推理和检查方法。答错的题可定位到凸性、KKT、光滑（smooth）下降、近端、投影或约束资格，而不必整课重看。"
+        },
+        "pitfalls": [
+          "看见答案觉得熟悉，不等于能从空白纸独立推出；完成检索后再看推导更有诊断价值。",
+          "更换系数后，梯度、光滑常数、软阈值（soft thresholding）与乘子都可能变化，不能只照搬旧数字。",
+          "一个反例推翻的是指定的错误命题，不意味着所有相邻定理都失效。"
+        ],
+        "checks": [
+          {
+            "question": "不看前文，你会怎样审核一个新问题的“最优解”？",
+            "answer": "先查定义域与可行性，再查凸性和解的存在；可微（differentiable）无约束查梯度，约束问题查变分不等式（variational inequality）或KKT，复合问题查次梯度。若只近似求解，说明残差或可计算间隙及其条件。"
+          },
+          {
+            "question": "六题中哪一题最直接说明“有解”不代表“总有KKT乘子”？",
+            "answer": "第六题。唯一可行点0确实最优，但站立式恒为1；Slater失效，不能使用KKT必要性的资格条件。"
+          }
+        ],
+        "animation": null,
+        "source": {
+          "label": "原理参照：刘浩洋、户将、李勇锋、文再文《最优化：建模、算法与理论》作者网站；本课文字、算例与推导重新编写",
+          "url": "https://faculty.bicmr.pku.edu.cn/~wenzw/optbook.html"
+        }
+      }
+    ],
+    "takeaways": [
+      "拿到新题先写清变量、目标、定义域与约束，不把不可行低目标当成好答案。",
+      "能用海瑟矩阵（Hessian）或定义判断凸性（convexity），并分别说明解是否存在、是否唯一。",
+      "能从KKT构造可核验的全局最优（global optimality）证书，清楚约束资格条件（constraint qualification）负责哪一个方向。",
+      "能按L选择基本梯度（gradient）步长（step size），算出投影或近端（proximal），并检查更新仍在正确模型中。",
+      "能区分最优值、目标间隙、距离误差和站立残差（residual），不混用停止标准。",
+      "能按结构与原语成本解释选法；不会用两次迭代或一个漂亮动画推出普遍优劣。",
+      "完成标准：不看解答重做综合题，至少能讲清六道变式各自用到的假设与结论；一天核心路径是起点，熟练程度还要靠间隔复习与更多实例。"
+    ]
+  }
+]

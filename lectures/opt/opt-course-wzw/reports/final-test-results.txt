@@ -1,0 +1,176 @@
+{
+  "status": "PASS",
+  "formulaVariants": 281,
+  "assertions": 853,
+  "checks": [
+    {
+      "scene": "convex-chord",
+      "formulaVariants": 66
+    },
+    {
+      "scene": "supporting-plane",
+      "formulaVariants": 6
+    },
+    {
+      "scene": "projection",
+      "formulaVariants": 6
+    },
+    {
+      "scene": "kkt",
+      "formulaVariants": 6
+    },
+    {
+      "scene": "gradient",
+      "formulaVariants": 70
+    },
+    {
+      "scene": "prox",
+      "formulaVariants": 112
+    },
+    {
+      "scene": "newton",
+      "formulaVariants": 6
+    },
+    {
+      "scene": "admm",
+      "formulaVariants": 9
+    }
+  ],
+  "scope": "Exhaustive strict-KaTeX rendering across all supported slider values, finite SVG coordinates, and selected Euclidean-geometry invariants. Production controller behavior is separately exercised by animations.test.cjs; this is not a browser interaction test."
+}
+✔ convex_one_day/tests/animation-audit.test.cjs (293.793476ms)
+✔ Eight discoverable scenes have substantive, synchronized explanatory stages (20.442962ms)
+✔ Chord gap equals exact Jensen deficit at all weights and at endpoints (0.781773ms)
+✔ Supporting line touches at a, has the derivative slope, and stays below globally (0.391362ms)
+✔ Disk projection is feasible, radial, nonexpansive, and satisfies the variational inequality (5.627021ms)
+✔ Halfspace KKT conditions and strong duality hold for active and inactive constraints (0.641791ms)
+✔ Gradient iterations, smooth bound and exact spectral stability agree (0.996037ms)
+✔ Soft threshold uses the subgradient interval and is never hard thresholding (1.555833ms)
+✔ Newton direction solves the Hessian system and its model is exact for this quadratic (0.326503ms)
+✔ ADMM uses fresh x, scaled multipliers, and both residuals; limit satisfies KKT (2.533933ms)
+✔ All slider variants retain valid computed geometry and narrative (43.75947ms)
+✔ Controller starts paused, advances explanatory stages, pauses and clears timeouts on cleanup (29.892875ms)
+{
+  "status": "PASS",
+  "generatedAt": "2026-10-15T06:49:44.691Z",
+  "katexVersion": "0.16.27",
+  "modules": 8,
+  "lessons": 34,
+  "proofSteps": 258,
+  "mainPathMinutes": 420,
+  "renderedMathExpressions": 1147,
+  "assertions": 10331,
+  "numericalAssertions": 15,
+  "sources": [
+    "https://faculty.bicmr.pku.edu.cn/~wenzw/optbook.html",
+    "https://faculty.bicmr.pku.edu.cn/~wenzw/optbook/opt2.pdf",
+    "https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf",
+    "https://faculty.bicmr.pku.edu.cn/~wenzw/optbook/lect/lect-newton-TR.pdf",
+    "https://web.stanford.edu/~boyd/cvxbook/",
+    "https://faculty.bicmr.pku.edu.cn/~wenzw/optbook/lect/24-lect-admm-chhyx.pdf"
+  ],
+  "usedAnimations": [
+    "convex-chord",
+    "supporting-plane",
+    "projection",
+    "kkt",
+    "gradient",
+    "prox",
+    "newton",
+    "admm"
+  ],
+  "errors": [],
+  "warnings": [],
+  "limitations": [
+    "Schema and KaTeX checks are exhaustive over loaded JSON.",
+    "Numerical tests validate the named independent reference calculations only.",
+    "Mathematical theorem validity, all example arithmetic, source support, prose originality, visual layout, and runtime interactions require separate review."
+  ]
+}
+✔ convex_one_day/tests/course.test.cjs (367.083258ms)
+✔ Flat edition retains all modules, lesson fields, symbols and 258 ordered proof stages (6.850252ms)
+✔ Every proof is directly visible once with no duplicate player or mode gate (23.129981ms)
+✔ Standard type is 18px and renderer does not force prose newlines into line breaks (0.460346ms)
+✔ Independent: actual CPU clipper retains correct halfspace and conserves triangle area (5.160485ms)
+✔ Independent: engine-axis slice inequalities preserve mathematical x, y and height (0.946862ms)
+Independently inspected 21530 formula model states.
+✔ Independent: all 34 lessons expose a complete formula-model catalog (2.238856ms)
+✔ Independent: every catalog proof stage and exposed parameter grid stays finite (1476.797151ms)
+✔ Independent: 195 selected illustration slots preserve all 258 proof steps exactly once (13.673012ms)
+✔ Independent: selected exact examples agree with original lesson numbers and certificates (0.801632ms)
+✔ Independent: annotated points remain inside declared display-domain framing (8.458505ms)
+✔ all 14 foundation lessons match actual proof counts and all stages emit finite geometry (27.072319ms)
+✔ exact Taylor example retains linear and quadratic changes (0.27735ms)
+✔ squared chord, strong convexity and least-squares examples retain their constants (0.278782ms)
+✔ partial minimization retains y=x/2 and the exact residual square (0.491693ms)
+✔ threshold examples and projected-gradient mapping reproduce nearby answers (1.662014ms)
+✔ effective domains never encode infinity as a finite surface and unknown lesson is unsupported (0.473917ms)
+✔ all annotated geometry stays inside declared variable-axis framing (43.045038ms)
+✔ every advanced proof has finite useful geometry, title and declared axes (33.280409ms)
+✔ ADMM exact first two rounds, dual stationarity and nonmonotone feasible objective (2.15541ms)
+✔ triangular central path retains strict feasibility, multipliers and gap certificate (0.378483ms)
+✔ scalar barrier certificate is distinct from actual error (0.266433ms)
+✔ projection handles negative coordinates and exact PG rate only on stated trajectory (0.501709ms)
+✔ shared optimality decomposition and local Newton bound are truthful (0.375257ms)
+✔ retrieval problems retain distinct coefficients, constraints and counterexample (0.52937ms)
+✔ all 98 proof scenes have finite render geometry across parameter interval (33.084343ms)
+✔ Fenchel supports and weak-duality bounds are analytic certificates (0.39625ms)
+✔ Slater scenes explicitly distinguish nonattainment and finite boundaries (0.218481ms)
+✔ KKT uses original simplex objective and valid active-set transitions (1.077791ms)
+✔ descent uses L=9 and reports both safe and unstable steps (0.202046ms)
+✔ rate certificates remain conservative; preconditioning preserves physical point (0.706298ms)
+✔ prox examples and optimality conditions exactly match course (0.381207ms)
+✔ Lasso first-step primal dual certificate and zero threshold are exact (0.301356ms)
+Lesson-specific experiment numerical checks passed.
+✔ convex_one_day/tests/lesson-experiments.test.cjs (99.010707ms)
+PASS: 273 proof/display equations have no literal ampersands; formal punctuation checked
+✔ convex_one_day/tests/math-layout.test.cjs (290.301615ms)
+PASS: 66 numerical content assertions
+✔ convex_one_day/tests/numerical-content.test.cjs (138.323866ms)
+✔ Projection is firmly nonexpansive, idempotent and invariant under positive scaling (17.024711ms)
+✔ KKT dual certificate and strong-convex lower bound hold for random feasible points (2.167859ms)
+✔ Gradient stability boundary distinguishes all-start convergence from a special initial point (1.037459ms)
+✔ Soft threshold satisfies Moreau decomposition, firm nonexpansiveness and threshold endpoints (3.289866ms)
+✔ Newton decrement matches exact objective decrease at arbitrary starts (1.85112ms)
+✔ ADMM scaled/unscaled multipliers and stationarity residual identities hold across penalty scales (18.222072ms)
+✔ Public numerical routines reject nonfinite and malformed input rather than draw misleading geometry (9.582795ms)
+✔ Every supported lab parameter and stage renders strict TeX with finite geometry (238.683729ms)
+✔ Laboratory displayed values independently match their exact parameter models (0.627198ms)
+✔ Preset boundary cases belong to the supported parameter grids and remain renderable (0.937478ms)
+✔ Exact preconditioning lesson: physical start, transformed Hessian, objectives and mode factors (1.986635ms)
+✔ Exact scalar PG lesson: iterates, full objective, upper model and certified rate (5.611989ms)
+✔ Exact Lasso lesson: first step, residual scaling, primal/dual certificate and optimum (0.672136ms)
+✔ Residual-scaled Lasso certificates stay valid off the shown trajectory, including zero residual (4.945305ms)
+✔ All 34 lessons and 258 proof stages carry bilingual titles, retaining complete content (1.708154ms)
+✔ Every lesson retains a nonempty symbol glossary with valid mathematical symbols (30.234673ms)
+✔ Terminology remains English-searchable across the major mathematical topics (8.505555ms)
+✔ Added bilingual prose has balanced math delimiters and no accidental nested annotation in TeX (107.103683ms)
+✔ All 680 shared 3D scene states have finite true model samples, coordinates and proof caveats (69.459393ms)
+✔ Convex lift preserves original section; supporting-plane gap and tangency hold in both variables (1.761424ms)
+✔ Projection normals and KKT feasible geometry refer to variable-space constraints, not graph normals (1.237792ms)
+✔ Gradient and Newton plotted discrete endpoints use exact objectives and synchronized stages (1.344043ms)
+✔ ADMM joint surface keeps primal coordinates separate from multiplier and current-stage updates (2.540663ms)
+✔ Lesson-specific 3D scenes preserve coordinate transformations, scalar upper model and Lasso certificates (10.428364ms)
+✔ Soft-threshold parameter surface preserves the fixed-input problem and its conditional minimizer ridge (7.972379ms)
+✔ all eleven models expose finite geometry and explicit mathematical interpretation (8.683013ms)
+✔ Jensen chord is exact original section and nonnegative analytical gap (0.69423ms)
+✔ supporting plane tangent and global quadratic identity on analytic grid (2.171224ms)
+✔ projection matches every radius and the all-feasible-point variational inequality (0.885229ms)
+✔ KKT active, degenerate and inactive cases preserve stationarity and feasible clipping (0.488099ms)
+✔ gradient state matches exact existing iterations, including unstable step (1.812602ms)
+✔ Newton full and damped coordinates retain t=2 and overshoot counterexamples (0.329689ms)
+✔ prox parametric surface fixes input 2.4 and ridge solves each scalar section (1.413969ms)
+✔ ADMM uses joint objective and partial-round visibility without inventing x0 (2.310464ms)
+✔ preconditioning coordinate transform preserves objective and synchronized paths (0.841703ms)
+✔ scalar PG has touching global upper model and exact proximal trajectory (0.964048ms)
+✔ Lasso exact objective, ISTA and dual certificate agree including optimum (0.772208ms)
+✔ browser model can load before its math dependencies (2.631771ms)
+✔ prox stage zero and one preserve distance/penalty decomposition (0.197969ms)
+ℹ tests 87
+ℹ suites 0
+ℹ pass 87
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1640.543006

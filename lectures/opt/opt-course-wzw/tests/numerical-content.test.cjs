@@ -1,0 +1,87 @@
+'use strict';
+// Independent hand-derived fixtures for the course's specified examples.
+// This checks computations, not every numeral appearing in narrative text.
+const fs=require('node:fs'),path=require('node:path');
+const root=path.resolve(__dirname,'..');
+let assertions=0;const checks=[],failures=[];
+function near(id,label,actual,expected,tol=1e-10){assertions++;const pass=Math.abs(actual-expected)<=tol;checks.push({lesson:id,label,actual,expected,pass});if(!pass)failures.push(`${id} ${label}: ${actual} != ${expected}`);}
+const sq=x=>x*x,soft=(v,a)=>Math.sign(v)*Math.max(Math.abs(v)-a,0),dot=(a,b)=>a.reduce((s,x,i)=>s+x*b[i],0);
+near('m1-l1','cost at (0,3)',2*0+3,3);
+near('m1-l2','squared matrix amplification at (3,-4)',sq(6)+sq(-4),52);
+near('m1-l2','steepest unit directional derivative',3*(-3/5)+4*(-4/5),-5);
+near('m1-l3','Taylor gradient norm squared',sq(2)+sq(4),20);
+near('m1-l3','Taylor Hessian quadratic form',2*sq(2)+4*sq(4),72);
+near('m1-l3','Taylor small-step objective',sq(.8)+2*sq(.6),1.36);
+near('m1-l3','Taylor large-step objective',sq(-1)+2*sq(-3),19);
+near('m2-l2','convex chord gap',.25*sq(2)-sq(.5),.75);
+near('m2-l3','supporting-line gap at -2',sq(-2)-(2*(-2)-1),9);
+near('m2-l5','partial minimization x=3',sq(3-1.5)+sq(1.5),4.5);
+near('m4-l1','Fenchel gap',sq(2)/2+sq(3)/2-2*3,.5);
+near('m4-l2','weak dual certificate lambda=1',sq(1.1)-(1-sq(1)/4),.46);
+near('m4-l2','weak dual certificate lambda=2',sq(1.1)-(2-sq(2)/4),.21);
+near('m4-l4','KKT objective at (2,0)',(sq(2-3)+sq(0-1))/2,1);
+near('m4-l4','perturbed resource objective',(sq(2.1-3)+sq(.1-1))/2,.81);
+near('m5-l1','safe step target',sq(8/3)/2,32/9);
+near('m5-l1','descent lemma upper bound',9-(sq(3)+sq(9))/18,4);
+near('m5-l1','unsafe step target',sq(2)/2+9*sq(-2)/2,20);
+near('m5-l2','fifth objective gap',2*sq(3/2**5),18/1024);
+near('m5-l2','general iteration budget',Math.ceil(9/(2*(1/8)*.1)),360);
+near('m5-l3','first strong-convex objective',sq(4.8)/2,11.52);
+near('m5-l3','condition-number budget',Math.ceil(25*Math.log(2500)),196);
+near('m5-l4','unscaled one-step objective',sq(.99)/2,.49005);
+near('m5-l4','scaled Hessian high eigenvalue',.1*100*.1,1);
+near('m6-l1','quadratic proximal objective',sq(2)/2+sq(2-6)/4,6);
+const v=[3,-.4,1,-2],u=v.map(x=>soft(x,.5));
+near('m6-l2','soft threshold l1 norm',u.reduce((s,x)=>s+Math.abs(x),0),4.5);
+near('m6-l2','soft threshold squared distance',u.reduce((s,x,i)=>s+sq(x-v[i]),0),.91);
+near('m6-l2','soft threshold complete objective',u.reduce((s,x,i)=>s+Math.abs(x)+sq(x-v[i]),0),5.41);
+near('m6-l2','all-zero comparison objective',dot(v,v),14.16);
+near('m6-l3','third PG full objective',sq(1.75-3)/2+Math.abs(1.75),2.53125);
+near('m6-l3','third PG gap',sq(1.75-3)/2+1.75-2.5,.03125);
+near('m6-l4','Lasso first primal objective',(sq(2.5)+sq(.4))/2+.5,3.705);
+near('m6-l4','Lasso scaled-residual dual',3+.4*.16-(1+sq(.16))/2,2.5512);
+near('m6-l4','Lasso first duality certificate',3.705-2.5512,1.1538);
+near('m6-l4','Lasso optimal primal',(1+sq(.4))/2+2,2.58);
+near('m6-l4','Lasso optimal dual',3+.4*.4-(1+sq(.4))/2,2.58);
+const f=p=>sq(p[0]-2)/2+2*sq(p[1]-1);
+near('m7-l1','unconstrained Newton start objective',f([0,0]),4);
+const center=(1+Math.sqrt(3))/2,lambda=center;
+near('m7-l2','barrier first-order residual',2*center-1/(center-1),0);
+near('m7-l2','barrier exact duality gap',sq(center)/2-(lambda-sq(lambda)/2),.5);
+let z=[1,1],dual=[0,0],rows=[];
+for(let k=1;k<=2;k++){
+ const x=[(2+z[0]-dual[0])/2,(4+z[1]-dual[1])/5];
+ const w=x.map((a,i)=>a+dual[i]),theta=(w[0]+w[1]-2)/2,zn=w.map(a=>a-theta);
+ const r=x.map((a,i)=>a-zn[i]),s=zn.map((a,i)=>a-z[i]);dual=dual.map((a,i)=>a+r[i]);z=zn;
+ rows.push({x,z:[...z],u:[...dual],r,s});
+}
+near('m7-l3','first ADMM x1',rows[0].x[0],1.5);
+near('m7-l3','first ADMM z1',rows[0].z[0],1.25);
+near('m7-l3','first ADMM u1',rows[0].u[0],.25);
+near('m7-l4','first feasible ADMM objective',f(rows[0].z),.40625);
+near('m7-l4','second feasible ADMM objective increases',f(rows[1].z),.425);
+near('m7-l4','second ADMM primal norm',Math.hypot(...rows[1].r),Math.sqrt(.08));
+near('m7-l4','second ADMM dual norm',Math.hypot(...rows[1].s),Math.sqrt(.005));
+near('m8-l1','capstone optimum objective',f([1.2,.8]),.4);
+near('m8-l1','capstone stationarity first',1.2-2+.8,0);
+near('m8-l1','capstone stationarity second',4*(.8-1)+.8,0);
+near('m8-l1','distance certificate',Math.sqrt(2*.005),.1);
+let q=1;
+for(let k=1;k<=4;k++){
+ q=3*q/8+.75;near('m8-l2',`exact projected-gradient gap k=${k}`,f([q,2-q])-.4,.1*(9/64)**k);
+}
+near('m8-l2','first gradient mapping coordinate',4*(1-1.125),-.5);
+near('m8-l3','barrier Newton first row',6*(39/106)+(31/106),2.5);
+near('m8-l3','barrier Newton second row',(39/106)+9*(31/106),3);
+near('m8-l3','barrier next slack',2-(46/53)-(42/53),18/53);
+near('m8-l3','active Newton tangent constraint',.2+(-.2),0);
+near('m8-l3','active Newton first equation',.2+.8,1);
+near('m8-l3','active Newton second equation',4*(-.2)+.8,0);
+near('m8-l4','retrieval gradient new objective',sq(.75)+4*sq(0),9/16);
+near('m8-l4','retrieval gradient upper bound',5-(sq(2)+sq(8))/(2*8),.75);
+near('m8-l4','retrieval threshold negative',soft(-3,.75),-9/4);
+near('m8-l4','retrieval threshold deadzone',soft(.4,.75),0);
+near('m8-l4','retrieval threshold positive',soft(2,.75),5/4);
+const result={status:failures.length?'FAIL':'PASS',assertions,failures,checks,limitations:['Hand-derived fixtures check these specified mathematical computations. They do not automatically parse or prove every prose claim.','Full source-to-content matching and theorem hypotheses are reviewed separately.']};
+fs.writeFileSync(path.join(root,'reports/numerical-content-audit.json'),JSON.stringify(result,null,2)+'\n');
+console.log(`${result.status}: ${assertions} numerical content assertions`);if(failures.length)console.error(failures.join('\n'));process.exitCode=failures.length?1:0;

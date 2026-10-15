@@ -1,0 +1,1452 @@
+[
+  {
+    "id": "m1",
+    "title": "把问题写对 · Modeling foundations",
+    "minutes": 35,
+    "goals": [
+      "分清变量、数据、目标、可行域（feasible set）、最优值和最优解",
+      "判断何时最小值存在，何时只能逼近下确界（infimum）",
+      "从增量展开读出梯度（gradient）、Hessian与最小二乘（least squares）结构"
+    ],
+    "prerequisites": [
+      "会计算一元导数、向量内积（inner product）和矩阵乘法",
+      "知道收敛数列的含义；紧集（compact set）在有限维可理解为闭且有界"
+    ],
+    "summary": "主线35分钟建立后续推导共同使用的语言。展开证明可深入慢读：重点是说明候选解为什么可行、为什么最优，以及模型为什么可能根本没有最优点。",
+    "lessons": [
+      {
+        "id": "m1-l1",
+        "title": "模型与存在性 · Modeling & existence",
+        "intuition": "优化先由约束筛掉不允许的方案，再用目标函数（objective function）给剩下的方案排序。找到一个很小的数只得到候选点；证明最优需要覆盖全部可行点的下界。若最佳极限落在被排除的边界，任何算法都无法返回不存在的最优点。",
+        "formal": "考虑非空集合 \\(C\\subseteq\\mathbb R^n\\) 上的实值函数f。最优值 \\(p^\\star=\\inf_{x\\in C}f(x)\\)，最优解集合（solution set）：\n\n\\[\\operatorname{argmin}_{x\\in C}f =\\{x\\in C:f(x)=p^\\star\\}\\]\n\n若C非空紧且f连续，则最优解存在。若C非空闭，f在C上连续且强制增长（coercivity），即沿C中 \\(\\|x\\|_2\\to\\infty\\) 的序列都有 \\(f(x)\\to+\\infty\\)，也存在最优解。这些是充分条件，不是必要条件。",
+        "symbols": [
+          {
+            "symbol": "x",
+            "meaning": "Decision vector · 决策向量，待选择的量"
+          },
+          {
+            "symbol": "C",
+            "meaning": "Feasible set · 满足全部约束的可行域"
+          },
+          {
+            "symbol": "p^\\star",
+            "meaning": "Infimum · 下确界，是数，可能为负无穷"
+          },
+          {
+            "symbol": "x^\\star",
+            "meaning": "Optimizer · 实际达到下确界的可行点，可能不存在"
+          }
+        ],
+        "proof": [
+          {
+            "title": "1. 最优的量词覆盖全域 · Quantifiers",
+            "body": "一个最优点既要自己可行，又不能比任何其他可行点更差。",
+            "formula": "\\begin{aligned}&x^\\star\\in C\\\\&f(x^\\star)\\le f(x)\\qquad \\forall x\\in C\\end{aligned}",
+            "reason": "更低但不可行的点不参加比较；只比较几个点不足以证明全局最优（global optimality）。"
+          },
+          {
+            "title": "2. 下界与可行点形成证书 · Optimality certificate",
+            "body": "若所有可行点的目标至少为 \\(\\ell\\)，而某候选点达到它，就夹住了最优值。",
+            "formula": "\\ell\\le p^\\star\\le f(x^\\star)=\\ell \\Longrightarrow p^\\star=\\ell",
+            "reason": "下界必须适用于全体可行点，候选点也必须确实满足全部约束。"
+          },
+          {
+            "title": "3. 下确界可以无法取得 · Unattained infimum",
+            "body": "取 \\(C=(0,\\infty)\\)、\\(f(x)=x\\)。零是下界且可以逼近，但任意正的候选点都能再减半。",
+            "formula": "\\begin{aligned}&\\inf_{x>0}x=0\\\\&f(x/2)<f(x)\\\\&\\operatorname{argmin}_{x>0}x=\\varnothing\\end{aligned}",
+            "reason": "极限点零不在可行域；有极限不意味着极限可行。"
+          },
+          {
+            "title": "4. 紧性先排除向下无界 · Bounded below",
+            "body": "设C非空紧、f连续。若目标向下无界，选 \\(f(x_k)\\le-k\\)，紧性（compactness）给出收敛子列（convergent subsequence）。",
+            "formula": "\\begin{aligned}&x_{k_j}\\to\\bar x\\in C\\\\&f(x_{k_j})\\to f(\\bar x)\\in\\mathbb R\\end{aligned}",
+            "reason": "连续性（continuity）要求有限极限，却与函数值趋于负无穷矛盾，故下确界有限。"
+          },
+          {
+            "title": "5. 用最小化序列找到可行极限 · Minimizing sequence",
+            "body": "按下确界定义选 \\(f(x_k)\\le p^\\star+1/k\\)，再从紧集（compact set）取收敛子列。",
+            "formula": "p^\\star\\le f(x_{k_j})\\le p^\\star+1/k_j \\Longrightarrow f(\\bar x)=p^\\star",
+            "reason": "紧性提供子列及可行极限，连续性把函数值极限搬回极限点，故最小值取得。"
+          },
+          {
+            "title": "6. 非紧集合也能缩到紧水平集 · Compact sublevel set",
+            "body": "设C闭、f连续且强制增长。任取 \\(x_0\\in C\\)，只在不差于它的点中找最优。",
+            "formula": "K=\\{x\\in C:f(x)\\le f(x_0)\\}",
+            "reason": "K非空；C闭与连续性保证K闭；强制增长保证K有界，否则会有目标始终不大的无界序列。"
+          },
+          {
+            "title": "7. 水平集上的解就是原问题的解 · Global attainment",
+            "body": "在紧集K上最小值取得，而K外的点全部更差。",
+            "formula": "\\min_{x\\in K}f(x)\\le f(x_0)<f(y)\\qquad \\forall y\\in C\\setminus K",
+            "reason": "这把全域存在性归结到紧集定理，避免直接假设argmin非空。"
+          }
+        ],
+        "example": {
+          "problem": "选两个非负产量，总量至少3，成本为第一个产量的2倍加第二个产量。求最低成本，再比较总量必须严格大于3的版本。",
+          "steps": [
+            "\\(C=\\{x:x_1,x_2\\ge0,\\ x_1+x_2\\ge3\\}\\)，\\(f(x)=2x_1+x_2\\)。",
+            "对任意可行点，\\(f(x)=(x_1+x_2)+x_1\\ge3\\)。",
+            "点 \\((0,3)\\) 可行且成本3；等号还要求 \\(x_1=0\\)、总量为3，所以最优点唯一。",
+            "严格约束版本可取 \\((0,3+1/k)\\) 逼近成本3，但每个可行点成本都严格大于3。"
+          ],
+          "answer": "原问题最优解为(0,3)，最优值3。严格约束版本下确界仍为3，但没有最优解。"
+        },
+        "pitfalls": [
+          "不要把min和inf混用；前者要求最小值实际取得。",
+          "闭可行域不单独保证解存在，例如指数函数在整个实数上只有下确界0。"
+        ],
+        "checks": [
+          {
+            "question": "实数上负平方函数的下确界是什么？",
+            "answer": "\\(\\inf_{x\\in\\mathbb R}(-x^2)=-\\infty\\)，没有实数点达到它。"
+          },
+          {
+            "question": "强制增长是否表示目标处处递增？",
+            "answer": "不是。它仅限制变量长度趋于无穷时的行为，有限区域内可以先降后升。"
+          }
+        ],
+        "animation": null,
+        "source": {
+          "label": "《最优化：建模、算法与理论》§1.1、§1.5与§2.3；独立重写与推导",
+          "url": "https://faculty.bicmr.pku.edu.cn/~wenzw/optbook.html"
+        }
+      },
+      {
+        "id": "m1-l2",
+        "title": "范数与内积 · Norms & inner products",
+        "intuition": "欧氏范数（Euclidean norm）先将各坐标平方求和，再开根号，1范数（ℓ₁ norm）累计绝对误差，无穷范数（infinity norm）关注最大误差。内积（inner product）衡量方向之间的对齐；柯西不等式（Cauchy–Schwarz inequality）用两个长度控制这种对齐。最陡下降（steepest descent）也依赖我们怎样规定一步有多长。",
+        "formal": "对 \\(x\\in\\mathbb R^n\\)，\\(\\|x\\|_1=\\sum_i|x_i|\\)、\\(\\|x\\|_2=(\\sum_i x_i^2)^{1/2}\\)、\\(\\|x\\|_\\infty=\\max_i|x_i|\\)。范数（norm）满足正定性（positive definiteness）、绝对齐次性（absolute homogeneity）和三角不等式（triangle inequality）。柯西不等式为 \\(|u^Tv|\\le\\|u\\|_2\\|v\\|_2\\)。诱导矩阵2范数（induced matrix 2-norm）为 \\(\\|A\\|_2=\\max_{\\|d\\|_2=1}\\|Ad\\|_2\\)，与元素平方和开根号的Frobenius范数不同。",
+        "symbols": [
+          {
+            "symbol": "\\|x\\|_p",
+            "meaning": "Vector norm · 选定的向量长度"
+          },
+          {
+            "symbol": "u^Tv",
+            "meaning": "Euclidean inner product · 欧氏内积"
+          },
+          {
+            "symbol": "\\|A\\|_2",
+            "meaning": "Operator 2-norm · 矩阵对欧氏长度的最大放大率"
+          },
+          {
+            "symbol": "\\|A\\|_F",
+            "meaning": "Frobenius norm · 矩阵元素平方和开根号"
+          }
+        ],
+        "proof": [
+          {
+            "title": "1. 从非负平方开始 · Nonnegative square",
+            "body": "若 \\(v\\ne0\\)，用v的倍数逼近u，剩余向量长度平方总非负。",
+            "formula": "0\\le\\|u-av\\|_2^2 =\\|u\\|_2^2-2a\\,u^Tv +a^2\\|v\\|_2^2",
+            "reason": "将内积展开，把几何问题化为标量a的二次式。"
+          },
+          {
+            "title": "2. 选最好的倍数得到柯西不等式 · Cauchy–Schwarz",
+            "body": "令 \\(a=(u^Tv)/\\|v\\|_2^2\\) 代回；v为零时结论直接成立。",
+            "formula": "0\\le\\|u\\|_2^2-\\frac{(u^Tv)^2}{\\|v\\|_2^2} \\Longrightarrow |u^Tv|\\le\\|u\\|_2\\|v\\|_2",
+            "reason": "乘以正数再开平方；等号对应两个向量线性相关（linear dependence）。"
+          },
+          {
+            "title": "3. 控制交叉项得到三角不等式 · Triangle inequality",
+            "body": "相加后的长度平方含一个交叉内积，用刚证明的界控制它。",
+            "formula": "\\|u+v\\|_2^2 \\le\\|u\\|_2^2+2\\|u\\|_2\\|v\\|_2 +\\|v\\|_2^2 =(\\|u\\|_2+\\|v\\|_2)^2",
+            "reason": "两边非负，所以可以开平方；这也验证欧氏范数的关键公理。"
+          },
+          {
+            "title": "4. 比较不同误差尺度 · Norm comparison",
+            "body": "最大分量平方包含在平方和中；绝对值和平方至少含全部平方项；最后对绝对值向量与全1向量用柯西不等式。",
+            "formula": "\\|x\\|_\\infty\\le\\|x\\|_2 \\le\\|x\\|_1\\le\\sqrt n\\,\\|x\\|_2",
+            "reason": "换范数时误差阈值会变，且比较常数可能随维数增长。"
+          },
+          {
+            "title": "5. 单位方向控制所有输入 · Operator norm",
+            "body": "把非零x分成长度和单位方向，零向量时结论直接成立。",
+            "formula": "\\|Ax\\|_2 = \\|x\\|_2\\left\\|A\\frac{x}{\\|x\\|_2}\\right\\|_2 \\le \\|A\\|_2\\|x\\|_2",
+            "reason": "单位球面（unit sphere）紧且映射连续，故定义中的最大值可取到。"
+          },
+          {
+            "title": "6. 求欧氏单位球里的最陡一阶方向 · Steepest direction",
+            "body": "若梯度（gradient） \\(g\\ne0\\)，柯西不等式给一阶变化的下界，负归一化梯度达到它。",
+            "formula": "\\begin{aligned}&\\min_{\\|d\\|_2\\le1}g^Td=-\\|g\\|_2\\\\&d^\\star=-\\frac{g}{\\|g\\|_2}\\end{aligned}",
+            "reason": "“最陡”必须附带长度度量；这只最小化线性模型（linear model），不保证任意长的真实步子下降。"
+          }
+        ],
+        "example": {
+          "problem": "取 \\(x=(3,-4)\\)、\\(A=\\operatorname{diag}(2,1)\\)、\\(g=(3,4)\\)，计算三种长度、放大率与欧氏单位最陡方向。",
+          "steps": [
+            "\\(\\|x\\|_1=7\\)、\\(\\|x\\|_2=5\\)、\\(\\|x\\|_\\infty=4\\)。",
+            "单位向量d满足 \\(\\|Ad\\|_2^2=4d_1^2+d_2^2\\le4\\)，在 \\((1,0)\\) 取等号，故 \\(\\|A\\|_2=2\\)。",
+            "\\(\\|Ax\\|_2=\\sqrt{52}\\le10\\)，符合放大界。",
+            "\\(d^\\star=(-3/5,-4/5)\\)，长度1且 \\(g^Td^\\star=-5\\)。"
+          ],
+          "answer": "三种误差为7、5、4；矩阵最大放大率2；单位最陡方向为(−3/5,−4/5)。"
+        },
+        "pitfalls": [
+          "本例矩阵Frobenius范数为根号5，算子2范数（operator 2-norm）为2，不能混用。",
+          "负梯度方向正确，不等于任意步长（step size）都能降低真实函数。"
+        ],
+        "checks": [
+          {
+            "question": "梯度为零时，单位球（unit ball）中哪个方向一阶下降最多？",
+            "answer": "所有方向的一阶变化都为零，不存在唯一最陡方向；非凸（nonconvex）情况下也不能据此断言最优。"
+          },
+          {
+            "question": "为什么负梯度的长度未必为1？",
+            "answer": "负梯度尚未归一化。固定单位长度时要除以梯度范数，实际移动距离还由步长决定。"
+          }
+        ],
+        "animation": null,
+        "source": {
+          "label": "《最优化：建模、算法与理论》§2.1与§2.2；独立重写与推导",
+          "url": "https://faculty.bicmr.pku.edu.cn/~wenzw/optbook.html"
+        }
+      },
+      {
+        "id": "m1-l3",
+        "title": "梯度与展开 · Gradient & Taylor expansion",
+        "intuition": "梯度（gradient）是小位移的一阶线性模型（linear model）系数；Hessian描述这张线性模型如何变化。将多元函数限制到一条直线，就能借助一元微积分推导，而不用死记一套矩阵求导口诀。",
+        "formal": "设D开、\\(f:D\\to\\mathbb R\\)。f在x可微（differentiable）意指 \\(f(x+h)=f(x)+\\nabla f(x)^Th+o(\\|h\\|_2)\\)。若 \\(f\\in C^2(D)\\)，且连接x与x+h的线段包含于D，则可用二阶积分余项（second-order integral remainder）。二阶连续性（continuity of the Hessian）保证Hessian对称；仅有各偏导（partial derivative）存在不能直接当作可微。",
+        "symbols": [
+          {
+            "symbol": "\\nabla f(x)",
+            "meaning": "Gradient · 一阶线性变化的列向量系数"
+          },
+          {
+            "symbol": "\\nabla^2f(x)",
+            "meaning": "Hessian · 二阶变化的Hessian矩阵"
+          },
+          {
+            "symbol": "o(\\|h\\|_2)",
+            "meaning": "Little-o remainder · 除以位移长度后趋于零的余项"
+          },
+          {
+            "symbol": "\\varphi(t)=f(x+th)",
+            "meaning": "Line restriction · 沿位移方向的一元函数"
+          }
+        ],
+        "proof": [
+          {
+            "title": "1. 将变化放到一条路径上 · Line restriction",
+            "body": "固定起点x与位移h，只让标量t从0走到1。",
+            "formula": "\\varphi(0)=f(x),\\qquad\\varphi(1)=f(x+h)",
+            "reason": "h是固定向量，t是路径参数，因此可以使用一元微积分。"
+          },
+          {
+            "title": "2. 链式法则给出一阶与二阶变化 · Chain rule",
+            "body": "沿h的斜率是梯度投影，曲率是Hessian的方向二次型（quadratic form）。",
+            "formula": "\\begin{aligned}&\\varphi'(t)=\\nabla f(x+th)^Th\\\\&\\varphi''(t)=h^T\\nabla^2f(x+th)h\\end{aligned}",
+            "reason": "分别需要一个与两个方向向量相乘，这解释梯度和Hessian的形状。"
+          },
+          {
+            "title": "3. 对导数的变化两次积分 · Double integration",
+            "body": "先把总变化写成一阶导数积分，再把一阶导数写成初始斜率加累计二阶变化。",
+            "formula": "\\varphi(1)-\\varphi(0) =\\varphi\\prime(0) +\\int_0^1\\!\\int_0^t\\varphi\\prime\\prime(s)\\,ds\\,dt",
+            "reason": "连续二阶导数允许基本定理和交换积分顺序。"
+          },
+          {
+            "title": "4. 得到精确积分余项 · Integral remainder",
+            "body": "对三角积分区域换序，固定s后t的取值长度为1减s。",
+            "formula": "f(x+h)=f(x)+\\nabla f(x)^Th +\\int_0^1(1-s) \\cdot h^T\\nabla^2f(x+sh)h\\,ds",
+            "reason": "余项是整条线段曲率的加权平均，而非凭空加上的二次项。"
+          },
+          {
+            "title": "5. 短位移时Hessian接近起点值 · Taylor expansion",
+            "body": "二阶连续性统一控制短线段上的曲率差，权重积分恰为二分之一。",
+            "formula": "f(x+h)=f(x)+\\nabla f(x)^Th +\\frac12h^T\\nabla^2f(x)h +o(\\|h\\|_2^2)",
+            "reason": "从精确积分式分离起点Hessian后，剩余误差除以位移平方趋零。"
+          },
+          {
+            "title": "6. 负梯度只保证足够短的下降 · Short-step descent",
+            "body": "设 \\(g=\\nabla f(x)\\ne0\\)，位移取 \\(-tg\\)。",
+            "formula": "f(x-tg)-f(x)=-t\\|g\\|_2^2+o(t)<0\\qquad\\text{for sufficiently small }t>0",
+            "reason": "余项除以t趋零，不能最终抵消负的线性主项；但较大t时二阶项可能占上风。"
+          },
+          {
+            "title": "7. 二次函数没有高阶余项 · Quadratic model",
+            "body": "对称Q定义 \\(f(x)=\\frac12x^TQx+b^Tx+c\\)，直接乘开得精确等式。",
+            "formula": "\\begin{aligned}&f(x+h)-f(x) =(Qx+b)^Th+\\frac12h^TQh\\\\&\\nabla f(x)=Qx+b\\\\&\\nabla^2f(x)=Q\\end{aligned}",
+            "reason": "二次目标是检验导数、步长（step size）和算法实现最方便的标准模型。"
+          }
+        ],
+        "example": {
+          "problem": "取 \\(f(x_1,x_2)=x_1^2+2x_2^2\\)，起点 \\((1,1)\\)，比较负梯度步长0.1与1。",
+          "steps": [
+            "梯度 \\(g=(2,4)\\)，Hessian为 \\(\\operatorname{diag}(2,4)\\)，初始目标3。",
+            "精确变化为 \\(-20t+36t^2\\)，因为 \\(\\|g\\|_2^2=20\\)、\\(g^T\\nabla^2f\\,g=72\\)。",
+            "t为0.1时新点 \\((0.8,0.6)\\)，目标1.36，下降。",
+            "t为1时新点 \\((-1,-3)\\)，目标19，上升。严格下降范围为 \\(0<t<5/9\\)。"
+          ],
+          "answer": "方向正确但步长过大仍会失败，二次曲率项精确解释了这一现象。"
+        },
+        "pitfalls": [
+          "偏导存在不自动推出可微；本课程在定理中明确写出可微或二阶连续可微（twice continuously differentiable）条件。",
+          "Hessian的对角元素只测试坐标方向，不足以判定全部方向曲率（directional curvature）。"
+        ],
+        "checks": [
+          {
+            "question": "二次目标前的二分之一有什么作用？",
+            "answer": "它抵消平方求导带出的2，让公式更简洁。只有把整个目标乘以同一个正数才保证最优点不变；若只改变二次项系数而保留线性项，最优点可能变化。"
+          },
+          {
+            "question": "Q不对称时，二分之一乘x转置Qx的梯度是什么？",
+            "answer": "\\(\\frac12(Q+Q^T)x\\)。二次型只取决于Q的对称部分。"
+          }
+        ],
+        "animation": null,
+        "source": {
+          "label": "《最优化：建模、算法与理论》§2.2；独立重写与推导",
+          "url": "https://faculty.bicmr.pku.edu.cn/~wenzw/optbook.html"
+        }
+      },
+      {
+        "id": "m1-l4",
+        "title": "最小二乘 · Least squares",
+        "intuition": "最小二乘（least squares）将预测与观测之差叫作残差（residual）。转置矩阵把残差映回变量空间；最优点要求残差与所有可生成的预测方向正交。能否唯一识别参数，则取决于不同参数是否会产生同一预测。",
+        "formal": "给定 \\(A\\in\\mathbb R^{m\\times n}\\)、\\(b\\in\\mathbb R^m\\)，令 \\(f(x)=\\frac12\\|Ax-b\\|_2^2\\)，定义域为整个 \\(\\mathbb R^n\\)。梯度（gradient）为 \\(A^T(Ax-b)\\)，Hessian为 \\(A^TA\\succeq0\\)。最小二乘解总存在，全部解满足法方程（normal equations） \\(A^TAx=A^Tb\\)，唯一当且仅当A满列秩（full column rank）。半正定（positive semidefinite, PSD）指所有方向二次型（quadratic form）非负，不是矩阵元素都非负。",
+        "symbols": [
+          {
+            "symbol": "Ax-b",
+            "meaning": "Residual · 观测空间的残差"
+          },
+          {
+            "symbol": "\\ker A",
+            "meaning": "Null space · 被A映到零的方向集合"
+          },
+          {
+            "symbol": "A^TA",
+            "meaning": "Gram matrix · 对称Gram矩阵"
+          },
+          {
+            "symbol": "Q\\succeq0",
+            "meaning": "Positive semidefinite (PSD) · Q对称且所有方向二次型非负"
+          }
+        ],
+        "proof": [
+          {
+            "title": "1. 展开新旧残差的差 · Residual expansion",
+            "body": "新残差等于旧残差加Ah，平方范数（norm）直接展开。",
+            "formula": "f(x+h)-f(x) =(Ax-b)^TAh+\\frac12\\|Ah\\|_2^2",
+            "reason": "线性项与二次项都能从代数恒等式中读出。"
+          },
+          {
+            "title": "2. 梯度必须回到变量空间 · Gradient dimensions",
+            "body": "通过内积（inner product）恒等式把A移到残差一侧。",
+            "formula": "(Ax-b)^TAh=[A^T(Ax-b)]^Th",
+            "reason": "梯度应是n维，而残差是m维；转置不是可有可无的记号。"
+          },
+          {
+            "title": "3. 平方长度保证半正定 · PSD curvature",
+            "body": "每个方向二次型都是该方向经A映射后的平方长度。",
+            "formula": "d^TA^TAd=\\|Ad\\|_2^2\\ge0",
+            "reason": "无需A满秩，最小二乘仍然具有非负曲率。"
+          },
+          {
+            "title": "4. 法方程解存在：先确定像空间 · Null space",
+            "body": "Gram矩阵与A有相同零空间（null space），而对称矩阵的像是零空间的正交补（orthogonal complement）。",
+            "formula": "\\begin{aligned}&\\ker(A^TA)=\\ker A\\\\&\\operatorname{range}(A^TA)=(\\ker A)^\\perp\\end{aligned}",
+            "reason": "反向包含用d的二次型为零推出Ad为零；正向包含直接代入。"
+          },
+          {
+            "title": "5. 右端恰在像空间中 · Solvability",
+            "body": "对每个 \\(d\\in\\ker A\\)，右端 \\(A^Tb\\) 与d正交。",
+            "formula": "d^TA^Tb=(Ad)^Tb=0 \\Longrightarrow A^Tb\\in\\operatorname{range}(A^TA)",
+            "reason": "所以法方程相容，即使系数矩阵不可逆也至少有一个解。"
+          },
+          {
+            "title": "6. 法方程提供全局最优证书 · Global certificate",
+            "body": "在任一法方程解 \\(x^\\star\\) 处，增量的一阶项消失，余下非负平方。",
+            "formula": "f(x^\\star+h)-f(x^\\star)=\\frac12\\|Ah\\|_2^2\\ge0",
+            "reason": "对所有h成立，故不是仅证明驻点（stationary point），而是全局最优（global optimality）。"
+          },
+          {
+            "title": "7. 零空间恰好描述全部解 · Uniqueness",
+            "body": "新点仍最优，当且仅当差向量被A消掉。",
+            "formula": "\\begin{aligned}&\\operatorname{argmin}f=x^\\star+\\ker A\\\\&A^TA\\succ0 \\iff \\ker A=\\{0\\}\\end{aligned}",
+            "reason": "满列秩消除平坦方向；秩亏（rank deficiency）时预测仍唯一，但产生预测的参数不唯一。"
+          },
+          {
+            "title": "8. 特征值界给出最缓与最陡曲率 · Spectral bounds",
+            "body": "对称矩阵正交对角化（orthogonal diagonalization）后，二次型是特征值（eigenvalue）乘坐标平方的和。",
+            "formula": "\\lambda_{\\min}(A^TA)\\|d\\|_2^2\\le\\|Ad\\|_2^2 \\le \\lambda_{\\max}(A^TA)\\|d\\|_2^2",
+            "reason": "最小特征值控制平坦性，最大特征值控制最大放大；后续分别对应强凸（strong convexity）参数与步长（step size）限制。"
+          }
+        ],
+        "example": {
+          "problem": "比较 \\(A=\\operatorname{diag}(1,2),b=(1,2)\\) 与 \\(A=(1\\ \\ 1),b=2\\) 两个最小二乘问题。",
+          "steps": [
+            "第一种法方程为 \\(x_1=1,4x_2=4\\)，故唯一解 \\((1,1)\\)。",
+            "任意位移h增加目标 \\(\\frac12h_1^2+2h_2^2\\)，非零位移严格增加。",
+            "第二种目标 \\(\\frac12(x_1+x_2-2)^2\\)，Gram矩阵为 \\(\\begin{pmatrix}1&1\\\\1&1\\end{pmatrix}\\)，特征值0和2。",
+            "全部 \\(x_1+x_2=2\\) 都最优；方向 \\((1,-1)\\) 不改变预测。"
+          ],
+          "answer": "第一种模型满列秩，参数唯一；第二种有平坦方向，最优预测为2，但参数有无穷多个。"
+        },
+        "pitfalls": [
+          "写Gram矩阵的逆之前必须检查满列秩；秩亏不等于法方程无解。",
+          "半正定允许负的非对角元素，判定依据始终是所有方向二次型。"
+        ],
+        "checks": [
+          {
+            "question": "对角元素正是否保证半正定？",
+            "answer": "不保证。\\(\\begin{pmatrix}1&2\\\\2&1\\end{pmatrix}\\) 沿 \\((1,-1)\\) 的二次型为−2。"
+          },
+          {
+            "question": "加入正的平方范数惩罚怎样影响唯一性？",
+            "answer": "加 \\(\\frac\\mu2\\|x\\|_2^2\\)、\\(\\mu>0\\) 后，Hessian为 \\(A^TA+\\mu I\\succ0\\)，所有平坦方向被消除。"
+          }
+        ],
+        "animation": null,
+        "source": {
+          "label": "《最优化：建模、算法与理论》§2.2、§2.5与§5.2；独立重写与推导",
+          "url": "https://faculty.bicmr.pku.edu.cn/~wenzw/optbook.html"
+        }
+      }
+    ],
+    "takeaways": [
+      "先检查可行与存在，再判断算法输出是否是解",
+      "范数（norm）度量误差，内积（inner product）控制一阶变化，矩阵谱控制二阶变化",
+      "最小二乘（least squares）梯度（gradient）把残差（residual）经转置映回变量空间，Hessian是Gram矩阵"
+    ]
+  },
+  {
+    "id": "m2",
+    "title": "凸性为什么强 · Convexity",
+    "minutes": 60,
+    "goals": [
+      "能从定义和保凸运算判别常见可行域（feasible set）与目标函数（objective function）",
+      "能双向推导凸性（convexity）与一阶支撑（first-order support）不等式的等价关系",
+      "能用方向曲率（directional curvature）判断二阶凸性，并区分严格凸（strict convexity）、强凸（strong convexity）与解存在"
+    ],
+    "prerequisites": [
+      "完成m1：内积（inner product）、可微性（differentiability）、Hessian、半正定（positive semidefinite, PSD）",
+      "会对一元函数求导和积分"
+    ],
+    "summary": "主线用60分钟把三种表述连成一件事：函数值在弦下、切平面（tangent hyperplane）在图像下、所有方向曲率（directional curvature）非负。每种表述都要连同定义域和正则性（regularity）条件使用，不能只看公式外形。",
+    "lessons": [
+      {
+        "id": "m2-l1",
+        "title": "凸集 · Convex sets",
+        "intuition": "两个生产方案都合规，取各做一半的平均方案是否还合规？凸集（convex set）回答的就是这个问题。这个性质看起来简单，却让我们能沿着通向任意更好点的直线走一小步，因而把“附近没有改进”连接到“全局没有改进”。",
+        "formal": "集合 \\(C\\subseteq\\mathbb R^n\\) 凸，指任意 \\(x,y\\in C\\)、\\(t\\in[0,1]\\) 都有 \\((1-t)x+ty\\in C\\)。本课允许空集为凸集，但可行域（feasible set）是否非空必须另外检查。凸性（convexity）不包含闭性（closedness）、有界性（boundedness）或内点（interior point）存在。标准凸优化形式使用凸不等式和仿射等式（affine equality）；某些特殊非线性等式也可能恰好定义凸集，因此应区分“标准表示规则”与“集合本身的性质”。",
+        "symbols": [
+          {
+            "symbol": "(1-t)x+ty",
+            "meaning": "Convex combination · 两端点之间的凸组合"
+          },
+          {
+            "symbol": "\\{x:Ax=b\\}",
+            "meaning": "Affine equality set · 仿射等式集合"
+          },
+          {
+            "symbol": "\\{x:a^Tx\\le b\\}",
+            "meaning": "Closed half-space · 闭半空间"
+          },
+          {
+            "symbol": "A^{-1}(D)",
+            "meaning": "Preimage · 原像集合，此符号不要求矩阵可逆"
+          }
+        ],
+        "proof": [
+          {
+            "title": "1. 仿射等式保留插值 · Affine equality",
+            "body": "设 \\(Ax=b\\)、\\(Ay=b\\)。矩阵乘法把凸组合变成像的相同凸组合。",
+            "formula": "A((1-t)x+ty) =(1-t)Ax+tAy =(1-t)b+tb=b",
+            "reason": "这不仅对0到1的t成立，对所有实数t也成立，故等式集合具有更强的仿射结构。"
+          },
+          {
+            "title": "2. 半空间不会被线段穿出 · Half-space",
+            "body": "如果两个端点在线性上界以下，插值后的线性数值也是两个合格数值的平均。",
+            "formula": "a^T((1-t)x+ty) =(1-t)a^Tx+ta^Ty \\le(1-t)b+tb=b",
+            "reason": "这里权重非负很关键；负权重不能这样保持不等式方向。"
+          },
+          {
+            "title": "3. 同时满足多个凸约束仍保留线段 · Intersection",
+            "body": "设每个 \\(C_i\\) 凸，两个端点属于所有 \\(C_i\\)。于是每条线段也逐一属于所有集合。",
+            "formula": "x,y\\in\\bigcap_i C_i \\Longrightarrow (1-t)x+ty\\in\\bigcap_i C_i",
+            "reason": "凸集任意交仍凸；交集可能为空，因此不能顺便断言模型可行。"
+          },
+          {
+            "title": "4. 仿射原像保凸 · Affine preimage",
+            "body": "若 \\(D\\) 凸，定义 \\(C=\\{x:Ax+b\\in D\\}\\)，将插值点的像写成两个像的凸组合。",
+            "formula": "A((1-t)x+ty)+b =(1-t)(Ax+b)+t(Ay+b) \\in D",
+            "reason": "只需要线性加平移结构，不需要A方阵、满秩或可逆。"
+          },
+          {
+            "title": "5. 范数球也是凸的 · Norm ball",
+            "body": "对 \\(\\|x-c\\|\\le r\\)、\\(\\|y-c\\|\\le r\\) 用三角不等式（triangle inequality）与齐次性，设 \\(r\\ge0\\)。",
+            "formula": "\\|(1-t)x+ty-c\\| \\le(1-t)\\|x-c\\|+t\\|y-c\\| \\le r",
+            "reason": "范数（norm）公理直接把误差预算变成凸约束，不必对范数求导。"
+          },
+          {
+            "title": "6. 从两个点推广到有限多个点 · Finite combinations",
+            "body": "设 \\(\\alpha_i\\ge0\\)、\\(\\sum_i\\alpha_i=1\\)。把前几个点先按归一化权重合成一个点，再与最后一点组合。",
+            "formula": "\\sum_{i=1}^k\\alpha_i x_i =(1-\\alpha_k) \\cdot\\left(\\sum_{i<k}\\frac{\\alpha_i}{1-\\alpha_k}x_i\\right) +\\alpha_kx_k",
+            "reason": "当最后权重为1时结论直接成立；否则归纳使用二点凸性，说明有限混合方案也可行。"
+          },
+          {
+            "title": "7. 用一个中点反例否定凸性 · Counterexample",
+            "body": "并集通常不保凸。例如两段 \\([-2,-1]\\) 和 \\([1,2]\\) 的并包含−1与1，却不含中点0。",
+            "formula": "-1,1\\in C,\\qquad\\frac{-1+1}{2}=0\\notin C",
+            "reason": "证明凸性需要任意端点和任意权重；推翻凸性只需一个失败的插值。"
+          }
+        ],
+        "example": {
+          "problem": "证明 \\(C=\\{x\\in\\mathbb R^2:x_1,x_2\\ge0,\\ x_1+x_2=1\\}\\) 是凸集，并比较它与 \\(D=\\{x:\\|x\\|_2=1\\}\\)。",
+          "steps": [
+            "C是两个半空间与一个仿射集合（affine set）的交，因此凸；点 \\((1,0)\\) 证明它非空。",
+            "\\((1,0)\\) 与 \\((0,1)\\) 的中点 \\((1/2,1/2)\\) 仍非负、分量和仍为1。",
+            "D包含 \\((1,0)\\) 与 \\((-1,0)\\)，但不包含它们的中点 \\((0,0)\\)，因此不凸。",
+            "若把D的等式改为 \\(\\|x\\|_2\\le1\\)，就得到凸的实心球。"
+          ],
+          "answer": "概率单纯形（probability simplex）是凸的；球面通常不凸，实心球凸。凸性看全部允许点，不能只看边界形状是否圆滑。"
+        },
+        "pitfalls": [
+          "凸并不等于开放或闭合。开球、闭球都凸；仅凸性不保证最小值能取得。",
+          "非线性等式通常不能直接放入标准凸形式，但不能据此断言所有非线性等式定义的集合都非凸（nonconvex），例如平方等于零定义单点。"
+        ],
+        "checks": [
+          {
+            "question": "非空凸集一定有普通内点吗？",
+            "answer": "不一定。二维平面里的一条线段没有二维开球能装在其中，但它仍是凸集；后面的相对内点（relative interior point）会处理低维情况。"
+          },
+          {
+            "question": "两个凸集的交是空集，是否意味着交运算不保凸？",
+            "answer": "不是。空集按定义仍凸；模型可行性与凸性是两个不同问题。"
+          }
+        ],
+        "animation": null,
+        "source": {
+          "label": "《最优化：建模、算法与理论》§2.4；独立重写与推导",
+          "url": "https://faculty.bicmr.pku.edu.cn/~wenzw/optbook.html"
+        }
+      },
+      {
+        "id": "m2-l2",
+        "title": "凸函数与上方图 · Convex functions & epigraphs",
+        "intuition": "凸函数（convex function）不是“图像看着像碗”这么粗略的条件。它要求任意两点之间的函数值不超过端点值的线性平均。把每个函数点上方的整条竖线都加进去，就得到上方图（epigraph）；函数的凸性（convexity）恰好变成这个高一维集合的凸性。",
+        "formal": "设 \\(D\\subseteq\\mathbb R^n\\) 非空且凸，\\(f:D\\to\\mathbb R\\)。若 \\(f((1-t)x+ty)\\le(1-t)f(x)+tf(y)\\) 对所有 \\(x,y\\in D\\)、\\(t\\in[0,1]\\) 成立，称f凸。上方图为 \\(\\operatorname{epi}f=\\{(x,r):x\\in D,\\ r\\ge f(x)\\}\\)。约束可用示性函数（indicator function） \\(\\delta_C(x)=0\\)（x在C内）或 \\(+\\infty\\)（x在C外）编码；它不是概率论中取0和1的指示函数。",
+        "symbols": [
+          {
+            "symbol": "\\operatorname{dom}f",
+            "meaning": "Effective domain · 函数取有限值的有效定义域"
+          },
+          {
+            "symbol": "\\operatorname{epi}f",
+            "meaning": "Epigraph · 图像及其上方所有点"
+          },
+          {
+            "symbol": "\\delta_C",
+            "meaning": "Indicator function · 以正无穷排除不可行点的凸分析示性函数"
+          },
+          {
+            "symbol": "\\{x:f(x)\\le\\alpha\\}",
+            "meaning": "Sublevel set · 目标不超过门槛的下水平集"
+          }
+        ],
+        "proof": [
+          {
+            "title": "1. 从函数凸性推出上方图凸 · Convex epigraph",
+            "body": "取上方图中两点 \\((x,r)\\)、\\((y,s)\\)，因此 \\(r\\ge f(x)\\)、\\(s\\ge f(y)\\)。",
+            "formula": "f((1-t)x+ty) \\le(1-t)f(x)+tf(y) \\le(1-t)r+ts",
+            "reason": "插值点的高度仍高于函数值，故它属于上方图。"
+          },
+          {
+            "title": "2. 从上方图凸反推函数凸 · Reverse implication",
+            "body": "反过来，只选恰好贴着图像的两个端点，再使用集合凸性。",
+            "formula": "(x,f(x)),(y,f(y))\\in\\operatorname{epi}f \\Longrightarrow f((1-t)x+ty) \\le(1-t)f(x)+tf(y)",
+            "reason": "上方图定义把集合成员关系翻译回弦上界，所以两个概念完全等价。"
+          },
+          {
+            "title": "3. 所有范数都提供凸函数 · Convex norms",
+            "body": "将范数（norm）的三角不等式（triangle inequality）和非负齐次性依次用于插值。",
+            "formula": "\\|(1-t)x+ty\\| \\le\\|(1-t)x\\|+\\|ty\\| =(1-t)\\|x\\|+t\\|y\\|",
+            "reason": "范数在原点不可微（differentiable）也不影响凸性，因此凸性比光滑（smooth）性更基本。"
+          },
+          {
+            "title": "4. 平方长度给出可见的弦间隙 · Squared norm",
+            "body": "把左右两边展开，交叉项相消后，弦与函数之间剩下一项非负平方距离。",
+            "formula": "(1-t)\\|x\\|_2^2+t\\|y\\|_2^2 -\\|(1-t)x+ty\\|_2^2 =t(1-t)\\|x-y\\|_2^2",
+            "reason": "这一精确恒等式后来会成为强凸性（strong convexity）中的统一二次间隙。"
+          },
+          {
+            "title": "5. 凸函数的下水平集凸 · Sublevel sets",
+            "body": "若两个端点目标都不超过同一门槛 \\(\\alpha\\)，插值处的函数值也不会超过门槛。",
+            "formula": "f(x),f(y)\\le\\alpha \\Longrightarrow \\ f((1-t)x+ty) \\le (1-t)\\alpha+t\\alpha=\\alpha",
+            "reason": "低成本方案的集合可安全混合；但这个性质反过来只叫拟凸，弱于函数凸性。"
+          },
+          {
+            "title": "6. 示性函数把约束装进目标 · Indicator function",
+            "body": "当C非空时，\\(\\delta_C\\) 不恒为正无穷，且从不为负无穷。其上方图是C乘非负半轴。",
+            "formula": "\\begin{aligned}&\\operatorname{epi}\\delta_C=C\\times[0,\\infty)\\\\&\\min_{x\\in C}f(x) =\\min_{x\\in\\mathbb R^n}\\bigl(f(x)+\\delta_C(x)\\bigr)\\end{aligned}",
+            "reason": "C凸时示性函数凸。右侧有效定义域自动保留约束，正无穷只是排除不可行点，不是可计算的惩罚常数。"
+          },
+          {
+            "title": "7. 下水平集凸不能替代弦不等式 · Converse fails",
+            "body": "\\(f(x)=x^3\\) 在实数上单调，所以每个下水平集都是半直线；但取端点−2与0，弦不等式失败。",
+            "formula": "f(-1)=-1>\\frac{f(-2)+f(0)}2=-4",
+            "reason": "具体反例说明凸集（convex set）合性质不足以恢复函数值之间的定量关系。"
+          }
+        ],
+        "example": {
+          "problem": "用 \\(f(x)=x^2\\)、端点0和2、权重 \\(t=1/4\\)，计算弦高度、实际函数值与两者间隙。再把定义域限制在 \\([0,1]\\)。",
+          "steps": [
+            "插值点为 \\(z=(1-t)0+t\\cdot2=1/2\\)。",
+            "弦高度为 \\((3/4)\\cdot0+(1/4)\\cdot4=1\\)，实际值 \\(f(z)=1/4\\)。",
+            "间隙 \\(1-1/4=3/4\\)，也等于 \\(t(1-t)(2-0)^2\\)。",
+            "限制定义域后写成 \\(F(x)=x^2+\\delta_{[0,1]}(x)\\)。点2的F值是正无穷，比较有限弦时应选择有效域（effective domain）内端点。"
+          ],
+          "answer": "凸函数位于两端点连成的弦下；加入示性函数后，目标与约束合并，但有效定义域仍须明确。"
+        },
+        "pitfalls": [
+          "凸函数的图像本身通常不是凸集；凸的是图像上方区域。",
+          "不要把取正无穷的示性函数当作一个很大的有限罚项，后者可能仍允许不可行点最优。"
+        ],
+        "checks": [
+          {
+            "question": "负平方函数的下水平集是否都凸？",
+            "answer": "不是。例如 \\(\\{x:-x^2\\le-1\\}=(-\\infty,-1]\\cup[1,\\infty)\\)，中间有缺口。"
+          },
+          {
+            "question": "函数是凸的，是否自动连续到定义域边界？",
+            "answer": "不自动。边界的连续性（continuity）需要另行判断；在非空开放有效域内，有限凸函数（finite convex function）连续。"
+          }
+        ],
+        "animation": "convex-chord",
+        "source": {
+          "label": "《最优化：建模、算法与理论》§2.3、§2.5；独立重写与推导",
+          "url": "https://faculty.bicmr.pku.edu.cn/~wenzw/optbook.html"
+        }
+      },
+      {
+        "id": "m2-l3",
+        "title": "一阶等价定理 · First-order characterization",
+        "intuition": "可微性（differentiability）只告诉我们切平面（tangent hyperplane）在很近处近似函数。凸性（convexity）额外保证这张平面在整个定义域内都不会高于真实函数。反过来，如果每个点的切平面都能做到全局托住函数，两端切平面的线性项就能在插值点精确抵消，恢复凸性。",
+        "formal": "设 \\(D\\subseteq\\mathbb R^n\\) 是非空开凸集（convex set），\\(f:D\\to\\mathbb R\\) 可微（differentiable）。则f凸，当且仅当对所有 \\(x,y\\in D\\)，\\(f(y)\\ge f(x)+\\nabla f(x)^T(y-x)\\)。在同样的开凸域上，这又等价于梯度单调（gradient monotonicity）：\\((\\nabla f(y)-\\nabla f(x))^T(y-x)\\ge0\\)。这里采用开域版本，避免边界梯度（gradient）应如何定义的额外技术问题。",
+        "symbols": [
+          {
+            "symbol": "\\nabla f(x)^T(y-x)",
+            "meaning": "First-order change · 从x的切平面预测到y的线性变化"
+          },
+          {
+            "symbol": "\\ell_x(y)",
+            "meaning": "Affine minorant · 以x为接触点的仿射下界"
+          },
+          {
+            "symbol": "\\text{梯度单调}",
+            "meaning": "Gradient monotonicity · 两个梯度之差与两点之差的内积非负，并非每个分量分别递增"
+          }
+        ],
+        "proof": [
+          {
+            "title": "1. 从凸弦不等式出发 · Chord inequality",
+            "body": "固定 \\(x,y\\in D\\)，对 \\(0<t\\le1\\) 向y迈出比例t。",
+            "formula": "f(x+t(y-x))\\le(1-t)f(x)+tf(y)",
+            "reason": "开凸域保证路径上函数有定义；凸性比较实际值与端点平均。"
+          },
+          {
+            "title": "2. 整理成割线斜率的界 · Secant bound",
+            "body": "移项并除以正数t，得到任何短割线（secant）斜率都不超过完整的端点差。",
+            "formula": "\\frac{f(x+t(y-x))-f(x)}{t}\\le f(y)-f(x)",
+            "reason": "不能在这一步把t取成负数，否则不等式方向和可行路径都会改变。"
+          },
+          {
+            "title": "3. 缩短割线得到切线 · Directional limit",
+            "body": "令 \\(t\\downarrow0\\)，左侧由可微性收敛到方向导数（directional derivative）。",
+            "formula": "\\nabla f(x)^T(y-x)\\le f(y)-f(x)",
+            "reason": "这正是一阶全局下界；关键是任意远处的y从头到尾没有被限定为局部点。"
+          },
+          {
+            "title": "4. 反向证明：在插值点同时支撑两个端点 · Two supporting planes",
+            "body": "现在假设全局下界对所有点成立。令 \\(z=(1-t)x+ty\\)，以同一个z为基点写两次。",
+            "formula": "\\begin{aligned}&f(x)-f(z)\\ge\\nabla f(z)^T(x-z)\\\\&f(y)-f(z)\\ge\\nabla f(z)^T(y-z)\\end{aligned}",
+            "reason": "必须从同一基点取梯度，后续线性项才会严格抵消。"
+          },
+          {
+            "title": "5. 按同样权重加起来 · Weighted sum",
+            "body": "第一式乘1减t，第二式乘t，再相加。",
+            "formula": "(1-t)(x-z)+t(y-z)=0 \\Longrightarrow (1-t)f(x)+tf(y)\\ge f(z)",
+            "reason": "恢复定义中的弦上界，完成“当且仅当”的另一方向。"
+          },
+          {
+            "title": "6. 两个支撑式推出梯度单调 · Monotone gradient",
+            "body": "交换x与y各写一次支撑不等式，相加后函数值抵消。",
+            "formula": "0\\ge\\nabla f(x)^T(y-x) +\\nabla f(y)^T(x-y) \\Longrightarrow (\\nabla f(y)-\\nabla f(x))^T \\cdot(y-x)\\ge0",
+            "reason": "单调性（monotonicity）体现梯度沿位移方向的投影不往回下降，而不是坐标逐个比较。"
+          },
+          {
+            "title": "7. 梯度单调也足够恢复支撑式 · Recover support",
+            "body": "设梯度单调，令 \\(\\varphi(s)=f(x+s(y-x))\\)。一元中值定理给出某个 \\(c\\in(0,1)\\)，且单调性比较c与0。",
+            "formula": "\\begin{aligned}&f(y)-f(x)=\\varphi'(c)\\\\&c\\bigl(\\varphi'(c)-\\varphi'(0)\\bigr)\\ge0\\end{aligned}",
+            "reason": "因c为正，可得函数差至少为起点方向导数，从而恢复一阶下界；这个证明只需要可微，不偷偷追加梯度连续性（continuity）。"
+          }
+        ],
+        "example": {
+          "problem": "对 \\(f(x)=x^2\\)，在 \\(x=1\\) 建立切线下界，再在 \\(y=-2\\) 检查。最后比较非凸函数（nonconvex function） \\(h(x)=-x^2\\)。",
+          "steps": [
+            "\\(f(1)=1\\)、\\(f'(1)=2\\)，切线为 \\(\\ell_1(y)=1+2(y-1)=2y-1\\)。",
+            "差值 \\(f(y)-\\ell_1(y)=y^2-2y+1=(y-1)^2\\ge0\\)，这是一份对所有y的证书。",
+            "y为−2时，实际值4，切线值−5，间隙9。",
+            "对h在0求导得到零，但切线值为0，而 \\(h(1)=-1<0\\)。可微性没有使该切线成为全局下界。"
+          ],
+          "answer": "凸性把局部切线升级为全局证书。驻点（stationary point）在凸问题中能证明最优，正是因为此时这张全局下界变成水平面。"
+        },
+        "pitfalls": [
+          "凸函数（convex function）在弦下、在切平面上，两种不等式方向不要混淆。",
+          "只验证某一个基点的支撑不等式，不足以证明整个函数凸；必须对所有基点成立。"
+        ],
+        "checks": [
+          {
+            "question": "梯度单调是不是要求每个偏导（partial derivative）都随每个坐标增大而增大？",
+            "answer": "不是。它只要求两向量差的内积非负；正半定Hessian可以有负的非对角项。"
+          },
+          {
+            "question": "若函数凸且可微，但梯度不为零，就一定不是约束最优点吗？",
+            "answer": "不能这样说。梯度为零是全空间最优条件；边界上可能没有可行的负梯度方向，下一模块会推导约束版。"
+          }
+        ],
+        "animation": "supporting-plane",
+        "source": {
+          "label": "《最优化：建模、算法与理论》§2.5.2；独立重写与推导",
+          "url": "https://faculty.bicmr.pku.edu.cn/~wenzw/optbook.html"
+        }
+      },
+      {
+        "id": "m2-l4",
+        "title": "二阶判据与强凸 · Hessian test & strong convexity",
+        "intuition": "一张表面沿每条直线都向上弯，它才是凸的。Hessian把“沿哪个方向弯多少”编码成二次型（quadratic form）。强凸（strong convexity）进一步要求无论在哪里、沿哪个方向，至少保留同一份正的平方曲率；它让最优点附近有定量的误差界，而不是只知道形状没有凹陷。",
+        "formal": "条件 / Assumptions：\\(D\\subseteq\\mathbb R^n\\) 非空、开且凸，\\(f\\in C^2(D)\\)。二阶判据 / Hessian test：\\(f\\) 凸，当且仅当每个 \\(x\\in D\\) 都满足 \\(\\nabla^2f(x)\\succeq0\\)。\n\n强凸 / Strong convexity：给定 \\(\\mu>0\\)，以下三项等价：1. \\(x\\mapsto f(x)-\\frac\\mu2\\|x\\|_2^2\\) 凸。2. 所有 \\(x\\in D\\) 满足 \\(\\nabla^2f(x)\\succeq\\mu I\\)。3. 所有 \\(x,y\\in D\\) 满足：\\[f(y)\\ge f(x) +\\nabla f(x)^T(y-x) +\\frac\\mu2\\|y-x\\|_2^2.\\]Hessian 处处正定（positive definite, PD）可推出严格凸（strict convexity）。若没有统一的正曲率下界，则不一定强凸。",
+        "symbols": [
+          {
+            "symbol": "\\mu>0",
+            "meaning": "Strong-convexity parameter · 全域统一的强凸参数"
+          },
+          {
+            "symbol": "\\nabla^2f(x)\\succeq\\mu I",
+            "meaning": "Hessian lower bound · 每个方向的曲率至少为mu乘方向长度平方"
+          },
+          {
+            "symbol": "\\text{严格凸}",
+            "meaning": "Strict convexity · 不同端点之间的非平凡弦不等式严格成立"
+          },
+          {
+            "symbol": "\\text{强凸}",
+            "meaning": "Strong convexity · 严格性还有统一的定量二次下界"
+          }
+        ],
+        "proof": [
+          {
+            "title": "1. 凸性迫使对称小步的总变化非负 · Symmetric increments",
+            "body": "固定x和方向d，因域开放，足够小的正负t都可取。以x为中点使用凸性（convexity）。",
+            "formula": "f(x+td)+f(x-td)-2f(x)\\ge0",
+            "reason": "开放性在必要性证明中保证可以测试所有方向的双边微小位移。"
+          },
+          {
+            "title": "2. 二阶展开抽出方向曲率 · Directional curvature",
+            "body": "两个Taylor式相加后，一阶项抵消；除以正数平方并取极限。",
+            "formula": "f(x+td)+f(x-td)-2f(x) =t^2d^T\\nabla^2f(x)d+o(t^2) \\Longrightarrow d^T\\nabla^2f(x)d\\ge0",
+            "reason": "对每个d都成立，恰好就是Hessian半正定（positive semidefinite, PSD），而非仅对坐标方向成立。"
+          },
+          {
+            "title": "3. 反向用积分余项推出一阶下界 · Sufficiency",
+            "body": "若路径上Hessian均半正定，令 \\(h=y-x\\)，Taylor积分余项（integral remainder）非负。",
+            "formula": "f(y)-f(x)-\\nabla f(x)^Th=\\int_0^1(1-s)\\cdot h^T\\nabla^2f(x+sh)h\\,ds\\ge0",
+            "reason": "上一节已证明一阶下界等价于凸性，因此完成二阶判据双向推导。"
+          },
+          {
+            "title": "4. 减去统一二次曲率 · Subtract curvature",
+            "body": "令 \\(q(x)=f(x)-\\frac\\mu2\\|x\\|_2^2\\)，其Hessian只是在每个方向减去mu。",
+            "formula": "\\nabla^2q(x)=\\nabla^2f(x)-\\mu I\\succeq0\\iff q\\text{ 凸}",
+            "reason": "强凸的含义是去掉一层固定二次碗后仍保持凸，而不是仅在每个点有一些正曲率。"
+          },
+          {
+            "title": "5. 把q的切平面下界翻回f · Quadratic support",
+            "body": "对q使用一阶支撑（first-order support）式，移回平方项并配方。",
+            "formula": "f(y)\\ge f(x) +\\nabla f(x)^T(y-x) +\\frac\\mu2\\|y-x\\|_2^2",
+            "reason": "恒等式 \\(\\|y\\|_2^2-\\|x\\|_2^2-2x^T(y-x)=\\|y-x\\|_2^2\\) 给出二次距离项。"
+          },
+          {
+            "title": "6. 将强凸写成弦间隙 · Strong convexity",
+            "body": "在q的弦不等式中恢复平方项，用平方长度的插值恒等式化简。",
+            "formula": "f((1-t)x+ty) \\le(1-t)f(x)+tf(y) -\\frac\\mu2t(1-t)\\|x-y\\|_2^2",
+            "reason": "不同端点和非零权重产生严格正的扣除量，所以强凸必然严格凸。"
+          },
+          {
+            "title": "7. 唯一性不能代替存在性 · Uniqueness vs existence",
+            "body": "若两个不同点都是最优点，中点的强凸式会给出比最优值更小的值，矛盾。但这个证明先假设了最优点存在。",
+            "formula": "f\\left(\\frac{x+y}{2}\\right) \\le\\frac{f(x)+f(y)}2 -\\frac\\mu8\\|x-y\\|_2^2 <p^\\star",
+            "reason": "例如x平方限制在开区间(1,2)上是2-强凸，却无法取得下确界（infimum）1。"
+          },
+          {
+            "title": "8. 最优性给出距离误差界 · Distance bound",
+            "body": "若全空间可微（differentiable）强凸函数存在最优点 \\(x^\\star\\)，其梯度（gradient）为零。把最优点作为二次下界基点。",
+            "formula": "f(x)-f(x^\\star)\\ge\\frac\\mu2\\|x-x^\\star\\|_2^2 \\Longrightarrow \\|x-x^\\star\\|_2 \\le \\sqrt{\\frac{2(f(x)-f(x^\\star))}{\\mu}}",
+            "reason": "目标误差（objective gap）小就能保证点误差小；没有正的统一曲率时，这个定量结论通常不能成立。"
+          }
+        ],
+        "example": {
+          "problem": "比较 \\(f(x_1,x_2)=\\tfrac12x_1^2+2x_2^2\\)、\\(g(x)=x^4\\) 与 \\(h(x)=e^x\\)，各自定义在整个相应实空间。",
+          "steps": [
+            "f的Hessian为 \\(\\operatorname{diag}(1,4)\\)，最小特征值（eigenvalue）为1，所以f是1-强凸，最优点为原点。",
+            "g的二阶导数为 \\(12x^2\\ge0\\)，故凸；导数 \\(4x^3\\) 严格递增，故严格凸。",
+            "g在0处曲率为0，因此不存在全域正的强凸参数。",
+            "h的二阶导数处处正，但x趋负无穷时曲率趋于0，所以严格凸却不在全实线上强凸；其下确界0也不取得。"
+          ],
+          "answer": "凸、严格凸、强凸是逐渐增强的性质。处处正定不等于存在统一正下界；这些形状判据也不能让被排除的极限点变成可行。"
+        },
+        "pitfalls": [
+          "Hessian只在一个点半正定，不能证明全域凸，也不能单独保证那个点是局部最小。",
+          "严格凸不要求Hessian处处正定，x的四次方就是反例。"
+        ],
+        "checks": [
+          {
+            "question": "把强凸函数限制到非空凸子集后，强凸不等式还成立吗？",
+            "answer": "仍成立，因为只减少了需要检验的点对；但新可行域（feasible set）若不闭，最优点仍可能不存在。"
+          },
+          {
+            "question": "矩阵最小特征值为0的二次函数（quadratic function）是否可能强凸？",
+            "answer": "在整个空间上不可能。若限制到一个不包含平坦方向的低维仿射子空间，则应只检查该子空间的允许方向，可能获得强凸性（strong convexity）。"
+          }
+        ],
+        "animation": null,
+        "source": {
+          "label": "《最优化：建模、算法与理论》§2.5.1、§2.5.2与§2.5.4；独立重写与推导",
+          "url": "https://faculty.bicmr.pku.edu.cn/~wenzw/optbook.html"
+        }
+      },
+      {
+        "id": "m2-l5",
+        "title": "保凸运算 · Convexity-preserving operations",
+        "intuition": "实际目标往往由损失、惩罚和约束拼成，不适合每次重新求复杂Hessian。保凸运算是一套可重复使用的拼装规则，但每条规则都有方向要求：权重不能乱取负数，外函数的单调性（monotonicity）不能省略，取最大值和取最小值也有本质区别。",
+        "formal": "本节先取共同凸域D上的有限凸函数（finite convex function），非负加权和（nonnegative weighted sum）与有限逐点最大值（pointwise maximum）均凸；与仿射映射（affine map）复合也凸。若g凸、h在包含g取值和相关凸组合（convex combination）的区间上凸且单调不减，则 \\(h\\circ g\\) 凸。若 \\(F(x,y)\\) 联合凸（joint convexity）、Y非空凸，且 \\(v(x)=\\inf_{y\\in Y}F(x,y)\\) 在所考虑的凸域内处处有限，则v凸；不要求内层最小值取得，但必须使用近似最优点。",
+        "symbols": [
+          {
+            "symbol": "\\alpha_i\\ge0",
+            "meaning": "Nonnegative weights · 非负组合权重"
+          },
+          {
+            "symbol": "\\max_i f_i(x)",
+            "meaning": "Pointwise maximum · 在同一点比较多个函数，取最大者"
+          },
+          {
+            "symbol": "F(x,y)",
+            "meaning": "Joint convexity · 关于拼接变量(x,y)联合凸"
+          },
+          {
+            "symbol": "\\varepsilon>0",
+            "meaning": "Approximation tolerance · 用于替代未必存在的精确内层最优点"
+          }
+        ],
+        "proof": [
+          {
+            "title": "1. 非负加权和逐项使用凸性 · Weighted sum",
+            "body": "每个凸不等式乘上非负系数后，方向保持不变，再求和。",
+            "formula": "\\sum_i\\alpha_if_i((1-t)x+ty) \\le(1-t)\\sum_i\\alpha_if_i(x) +t\\sum_i\\alpha_if_i(y)",
+            "reason": "权重无需和为1；只需非负。负权重可能把一个凸函数（convex function）翻成凹函数。"
+          },
+          {
+            "title": "2. 仿射复合保留同一个插值参数 · Affine composition",
+            "body": "若 \\(g(x)=f(Ax+b)\\)，先把插值点的像整理出来。",
+            "formula": "g((1-t)x+ty) =f((1-t)(Ax+b)+t(Ay+b)) \\le(1-t)g(x)+tg(y)",
+            "reason": "有效域（effective domain）是f有效域的仿射原像（affine preimage），本身凸；A不需要可逆。"
+          },
+          {
+            "title": "3. 最大值由同一个端点上界控制 · Pointwise maximum",
+            "body": "对每个索引i分别应用凸性（convexity），再用端点处的最大值放大右侧。",
+            "formula": "f_i((1-t)x+ty) \\le(1-t)\\max_jf_j(x) +t\\max_jf_j(y)",
+            "reason": "右侧已经与i无关，因此左侧再对i取最大值仍保持不等式。"
+          },
+          {
+            "title": "4. 非线性复合需要两次不同理由 · Monotone composition",
+            "body": "先用g凸得到输入上界，再靠h单调把输入比较搬到输出，最后用h凸。",
+            "formula": "h(g((1-t)x+ty)) \\le h((1-t)g(x)+tg(y)) \\le(1-t)h(g(x))+th(g(y))",
+            "reason": "第一个不等式用单调性，第二个用凸性；把两种理由混在一起会遗漏关键条件。"
+          },
+          {
+            "title": "5. 内层最小值不取得时选近似最优点 · Approximate minimizers",
+            "body": "对 \\(x_1,x_2\\) 与任意正数 \\(\\varepsilon\\)，分别选择 \\(y_1,y_2\\in Y\\) 使函数值距下确界（infimum）不超过它。",
+            "formula": "F(x_i,y_i)\\le v(x_i)+\\varepsilon\\qquad(i=1,2)",
+            "reason": "v有限且Y非空时，下确界的定义保证这类近似点存在，不需要写不存在的argmin。"
+          },
+          {
+            "title": "6. 联合凸性让两个变量同步插值 · Joint convexity",
+            "body": "因为Y凸，混合后的y仍可作为内层比较点；再用F联合凸。",
+            "formula": "v((1-t)x_1+tx_2) \\le F\\bigl((1-t)x_1+tx_2, (1-t)y_1+ty_2\\bigr) \\le(1-t)v(x_1)+tv(x_2)+\\varepsilon",
+            "reason": "第一步是下确界不大于某个候选值，第二步必须对(x,y)一起使用凸性。"
+          },
+          {
+            "title": "7. 让近似误差归零 · Vanishing error",
+            "body": "上述不等式对每个 \\(\\varepsilon>0\\) 都成立，故可去掉该误差。",
+            "formula": "v((1-t)x_1+tx_2) \\le(1-t)v(x_1)+tv(x_2)",
+            "reason": "这证明部分极小化保凸，但不能推广为任意两个凸函数逐点取最小值。"
+          },
+          {
+            "title": "8. 用反例守住规则边界 · Counterexamples",
+            "body": "令 \\(q(x)=\\min\\{(x-1)^2,(x+1)^2\\}\\)，两项都凸，却在两个分开的点有零值。",
+            "formula": "\\begin{aligned}&q(-1)=q(1)=0\\\\&q(0)=1>\\frac{q(-1)+q(1)}2\\end{aligned}",
+            "reason": "离散选择两个函数不等于在凸集（convex set）上对联合凸函数消元；保凸条件缺失会导致双井形状。"
+          }
+        ],
+        "example": {
+          "problem": "判断 \\(f(x)=\\tfrac12\\|Ax-b\\|_2^2+\\lambda\\|x\\|_1\\)、\\(\\lambda\\ge0\\) 的凸性，并计算 \\(v(x)=\\inf_y\\{(x-y)^2+y^2\\}\\)。",
+          "steps": [
+            "平方残差（residual）的Hessian是 \\(A^TA\\succeq0\\)，所以第一项凸。",
+            "1范数（ℓ₁ norm）由三角不等式（triangle inequality）知凸；\\(\\lambda\\ge0\\) 保证加权后仍凸，故f凸。",
+            "对第二个问题配方：\\((x-y)^2+y^2=2(y-x/2)^2+x^2/2\\)。",
+            "内层最优点 \\(y=x/2\\)，得到 \\(v(x)=x^2/2\\)，符合联合凸函数部分极小化仍凸的结论。"
+          ],
+          "answer": "平方损失加非负的1范数正则项（regularizer）是凸模型。部分消元可保凸，但必须有联合凸性及凸的被消元变量集合。"
+        },
+        "pitfalls": [
+          "两个凸函数相乘不一定凸；例如x平方与(x−1)平方相乘形成两个零值点和中间凸性违例。",
+          "外函数凸还不够。将凸且递减的指数负输入函数与x平方复合，得到指数负平方函数，在0附近不凸。"
+        ],
+        "checks": [
+          {
+            "question": "lambda取负数时，上述1范数正则模型还能直接保证凸吗？",
+            "answer": "不能。取A=0、b=0、\\(\\lambda=-1\\)，目标为 \\(-\\|x\\|_1\\)，明显不凸。"
+          },
+          {
+            "question": "分别对x和y凸，是否足以保证对y取下确界后关于x凸？",
+            "answer": "不够。例如 \\(F(x,y)=xy\\) 对每个变量分别是仿射，令 \\(Y=[-1,1]\\)，则 \\(\\inf_{y\\in Y}xy=-|x|\\) 不凸。"
+          }
+        ],
+        "animation": null,
+        "source": {
+          "label": "《最优化：建模、算法与理论》§2.5.3；独立重写与推导",
+          "url": "https://faculty.bicmr.pku.edu.cn/~wenzw/optbook.html"
+        }
+      }
+    ],
+    "takeaways": [
+      "凸集（convex set）保留线段；凸函数（convex function）在弦下，却在每个切平面（tangent hyperplane）上方",
+      "一阶条件是全局不等式，Hessian条件必须在整个开凸域内逐点检查",
+      "非负加权和（nonnegative weighted sum）、仿射复合、最大值保凸；任意乘积和任意最小值不保凸",
+      "强凸（strong convexity）提供统一二次曲率下界，唯一性仍需以解存在为前提"
+    ]
+  },
+  {
+    "id": "m3",
+    "title": "怎样证明已经最优 · Optimality and geometry",
+    "minutes": 50,
+    "goals": [
+      "推导凸问题局部最优（local optimality）即全局最优（global optimality），以及光滑（smooth）约束一阶条件",
+      "用次梯度（subgradient）处理绝对值、1范数（ℓ₁ norm）和光滑加非光滑（nonsmooth）复合目标",
+      "证明投影存在唯一，使用变分不等式（variational inequality）与非扩张（nonexpansiveness）性质",
+      "把最优性写成法锥（normal cone）平衡或投影固定点（fixed point）"
+    ],
+    "prerequisites": [
+      "完成m2的一阶支撑（first-order support）定理与凸集（convex set）定义",
+      "会使用平方范数（norm）展开和柯西不等式（Cauchy–Schwarz inequality）"
+    ],
+    "summary": "主线50分钟围绕同一个问题：怎样排除所有可能的改进？无约束时用零梯度（gradient），折点处用零次梯度（subgradient），边界上用法向平衡。投影将这些几何条件变成后续算法可以直接调用的操作。",
+    "lessons": [
+      {
+        "id": "m3-l1",
+        "title": "局部与全局最优 · Local & global optimality",
+        "intuition": "一般函数可能在一个小坑里暂时无法改进，远处却还有更深的坑。凸性（convexity）排除了这种分离：若远处有更好点，从当前点向它走任意短的一步都应更好。约束改变了可走的方向，所以边界最优点不必把全部方向导数（directional derivative）都变成零。",
+        "formal": "设C非空凸、f在C上有限且凸，则任何相对于C的局部最小点都是全局最小点。进一步，设D为包含C的开集，f在D可微（differentiable），\\(x^\\star\\in C\\)。局部最优（local optimality）必满足 \\(\\nabla f(x^\\star)^T(y-x^\\star)\\ge0\\) 对每个 \\(y\\in C\\) 成立；若f在一个包含C的凸域上凸，则此条件也充分。无约束 \\(C=\\mathbb R^n\\) 时，它等价于 \\(\\nabla f(x^\\star)=0\\)。这些都是对给定候选点的判定，不另行保证候选点存在。",
+        "symbols": [
+          {
+            "symbol": "x^\\star",
+            "meaning": "Feasible candidate · 待检验且必须可行的候选点"
+          },
+          {
+            "symbol": "y-x^\\star",
+            "meaning": "Feasible chord direction · 通向任意另一可行点的方向"
+          },
+          {
+            "symbol": "\\text{局部最小}",
+            "meaning": "Local minimum · 存在邻域，其中所有可行点的目标均不更低"
+          },
+          {
+            "symbol": "\\text{全局最小}",
+            "meaning": "Global minimum · 整个可行域上没有更低的点"
+          }
+        ],
+        "proof": [
+          {
+            "title": "1. 假设局部最优点远处还有改进 · Contradiction setup",
+            "body": "反设某个 \\(y\\in C\\) 满足 \\(f(y)<f(x^\\star)\\)。沿两点之间的线段取近点。",
+            "formula": "x_t=(1-t)x^\\star+ty\\in C\\qquad(0<t<1)",
+            "reason": "C凸保证整条路径可行，这是反证能成立的核心结构。"
+          },
+          {
+            "title": "2. 凸性把远处改进带回近处 · Convex segment",
+            "body": "路径上每一点都低于当前目标，差距虽小但严格存在。",
+            "formula": "f(x_t)\\le(1-t)f(x^\\star)+tf(y)<f(x^\\star)",
+            "reason": "当t趋零时，x_t任意接近x星，仍严格更好，直接违背相对局部最优。"
+          },
+          {
+            "title": "3. 可微时局部最优限制每条可行弦 · Feasible direction",
+            "body": "任取y，足够小的正t让x_t落在局部最优邻域内，因此函数差非负。",
+            "formula": "\\frac{f(x^\\star+t(y-x^\\star))-f(x^\\star)}t\\ge0",
+            "reason": "只允许正t，不要求反向方向也可行；边界点尤其需要注意这一点。"
+          },
+          {
+            "title": "4. 缩短步长得到变分不等式 · Variational inequality",
+            "body": "对上式令t从右趋零，用可微性（differentiability）求方向导数。",
+            "formula": "\\nabla f(x^\\star)^T(y-x^\\star)\\ge0\\qquad\\forall y\\in C",
+            "reason": "必要性这里只用凸可行域与可微性，还没有用到目标凸性。"
+          },
+          {
+            "title": "5. 凸目标将一阶必要条件升级为充分条件 · Sufficiency",
+            "body": "对任意可行y，先写支撑不等式，再用刚才的一阶非负条件。",
+            "formula": "f(y)\\ge f(x^\\star) +\\nabla f(x^\\star)^T(y-x^\\star) \\ge f(x^\\star)",
+            "reason": "这是对全域的下界证书，因此排除了远处更低的点。"
+          },
+          {
+            "title": "6. 全空间时只剩零梯度 · Unconstrained case",
+            "body": "若所有方向都可行，可特意选 \\(y=x^\\star-\\nabla f(x^\\star)\\)。",
+            "formula": "-\\|\\nabla f(x^\\star)\\|_2^2\\ge0 \\Longrightarrow \\nabla f(x^\\star)=0",
+            "reason": "平方范数（norm）非负，所以只能为零；反向若梯度（gradient）零，变分不等式（variational inequality）自动成立。"
+          },
+          {
+            "title": "7. 边界最优允许非零梯度 · Boundary optimum",
+            "body": "例如 \\(C=[1,\\infty)\\)、\\(f(x)=x^2\\)，在 \\(x^\\star=1\\) 梯度为2，但每个可行位移非负。",
+            "formula": "f'(1)(y-1)=2(y-1)\\ge0\\qquad\\forall y\\ge1",
+            "reason": "负梯度指向约束外，因此不能作为可行改进方向；不应强行令梯度为零。"
+          }
+        ],
+        "example": {
+          "problem": "最小化 \\(f(x_1,x_2)=\\frac12(x_1^2+x_2^2)\\)，约束 \\(x_1+x_2=2\\)。验证 \\(x^\\star=(1,1)\\)。",
+          "steps": [
+            "候选点分量和为2，可行；梯度 \\(\\nabla f(x^\\star)=(1,1)\\)，并不为零。",
+            "对任意可行y，\\(\\nabla f(x^\\star)^T(y-x^\\star)=y_1+y_2-2=0\\)。",
+            "一阶支撑（first-order support）定理保证其全局最优（global optimality），目标值为1。",
+            "也可参数化 \\(y=(1+a,1-a)\\)，直接计算 \\(f(y)=1+a^2\\)，非零a都严格增加。"
+          ],
+          "answer": "最优点是(1,1)，目标值1。梯度与可行直线垂直，所以沿直线无法一阶下降；梯度不为零完全合理。"
+        },
+        "pitfalls": [
+          "局部最优的邻域应与可行域相交，不要求整个开球中的点都可行。",
+          "非凸（nonconvex）目标的驻点（stationary point）可能是极大点或鞍点（saddle point）；只有满足相应凸性时零梯度才是全局证书。"
+        ],
+        "checks": [
+          {
+            "question": "最小化x的四次方减2倍x的平方，零点梯度为零，是否最优？",
+            "answer": "不是。零点目标0，而正负1处目标−1。非凸问题中驻点不足以证明最优。"
+          },
+          {
+            "question": "凸函数（convex function）在凸集（convex set）上局部最优即全局最优，是否需要可微？",
+            "answer": "不需要。前两步只用了线段可行性和凸弦不等式，对绝对值等非光滑（nonsmooth）函数同样成立。"
+          }
+        ],
+        "animation": null,
+        "source": {
+          "label": "《最优化：建模、算法与理论》§1.5、§5.2与§5.6；独立重写与推导",
+          "url": "https://faculty.bicmr.pku.edu.cn/~wenzw/optbook.html"
+        }
+      },
+      {
+        "id": "m3-l2",
+        "title": "次梯度 · Subgradients",
+        "intuition": "绝对值在零点没有唯一切线，却有很多永远位于图像下方的直线。次梯度（subgradient）保留的正是“全局托住函数”的作用，而不是勉强给折点指定一个普通导数。最优性只需要这族支撑面中包含水平面。",
+        "formal": "设 \\(f:\\mathbb R^n\\to\\mathbb R\\cup\\{+\\infty\\}\\) 为适当凸函数（proper convex function），即不恒为正无穷且不取负无穷。对 \\(x\\in\\operatorname{dom}f\\)，定义：\n\n\\[\\partial f(x)=\\{g: f(y)\\ge f(x)+g^T(y-x),\\qquad \\forall y\\in\\operatorname{dom}f\\}\\]\n\n域外次微分（subdifferential）为空。则 \\(x^\\star\\) 全局最优（global optimality）当且仅当 \\(0\\in\\partial f(x^\\star)\\)。在开放邻域（open neighborhood）内可微（differentiable）时次微分只含梯度（gradient）；一般有效域（effective domain）边界处可能为空，不能默认每个点都有次梯度。",
+        "symbols": [
+          {
+            "symbol": "g\\in\\partial f(x)",
+            "meaning": "Subgradient · g是一个全局支撑斜率"
+          },
+          {
+            "symbol": "\\partial f(x)",
+            "meaning": "Subdifferential · 所有次梯度组成的集合，不是单个向量"
+          },
+          {
+            "symbol": "\\operatorname{sign}(a)",
+            "meaning": "Sign function · a为正取1，为负取−1；在零点不用它替代整个区间"
+          }
+        ],
+        "proof": [
+          {
+            "title": "1. 最优性恰好是零斜率支撑 · Zero subgradient",
+            "body": "在次梯度定义里把g取成零，所有线性变化项都消失。",
+            "formula": "0\\in\\partial f(x^\\star) \\iff  f(y)\\ge f(x^\\star)\\qquad \\forall y\\in\\operatorname{dom}f",
+            "reason": "这直接证明必要性和充分性；不需可微，也没有假定最优解事先一定存在。"
+          },
+          {
+            "title": "2. 可微点不能藏着另一条支撑斜率 · Differentiable case",
+            "body": "若g是次梯度，在可微开放邻域内分别令 \\(y=x+td\\) 与 \\(y=x-td\\)，除以正t并取极限。",
+            "formula": "g^Td\\le\\nabla f(x)^Td,\\qquad -g^Td\\le-\\nabla f(x)^Td",
+            "reason": "两式合起来对每个d有相等内积（inner product），因此g必等于梯度；梯度本身由凸支撑定理确为次梯度。"
+          },
+          {
+            "title": "3. 绝对值在正点与负点的次梯度 · Absolute value",
+            "body": "\\(|a|\\) 在 \\(a>0\\) 的普通导数为1，在 \\(a<0\\) 为−1，因此可微点的次微分是单点。",
+            "formula": "\\begin{aligned}&\\partial|a|=\\{1\\}\\ (a>0)\\\\&\\partial|a|=\\{-1\\}\\ (a<0)\\end{aligned}",
+            "reason": "这些斜率也可直接代回全局支撑式验证，不只是局部求导结果。"
+          },
+          {
+            "title": "4. 零点从正侧限制上界 · Right-side bound",
+            "body": "在零点，次梯度条件变成所有y都满足绝对值不小于gy。先取正y。",
+            "formula": "|y|\\ge gy\\qquad \\forall y>0 \\Longrightarrow g\\le1",
+            "reason": "除以正y不改变方向，所以每条支撑线的斜率不能超过右侧斜率1。"
+          },
+          {
+            "title": "5. 负侧限制下界并验证充分性 · Left-side bound",
+            "body": "再取负y，除以负数会反转方向；得到g至少为−1。这两个界也足以保证所有y成立。",
+            "formula": "\\begin{aligned}&\\partial|0|=[-1,1]\\\\&|g|\\le1 \\Longrightarrow  gy\\le|g||y|\\le|y|\\end{aligned}",
+            "reason": "这里只选一个g等于零用于计算是允许的，但把整个次微分说成零就丢掉了其他合法斜率。"
+          },
+          {
+            "title": "6. 1范数的必要条件逐坐标得到 · Coordinate necessity",
+            "body": "若g支撑1范数（ℓ₁ norm），令y仅改变第i个坐标，其余项完全抵消。",
+            "formula": "g_i\\in\\partial|x_i|\\quad\\text{对每个 }i",
+            "reason": "这是从多元全称不等式抽出单变量条件，不需要先引用任何次微分求和法则。"
+          },
+          {
+            "title": "7. 各坐标条件也充分 · Coordinate sufficiency",
+            "body": "把每个坐标的绝对值支撑不等式相加，恰好得到全向量支撑式。",
+            "formula": "\\|y\\|_1\\ge\\|x\\|_1+\\sum_i g_i(y_i-x_i) \\Longrightarrow \\partial\\|x\\|_1=\\{g:\\forall i, x_i\\ne0\\Rightarrow g_i=\\operatorname{sign}(x_i), x_i=0\\Rightarrow |g_i|\\le1\\}",
+            "reason": "非零坐标固定斜率，零坐标留下区间；后续稀疏（sparse）解的最优性靠这些区间抵消损失梯度。"
+          },
+          {
+            "title": "8. 边界次梯度不保证存在 · Empty subdifferential",
+            "body": "定义 \\(f(x)=-\\sqrt{x}\\) 于 \\([0,\\infty)\\)，其他地方取正无穷。它凸，但在0处若有有限次梯度g，就必须满足下面的界。",
+            "formula": "-\\sqrt y\\ge gy\\qquad \\forall y>0 \\Longrightarrow g\\le-\\frac1{\\sqrt y}\\qquad \\forall y>0",
+            "reason": "当y趋零，右侧趋负无穷，没有有限g满足，因此边界次微分为空。"
+          }
+        ],
+        "example": {
+          "problem": "求 \\(f(x)=\\|x\\|_1\\) 在 \\(x=(2,0,-3)\\) 与 \\(x=(0,0,0)\\) 处的次微分，并判断两点是否最优。",
+          "steps": [
+            "在 \\((2,0,-3)\\)，次微分为 \\(\\{(1,s,-1):-1\\le s\\le1\\}\\)。",
+            "例如取 \\(g=(1,1/2,-1)\\)，它给出对所有y有效的线性下界。",
+            "该集合不含零向量，因此当前点不是最优；目标值为5。",
+            "原点次微分为 \\([-1,1]^3\\)，包含零，所以原点最优，目标为0。"
+          ],
+          "answer": "非零坐标的支撑斜率被固定，零坐标允许一个区间。最优条件是零向量属于次微分，而非每个次梯度都等于零。"
+        },
+        "pitfalls": [
+          "次梯度是全局支撑条件；对非凸函数（nonconvex function）不能随意把局部导数称作本节意义下的次梯度。",
+          "负次梯度未必是下降方向：绝对值在0取次梯度1，向负方向走反而增加目标。"
+        ],
+        "checks": [
+          {
+            "question": "绝对值在0的次梯度1是否证明0不是最优？",
+            "answer": "不会。次微分同时还包含0，只要存在零次梯度就满足最优条件。"
+          },
+          {
+            "question": "为什么次微分一定是凸集（convex set）？",
+            "answer": "每个固定y对g给出一个线性半空间（half-space）约束，\\(\\partial f(x)\\) 是这些闭半空间的交，故闭且凸，但可能为空。"
+          }
+        ],
+        "animation": null,
+        "source": {
+          "label": "《最优化：建模、算法与理论》§2.7与§5.3；独立重写与推导",
+          "url": "https://faculty.bicmr.pku.edu.cn/~wenzw/optbook.html"
+        }
+      },
+      {
+        "id": "m3-l3",
+        "title": "光滑加非光滑 · Smooth + nonsmooth",
+        "intuition": "拟合误差希望继续推动某个系数，绝对值惩罚在零点却能提供一整段反向支撑斜率。两者若恰好抵消，系数就可以稳定停在零。这个“抵消”是精确的全局最优性条件（global optimality condition），不是人为把小数截断。",
+        "formal": "设 \\(f:\\mathbb R^n\\to\\mathbb R\\) 凸且可微（differentiable），\\(h:\\mathbb R^n\\to\\mathbb R\\cup\\{+\\infty\\}\\) 适当凸，令 \\(F=f+h\\)。对 \\(x^\\star\\in\\operatorname{dom}h\\)，有：\n\n\\[x^\\star\\in\\operatorname{argmin}F \\iff-\\nabla f(x^\\star)\\in\\partial h(x^\\star)\\]\n\n本节给出直接证明，避免无条件套用一般次微分（subdifferential）求和等式；全空间有限可微的f满足所需正则性（regularity）。h可以是绝对值惩罚，也可以是凸集（convex set）示性函数（indicator function）。",
+        "symbols": [
+          {
+            "symbol": "F=f+h",
+            "meaning": "Composite objective · 光滑损失与可能非光滑惩罚的总目标"
+          },
+          {
+            "symbol": "-\\nabla f(x^\\star)\\in\\partial h(x^\\star)",
+            "meaning": "Subgradient optimality · 损失梯度被一个惩罚次梯度恰好抵消"
+          },
+          {
+            "symbol": "\\lambda>0",
+            "meaning": "Regularization parameter · 1范数（ℓ₁ norm）惩罚强度"
+          },
+          {
+            "symbol": "x_t=x^\\star+t(y-x^\\star)",
+            "meaning": "Feasible interpolation · 连接候选点与任意比较点的可行插值"
+          }
+        ],
+        "proof": [
+          {
+            "title": "1. 先证明抵消条件足够 · Sufficient condition",
+            "body": "若 \\(g=-\\nabla f(x^\\star)\\in\\partial h(x^\\star)\\)，分别写f的一阶下界与h的次梯度下界。",
+            "formula": "\\begin{aligned}&f(y)-f(x^\\star) \\ge\\nabla f(x^\\star)^T(y-x^\\star)\\\\&h(y)-h(x^\\star) \\ge-\\nabla f(x^\\star)^T(y-x^\\star)\\end{aligned}",
+            "reason": "两个下界在同一个候选点展开，一正一负的线性项可抵消。"
+          },
+          {
+            "title": "2. 加起来得到全局证书 · Global certificate",
+            "body": "对定义域内任意y相加；域外总目标正无穷，不可能更好。",
+            "formula": "F(y)\\ge F(x^\\star)",
+            "reason": "这完成充分性，无需h可微。真正用到的是一个合法的支撑斜率。"
+          },
+          {
+            "title": "3. 必要性从最优点沿线段出发 · Necessary condition",
+            "body": "现假设 \\(x^\\star\\) 最优。固定任意 \\(y\\in\\operatorname{dom}h\\)，令 \\(x_t=(1-t)x^\\star+ty\\)、\\(0<t<1\\)，用h凸性（convexity）控制路径上的惩罚值。",
+            "formula": "\\begin{aligned}&h(x_t)\\le(1-t)h(x^\\star)+th(y)\\\\&0\\le F(x_t)-F(x^\\star)\\end{aligned}",
+            "reason": "h有效域（effective domain）凸，所以x_t仍在有效域内，两个有限值可以相减。"
+          },
+          {
+            "title": "4. 用惩罚的弦上界夹住总变化 · Chord bound",
+            "body": "把总变化中的h(x_t)用上一式替换为上界。",
+            "formula": "0\\le f(x_t)-f(x^\\star)+t\\bigl(h(y)-h(x^\\star)\\bigr)",
+            "reason": "若总变化非负，它的这个上界也必非负；这一步不能把不等式方向写反。"
+          },
+          {
+            "title": "5. 缩短步长得到一个全局h支撑式 · Directional limit",
+            "body": "除以正t并令t趋零，仅光滑项需要求导。",
+            "formula": "0\\le\\nabla f(x^\\star)^T(y-x^\\star)+h(y)-h(x^\\star)",
+            "reason": "整理后对任意y正好是负梯度属于h的次微分；必要性因此成立。"
+          },
+          {
+            "title": "6. 将1范数条件逐坐标展开 · Coordinate conditions",
+            "body": "设 \\(h(x)=\\lambda\\|x\\|_1\\)、\\(\\lambda>0\\)，把上一节的次微分公式代入。",
+            "formula": "\\begin{aligned}&x_i^\\star\\ne0\\Rightarrow \\nabla_i f(x^\\star) +\\lambda\\operatorname{sign}(x_i^\\star)=0\\\\&x_i^\\star=0\\Rightarrow |\\nabla_i f(x^\\star)|\\le\\lambda\\end{aligned}",
+            "reason": "零坐标允许整个支撑区间，只要损失梯度没有大到超出区间就能被抵消。"
+          },
+          {
+            "title": "7. 标量二次损失给出精确阈值 · Scalar threshold",
+            "body": "令 \\(f(x)=\\frac12(x-b)^2\\)。先假设最优x为正、为负或等于零，再检查各自一致性。",
+            "formula": "x^\\star=\\begin{cases}b-\\lambda,&b>\\lambda,\\\\0,&|b|\\le\\lambda,\\\\b+\\lambda,&b<-\\lambda.\\end{cases}",
+            "reason": "正分支解x−b+lambda为零并要求x正；负分支相反；零分支使用区间条件。二次项强凸（strong convexity）确保此解唯一。"
+          }
+        ],
+        "example": {
+          "problem": "求 \\(F(x)=\\frac12(x-0.6)^2+|x|\\) 的最小点，并与把观测值换成2的情形比较。",
+          "steps": [
+            "第一题在x为0时，损失梯度为−0.6，负梯度0.6属于 \\([-1,1]\\)，抵消条件满足。",
+            "因此 \\(x^\\star=0\\)，目标 \\(F(0)=0.18\\)；例如x为0.6时目标为0.6，反而更大。",
+            "若观测值为2，零点损失梯度为−2，超出可抵消范围，因此0不最优。",
+            "正分支方程 \\(x-2+1=0\\) 得 \\(x^\\star=1\\)，目标为1.5；x为0或2时目标都为2。"
+          ],
+          "answer": "观测值0.6被精确压成0；观测值2缩到1。零系数来自一阶抵消区间，不是计算误差或事后截断。"
+        },
+        "pitfalls": [
+          "一般两个扩展值（extended-valued）凸函数（convex function）的次微分求和等式需要正则条件，不能省略。本节通过全空间光滑项的直接证明避开这一漏洞。",
+          "这里只建立最优性条件；大规模问题如何迭代利用它，留到近端梯度（proximal gradient）模块。"
+        ],
+        "checks": [
+          {
+            "question": "若惩罚强度等于观测值绝对值，标量最优点是否有一段区间？",
+            "answer": "没有。二次项使总目标强凸，阈值边界上的唯一解仍是零。"
+          },
+          {
+            "question": "把h取成凸集C的示性函数，抵消条件会变成什么？",
+            "answer": "会变成 \\(-\\nabla f(x^\\star)\\in\\partial\\delta_C(x^\\star)\\)，后面把这个次微分称作外法锥（outward normal cone）。"
+          }
+        ],
+        "animation": null,
+        "source": {
+          "label": "《最优化：建模、算法与理论》§2.7.2与§5.3；独立重写与推导",
+          "url": "https://faculty.bicmr.pku.edu.cn/~wenzw/optbook.html"
+        }
+      },
+      {
+        "id": "m3-l4",
+        "title": "欧氏投影 · Euclidean projection",
+        "intuition": "投影把一个可能不可行的点拉回可行域（feasible set），要求移动距离尽量短。对凸集（convex set），最近点处从集合指向外点的向量，会与所有集合内位移形成非正内积（inner product）。这条几何关系比“看起来垂直”更普遍，因为角点没有唯一切线。",
+        "formal": "设 \\(C\\subseteq\\mathbb R^n\\) 非空、闭且凸，给定 \\(u\\in\\mathbb R^n\\)，欧氏投影（Euclidean projection）为：\n\n\\[\\Pi_C(u) =\\operatorname{argmin}_{x\\in C}\\frac12\\|x-u\\|_2^2\\]\n\n该最小点存在且唯一，并满足：\\(p=\\Pi_C(u)\\) 当且仅当 \\(p\\in C\\) 且 \\((u-p)^T(y-p)\\le0\\) 对每个 \\(y\\in C\\) 成立。非空用于有候选点，闭性（closedness）用于保留极限，凸性（convexity）用于唯一性与一阶刻画。",
+        "symbols": [
+          {
+            "symbol": "u",
+            "meaning": "Projection input · 待拉回可行域的点"
+          },
+          {
+            "symbol": "p=\\Pi_C(u)",
+            "meaning": "Euclidean projection · 唯一最近可行点"
+          },
+          {
+            "symbol": "u-p",
+            "meaning": "Projection residual · 从投影点指向外点的向量"
+          },
+          {
+            "symbol": "\\tfrac12\\|x-u\\|_2^2",
+            "meaning": "Squared-distance objective · 投影子问题目标，因子二分之一不改变最近点"
+          }
+        ],
+        "proof": [
+          {
+            "title": "1. 先把搜寻范围限制到一个球 · Bounded search",
+            "body": "取任意 \\(x_0\\in C\\)，距离超过 \\(\\|x_0-u\\|_2\\) 的点不可能比x_0更好。",
+            "formula": "K=C\\cap\\{x:\\|x-u\\|_2\\le\\|x_0-u\\|_2\\}",
+            "reason": "K非空、闭、有界，因此紧；原投影问题可在K内解决。"
+          },
+          {
+            "title": "2. 连续性保证距离最小值取得 · Existence",
+            "body": "平方距离是连续函数，在紧集（compact set）K上达到最小值；K外的点更远。",
+            "formula": "\\exists p\\in C: \\|p-u\\|_2\\le\\|x-u\\|_2\\qquad \\forall x\\in C",
+            "reason": "此处已经完成存在性，不需要假定整个C有界。"
+          },
+          {
+            "title": "3. 两个不同最近点会被中点击败 · Uniqueness",
+            "body": "若p与q都是最近点，C凸保证中点可行。平方距离恒等式给出严格改进。",
+            "formula": "\\left\\|\\frac{p+q}{2}-u\\right\\|_2^2 =\\frac12\\|p-u\\|_2^2+\\frac12\\|q-u\\|_2^2 -\\frac14\\|p-q\\|_2^2",
+            "reason": "若p不等于q，最后一项严格为负，违背两者已经最近，因此最近点唯一。"
+          },
+          {
+            "title": "4. 最近点必须抵抗所有可行短步 · Necessary inequality",
+            "body": "对任意y在C中，沿p到y的线段求平方距离的右方向导数（directional derivative）。",
+            "formula": "0\\le(p-u)^T(y-p) \\Longleftrightarrow (u-p)^T(y-p)\\le0",
+            "reason": "这是光滑（smooth）约束最优性的必要条件；C凸确保测试路径始终可行。"
+          },
+          {
+            "title": "5. 这个内积条件也足够 · Sufficiency",
+            "body": "若p可行且满足条件，比较任意y到u的平方距离，直接展开。",
+            "formula": "\\|y-u\\|_2^2 =\\|p-u\\|_2^2+\\|y-p\\|_2^2 +2(p-u)^T(y-p) \\ge\\|p-u\\|_2^2",
+            "reason": "非负内积和非负平方一起给出全域下界，所以p确为最近点。"
+          },
+          {
+            "title": "6. 得到投影的勾股不等式 · Pythagorean inequality",
+            "body": "同一展开不丢掉位移平方项，可得到更强的几何关系。",
+            "formula": "\\|u-y\\|_2^2\\ge\\|u-p\\|_2^2+\\|p-y\\|_2^2\\qquad \\forall y\\in C",
+            "reason": "一般凸集给不等式；投影到仿射子空间时内积为零，恢复勾股等式。"
+          },
+          {
+            "title": "7. 半空间公式从法向方向推出 · Half-space projection",
+            "body": "设 \\(C=\\{x:a^Tx\\le b\\}\\)、\\(a\\ne0\\)。若u在外面，猜测投影沿a的反方向退到边界。",
+            "formula": "p=u-\\frac{a^Tu-b}{\\|a\\|_2^2}a\\qquad\\text{当 }a^Tu>b",
+            "reason": "代入得a转置p等于b；且u−p是a的正倍数，因此对所有可行y满足投影内积条件。"
+          },
+          {
+            "title": "8. 把内外两种情形合并 · Piecewise formula",
+            "body": "若u本来可行，距离零已最小；若不在则用边界公式。",
+            "formula": "\\Pi_C(u)=u-\\frac{\\max\\{a^Tu-b,0\\}}{\\|a\\|_2^2}a",
+            "reason": "这里a非零很重要，分母不能为零；退回方向和距离由最优性条件一起确定。"
+          }
+        ],
+        "example": {
+          "problem": "将 \\(u=(3,2)\\) 投影到半空间（half-space） \\(C=\\{x:x_1+x_2\\le1\\}\\)，验证结果。",
+          "steps": [
+            "\\(a=(1,1)\\)、b为1，违规量 \\(a^Tu-b=4\\)，\\(\\|a\\|_2^2=2\\)。",
+            "\\(p=(3,2)-2(1,1)=(1,0)\\)，其分量和为1，确实可行。",
+            "对任意可行y，\\((u-p)^T(y-p)=2(y_1+y_2-1)\\le0\\)。",
+            "距离为 \\(\\sqrt8\\)。例如可行点 \\((0,0)\\) 到u距离为 \\(\\sqrt{13}\\)，并满足 \\(13\\ge8+1\\)。"
+          ],
+          "answer": "投影点为(1,0)。公式同时通过可行性和全域内积不等式验证，不能只因它在边界就认定最近。"
+        },
+        "pitfalls": [
+          "闭性不可省：把1投到开区间(0,1)，距离下确界（infimum）为0但没有最近点。",
+          "凸性不可省：把0投到集合{−1,1}，有两个同样近的点。"
+        ],
+        "checks": [
+          {
+            "question": "投影点总在边界吗？",
+            "answer": "不是。若u在可行域内，投影就是u，可能是内点（interior point）。"
+          },
+          {
+            "question": "最近点处必须与所有可行位移正交吗？",
+            "answer": "不必须。一般凸集只要求内积非正；对仿射子空间，正反方向都可行，才强制内积为零。"
+          }
+        ],
+        "animation": "projection",
+        "source": {
+          "label": "《最优化：建模、算法与理论》§2.4、§5.7与§8.1；独立重写与推导",
+          "url": "https://faculty.bicmr.pku.edu.cn/~wenzw/optbook.html"
+        }
+      },
+      {
+        "id": "m3-l5",
+        "title": "法锥与非扩张 · Normal cones & nonexpansiveness",
+        "intuition": "边界最优点上的负梯度（gradient）可能仍指向目标下降的方向，只是那个方向在集合外。法锥（normal cone）收集所有这种朝外的支撑法向量。投影的最近点条件和约束最优条件由此成为同一个平衡关系；而投影不放大距离，保证把迭代拉回可行域（feasible set）时不会额外放大误差。",
+        "formal": "对非空凸集（convex set）C和 \\(x\\in C\\)，定义外法锥（outward normal cone） \\(N_C(x)=\\{v:v^T(y-x)\\le0,\\ \\forall y\\in C\\}\\)。有 \\(N_C(x)=\\partial\\delta_C(x)\\)。以下所有投影、固定点（fixed point）及梯度映射（gradient mapping）结论进一步假设C闭。此时投影满足牢固非扩张性（firm nonexpansiveness）：\n\n\\[\\|\\Pi_C(u)-\\Pi_C(v)\\|_2^2 \\le(\\Pi_C(u)-\\Pi_C(v))^T \\cdot(u-v)\\]\n\n若f在全空间凸且可微（differentiable），\\(x\\in C\\)，则x最优等价于 \\(-\\nabla f(x)\\in N_C(x)\\)，也等价于对任一给定 \\(t>0\\)，\\(x=\\Pi_C(x-t\\nabla f(x))\\)。",
+        "symbols": [
+          {
+            "symbol": "N_C(x)",
+            "meaning": "Normal cone · C在x处的外法锥"
+          },
+          {
+            "symbol": "\\delta_C",
+            "meaning": "Indicator function · 在C内为0，C外为正无穷"
+          },
+          {
+            "symbol": "G_t(x)=\\tfrac1t[x-\\Pi_C(x-t\\nabla f(x))]",
+            "meaning": "Projected gradient mapping · 投影梯度映射；其零点是最优性证书"
+          },
+          {
+            "symbol": "\\text{非扩张}",
+            "meaning": "Nonexpansiveness · 输出之间的距离不超过输入之间的距离"
+          }
+        ],
+        "proof": [
+          {
+            "title": "1. 示性函数的次微分就是外法锥 · Indicator subdifferential",
+            "body": "把 \\(\\delta_C\\) 的取值代入次梯度（subgradient）定义，域内两边函数值都为零。",
+            "formula": "v\\in\\partial\\delta_C(x) \\iff 0\\ge v^T(y-x)\\qquad \\forall y\\in C \\iff  v\\in N_C(x)",
+            "reason": "域外函数值正无穷不再添加约束，所以剩下的正是所有可行位移的线性不等式。"
+          },
+          {
+            "title": "2. 内点与边界有不同法向空间 · Interior vs boundary",
+            "body": "若x是C的普通内点（interior point），正反小位移都可行，任何法向量必须与每个方向正交。",
+            "formula": "x\\in\\operatorname{int}C\\Longrightarrow N_C(x)=\\{0\\}",
+            "reason": "边界只允许部分位移，因此法锥可非零；低维集合可能没有普通内点，需要另外考虑其法向空间。"
+          },
+          {
+            "title": "3. 最优性是梯度与外法向平衡 · Normal balance",
+            "body": "约束一阶条件取负号后，恰好与法锥定义一致。",
+            "formula": "\\nabla f(x)^T(y-x)\\ge0\\ \\forall y\\in C \\iff -\\nabla f(x)\\in N_C(x)",
+            "reason": "可行点上负梯度若在外法锥中，就被约束挡住；凸性（convexity）使这一条件充分且必要。"
+          },
+          {
+            "title": "4. 最优点等价于投影固定点 · Fixed point",
+            "body": "将投影定理的输入取为 \\(u=x-t\\nabla f(x)\\)，候选投影取为x。",
+            "formula": "x=\\Pi_C(x-t\\nabla f(x)) \\iff (-t\\nabla f(x))^T(y-x)\\le0\\qquad \\forall y\\in C",
+            "reason": "t为正，可约去；所得正是上一步最优性。不论t多大，固定点条件都成立，但这不保证任意t下迭代收敛。"
+          },
+          {
+            "title": "5. 比较两个投影的内积条件 · Two projections",
+            "body": "令 \\(p=\\Pi_C(u)\\)、\\(q=\\Pi_C(v)\\)。第一条投影条件用q测试，第二条用p测试。",
+            "formula": "(u-p)^T(q-p)\\le0,\\qquad(v-q)^T(p-q)\\le0",
+            "reason": "两个测试点都可行，因此可以合法地相互代入。"
+          },
+          {
+            "title": "6. 组合两式得到牢固非扩张性 · Firm nonexpansiveness",
+            "body": "把第一式翻转位移后减去第二式，整理p减q的平方项。",
+            "formula": "\\|p-q\\|_2^2\\le(u-v)^T(p-q)",
+            "reason": "这是比普通非扩张（nonexpansiveness）更强的内积（inner product）控制，未来分析投影梯度的距离递推会用到它。"
+          },
+          {
+            "title": "7. 再用柯西不等式得到距离控制 · Distance stability",
+            "body": "右侧内积不超过两段长度之积；若p与q相同结论直接成立，否则除以它们的距离。",
+            "formula": "\\|p-q\\|_2^2\\le\\|u-v\\|_2\\|p-q\\|_2 \\Longrightarrow \\|\\Pi_C(u)-\\Pi_C(v)\\|_2\\le\\|u-v\\|_2",
+            "reason": "投影最多维持距离，不会放大输入扰动（perturbation）。但它也未必严格缩短，不能单靠此性质断言迭代收敛。"
+          },
+          {
+            "title": "8. 用零映射衡量一阶最优性 · Gradient mapping",
+            "body": "定义 \\(G_t(x)\\) 后，固定点恰好对应其为零；这是约束问题中比直接看梯度更合适的判据。",
+            "formula": "G_t(x)=0 \\iff  x=\\Pi_C(x-t\\nabla f(x)) \\iff  x\\in\\operatorname{argmin}_{y\\in C}f(y)",
+            "reason": "对非零残差（residual）能推出多大的目标误差（objective gap），还需要有界域、曲率等额外条件，不能直接把残差当作目标差（objective gap）。"
+          }
+        ],
+        "example": {
+          "problem": "在 \\(C=[0,\\infty)\\) 上最小化 \\(f(x)=\\frac12(x+1)^2\\)。计算边界法锥、最优点及步长（step size） \\(t=1/2\\) 的投影固定点，并验证一组投影距离。",
+          "steps": [
+            "在0处，\\(N_C(0)=(-\\infty,0]\\)，因为v乘任意非负y都必须不大于零。",
+            "\\(f'(0)=1\\)，所以负梯度−1属于法锥，x为0最优，目标1/2。",
+            "投影公式为 \\(\\Pi_C(u)=\\max\\{u,0\\}\\)。从最优点做半步得到−1/2，再投影回0，故固定点条件成立。",
+            "取输入u为−2、v为3，它们距离5，投影分别0和3，距离3；牢固非扩张（firm nonexpansiveness）式也给 \\(9\\le15\\)。"
+          ],
+          "answer": "约束最优点的梯度可以为1，但投影梯度映射为0。投影把不可行的下降尝试拉回最优边界，同时不放大点间距离。"
+        },
+        "pitfalls": [
+          "这里使用外法锥约定，内积为不大于零；若改用内法向，所有相关符号都要一致改变。",
+          "投影非扩张不代表投影梯度迭代可用任意步长；梯度这一步是否稳定还取决于光滑（smooth）常数。"
+        ],
+        "checks": [
+          {
+            "question": "C为整个实空间时，法锥与投影梯度映射退化成什么？",
+            "answer": "法锥为 \\(\\{0\\}\\)，投影是恒等映射，因此 \\(G_t(x)=\\nabla f(x)\\)，回到普通无约束最优性。"
+          },
+          {
+            "question": "非扩张是不是严格收缩（contraction）？",
+            "answer": "不是。例如在C内部投影不改变点，距离保持不变。严格收缩要求存在统一小于1的距离缩放常数。"
+          }
+        ],
+        "animation": null,
+        "source": {
+          "label": "《最优化：建模、算法与理论》§2.7、§5.6与§8.1；独立重写与推导",
+          "url": "https://faculty.bicmr.pku.edu.cn/~wenzw/optbook.html"
+        }
+      }
+    ],
+    "takeaways": [
+      "凸问题的局部最优（local optimality）已是全局最优（global optimality），但凸性（convexity）不能自动保证最优点存在",
+      "零属于次微分（subdifferential）是全局最优证书；不是要求每一个次梯度（subgradient）为零",
+      "约束最优允许梯度（gradient）非零，负梯度必须被可行域（feasible set）的外法向挡住",
+      "非空闭凸集（convex set）上的欧氏投影（Euclidean projection）存在唯一且不放大距离",
+      "投影固定点（fixed point）与一阶最优性等价，是投影梯度（projected gradient）法的理论入口"
+    ]
+  }
+]

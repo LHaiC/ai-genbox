@@ -1,0 +1,1 @@
+{"name":"convex-optimization-one-day","private":true,"version":"1.0.0","scripts":{"build:three":"node tools/build-three.cjs","build":"npm run build:three && python tools/build.py","test":"node --test tests/*.cjs"},"dependencies":{"three":"0.186.1"},"devDependencies":{"esbuild":"0.28.2"}}

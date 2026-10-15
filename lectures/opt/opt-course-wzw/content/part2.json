@@ -1,0 +1,1294 @@
+[
+  {
+    "id": "m4",
+    "title": "对偶、Slater 与 KKT · Duality and KKT",
+    "minutes": 65,
+    "goals": [
+      "把共轭（convex conjugate）理解为按斜率编号的最紧仿射下界（affine minorant）",
+      "从弱对偶（weak duality）推导可计算的误差证书",
+      "区分强对偶（strong duality）、对偶最优值（dual optimal value）可达与原始解存在",
+      "在明确约束资格条件（constraint qualification）下正确使用 KKT"
+    ],
+    "prerequisites": [
+      "凸函数（convex function）的一阶下界与次梯度（subgradient）",
+      "仿射约束、内积（inner product）与基本分离定理（separation theorem）",
+      "下确界（infimum）与最小值的区别"
+    ],
+    "summary": "先学习如何制造下界，再理解何时下界能贴住最优值。KKT 的四组条件是下界链逐项取等号的结果。65 分钟是主线阅读估计，分离证明可展开慢读。",
+    "lessons": [
+      {
+        "id": "m4-l1",
+        "title": "共轭函数 · Convex conjugates",
+        "intuition": "想用直线给函数托底，光选斜率还不够：截距太高就会穿过函数图像。共轭（convex conjugate） \\(f^*(y)\\) 回答“斜率固定为 \\(y\\) 时，必须往下挪多少”。它的输入是斜率，输出是最大差额，因此不是反函数。这个观点稍后把正则项（regularizer）直接变成对偶约束（dual constraint）。",
+        "formal": "令 \\(f:\\mathbb R^n\\to(-\\infty,+\\infty]\\) 适当，即从不取 \\(-\\infty\\)，并至少在一点有限。定义：\n\n\\[f^*(y) =\\sup_{x\\in\\operatorname{dom}f}\\{y^Tx-f(x)\\}\\]\n\n共轭为下半连续（lower semicontinuous, l.s.c.）凸函数（convex function），但对任意适当非凸函数（nonconvex function），它仍可能恒为 \\(+\\infty\\)。若 \\(f\\) 进一步为适当闭凸函数（proper closed convex function），则对 \\(x\\in\\operatorname{dom}f\\)，Fenchel 等号成立当且仅当 \\(y\\in\\partial f(x)\\)。",
+        "symbols": [
+          {
+            "symbol": "f^*(y)",
+            "meaning": "Convex conjugate · 共轭函数，星号不是最优点"
+          },
+          {
+            "symbol": "\\partial f(x)",
+            "meaning": "Subdifferential · 所有全局支撑斜率的集合"
+          },
+          {
+            "symbol": "\\delta_C",
+            "meaning": "Indicator function · 集合 C 内为 0、外为正无穷的示性函数"
+          }
+        ],
+        "proof": [
+          {
+            "title": "1. 把“所有位置都托得住”写成量词 · Supporting intercept",
+            "body": "斜率 y、截距 a 的仿射函数成为下界，要求对每个有效域（effective domain）内的 x 成立。",
+            "formula": "y^Tx+a\\le f(x)\\qquad \\forall x \\Longleftrightarrow a\\le\\inf_x\\{f(x)-y^Tx\\}=-f^*(y)",
+            "reason": "不是在一个位置相切就够了；必须控制所有位置。"
+          },
+          {
+            "title": "2. 用上确界定义得到 Fenchel 不等式 · Fenchel inequality",
+            "body": "固定任意候选位置 x，它给出的差额不可能超过最大差额。",
+            "formula": "f(x)+f^*(y)\\ge x^Ty",
+            "reason": "此步没有使用凸性（convexity），也没有要求上确界（supremum）能达到。"
+          },
+          {
+            "title": "3. 解释共轭为什么凸 · Convexity",
+            "body": "每个固定 x 给出关于 y 的仿射函数。分别用两个上确界控制同一个候选，再取上确界。",
+            "formula": "\\begin{aligned}&f^*(\\theta y_1+(1-\\theta)y_2) \\le\\theta f^*(y_1)+(1-\\theta)f^*(y_2)\\\\&0\\le\\theta\\le1\\end{aligned}",
+            "reason": "仿射函数族的逐点上确界保持凸性；连续仿射函数族的上确界也下半连续。"
+          },
+          {
+            "title": "4. 从次梯度推出等号 · Subgradient implies equality",
+            "body": "若 y 是 x 处的次梯度（subgradient），对任意 z，把支撑不等式移项。",
+            "formula": "f(z)\\ge f(x)+y^T(z-x) \\Longrightarrow \\ y^Tz-f(z)\\le y^Tx-f(x)",
+            "reason": "右边被 z=x 达到，因此恰好是共轭值。"
+          },
+          {
+            "title": "5. 从等号反推次梯度 · Equality implies subgradient",
+            "body": "若 Fenchel 差额为零，共轭定义控制每个 z，重新移项就得到全局支撑。",
+            "formula": "f^*(y)=y^Tx-f(x) \\Longrightarrow \\ f(z)\\ge f(x)+y^T(z-x)\\qquad \\forall z",
+            "reason": "这是双向等价，不只是“等号在最优点附近可能成立”。"
+          },
+          {
+            "title": "6. 算一遍二次共轭 · Quadratic conjugate",
+            "body": "对正定（positive definite, PD）对称矩阵 Q，完成平方，明确最大点和有限值。",
+            "formula": "\\begin{aligned}&\\sup_x\\left\\{y^Tx-\\frac12x^TQx\\right\\} = \\frac12y^TQ^{-1}y\\\\&x=Q^{-1}y\\end{aligned}",
+            "reason": "Q 正定保证二次惩罚覆盖每个方向；奇异时不能直接写逆矩阵。"
+          },
+          {
+            "title": "7. 算一遍绝对值共轭 · Absolute-value conjugate",
+            "body": "令 f(x)=λ|x|、λ>0。斜率不超过惩罚时，差额至多为零；超过时沿有利方向放大 x。",
+            "formula": "(\\lambda|\\cdot|)^*(y)=\\begin{cases}0,&|y|\\le\\lambda,\\\\+\\infty,&|y|>\\lambda.\\end{cases}",
+            "reason": "共轭把幅度惩罚变成斜率的硬约束，正是 Lasso 对偶约束的来源。"
+          }
+        ],
+        "example": {
+          "problem": "取 \\(f(x)=x^2/2\\)，比较 \\(x=2,y=3\\) 与 \\(x=3,y=3\\)，再看 \\(h(x)=2|x|\\) 的共轭。",
+          "steps": [
+            "配方：\\(3x-x^2/2=9/2-(x-3)^2/2\\)，故 \\(f^*(3)=4.5\\)。",
+            "在 \\(x=2\\)，Fenchel 差额为 \\(2+4.5-6=0.5\\)，斜率 3 不等于该点导数 2。",
+            "在 \\(x=3\\)，差额为 \\(4.5+4.5-9=0\\)，斜率正好是导数。",
+            "对 \\(h=2|x|\\)，\\(h^*(1.5)=0\\)；取 \\(y=3,x=s>0\\)，差额为 \\(s\\to+\\infty\\)，故 \\(h^*(3)=+\\infty\\)。"
+          ],
+          "answer": "Fenchel 差额测试的是“位置与斜率是否匹配”；绝对值的共轭是区间示性函数。"
+        },
+        "pitfalls": [
+          "\\(f^*\\) 不是 \\(f^{-1}\\)，也不是 \\(f\\) 的最优值。",
+          "\\(\\lambda\\|x\\|_1\\) 的共轭是 \\(\\|y\\|_\\infty\\le\\lambda\\) 的示性函数，不是 \\(\\lambda\\|y\\|_\\infty\\)。",
+          "若 \\(f(x_1,x_2)=x_1^2/2\\)，只有 \\(y_2=0\\) 时共轭有限；忽略有效域会给出错误公式。"
+        ],
+        "checks": [
+          {
+            "question": "\\(f(x)=x^2/2\\) 的 Fenchel 差额能写成什么平方？",
+            "answer": "\\((x-y)^2/2\\)，所以零差额恰好表示 \\(x=y\\)。"
+          },
+          {
+            "question": "原函数不凸，共轭是否可能仍凸？",
+            "answer": "一定凸；例如 −x² 的共轭恒为正无穷，这种凸性不意味着有用或适当。"
+          }
+        ],
+        "animation": null,
+        "source": {
+          "label": "文再文等，第 2.6 节：共轭函数",
+          "url": "https://faculty.bicmr.pku.edu.cn/~wenzw/optbook/opt2.pdf"
+        }
+      },
+      {
+        "id": "m4-l2",
+        "title": "弱对偶 · Weak duality",
+        "intuition": "原始问题（primal problem）是在可行方案里找便宜的；对偶问题（dual problem）是在合法下界里找最高的。乘子（multiplier）像给违反约束标出的价格，但这里的首要作用是保证符号：当约束已经满足时，加上的项不能把目标抬高。因而对偶值是证书，不是另一个随便设计的损失。",
+        "formal": "考虑 \\(p^*=\\inf\\{f(x):x\\in D,c_i(x)\\le0,Ax=b\\}\\)，其中 D 是预先保留的定义域，函数在 D 上有限。定义：\n\n\\[\\mathcal L(x,\\lambda,\\nu)=f(x) +\\sum_i\\lambda_i c_i(x) +\\nu^T(Ax-b)\\]\n\n对偶函数定义为 \\(g(\\lambda,\\nu)=\\inf_{x\\in D}\\mathcal L\\)，其中 \\(\\lambda\\ge0\\)、\\(\\nu\\) 自由。弱对偶（weak duality）无需凸性（convexity）；使用有限误差证书时假设原始可行（primal feasibility）且 \\(p^*\\) 有限。",
+        "symbols": [
+          {
+            "symbol": "\\mathcal L",
+            "meaning": "Lagrangian · 拉格朗日函数；用花体避免与平滑常数 L 混淆"
+          },
+          {
+            "symbol": "g(\\lambda,\\nu)",
+            "meaning": "Dual function · 对偶函数，可能为负无穷"
+          },
+          {
+            "symbol": "p^*,d^*",
+            "meaning": "Primal and dual optimal values · 原始下确界与对偶上确界"
+          }
+        ],
+        "proof": [
+          {
+            "title": "1. 先统一不等式方向 · Sign convention",
+            "body": "把 x≥1 写成 1−x≤0。可行点处，非负乘子乘不等式函数得到非正数。",
+            "formula": "c_i(x)\\le0\\quad\\lambda_i\\ge0\\quad\\Longrightarrow\\quad\\lambda_i c_i(x)\\le0",
+            "reason": "乘子符号来自下界需求，不能凭记忆任意改正负号。"
+          },
+          {
+            "title": "2. 解释等式乘子为什么自由 · Equality multiplier",
+            "body": "可行点的等式残差（residual）为零，乘以任何实数仍为零。",
+            "formula": "Ax=b\\quad\\Longrightarrow\\quad\\nu^T(Ax-b)=0",
+            "reason": "等式与不等式的乘子不能使用同一符号限制。"
+          },
+          {
+            "title": "3. 写出下界链 · Lower-bound chain",
+            "body": "先对所有保留域 D 中的点取下确界，再与任意原始可行点比较。",
+            "formula": "g(\\lambda,\\nu)\\le\\mathcal L(x,\\lambda,\\nu)\\le f(x)",
+            "reason": "第一处不等式来自下确界，第二处来自原始可行性。"
+          },
+          {
+            "title": "4. 从单个下界到最佳下界 · Dual maximization",
+            "body": "对所有原始可行点取下确界，再对所有合法乘子取上确界。",
+            "formula": "d^*:=\\sup_{\\lambda\\ge0,\\nu}g(\\lambda,\\nu)\\le p^*",
+            "reason": "即使对偶最优乘子不存在，上确界仍能定义。"
+          },
+          {
+            "title": "5. 证明对偶函数凹 · Dual concavity",
+            "body": "把乘子合记为 z。对固定 x，拉格朗日函数关于 z 仿射；每个候选值不低于相应下确界。",
+            "formula": "g(\\theta z_1+(1-\\theta)z_2) \\ge \\theta g(z_1)+(1-\\theta)g(z_2)",
+            "reason": "下确界与非负加权相容，因此最大化 g 是凸优化形式，即使原始问题非凸（nonconvex）。"
+          },
+          {
+            "title": "6. 把上下界相减成为误差证书 · Gap certificate",
+            "body": "一份原始可行方案给上界，一份对偶可行（dual feasibility）乘子给下界。",
+            "formula": "0\\le f(x)-p^*\\le f(x)-g(\\lambda,\\nu)",
+            "reason": "此证书不依赖已知真正最优值，也不要求强对偶（strong duality）。"
+          },
+          {
+            "title": "7. 完整消去一个原变量 · Eliminate primal variable",
+            "body": "对 min x²、x≥1，在所有实数 x 上配方。",
+            "formula": "\\mathcal L=x^2+\\lambda(1-x) = \\left(x-\\frac\\lambda2\\right)^2+\\lambda-\\frac{\\lambda^2}{4},\\quad g(\\lambda)=\\lambda-\\frac{\\lambda^2}{4}",
+            "reason": "取下确界时原不等式已经被松弛；若还强行保留 x≥1，得到的是另一种对偶构造。"
+          },
+          {
+            "title": "8. 用零间隙同时认证两端 · Zero-gap certificate",
+            "body": "对偶抛物线在 λ=2 达到 1，原始可行点 x=1 也达到 1。",
+            "formula": "g(2)=1=f(1)\\quad\\Longrightarrow\\quad p^*=d^*=1",
+            "reason": "任何合法下界都不能超过任何可行目标；上下界相遇就无需再枚举。"
+          }
+        ],
+        "example": {
+          "problem": "原问题 \\(\\min x^2\\)，约束 \\(x\\ge1\\)。算法返回 \\(x=1.1\\)，尝试乘子 \\(\\lambda=1\\) 与 \\(\\lambda=2\\)。",
+          "steps": [
+            "原始值为 \\(1.1^2=1.21\\)，并且 x=1.1 确实可行。",
+            "\\(g(1)=1-1/4=0.75\\)，证书给出目标误差（objective gap）至多 \\(1.21-0.75=0.46\\)。",
+            "\\(g(2)=2-4/4=1\\)，改进后的证书为 \\(1.21-1=0.21\\)。",
+            "直接解得 \\(p^*=1\\)，实际误差确实为 0.21。若改用不可行点 x=0.9，其目标 0.81 不能作为原始上界。"
+          ],
+          "answer": "改进对偶点可以在不改变原始方案的情况下收紧最优性证书。"
+        },
+        "pitfalls": [
+          "对偶函数虽然总凹，但计算其值可能仍要解一个困难的全局最小化问题。",
+          "把近似内层极小点的拉格朗日（Lagrangian）值直接当作 g，可能高估下界，从而伪造证书。",
+          "只有原始可行、对偶可行且下界计算可靠时，原始—对偶差才是误差证书。"
+        ],
+        "checks": [
+          {
+            "question": "弱对偶是否需要目标凸？",
+            "answer": "不需要；它只用乘子符号、可行性与下确界。"
+          },
+          {
+            "question": "强对偶是否表示每一个乘子都能给出紧下界？",
+            "answer": "不是。强对偶只表示最佳下界的上确界等于原始最优值。"
+          }
+        ],
+        "animation": null,
+        "source": {
+          "label": "文再文等，第 5.4.1 节：拉格朗日对偶",
+          "url": "https://faculty.bicmr.pku.edu.cn/~wenzw/optbook/opt2.pdf"
+        }
+      },
+      {
+        "id": "m4-l3",
+        "title": "Slater 条件 · Slater’s condition",
+        "intuition": "约束若在某个可行点同时留有严格余量，最优值附近的几何图形就不会只能用“竖直墙”支撑。支撑超平面（supporting hyperplane）能够归一化成目标系数为 1 的形式，剩下的系数便是有限的拉格朗日乘子（Lagrange multiplier）。关键不是算法走进内部，而是模型拥有这样一个点。",
+        "formal": "条件 / Assumptions：本课使用便于完整证明的全空间 Slater 版本。1. \\(f,c_1,\\ldots,c_m\\) 在 \\(\\mathbb R^n\\) 上处处有限且凸。2. 等式矩阵 \\(A\\) 满行秩（full row rank）；没有等式时删去相关项。3. 存在严格可行点（strictly feasible point）\\(\\bar x\\)：\\(A\\bar x=b\\)，且每个 \\(c_i(\\bar x)<0\\)。4. 原始最优值有限：\\(p^*\\in\\mathbb R\\)。\n\n结论 / Claim：\\(d^*=p^*\\)，且存在有限乘子（multiplier）达到对偶最优值（dual optimal value）。这称为强对偶（strong duality）与对偶可达（dual attainment）。边界 / Scope：结论不保证原始最优解存在。更一般的扩展值（extended-valued）版本使用共同定义域的相对内部（relative interior）。",
+        "symbols": [
+          {
+            "symbol": "\\bar x",
+            "meaning": "Strictly feasible point · 严格可行点，不必是最优点"
+          },
+          {
+            "symbol": "(u,v,r)",
+            "meaning": "Perturbation coordinates · 不等式右端、等式残差和目标上界的扰动坐标"
+          },
+          {
+            "symbol": "\\gamma",
+            "meaning": "Separating-hyperplane coefficient · 分离超平面中目标坐标的系数"
+          }
+        ],
+        "proof": [
+          {
+            "title": "1. 把所有可能的扰动画在一个集合里 · Perturbation set",
+            "body": "以严格的上界保留可活动空间；等式坐标保留精确残差。",
+            "formula": "\\mathcal S=\\{(u,v,r):\\exists x, c_i(x)<u_i\\ \\forall i, Ax-b=v,\\quad f(x)<r\\}",
+            "reason": "这个集合编码了哪些约束放宽量与目标上界能够同时实现。"
+          },
+          {
+            "title": "2. 证明它凸且开 · Convexity and openness",
+            "body": "两个见证点取凸组合（convex combination），凸函数（convex function）保持严格上界，仿射等式（affine equality）保持残差。连续性（continuity）处理小扰动；满行秩让等式残差也能独立小幅改变。",
+            "formula": "A R=I \\Longrightarrow A(x+R\\Delta v)-b=v+\\Delta v",
+            "reason": "有限凸函数（finite convex function）在全空间连续；取右逆 R，足够小的 Δv 不会耗尽严格余量。因此 S 在整个扰动空间开。"
+          },
+          {
+            "title": "3. 把最优值点放在集合边界 · Boundary point",
+            "body": "(0,0,p*) 不在 S，否则会有严格可行且目标小于下确界（infimum）的点。它在闭包：将近最优可行点与严格可行点混合，并令混合权重趋零。",
+            "formula": "\\begin{aligned}&(0,0,p^*)\\notin\\mathcal S\\\\&(0,0,p^*)\\in\\overline{\\mathcal S}\\end{aligned}",
+            "reason": "近最优序列存在于下确界定义；小比例混合保持目标趋近 p*，同时使不等式严格。"
+          },
+          {
+            "title": "4. 应用有限维凸集分离定理 · Separation theorem",
+            "body": "开凸集（convex set）与其边界点存在非零支撑法向，选定方向使整个集合落在上侧。",
+            "formula": "\\begin{aligned}&\\lambda^Tu+\\nu^Tv+\\gamma r\\ge\\gamma p^*\\qquad \\forall(u,v,r)\\in\\mathcal S\\\\&(\\lambda,\\nu,\\gamma)\\ne0\\end{aligned}",
+            "reason": "这是本证明调用的几何定理；后续工作是把几何法向变成合法乘子。"
+          },
+          {
+            "title": "5. 由上闭方向确定符号 · Multiplier signs",
+            "body": "固定见证 x，任意增加某个 u_i 或 r 仍留在 S。负系数会让左边趋向负无穷。",
+            "formula": "\\lambda\\ge0,\\qquad\\gamma\\ge0",
+            "reason": "非负性不是分离定理（separation theorem）自动附赠，而是集合在上方无限延伸的结果。"
+          },
+          {
+            "title": "6. 用 Slater 排除零目标系数 · Nonzero objective coefficient",
+            "body": "假设 γ=0。严格可行点允许取 v=0、每个 u_i<0，故 λ 必为零。再对任意 x 取相应扰动并逼近边界，得到 νᵀ(Ax−b)≥0。",
+            "formula": "\\begin{aligned}&\\gamma=0 \\Longrightarrow \\ \\lambda=0\\\\&A^T\\nu=0 \\Longrightarrow \\ \\nu=0\\end{aligned}",
+            "reason": "若 λ 有正分量，λᵀu<0 与分离式矛盾。A 满行秩使 Aᵀ 的零空间（null space）只含零，这又与法向非零矛盾。"
+          },
+          {
+            "title": "7. 归一化并让严格上界收紧 · Normalization",
+            "body": "因此 γ>0。所有系数除以 γ，再令 u 逐项降到 c(x)、r 降到 f(x)。",
+            "formula": "f(x)+\\widehat\\lambda^Tc(x) +\\widehat\\nu^T(Ax-b)\\ge p^*\\qquad \\forall x",
+            "reason": "这里得到对所有原变量（primal variable）的下界，正适合取拉格朗日（Lagrangian）下确界。"
+          },
+          {
+            "title": "8. 夹住对偶值，得到可达性 · Dual attainment",
+            "body": "对 x 取下确界给 g≥p*；弱对偶（weak duality）给 g≤p*。",
+            "formula": "g(\\widehat\\lambda,\\widehat\\nu)=p^*=d^*",
+            "reason": "不仅证明两个最优值相等，还实际证明存在一组有限最优乘子。"
+          },
+          {
+            "title": "9. 说明原始可达性仍是另一件事 · Primal nonattainment",
+            "body": "无约束 min exp(x) 满足这个定理的凸性（convexity）与有限最优值条件；没有不等式时 Slater 条件为空。",
+            "formula": "\\begin{aligned}&\\inf_{x\\in\\mathbb R}e^x=0\\\\&\\operatorname*{argmin}_{x\\in\\mathbb R}e^x = \\varnothing\\end{aligned}",
+            "reason": "原始值可以只在 x 趋向负无穷时被逼近；要有原始解，还需紧水平集（level set）等额外条件。"
+          }
+        ],
+        "example": {
+          "problem": "比较两个凸问题：A 为 \\(\\min x^2\\) 且 \\(x\\ge1\\)；B 为 \\(\\min x\\) 且 \\(x^2\\le0\\)。",
+          "steps": [
+            "A 可取严格可行点 \\(\\bar x=2\\)。其 \\(p^*=1\\)，由配方 \\(g(\\lambda)=\\lambda-\\lambda^2/4\\)，在 \\(\\lambda=2\\) 取得对偶最优值 1。",
+            "B 只有可行点 x=0，故 \\(p^*=0\\)，但没有严格可行点。",
+            "B 的拉格朗日函数（Lagrangian）为 \\(x+\\lambda x^2\\)。当 \\(\\lambda>0\\)，极小点为 \\(-1/(2\\lambda)\\)，所以 \\(g(\\lambda)=-1/(4\\lambda)\\)；\\(g(0)=-\\infty\\)。",
+            "因此 B 的 \\(d^*=\\sup_{\\lambda\\ge0}g(\\lambda)=0=p^*\\)，却没有有限乘子达到 0。"
+          ],
+          "answer": "问题 B 说明强对偶（strong duality）可以在 Slater 失败时成立，同时对偶最优值仍可能不可达。"
+        },
+        "pitfalls": [
+          "Slater 是充分条件；检查失败不等于已经证明存在对偶间隙（duality gap）。",
+          "存在原始解、值相等、存在对偶解是三个不同命题。",
+          "一般定义域有边界时应检查相对内部，而不是机械要求在整个环境空间有内点（interior point）。",
+          "冗余等式可先删去以满足本课满行秩假设；不要对未满行秩矩阵照搬证明中 ν=0 的一步。"
+        ],
+        "checks": [
+          {
+            "question": "在问题 B 中，为什么无法用 KKT 找到有限乘子？",
+            "answer": "驻点条件（stationarity condition）是 \\(1+2\\lambda x=0\\)。唯一可行点 x=0 使左侧恒为 1。"
+          },
+          {
+            "question": "严格可行点必须接近最优点吗？",
+            "answer": "不需要。它的作用是提供约束余量，保证分离法向能够归一化。"
+          }
+        ],
+        "animation": null,
+        "source": {
+          "label": "Boyd 与 Vandenberghe，Convex Optimization 第 5.2–5.3 节：Slater 条件与分离解释",
+          "url": "https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf"
+        }
+      },
+      {
+        "id": "m4-l4",
+        "title": "KKT 与互补松弛 · KKT & complementary slackness",
+        "intuition": "最优点不一定梯度（gradient）为零：在约束边界，想下降的方向可能正好被挡住。KKT（Karush–Kuhn–Tucker conditions）说目标梯度可由活跃约束（active constraint）的法向与等式法向抵消。互补松弛（complementary slackness）进一步要求，真正还有余量的约束不能收取正价格；但紧约束（active constraint）的价格也可能恰好为零。",
+        "formal": "令 \\(f,c_i\\) 在 \\(\\mathbb R^n\\) 上凸且可微（differentiable），等式为 \\(Ax=b\\)。任何满足原始可行（primal feasibility）、\\(\\lambda\\ge0\\)、互补松弛、驻点条件（stationarity condition）的 \\((x^*,\\lambda^*,\\nu^*)\\) 都是原始—对偶最优解，不需 Slater 来证明充分性。若还满足上一课 Slater 假设且原始最优解存在，则每个原始最优解都可配上对偶最优乘子（multiplier）满足 KKT。",
+        "symbols": [
+          {
+            "symbol": "\\lambda_i c_i(x^*)=0",
+            "meaning": "Complementary slackness · 互补松弛：乘子与约束余量不能同时非零"
+          },
+          {
+            "symbol": "\\nabla_x\\mathcal L=0",
+            "meaning": "Stationarity condition · 拉格朗日函数对原变量的驻点条件"
+          },
+          {
+            "symbol": "V(B)",
+            "meaning": "Optimal value function · 资源上限为 B 时的最优值函数"
+          }
+        ],
+        "proof": [
+          {
+            "title": "1. 写齐四组条件 · Four conditions",
+            "body": "先核对可行性，再检查互补和驻点（stationary point），缺一组都不是 KKT。",
+            "formula": "\\begin{aligned}&c(x^*)\\le0,\\quad Ax^*=b\\\\&\\lambda^*\\ge0\\\\&\\lambda_i^*c_i(x^*)=0\\quad\\forall i\\\\&\\nabla f(x^*) +\\sum_i\\lambda_i^*\\nabla c_i(x^*) +A^T\\nu^*=0\\end{aligned}",
+            "reason": "不能只把梯度方程解出来就宣称找到约束最优解。"
+          },
+          {
+            "title": "2. 利用凸性把驻点变成全局极小 · Lagrangian minimum",
+            "body": "非负加权凸约束与仿射等式（affine equality）项使拉格朗日函数关于 x 凸。",
+            "formula": "\\mathcal L(x,\\lambda^*,\\nu^*) \\ge\\mathcal L(x^*,\\lambda^*,\\nu^*) +\\nabla_x\\mathcal L(x^*,\\lambda^*,\\nu^*)^T \\cdot(x-x^*)",
+            "reason": "驻点令最后一项为零，所以 x* 达到拉格朗日（Lagrangian）下确界（infimum）。"
+          },
+          {
+            "title": "3. 互补松弛消去额外项 · Complementarity",
+            "body": "原始可行令等式项为零；互补松弛令每个不等式项也为零。",
+            "formula": "g(\\lambda^*,\\nu^*) = \\mathcal L(x^*,\\lambda^*,\\nu^*)=f(x^*)",
+            "reason": "上下界相遇，结合弱对偶（weak duality）就证明充分性。"
+          },
+          {
+            "title": "4. 反向从最优解与 Slater 出发 · Necessity under Slater",
+            "body": "Slater 给出达到 d*=p* 的乘子。对任意原始最优点，整个弱对偶链首尾相等。",
+            "formula": "p^*=g(\\lambda^*,\\nu^*) \\le \\mathcal L(x^*,\\lambda^*,\\nu^*)\\le f(x^*) = p^*",
+            "reason": "链中每一处都必须取等号，必要性由此逐项恢复。"
+          },
+          {
+            "title": "5. 从总和等号恢复逐项互补 · Termwise equality",
+            "body": "每一项 λ_i*c_i(x*) 都非正；若它们的和为零，就不能有任何一项严格为负。",
+            "formula": "\\begin{aligned}&\\sum_i\\lambda_i^*c_i(x^*)=0\\\\&\\lambda_i^*c_i(x^*)\\le0 \\Longrightarrow \\ \\lambda_i^*c_i(x^*) = 0\\ \\forall i\\end{aligned}",
+            "reason": "只有“逐项同号”时，和为零才强制每项为零。"
+          },
+          {
+            "title": "6. 从拉格朗日极小恢复驻点 · Stationarity",
+            "body": "另一处等号表示 x* 在整个空间上最小化光滑（smooth）拉格朗日函数。",
+            "formula": "x^*\\in\\operatorname*{argmin}_x\\mathcal L(x,\\lambda^*,\\nu^*) \\Longrightarrow \\ \\nabla_x\\mathcal L(x^*,\\lambda^*,\\nu^*) = 0",
+            "reason": "这一步是无约束光滑一阶必要条件，原始约束已通过乘子处理。"
+          },
+          {
+            "title": "7. 用对偶价格给资源扰动一个全局界 · Sensitivity bound",
+            "body": "把某约束写为 aᵀx≤B，保持最优乘子 λ* 不变；B 改为 B+δ 时，对偶函数（dual function）减少 λ*δ。",
+            "formula": "V(B+\\delta)\\ge V(B)-\\lambda^*\\delta",
+            "reason": "只要新问题可行，这就是资源变化的价值下界；它不需要新问题的最优乘子已知。"
+          },
+          {
+            "title": "8. 只有可微时才称为导数 · Differentiable value function",
+            "body": "上述支撑关系表示 −λ* 是值函数的一个次梯度（subgradient）。若 V 在 B 可微，才得到边际导数。",
+            "formula": "\\begin{aligned}&-\\lambda^*\\in\\partial V(B)\\\\&\\frac{dV}{dB}(B)=-\\lambda^*\\ \\text{若导数存在}\\end{aligned}",
+            "reason": "乘子可以非唯一，值函数也可能有折点，不能无条件称其为唯一边际价格。"
+          }
+        ],
+        "example": {
+          "problem": "最小化 \\(f(x)=\\tfrac12[(x_1-3)^2+(x_2-1)^2]\\)，约束 \\(x_1+x_2\\le2\\)、\\(x_1,x_2\\ge0\\)。",
+          "steps": [
+            "用乘子 λ 对应总量上限，η₁、η₂ 对应 −x₁≤0、−x₂≤0。驻点为 \\(x_1-3+\\lambda-\\eta_1=0\\)、\\(x_2-1+\\lambda-\\eta_2=0\\)。",
+            "取候选 \\(x^*=(2,0)\\)、\\(\\lambda=1\\)、\\(\\eta_1=\\eta_2=0\\)。总量恰好为 2，非负约束满足，驻点两式均为 0。",
+            "所有互补乘积为零，故 KKT 充分性证明它全局最优（global optimality）。目标为 \\(\\tfrac12(1+1)=1\\)。目标严格凸（strict convexity），所以原始解唯一。",
+            "\\((0.5,0.5)\\) 同时满足严格不等式，故必要性也可由 Slater 保证。注意 x₂=0 的约束紧，但 η₂=0。",
+            "总量上限若变为 2.2，新的最优点为 \\((2.1,0.1)\\)，目标 0.81；价格下界给 \\(V(2.2)\\ge1-1\\times0.2=0.8\\)，与直接计算一致。"
+          ],
+          "answer": "最优点 (2,0)，资源乘子 1；一个活跃约束可以具有零乘子。"
+        },
+        "pitfalls": [
+          "一般非凸（nonconvex）问题的 KKT 可能只给必要条件，不能照搬本课凸问题的充分性。",
+          "互补松弛允许“约束紧且乘子零”，不允许由约束紧直接推出乘子正。",
+          "没有约束资格条件（constraint qualification）时，即使原始最优解存在也可能没有 KKT 乘子。"
+        ],
+        "checks": [
+          {
+            "question": "若某约束在最优点严格小于零，乘子必须怎样？",
+            "answer": "必须为零，因为非零负数与非负乘子的积要等于零。"
+          },
+          {
+            "question": "KKT 的充分性为什么不依赖 Slater？",
+            "answer": "给定一组 KKT 证据后，凸性（convexity）已经使驻点成为拉格朗日全局极小，并由互补松弛得到零间隙（zero duality gap）。"
+          }
+        ],
+        "animation": "kkt",
+        "source": {
+          "label": "Boyd 与 Vandenberghe，Convex Optimization 第 5.5–5.6 节：最优性条件与敏感性",
+          "url": "https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf"
+        }
+      }
+    ],
+    "takeaways": [
+      "共轭（convex conjugate）用斜率描述仿射下界（affine minorant）；Fenchel 等号等价于次梯度（subgradient）匹配。",
+      "弱对偶（weak duality）不需要凸性（convexity）；强对偶（strong duality）需要额外论证。",
+      "Slater 是充分条件，不是强对偶的必要条件，也不单独保证原始解存在。",
+      "凸问题中一组满足 KKT 的点与乘子（multiplier）就是最优证书；要从最优点反推乘子，需约束资格条件（constraint qualification）。"
+    ]
+  },
+  {
+    "id": "m5",
+    "title": "梯度下降 · Gradient descent",
+    "minutes": 65,
+    "goals": [
+      "推导光滑（smooth）二次上界并据此选步长（step size）",
+      "完整证明凸梯度（gradient）法的末次函数值 O(1/k)",
+      "区分强凸（strong convexity）线性收敛（linear convergence）的函数值、距离与平方距离",
+      "用特征值（eigenvalue）理解震荡、发散和预条件（preconditioning）"
+    ],
+    "prerequisites": [
+      "梯度（gradient）、内积（inner product）、正定（positive definite, PD）矩阵与特征值（eigenvalue）",
+      "凸一阶下界与强凸（strong convexity）二次下界",
+      "最优解存在与最优值有限的区别"
+    ],
+    "summary": "不把更新公式当成魔法：先建立可检验的一步不等式，再用距离平方的望远镜相消得到全程保证。最后解释同一个算法为什么在狭长谷地里很慢。",
+    "lessons": [
+      {
+        "id": "m5-l1",
+        "title": "下降引理 · Descent lemma",
+        "intuition": "梯度（gradient）只告诉你局部朝哪边走，L 则限制走远后斜率能变多快。把线性预测加上一个安全的二次垫子，便得到全局上界。梯度步是在这个上界上做选择：步子太大时，曲率带来的代价会吞掉线性下降。",
+        "formal": "令 \\(f:\\mathbb R^n\\to\\mathbb R\\) 连续可微（continuously differentiable），\\(\\|\\nabla f(x)-\\nabla f(y)\\|_2\\le L\\|x-y\\|_2\\)，其中 \\(L>0\\)。此课的一步下降不需要凸性（convexity）。对 \\(x^+=x-t\\nabla f(x)\\)，若 \\(0<t<2/L\\) 且梯度非零，则目标严格下降；常用 \\(0<t\\le1/L\\) 得到更简洁的定量保证。",
+        "symbols": [
+          {
+            "symbol": "L",
+            "meaning": "Gradient Lipschitz constant · 梯度的 Lipschitz 常数，取一个有效上界即可"
+          },
+          {
+            "symbol": "t",
+            "meaning": "Step size · 一步更新的正步长"
+          },
+          {
+            "symbol": "g=\\nabla f(x)",
+            "meaning": "Gradient · 当前位置的梯度"
+          }
+        ],
+        "proof": [
+          {
+            "title": "1. 沿线段使用微积分基本定理 · Line integral",
+            "body": "令 d=y−x，把多维差值化成一维线积分。",
+            "formula": "f(y)-f(x)=\\int_0^1\\nabla f(x+s d)^T d\\,ds",
+            "reason": "C¹ 和线段位于定义域内保证这一步合法；本课定义域为整个空间。"
+          },
+          {
+            "title": "2. 剥离线性预测 · Linear model",
+            "body": "加减当前位置梯度，把误差单独写出来。",
+            "formula": "f(y)-f(x)-\\nabla f(x)^Td =\\int_0^1[\\nabla f(x+sd)-\\nabla f(x)]^T \\cdot d\\,ds",
+            "reason": "真正需要控制的是非线性余项，而不是假装泰勒展开没有余项。"
+          },
+          {
+            "title": "3. 用 Lipschitz 性控制余项 · Lipschitz bound",
+            "body": "先用柯西不等式（Cauchy–Schwarz inequality），再用梯度变化上界。",
+            "formula": "[\\nabla f(x+s d)-\\nabla f(x)]^Td\\le Ls\\|d\\|_2^2",
+            "reason": "右边随位置参数 s 线性增加，积分将产生二分之一。"
+          },
+          {
+            "title": "4. 积分得到下降引理 · Quadratic upper bound",
+            "body": "将上一步从 0 积分到 1。",
+            "formula": "f(y)\\le f(x) +\\nabla f(x)^T(y-x) +\\frac L2\\|y-x\\|_2^2",
+            "reason": "这是光滑（smooth）二次上界；与凸性给出的一阶下界方向相反，来源也不同。"
+          },
+          {
+            "title": "5. 代入梯度更新 · Gradient step",
+            "body": "选择 d=−tg，线性项和二次项都变成梯度范数（norm）平方。",
+            "formula": "f(x-tg)\\le f(x)-t\\left(1-\\frac{Lt}{2}\\right)\\|g\\|_2^2",
+            "reason": "只要括号为正，就有下降；安全步幅与曲率上界成反比。"
+          },
+          {
+            "title": "6. 提取常用充分下降式 · Sufficient decrease",
+            "body": "取 t≤1/L，使括号至少为 1/2。",
+            "formula": "f(x^+)\\le f(x)-\\frac t2\\|\\nabla f(x)\\|_2^2",
+            "reason": "后面的速率证明会重复使用这条定量下降式。"
+          },
+          {
+            "title": "7. L 未知时用回溯验证 · Backtracking test",
+            "body": "给定 c∈(0,1)、β∈(0,1)，从 t̂>0 开始反复乘 β，直到 Armijo 条件成立。",
+            "formula": "f(x-tg)\\le f(x)-ct\\|g\\|_2^2",
+            "reason": "测试实际目标，而不是猜测全局 L。若梯度已为零，可直接停止。"
+          },
+          {
+            "title": "8. 证明回溯会结束 · Finite termination",
+            "body": "下降引理（descent lemma）表明达到这个阈值就必定接受，所以几何缩短不会无限失败。",
+            "formula": "t\\le\\frac{2(1-c)}L \\Longrightarrow 1-\\frac{Lt}{2}\\ge c",
+            "reason": "该结论依赖一个有效的 L 与可靠函数计算；有限次终止不等于可用任意大的初始步长直接更新。"
+          }
+        ],
+        "example": {
+          "problem": "取 \\(f(x)=\\tfrac12x_1^2+\\tfrac92x_2^2\\)，从 \\(x^0=(3,1)\\) 出发。",
+          "steps": [
+            "梯度为 \\((x_1,9x_2)\\)，所以 \\(L=9\\)、\\(g^0=(3,9)\\)，初始目标为 9。",
+            "取 \\(t=1/9\\)，新点为 \\((8/3,0)\\)，新目标 \\(32/9\\approx3.5556\\)。",
+            "下降引理给上界 \\(9-(1/18)(3^2+9^2)=4\\)，实际值 3.5556 小于此上界。",
+            "若取 \\(t=1/3\\)，第二坐标每步乘 \\(1-9/3=-2\\)，其绝对值越变越大。第一步为 \\((2,-2)\\)，目标 20，已经高于 9。"
+          ],
+          "answer": "安全步长带来可证明的下降；超过稳定区间（stability interval）时，负梯度方向也会发散。"
+        },
+        "pitfalls": [
+          "L 不是梯度范数；梯度大与梯度变化快是不同概念。",
+          "局部测得的曲率不一定是覆盖整条更新线段的有效上界。",
+          "一步下降本身不证明收敛到全局最优（global optimality）；还需凸性、存在性及相应收敛分析。"
+        ],
+        "checks": [
+          {
+            "question": "对 \\(f(x)=5x^2\\)，L 与常用安全步长上限分别是多少？",
+            "answer": "梯度为 10x，所以 L=10，常用上限为 1/10。"
+          },
+          {
+            "question": "当 \\(t=2/L\\) 时是否保证严格下降？",
+            "answer": "不保证。最大曲率方向上的二次函数（quadratic function）可来回翻转而目标不变。"
+          }
+        ],
+        "animation": "gradient",
+        "source": {
+          "label": "文再文等，第 2.2 节光滑上界与第 6.1–6.2 节线搜索、梯度法",
+          "url": "https://faculty.bicmr.pku.edu.cn/~wenzw/optbook/opt2.pdf"
+        }
+      },
+      {
+        "id": "m5-l2",
+        "title": "凸光滑速率 · Smooth convex rate",
+        "intuition": "单步下降只说明每次都变好，却没告诉我们多久足够好。关键技巧是用“到某个最优点的距离平方”付账：每一步目标误差（objective gap）都消耗一部分距离预算，中间的距离项相互抵消。最后还要用单调性（monotonicity），才能从累计误差升级为最后一个点的误差。",
+        "formal": "假设 \\(f\\) 在 \\(\\mathbb R^n\\) 上凸、连续可微（continuously differentiable）且梯度（gradient） L-Lipschitz，\\(L>0\\)，并且存在最优点 \\(x^*\\)。取任意 \\(x^0\\)，固定 \\(0<t\\le1/L\\)，迭代 \\(x^{k+1}=x^k-t\\nabla f(x^k)\\)。则对整数 \\(k\\ge1\\)，末次函数值差 \\(f(x^k)-f^*\\le\\|x^0-x^*\\|_2^2/(2tk)\\)。这不是同一阶的点距离保证。",
+        "symbols": [
+          {
+            "symbol": "\\Delta_k=f(x^k)-f^*",
+            "meaning": "Objective gap · 第 k 次迭代的目标误差"
+          },
+          {
+            "symbol": "D_k=\\|x^k-x^*\\|_2^2",
+            "meaning": "Squared distance · 到选定最优点的距离平方"
+          },
+          {
+            "symbol": "g_k=\\nabla f(x^k)",
+            "meaning": "Gradient · 当前梯度"
+          }
+        ],
+        "proof": [
+          {
+            "title": "1. 先拿到下降量 · Descent amount",
+            "body": "由上一课，固定安全步长（step size）带来目标单调性。",
+            "formula": "f(x^{k+1})\\le f(x^k)-\\frac t2\\|g_k\\|_2^2",
+            "reason": "这一式既控制目标，也会在最后把平均界变为末次界。"
+          },
+          {
+            "title": "2. 用凸性把当前误差换成内积 · Convexity bound",
+            "body": "在 xᵏ 处写支撑下界，并以 x* 为比较点。",
+            "formula": "f(x^k)-f^*\\le g_k^T(x^k-x^*)",
+            "reason": "这是本证明中不可去掉凸性（convexity）的地方。"
+          },
+          {
+            "title": "3. 合并前两式 · Combine bounds",
+            "body": "从新目标减去最优值，保留下降项。",
+            "formula": "\\Delta_{k+1}\\le g_k^T(x^k-x^*)-\\frac t2\\|g_k\\|_2^2",
+            "reason": "此刻右侧仍有梯度，但它正好能装进一个距离差。"
+          },
+          {
+            "title": "4. 展开新距离平方 · Distance identity",
+            "body": "把更新 xᵏ⁺¹=xᵏ−tgₖ 代入，而不是引用不明来源的不等式。",
+            "formula": "D_{k+1}=D_k -2t g_k^T(x^k-x^*) +t^2\\|g_k\\|_2^2",
+            "reason": "这是精确代数恒等式，不需要任何凸性。"
+          },
+          {
+            "title": "5. 得到单步付账关系 · One-step inequality",
+            "body": "整理距离恒等式，再代回第三步。",
+            "formula": "\\Delta_{k+1}\\le\\frac{D_k-D_{k+1}}{2t}",
+            "reason": "因为左边非负，还可看出距离平方不会增大。"
+          },
+          {
+            "title": "6. 望远镜求和 · Telescoping sum",
+            "body": "对 j=0,…,k−1 求和，中间距离项首尾相消。",
+            "formula": "\\sum_{j=1}^k\\Delta_j\\le\\frac{D_0-D_k}{2t} \\le \\frac{D_0}{2t}",
+            "reason": "丢掉的是非负 Dₖ 前的负号；索引从第一次更新到第 k 次更新。"
+          },
+          {
+            "title": "7. 单调性把累计界压到最后一个点 · Last-iterate bound",
+            "body": "由于每一个历史目标误差都不小于最后的 Δₖ，累计和至少为 kΔₖ。",
+            "formula": "k\\Delta_k\\le\\sum_{j=1}^k\\Delta_j \\Longrightarrow \\Delta_k\\le\\frac{\\|x^0-x^*\\|_2^2}{2tk}",
+            "reason": "若没有目标单调性，不能从累计界直接声称相同的末次界，只能控制平均或最好点。"
+          },
+          {
+            "title": "8. 把速率翻译成迭代预算 · Iteration complexity",
+            "body": "若已知初始距离至多 R，想使函数值误差不超过 ε。",
+            "formula": "k\\ge\\left\\lceil\\frac{R^2}{2t\\varepsilon}\\right\\rceil",
+            "reason": "这是最坏情形充分预算，不是实际每个问题都需要这么多步。"
+          }
+        ],
+        "example": {
+          "problem": "取 \\(f(x)=2x^2\\)，\\(x^0=3\\)，\\(L=4\\)，用 \\(t=1/8\\)。",
+          "steps": [
+            "最优点为 0。更新为 \\(x^{k+1}=x^k-(1/8)4x^k=x^k/2\\)，所以 \\(x^k=3/2^k\\)。",
+            "实际目标误差为 \\(18/4^k\\)，例如第 5 次为 \\(18/1024\\approx0.017578\\)。",
+            "一般凸光滑（smooth）界给 \\(\\Delta_k\\le9/(2\\times(1/8)k)=36/k\\)，第 5 次上界为 7.2。",
+            "若只知道该一般界且要求误差不超过 0.1，需要 k≥360；本例实际第 4 次已经达到 \\(18/256\\approx0.070313\\)。"
+          ],
+          "answer": "最坏上界可以比实际保守很多；本例还具有强凸性（strong convexity），下一课会利用这个额外结构。"
+        },
+        "pitfalls": [
+          "O(1/k) 在这里修饰函数值差，不能删去“函数值”三个字。",
+          "若最优值只是不达到的下确界（infimum），不能凭空写出 x* 与初始距离。",
+          "固定步长的望远镜公式不能不加说明地套到任意变步长或随机梯度。"
+        ],
+        "checks": [
+          {
+            "question": "证明中哪一步把结论从平均变成末次？",
+            "answer": "用目标非增得到 kΔₖ≤ΣΔⱼ。仅有累计误差界是不够的。"
+          },
+          {
+            "question": "\\(f(x_1,x_2)=x_1^2\\) 是否有唯一最优点？",
+            "answer": "没有，所有 (0,x₂) 都最优。小函数值不能控制到任意指定最优点的第二坐标距离。"
+          }
+        ],
+        "animation": null,
+        "source": {
+          "label": "文再文等，第 6.2.1 节：凸梯度法收敛性",
+          "url": "https://faculty.bicmr.pku.edu.cn/~wenzw/optbook/opt2.pdf"
+        }
+      },
+      {
+        "id": "m5-l3",
+        "title": "强凸速率 · Strongly convex rate",
+        "intuition": "普通凸函数（convex function）的谷底可能很平；强凸性（strong convexity）要求每个方向至少有 μ 的曲率。当目标还明显高于最优值时，梯度（gradient）就不可能太小，因此每一步能吃掉当前误差的固定比例。这就是线性收敛（linear convergence）：误差乘一个小于 1 的数，而不是每步减一个固定常数。",
+        "formal": "令 \\(f:\\mathbb R^n\\to\\mathbb R\\) 连续可微（continuously differentiable）、\\(\\mu\\)-强凸（strong convexity）且梯度 L-Lipschitz，\\(0<\\mu\\le L\\)。全空间上的强凸二次下界给出强制性（coercivity），因此存在唯一最优点。取 \\(t=1/L\\)，则 \\(\\Delta_k\\le(1-\\mu/L)^k\\Delta_0\\)。本课证明的是目标差（objective gap）速率；随后用强凸性另行转换为距离界。",
+        "symbols": [
+          {
+            "symbol": "\\mu",
+            "meaning": "Strong-convexity constant · 强凸常数，统一最小曲率下界"
+          },
+          {
+            "symbol": "\\kappa=L/\\mu",
+            "meaning": "Condition number · 条件数，最大与最小曲率的比"
+          },
+          {
+            "symbol": "\\Delta_k",
+            "meaning": "Objective gap · 非负函数值误差"
+          }
+        ],
+        "proof": [
+          {
+            "title": "1. 先确认最优解存在且唯一 · Existence and uniqueness",
+            "body": "在固定 x₀ 处，强凸下界的正二次项压过线性项，故走向无穷时 f 也趋向无穷。连续性（continuity）使紧水平集（level set）上的最小值可达。",
+            "formula": "f(y)\\ge f(x_0) +\\nabla f(x_0)^T(y-x_0) +\\frac\\mu2\\|y-x_0\\|_2^2",
+            "reason": "强凸性还排除了两个不同最优点：它们的中点会有严格更小目标。"
+          },
+          {
+            "title": "2. 写出任意点处的二次下界 · Quadratic lower model",
+            "body": "在当前点 x，把梯度 g 视作已知向量。",
+            "formula": "f(y)\\ge f(x)+g^T(y-x) +\\frac\\mu2\\|y-x\\|_2^2",
+            "reason": "与光滑（smooth）二次上界不同，μ 控制的是函数不能过于平坦。"
+          },
+          {
+            "title": "3. 最小化这个下界模型 · Gradient domination",
+            "body": "右侧作为 y 的函数在 y=x−g/μ 取最小。对两边取下确界（infimum）。",
+            "formula": "f^*\\ge f(x)-\\frac1{2\\mu}\\|g\\|_2^2 \\Longrightarrow \\|g\\|_2^2\\ge2\\mu[f(x)-f^*]",
+            "reason": "这里只在优化下界模型，不是在建议把真实迭代步长（step size）取为 1/μ。"
+          },
+          {
+            "title": "4. 把梯度下降量换成当前误差比例 · Gap contraction",
+            "body": "对步长 1/L 应用下降引理（descent lemma），并代入刚得到的梯度下界。",
+            "formula": "\\Delta_{k+1}\\le\\Delta_k-\\frac1{2L}\\|g_k\\|_2^2 \\le \\left(1-\\frac\\mu L\\right)\\Delta_k",
+            "reason": "大误差必有足够大梯度，故保证按固定比例削减误差。"
+          },
+          {
+            "title": "5. 递推得到几何界 · Geometric rate",
+            "body": "将单步收缩（contraction）连续应用 k 次。",
+            "formula": "\\Delta_k \\le \\left(1-\\frac1\\kappa\\right)^k\\Delta_0\\le e^{-k/\\kappa}\\Delta_0",
+            "reason": "利用 1−a≤exp(−a)。μ=L 时第一步的误差界直接为零，应单独理解。"
+          },
+          {
+            "title": "6. 读出精度与条件数的代价 · Condition number",
+            "body": "当 0<ε<Δ₀，指数界给足够的步数。",
+            "formula": "k \\ge \\left\\lceil\\kappa\\log\\frac{\\Delta_0}{\\varepsilon}\\right\\rceil",
+            "reason": "精度提高一个数量级只增加对数代价，但条件数增大十倍会使这一预算约增十倍。"
+          },
+          {
+            "title": "7. 另外建立点距离界 · Distance bound",
+            "body": "最优点梯度为零，在 x* 处应用强凸下界。",
+            "formula": "\\frac\\mu2\\|x^k-x^*\\|_2^2\\le\\Delta_k \\Longrightarrow \\|x^k-x^*\\|_2 \\le \\sqrt{\\frac{2\\Delta_0}{\\mu}}\\left(1-\\frac\\mu L\\right)^{k/2}",
+            "reason": "函数值因子、平方距离因子和距离因子不能混写成同一个数。"
+          }
+        ],
+        "example": {
+          "problem": "取 \\(f(x)=\\tfrac12x_1^2+\\tfrac{25}{2}x_2^2\\)，\\(x^0=(5,1)\\)，步长 \\(t=1/25\\)。",
+          "steps": [
+            "\\(\\mu=1,L=25,\\kappa=25\\)，最优点为 0，初始目标为 25。",
+            "第一步为 \\((4.8,0)\\)，目标为 \\(4.8^2/2=11.52\\)。通用线性界给 \\(\\Delta_1\\le(24/25)25=24\\)。",
+            "实际对 k≥1 有 \\(x^k=(5(24/25)^k,0)\\)，所以 \\(\\Delta_k=12.5(24/25)^{2k}\\)。本例在快速方向一次归零后，实际速率比通用界更快。",
+            "只用通用指数界把误差保证到 0.01，足够取 \\(k\\ge\\lceil25\\log2500\\rceil=196\\)。"
+          ],
+          "answer": "条件数 25 限制统一步长；强凸保证线性速率，但通用上界不必贴合每个具体例子。"
+        },
+        "pitfalls": [
+          "最小化下界模型得到 1/μ，不意味着它是稳定的实际梯度步长。",
+          "强凸性足以推出这里的梯度—误差不等式，但反向不必成立；不要把两者当定义上的等价。",
+          "“线性收敛”是几何级数，和误差 O(1/k) 不是同一概念。"
+        ],
+        "checks": [
+          {
+            "question": "若 μ 不变而 L 增大，\\(1-\\mu/L\\) 怎样变化？",
+            "answer": "更接近 1，最坏收缩更慢。"
+          },
+          {
+            "question": "若已知函数值误差 ≤10⁻⁶、μ=2，点误差能保证多少？",
+            "answer": "\\(\\|x-x^*\\|\\le\\sqrt{2\\times10^{-6}/2}=10^{-3}\\)。"
+          }
+        ],
+        "animation": null,
+        "source": {
+          "label": "文再文等，第 2.5 节强凸与第 6.2.1 节强凸梯度法",
+          "url": "https://faculty.bicmr.pku.edu.cn/~wenzw/optbook/opt2.pdf"
+        }
+      },
+      {
+        "id": "m5-l4",
+        "title": "条件数与预条件 · Conditioning & preconditioning",
+        "intuition": "狭长椭圆不是因为变量多，而是不同方向的曲率尺度差太大。一个统一步长（step size）必须照顾最陡方向，于是平坦方向只能慢慢挪。换变量相当于重新选择尺子；合适的尺子能把椭圆变圆，但变换目标和约束时必须一致。",
+        "formal": "本课精确分析正定（positive definite, PD）二次函数（quadratic function） \\(f(x)=\\tfrac12x^TQx-b^Tx\\)，其中 Q 对称且 \\(0<\\mu=\\lambda_{\\min}(Q)\\le\\lambda_{\\max}(Q)=L\\)。其唯一最优点为 \\(x^*=Q^{-1}b\\)。下述最优固定步长与精确模态（eigenmode）递推属于这个二次模型，不冒充任意非凸函数（nonconvex function）的结论。",
+        "symbols": [
+          {
+            "symbol": "Q=U\\operatorname{diag}(q_i)U^T",
+            "meaning": "Orthogonal eigendecomposition · 正交特征分解"
+          },
+          {
+            "symbol": "e^k=x^k-x^*",
+            "meaning": "Iterate error · 迭代误差向量"
+          },
+          {
+            "symbol": "P\\succ0",
+            "meaning": "Preconditioner · 预条件矩阵"
+          }
+        ],
+        "proof": [
+          {
+            "title": "1. 把迭代中心移到最优点 · Error coordinates",
+            "body": "Qx*=b，梯度（gradient）等于 Q(x−x*)。",
+            "formula": "e^{k+1}=(I-tQ)e^k",
+            "reason": "线性递推让每个特征方向都可独立分析。"
+          },
+          {
+            "title": "2. 进入特征坐标 · Eigenbasis",
+            "body": "令 z=Uᵀe，正交变换保持欧氏长度。",
+            "formula": "z_i^{k+1}=(1-tq_i)z_i^k",
+            "reason": "负因子表示跨越谷底并变号，绝对值才决定是否衰减。"
+          },
+          {
+            "title": "3. 确定稳定区间 · Stability interval",
+            "body": "每个模态都收缩（contraction），要求 |1−tqᵢ|<1。最严格的限制来自最大特征值（eigenvalue）。",
+            "formula": "0<t<\\frac2L",
+            "reason": "区间端点不包括在一般收缩结论内；t=2/L 时最高曲率模态因子为 −1。"
+          },
+          {
+            "title": "4. 求最坏模态因子 · Worst-case factor",
+            "body": "q↦|1−tq| 在区间上凸，所以最大值出现在端点。",
+            "formula": "\\begin{aligned}&\\|e^{k+1}\\|_2\\le\\rho(t)\\|e^k\\|_2\\\\&\\rho(t)=\\max\\{|1-t\\mu|,|1-tL|\\}\\end{aligned}",
+            "reason": "对称正定 Q 的正交特征分解使这个范数（norm）估计精确可达。"
+          },
+          {
+            "title": "5. 平衡快慢两个端点 · Optimal fixed step",
+            "body": "最优固定 t 让两个端点的绝对因子相等且符号相反。",
+            "formula": "\\begin{aligned}&t_{\\mathrm{opt}}=\\frac2{L+\\mu}\\\\&\\rho_{\\mathrm{opt}}=\\frac{L-\\mu}{L+\\mu} = \\frac{\\kappa-1}{\\kappa+1}\\end{aligned}",
+            "reason": "这优化的是最坏方向上的欧氏误差收缩，不是对每个当前方向做精确线搜索。"
+          },
+          {
+            "title": "6. 分别报告距离与目标因子 · Distance vs objective",
+            "body": "二次函数差等于 Q-范数误差平方的一半，所有模态同样受 ρ 控制。",
+            "formula": "\\begin{aligned}&\\|e^k\\|_2\\le\\rho^k\\|e^0\\|_2\\\\&f(x^k)-f^*\\le\\rho^{2k}[f(x^0)-f^*]\\end{aligned}",
+            "reason": "后一个因子有平方，不能照抄距离收缩因子。"
+          },
+          {
+            "title": "7. 换变量查看新曲率 · Change of variables",
+            "body": "令 x=Dz，其中 D 可逆。新目标的海瑟矩阵（Hessian）为 DᵀQD。",
+            "formula": "\\begin{aligned}&\\widetilde f(z)=f(Dz)\\\\&\\nabla\\widetilde f(z)=D^T\\nabla f(Dz)\\\\&\\widetilde Q=D^TQD\\end{aligned}",
+            "reason": "缩放改变梯度法所依据的几何；它不是仅把结果显示成另一组单位。"
+          },
+          {
+            "title": "8. 把缩放写回原变量 · Preconditioned update",
+            "body": "在 z 中做梯度步，等价于在 x 中乘一个正定矩阵调整方向。",
+            "formula": "\\begin{aligned}&x^+=x-tDD^T\\nabla f(x)=x-tP^{-1}\\nabla f(x)\\\\&P^{-1}=DD^T\\end{aligned}",
+            "reason": "理想 P=Q 可一步解二次问题，但构造和求解 P 也有成本；实际常用易求逆的近似。"
+          }
+        ],
+        "example": {
+          "problem": "取 \\(Q=\\operatorname{diag}(1,100)\\)、\\(b=0\\)、\\(x^0=(1,1)\\)。比较原坐标与缩放 \\(D=\\operatorname{diag}(1,0.1)\\)。",
+          "steps": [
+            "原条件数（condition number）为 100。取安全步长 0.01，新点为 (0.99,0)，目标从 50.5 降到 0.49005；此后第一坐标每步只乘 0.99。",
+            "最坏模态最优固定步长为 \\(2/101\\)，距离因子为 \\(99/101\\approx0.980198\\)，目标差（objective gap）因子为其平方，约 0.960788。",
+            "新曲率为 \\(D^TQD=I\\)。同一个初始物理点对应 \\(z^0=D^{-1}x^0=(1,10)\\)。",
+            "在 z 中取 t=1，一步得到 z=0，再映回 x=0。等价地，原空间用 \\(P=Q\\) 的预条件步也一步达到最优。"
+          ],
+          "answer": "曲率不均衡可以由坐标尺度造成；但理想预条件的计算开销必须算进算法成本。"
+        },
+        "pitfalls": [
+          "预条件改善的是变换后的曲率，不能只改数据列而不相应改目标、约束或正则项（regularizer）。",
+          "精确线搜索每次依赖当前梯度，不等于固定取 2/(L+μ)。",
+          "特征值全正很重要；若 Q 有负特征值，本课的凸性（convexity）、唯一性和稳定结论均需重查。"
+        ],
+        "checks": [
+          {
+            "question": "因子 −0.8 表示发散吗？",
+            "answer": "不表示。它表示交替变号且幅度每步缩小为 0.8；只有绝对值大于 1 才在该模态上放大。"
+          },
+          {
+            "question": "若 L=μ，最优固定步长与收缩因子是什么？",
+            "answer": "t=1/L，ρ=0；Q=LI，二次问题一步求解。"
+          }
+        ],
+        "animation": "gradient",
+        "source": {
+          "label": "文再文等，第 6.2.1 节：二次梯度法、条件数与收敛性",
+          "url": "https://faculty.bicmr.pku.edu.cn/~wenzw/optbook/opt2.pdf"
+        }
+      }
+    ],
+    "takeaways": [
+      "L 控制最大曲率与安全步幅，μ 控制最小曲率与误差回拉。",
+      "凸光滑（smooth）梯度（gradient）法在固定 0<t≤1/L 下有末次函数值差 O(1/k)，证明还用了目标单调性（monotonicity）。",
+      "强凸（strong convexity）时误差按固定比例缩小；“线性”指几何速率（geometric rate），不是每次减同一个数。",
+      "条件数（condition number） L/μ 大时，最陡方向限制步长（step size），平坦方向拖慢速度；合理缩放能改变这种几何。"
+    ]
+  },
+  {
+    "id": "m6",
+    "title": "投影与近端梯度 · Proximal methods",
+    "minutes": 55,
+    "goals": [
+      "证明闭凸近端（proximal）子问题的存在、唯一与最优性条件",
+      "从绝对值次微分（subdifferential）推出软阈值（soft thresholding），而不是背公式",
+      "推导投影／近端梯度（proximal gradient）及末次 O(1/k) 目标界",
+      "完成一次 Lasso 更新并用对偶间隙（duality gap）验证误差"
+    ],
+    "prerequisites": [
+      "闭凸集（convex set）的投影与凸次梯度（subgradient）",
+      "光滑（smooth）二次上界及望远镜求和（telescoping sum）",
+      "弱对偶（weak duality）、Fenchel 与 KKT 的基本含义"
+    ],
+    "summary": "把目标拆成容易求梯度（gradient）的部分 f 和容易做近端（proximal）的部分 h：只线性化 f，保留 h 的真实形状。这样每一步就能精确满足简单约束，或直接产生零坐标。",
+    "lessons": [
+      {
+        "id": "m6-l1",
+        "title": "近端算子 · Proximal operator",
+        "intuition": "近端（proximal）更新让一个点同时兼顾“降低 h”与“别离输入 v 太远”。距离平方给出稳定的拉回力，凸性（convexity）排除竞争的局部谷底。把不可行点的 h 设成正无穷，就自然得到投影；因此投影并不是与近端无关的另一套技巧。",
+        "formal": "令 \\(h:\\mathbb R^n\\to(-\\infty,+\\infty]\\) 适当、闭、凸，\\(t>0\\)、\\(v\\in\\mathbb R^n\\)。以下近端子问题的解存在且唯一：\n\n\\[\\operatorname{prox}_{th}(v) =\\operatorname*{argmin}_u \\left\\{h(u)+\\frac{\\|u-v\\|_2^2}{2t}\\right\\}\\]这里要求 h 下半连续（lower semicontinuous, l.s.c.），未要求其有效域（effective domain）本身闭；例如 \\(h(u)=-\\log u\\) 在 \\(u>0\\) 有限、其余为 \\(+\\infty\\)，也是闭凸函数（closed convex function）。若 \\(h=\\delta_C\\)，则必须有 C 非空、闭、凸。",
+        "symbols": [
+          {
+            "symbol": "\\operatorname{prox}_{th}(v)",
+            "meaning": "Proximal operator · 输入 v 的近端点，是向量而不是最小值"
+          },
+          {
+            "symbol": "\\delta_C",
+            "meaning": "Indicator function · 集合的扩展值示性函数"
+          },
+          {
+            "symbol": "N_C(u)",
+            "meaning": "Normal cone · 法锥，满足 sᵀ(z−u)≤0 对所有 z∈C"
+          }
+        ],
+        "proof": [
+          {
+            "title": "1. 找到一个有限比较点 · Finite comparison",
+            "body": "适当性保证某个 u₀ 的 h 值有限，因此近端目标不是处处正无穷。",
+            "formula": "\\exists u_0\\in\\operatorname{dom}h: h(u_0)+\\frac1{2t}\\|u_0-v\\|_2^2<+\\infty",
+            "reason": "如果 C 为空，示性函数不适当，投影问题从这里就已经失败。"
+          },
+          {
+            "title": "2. 给 h 一个仿射下界 · Affine minorant",
+            "body": "有限维适当闭凸函数（proper closed convex function）有全局仿射下界（affine minorant），可由其上方图（epigraph）与某个同竖线下方点严格分离得到。",
+            "formula": "h(u)\\ge a^Tu+b\\quad\\forall u",
+            "reason": "分离法向的高度分量必须非零：上方图含同一横坐标的有限点，零高度分量无法严格分离该竖线下方点。"
+          },
+          {
+            "title": "3. 证明目标在无穷远增长 · Coercivity",
+            "body": "加入正二次距离项，线性下降最多是一阶量级。",
+            "formula": "h(u)+\\frac1{2t}\\|u-v\\|_2^2 \\ge a^Tu+b+\\frac1{2t}\\|u-v\\|_2^2 \\longrightarrow+\\infty",
+            "reason": "因此任意有限水平集（level set）有界，不会出现极小化序列逃往无穷。"
+          },
+          {
+            "title": "4. 用闭性得到存在，用强凸性得到唯一 · Existence and uniqueness",
+            "body": "近端目标下半连续，有限非空水平集闭且有界；其最小值可达。二次项使它 1/t-强凸（strong convexity）。",
+            "formula": "J(\\theta u+(1-\\theta)w) \\le\\theta J(u)+(1-\\theta)J(w) -\\frac{\\theta(1-\\theta)}{2t}\\|u-w\\|_2^2",
+            "reason": "若 u≠w 都最优，中间点会更好，产生矛盾。"
+          },
+          {
+            "title": "5. 写出次梯度最优性条件 · Optimality condition",
+            "body": "平方项处处光滑（smooth），凸次微分（subdifferential）求和规则适用。",
+            "formula": "u=\\operatorname{prox}_{th}(v) \\Longleftrightarrow 0\\in\\partial h(u)+\\frac{u-v}{t} \\Longleftrightarrow \\frac{v-u}{t}\\in\\partial h(u)",
+            "reason": "这个隐式关系是计算各种近端公式与证明稳定性的核心。"
+          },
+          {
+            "title": "6. 从两个最优性条件推出稳定性 · Monotonicity",
+            "body": "令 u=prox(v)、w=prox(z)。将两条次梯度（subgradient）下界相加，得到次梯度单调性（monotonicity）。",
+            "formula": "\\left\\langle\\frac{v-u}{t}-\\frac{z-w}{t},u-w\\right\\rangle \\ge 0",
+            "reason": "这是 h 凸性的直接后果，不是额外假设。"
+          },
+          {
+            "title": "7. 得到牢固非扩张关系 · Firm nonexpansiveness",
+            "body": "整理，再应用柯西不等式（Cauchy–Schwarz inequality）。",
+            "formula": "\\|u-w\\|_2^2\\le\\langle u-w,v-z\\rangle \\le \\|u-w\\|_2\\|v-z\\|_2",
+            "reason": "所以输出距离不大于输入距离；第一条比普通非扩张（nonexpansiveness）更强。"
+          },
+          {
+            "title": "8. 用示性函数恢复投影 · Projection special case",
+            "body": "在 C 外，目标为正无穷；在 C 内，只剩距离平方。",
+            "formula": "\\begin{aligned}&\\operatorname{prox}_{t\\delta_C}(v)=\\Pi_C(v)\\\\&v-\\Pi_C(v)\\in N_C(\\Pi_C(v))\\end{aligned}",
+            "reason": "正比例 t 不改变示性函数，因此投影结果与 t 无关。"
+          }
+        ],
+        "example": {
+          "problem": "先计算 \\(h(u)=u^2/2\\)、v=6、t=2 的近端点；再将 \\(v=(-2,3)\\) 投影到非负正交锥。",
+          "steps": [
+            "二次 h 的最优性为 \\(u+(u-6)/2=0\\)，故 u=2。",
+            "近端目标在 u=2 为 \\(2+16/4=6\\)；在 u=0 为 9，在 u=6 为 18。近端选择兼顾两项的 2。",
+            "对 \\(C=\\mathbb R_+^2\\)，每坐标距离独立最小化，负坐标截到零、正坐标保留，所以投影为 (0,3)。",
+            "\\(v-\\Pi_C(v)=(-2,0)\\)。对任意 z≥0，\\((-2,0)^T(z-(0,3))=-2z_1\\le0\\)，验证了法锥条件。"
+          ],
+          "answer": "二次惩罚产生收缩（contraction），示性函数产生投影；二者共享同一个近端最优性条件。"
+        },
+        "pitfalls": [
+          "函数闭不等于有效域一定闭；应检查扩展值函数的下半连续性。",
+          "非凸（nonconvex）集合的最近点可能不唯一；开集合的最近点可能根本不存在。",
+          "近端算子（proximal operator）返回一个点，不能把它与 Moreau 包络的最小目标值混用。"
+        ],
+        "checks": [
+          {
+            "question": "t 越大，距离惩罚越强还是越弱？",
+            "answer": "越弱，因为系数是 1/(2t)；但 h 是示性函数时，投影仍不受 t 影响。"
+          },
+          {
+            "question": "开区间 C=(0,1)，输入 v=2，有没有投影？",
+            "answer": "没有。距离下确界（infimum）在 1 处，但 1 不可行；这说明闭性（closedness）不可随意删除。"
+          }
+        ],
+        "animation": null,
+        "source": {
+          "label": "文再文等，第 8.1.1 节：邻近算子",
+          "url": "https://faculty.bicmr.pku.edu.cn/~wenzw/optbook/opt2.pdf"
+        }
+      },
+      {
+        "id": "m6-l2",
+        "title": "软阈值 · Soft thresholding",
+        "intuition": "绝对值在零点没有唯一斜率，而是允许一整段支撑斜率。只要输入对零的拉力落在这段范围里，零就能满足平衡条件，所以不是“数值小了就人为删掉”，而是零本来就是精确最优解。阈值之外则保留符号，并把幅度向零缩小。",
+        "formal": "取 \\(h(x)=\\lambda\\|x\\|_1\\)、\\(\\lambda>0\\)、\\(t>0\\)。其近端算子（proximal operator）逐坐标为软阈值（soft thresholding）：\n\n\\[S_{t\\lambda}(v)_i =\\operatorname{sign}(v_i) \\cdot\\max\\{|v_i|-t\\lambda,0\\}\\]\n\n约定 sign(0)=0。证明基于凸次梯度（subgradient）条件，阈值边界 \\(|v_i|=t\\lambda\\) 也输出零。",
+        "symbols": [
+          {
+            "symbol": "a=t\\lambda",
+            "meaning": "Threshold · 本次近端阈值"
+          },
+          {
+            "symbol": "S_a",
+            "meaning": "Soft-thresholding operator · 软阈值算子"
+          },
+          {
+            "symbol": "\\partial|u|",
+            "meaning": "Absolute-value subdifferential · u>0 为 {1}，u<0 为 {−1}，u=0 为 [−1,1]"
+          }
+        ],
+        "proof": [
+          {
+            "title": "1. 利用逐坐标可分性 · Separability",
+            "body": "平方距离与 ℓ₁ 范数（norm）都能写成各坐标之和，没有交叉项。",
+            "formula": "\\min_u\\sum_i\\left\\{\\lambda|u_i|+\\frac{(u_i-v_i)^2}{2t}\\right\\}",
+            "reason": "分别找到每个标量子问题的唯一解，拼接就是向量问题唯一解。"
+          },
+          {
+            "title": "2. 先写统一最优性条件 · Subgradient condition",
+            "body": "不用在零点硬凑一个普通导数。",
+            "formula": "0\\in\\lambda\\partial|u|+\\frac{u-v}{t}",
+            "reason": "三种符号情形只是这一个集合包含式的展开。"
+          },
+          {
+            "title": "3. 假设解在正半轴 · Positive branch",
+            "body": "此时次梯度为 1，解线性方程后必须检验正性。",
+            "formula": "u=v-t\\lambda>0\\quad\\Longleftrightarrow\\quad v>t\\lambda",
+            "reason": "候选不满足它的符号假设就必须丢弃。"
+          },
+          {
+            "title": "4. 假设解在负半轴 · Negative branch",
+            "body": "此时次梯度为 −1，得到另一条带符号条件的公式。",
+            "formula": "u=v+t\\lambda<0 \\Longleftrightarrow v<-t\\lambda",
+            "reason": "负数向零靠近意味着加一个正阈值，不能误写成继续减小。"
+          },
+          {
+            "title": "5. 检查零能否平衡 · Zero branch",
+            "body": "在零点，次梯度是一整个区间。",
+            "formula": "0\\in\\lambda[-1,1]-\\frac vt \\Longleftrightarrow |v|\\le t\\lambda",
+            "reason": "区间吸收一段连续输入，因而产生精确的零坐标。"
+          },
+          {
+            "title": "6. 合并三种情况 · Unified formula",
+            "body": "正半轴、负半轴和闭阈值区间覆盖所有实数。",
+            "formula": "S_a(v)=\\begin{cases}v-a,&v>a,\\\\0,&|v|\\le a,\\\\v+a,&v<-a.\\end{cases}",
+            "reason": "强凸性（strong convexity）保证边界没有隐藏的第二个解；分段公式连续拼接。"
+          },
+          {
+            "title": "7. 和平方惩罚做数学比较 · Quadratic penalty comparison",
+            "body": "若改为 h(u)=λu²/2，普通导数就能求解。",
+            "formula": "\\operatorname{prox}_{t\\lambda\\|\\cdot\\|_2^2/2}(v) = \\frac{v}{1+t\\lambda}",
+            "reason": "平方惩罚缩小每个非零数，但有限参数下一般不会把它变成精确零。"
+          }
+        ],
+        "example": {
+          "problem": "输入 \\(v=(3,-0.4,1,-2)\\)，λ=1、t=0.5，求近端点并核算目标。",
+          "steps": [
+            "阈值 a=0.5。逐坐标得到 \\(u=(2.5,0,0.5,-1.5)\\)。",
+            "\\(\\|u\\|_1=4.5\\)，差向量为 \\((-0.5,0.4,-0.5,0.5)\\)，平方和为 0.91。",
+            "因为 \\(1/(2t)=1\\)，近端目标为 \\(4.5+0.91=5.41\\)。输入 v 自身的目标为 \\(\\|v\\|_1=6.4\\)；全零点目标为 \\(\\|v\\|_2^2=14.16\\)。",
+            "第二坐标零点最优性可取次梯度 −0.8：\\(-0.8+(0-(-0.4))/0.5=0\\)，且 −0.8∈[−1,1]。"
+          ],
+          "answer": "第二坐标被精确清零；其他坐标保留符号并缩小 0.5。"
+        },
+        "pitfalls": [
+          "软阈值不是硬阈值：阈值之外也会缩小幅度，而不是原样保留。",
+          "阈值是 tλ，不能只把 λ 填进每一次不同步长（step size）的更新。",
+          "ℓ₁ 凸优化可产生稀疏（sparse）解，但不能无条件保证恢复某个真实稀疏信号或保证解唯一。"
+        ],
+        "checks": [
+          {
+            "question": "当 v=−0.5、a=0.5 时输出多少？",
+            "answer": "零，边界包含在 |v|≤a 的情形中。"
+          },
+          {
+            "question": "为何零点的次梯度区间与稀疏性有关？",
+            "answer": "一个区间的输入拉力都能被零点的合法次梯度抵消，所以零对应一段输入，而不只是单个输入。"
+          }
+        ],
+        "animation": "prox",
+        "source": {
+          "label": "文再文等，第 8.1.1 节 ℓ₁ 邻近算子与第 8.1.3 节 Lasso",
+          "url": "https://faculty.bicmr.pku.edu.cn/~wenzw/optbook/opt2.pdf"
+        }
+      },
+      {
+        "id": "m6-l3",
+        "title": "近端梯度 · Proximal gradient",
+        "intuition": "若把绝对值也线性化，就会丢掉零点的尖角。近端梯度（proximal gradient）只用梯度（gradient）近似 f，完整保留 h，再加一个控制步幅的平方项。这样一来，光滑（smooth）曲率负责安全下降，非光滑（nonsmooth）结构负责投影或清零；证明则延续上一模块的距离平方付账。",
+        "formal": "令 \\(F=f+h\\)，其中 f 在全空间凸且连续可微（continuously differentiable）、梯度 L-Lipschitz（L>0），h 适当闭凸，\\(\\operatorname*{argmin}F\\ne\\varnothing\\)。取 \\(x^0\\in\\operatorname{dom}h\\)，固定 \\(0<t\\le1/L\\)。定义：\n\n\\[x^{k+1} =\\operatorname{prox}_{th}(x^k-t\\nabla f(x^k))\\]\n\n则对整数 \\(k\\ge1\\)，\\(F(x^k)-F^*\\le\\|x^0-x^*\\|^2/(2tk)\\)。若 \\(h=\\delta_C\\)，这就是投影梯度（projected gradient）法。",
+        "symbols": [
+          {
+            "symbol": "F=f+h",
+            "meaning": "Composite objective · 完整复合目标，不能只监控 f"
+          },
+          {
+            "symbol": "G_t(x)=(x-x^+)/t",
+            "meaning": "Gradient mapping · 梯度映射，度量一次更新的固定点残量"
+          },
+          {
+            "symbol": "Q_t(u;x)",
+            "meaning": "Quadratic surrogate · 线性化 f 并保留 h 的二次模型"
+          }
+        ],
+        "proof": [
+          {
+            "title": "1. 建立保留非光滑结构的模型 · Composite upper model",
+            "body": "固定当前点 x，优化一个由线性预测、平方距离和原 h 组成的强凸（strong convexity）模型。",
+            "formula": "Q_t(u;x)=f(x) +\\nabla f(x)^T(u-x) +\\frac1{2t}\\|u-x\\|^2+h(u)",
+            "reason": "t≤1/L 时光滑上界保证 F(u)≤Qₜ(u;x)，而在 u=x 处模型与原目标相等。"
+          },
+          {
+            "title": "2. 配方得到更新公式 · Complete the square",
+            "body": "与 u 无关的常数不影响极小点。",
+            "formula": "x^+=\\operatorname*{argmin}_u Q_t(u;x) = \\operatorname{prox}_{th}\\bigl(x-t\\nabla f(x)\\bigr)",
+            "reason": "先走光滑梯度步，再用近端（proximal）结构修正，是同一个模型极小化的精确表达。"
+          },
+          {
+            "title": "3. 提取新点处的合法次梯度 · Valid subgradient",
+            "body": "设 g=∇f(x)，近端最优性给出 h 在 x⁺ 的次梯度（subgradient）。",
+            "formula": "s=\\frac{x-x^+}{t}-g\\in\\partial h(x^+)",
+            "reason": "评价点是新点 x⁺，不能误写为旧点 x 的次梯度。"
+          },
+          {
+            "title": "4. 分别控制光滑与非光滑项 · Two convexity bounds",
+            "body": "对任意 z∈dom h，用光滑上界和 f 的凸下界消去 f(x)，再用 h 的次梯度下界。",
+            "formula": "\\begin{aligned}&f(x^+)-f(z) \\le g^T(x^+-z)+\\frac L2\\|x^+-x\\|^2\\\\&h(x^+)-h(z)\\le s^T(x^+-z)\\end{aligned}",
+            "reason": "第一条同时使用了 f 的光滑性与凸性（convexity）；第二条使用 h 的凸性。"
+          },
+          {
+            "title": "5. 让梯度项抵消并展开内积 · Three-point inequality",
+            "body": "将 s+g=(x−x⁺)/t 代入两式之和。",
+            "formula": "F(x^+)-F(z) \\le\\frac{\\|x-z\\|^2-\\|x^+-z\\|^2}{2t} -\\left(\\frac1{2t}-\\frac L2\\right)\\|x^+-x\\|^2",
+            "reason": "恒等式 2⟨x−x⁺,x⁺−z⟩=‖x−z‖²−‖x⁺−z‖²−‖x−x⁺‖² 是代数核心。"
+          },
+          {
+            "title": "6. 先取 z=x 得到单调下降 · Descent",
+            "body": "完整地保留上一步两个平方项，再用 t≤1/L 简化。",
+            "formula": "F(x^+)\\le F(x) -\\left(\\frac1t-\\frac L2\\right)\\|x^+-x\\|^2 \\le F(x)-\\frac t2\\|G_t(x)\\|^2",
+            "reason": "下降针对完整 F，光滑损失 f 单独可能增加或减少。"
+          },
+          {
+            "title": "7. 再取 z=x* 得到距离预算 · Distance budget",
+            "body": "t≤1/L 使最后的扣除项非负，可以丢去。",
+            "formula": "F(x^{k+1})-F^* \\le \\frac{\\|x^k-x^*\\|^2-\\|x^{k+1}-x^*\\|^2}{2t}",
+            "reason": "最优点存在是假设，不是由 h 的近端子问题存在自动推出。"
+          },
+          {
+            "title": "8. 求和并调用单调性 · Last-iterate rate",
+            "body": "累计误差受初始距离控制；目标非增保证最后误差不超过累计平均。",
+            "formula": "k[F(x^k)-F^*]\\le\\sum_{j=1}^k[F(x^j)-F^*] \\le \\frac{\\|x^0-x^*\\|^2}{2t}",
+            "reason": "因此这是末次迭代函数值保证，不是只对平均迭代点的保证。"
+          },
+          {
+            "title": "9. 解释零梯度映射的含义 · Gradient mapping",
+            "body": "若 Gₜ(x)=0，新旧点相同，近端条件正好变成完整目标的最优性。",
+            "formula": "G_t(x)=0 \\Longleftrightarrow \\ 0\\in\\nabla f(x)+\\partial h(x) \\Longleftrightarrow \\ x\\in\\operatorname*{argmin}F",
+            "reason": "最后一处充分性依赖凸性；一般 Gₜ(x) 不是 F 在旧点的次梯度。"
+          },
+          {
+            "title": "10. 恢复约束算法 · Projected gradient",
+            "body": "令 h=δC，近端替换成投影。",
+            "formula": "x^{k+1}=\\Pi_C(x^k-t\\nabla f(x^k))",
+            "reason": "C 非空闭凸保证投影定义良好；每个新点都在 C 内，因此不需要事后再修正可行性。"
+          }
+        ],
+        "example": {
+          "problem": "取 \\(f(x)=\\tfrac12(x-3)^2\\)、\\(h(x)=|x|\\)，从 x⁰=0 用 t=0.5 更新。",
+          "steps": [
+            "L=1，步长（step size）安全。更新为 \\(x^{k+1}=S_{0.5}(0.5x^k+1.5)\\)。",
+            "前 3 步依次为 1、1.5、1.75；之后都为正，因此递推为 \\(x^{k+1}=0.5x^k+1\\)，极限为 2。",
+            "完整目标从 4.5 降到 3、2.625、2.53125；最优目标 \\(F(2)=2.5\\)。第 3 步实际误差为 0.03125。",
+            "速率界为 \\(\\|0-2\\|^2/(2\\times0.5k)=4/k\\)。最优点处光滑梯度为 −1，并不为零；它被 h 的次梯度 +1 抵消。"
+          ],
+          "answer": "近端梯度允许最优点的光滑梯度非零，正确停止条件是完整最优性或零梯度映射。"
+        },
+        "pitfalls": [
+          "只监控平方损失 f 可能误判算法；理论下降的是 F=f+h。",
+          "梯度映射一般不是旧点的次梯度，例如 f=0、h=|x|、x=0.2、t=1 时 G=0.2，而旧点次梯度只有 1。",
+          "近端子问题可解不等于原始复合问题一定有最优解；速率需要另行假设最优点存在。"
+        ],
+        "checks": [
+          {
+            "question": "h=0 时，这个算法与梯度映射变成什么？",
+            "answer": "算法退化为普通梯度下降（gradient descent），Gₜ(x)=∇f(x)。"
+          },
+          {
+            "question": "为何投影梯度在边界最优点可能梯度非零？",
+            "answer": "投影会消去不可行的下降位移；固定点条件是 −∇f(x) 属于法锥（normal cone），而不必是零。"
+          }
+        ],
+        "animation": "prox",
+        "source": {
+          "label": "文再文等，第 8.1.2 与第 8.1.4 节：近似点梯度、梯度映射与收敛性",
+          "url": "https://faculty.bicmr.pku.edu.cn/~wenzw/optbook/opt2.pdf"
+        }
+      },
+      {
+        "id": "m6-l4",
+        "title": "Lasso：更新与证书 · Updates & certificates",
+        "intuition": "Lasso 把拟合误差和参数绝对值一起优化。近端（proximal）步骤用 A 与 Aᵀ 计算梯度（gradient），再逐坐标软阈值（soft thresholding）；对偶则把残差（residual）转成一个满足幅度约束的向量。两条路线相遇时，不仅有一个看起来稀疏（sparse）的答案，还有可核查的误差上界。",
+        "formal": "给定 \\(A\\in\\mathbb R^{m\\times n}\\)、\\(b\\in\\mathbb R^m\\)、\\(\\lambda>0\\)，最小化 \\(F(x)=\\tfrac12\\|Ax-b\\|_2^2+\\lambda\\|x\\|_1\\)。由于 \\(F(x)\\ge\\lambda\\|x\\|_1\\)，目标强制且连续，最优解存在；若 A 满列秩（full column rank），目标强凸（strong convexity）且解唯一，否则不保证唯一。可取 \\(L=\\|A\\|_2^2\\)；A 非零时用 \\(0<t\\le1/L\\)，A=0 时解直接为零。",
+        "symbols": [
+          {
+            "symbol": "r=b-Ax",
+            "meaning": "Residual · 本课采用观测减预测的残差符号"
+          },
+          {
+            "symbol": "y",
+            "meaning": "Dual variable · 对偶变量，与残差同维"
+          },
+          {
+            "symbol": "D(y)=b^Ty-\\|y\\|_2^2/2",
+            "meaning": "Dual objective · 对偶目标，仅在 ‖Aᵀy‖∞≤λ 时提供合法下界"
+          }
+        ],
+        "proof": [
+          {
+            "title": "1. 求出光滑梯度并核对曲率 · Smooth curvature",
+            "body": "对平方残差使用链式法则（chain rule）。",
+            "formula": "\\begin{aligned}&\\nabla f(x)=A^T(Ax-b)\\\\&\\nabla^2f=A^TA\\\\&L=\\lambda_{\\max}(A^TA)=\\|A\\|_2^2\\end{aligned}",
+            "reason": "L 是矩阵谱范数（norm）的平方，不能把任意一个矩阵元素当成 L。"
+          },
+          {
+            "title": "2. 写出可执行更新 · ISTA update",
+            "body": "将光滑（smooth）步与 ℓ₁ 近端组合。",
+            "formula": "x^{k+1}=S_{t\\lambda}\\left(x^k-tA^T(Ax^k-b)\\right)",
+            "reason": "可以只提供矩阵—向量乘法接口，无需显式形成 AᵀA。"
+          },
+          {
+            "title": "3. 写出坐标最优性，解释零坐标 · Coordinate optimality",
+            "body": "完整次梯度（subgradient）条件为 Aᵀ(Ax−b)+λs=0。以 r=b−Ax 表示。",
+            "formula": "\\begin{aligned}&x_i\\ne0\\Rightarrow (A^Tr)_i=\\lambda\\operatorname{sign}(x_i)\\\\&x_i=0\\Rightarrow |(A^Tr)_i|\\le\\lambda\\end{aligned}",
+            "reason": "非零坐标处是等式，零坐标处是区间条件。边界等号也允许零坐标。"
+          },
+          {
+            "title": "4. 引入残差变量得到等式约束 · Residual constraint",
+            "body": "让平方项与 ℓ₁ 项分离，并固定本课的符号约定。",
+            "formula": "\\min_{x,r}\\frac12\\|r\\|^2+\\lambda\\|x\\|_1\\qquad\\text{s.t.}\\quad b-Ax-r=0",
+            "reason": "x 与 r 都在全空间；等式带 −I 的系数保证独立残差维度。"
+          },
+          {
+            "title": "5. 形成拉格朗日函数并消去 r · Eliminate residual",
+            "body": "等式乘子（equality multiplier） y 不受符号限制；对 r 完成平方。",
+            "formula": "\\begin{aligned}&\\mathcal L=\\frac12\\|r\\|^2+\\lambda\\|x\\|_1 +y^T(b-Ax-r)\\\\&\\inf_r\\left(\\frac12\\|r\\|^2-y^Tr\\right) =-\\frac12\\|y\\|^2\\end{aligned}",
+            "reason": "极小点 r=y，因而最优对偶变量与最优残差相等。"
+          },
+          {
+            "title": "6. 消去 x 时得到对偶约束 · Dual constraint",
+            "body": "逐坐标比较线性收益与绝对值成本，或使用 ℓ₁ 共轭（convex conjugate）。",
+            "formula": "\\inf_x\\{\\lambda\\|x\\|_1-(A^Ty)^Tx\\} =\\begin{cases}0,&\\|A^Ty\\|_\\infty\\le\\lambda,\\\\-\\infty,&\\text{otherwise}.\\end{cases}",
+            "reason": "某个系数超过 λ 时，沿该坐标放大就能使下确界（infimum）趋向负无穷。"
+          },
+          {
+            "title": "7. 得到对偶并说明零间隙可达 · Strong duality",
+            "body": "这个等式约束凸问题的目标在全空间有限，且等式可行，因此满足相应 Slater 版本。",
+            "formula": "\\begin{aligned}&\\max_{\\|A^Ty\\|_\\infty\\le\\lambda}D(y)\\\\&D(y)=b^Ty-\\frac12\\|y\\|^2\\\\&F^*=D^*\\end{aligned}",
+            "reason": "这里既有原始解，也有对偶解；弱对偶（weak duality）证书本身则不必等到最优时才可使用。"
+          },
+          {
+            "title": "8. 把任意残差缩放成对偶可行点 · Dual feasible scaling",
+            "body": "算 M=‖Aᵀr‖∞。若 M≤λ，直接用 y=r；否则缩到边界。",
+            "formula": "\\begin{aligned}&y=\\alpha r\\\\&\\alpha=\\begin{cases}1,&M\\le\\lambda,\\\\\\lambda/M,&M>\\lambda.\\end{cases}\\end{aligned}",
+            "reason": "此写法在 M=0 时不会除零；它给出可行候选，不宣称沿射线必为最佳对偶点。"
+          },
+          {
+            "title": "9. 用原始—对偶间隙停止 · Gap stopping rule",
+            "body": "所有 x 都是原始无约束问题的可行点；对偶点需要满足刚才的幅度约束。",
+            "formula": "0\\le F(x)-F^*\\le F(x)-D(y)",
+            "reason": "目标变化很小可能只是步长（step size）很小；合法间隙直接控制次优程度。"
+          },
+          {
+            "title": "10. 用零点检验建立参数尺度感 · Zero-solution threshold",
+            "body": "代入 x=0、r=b，KKT 条件立即给出所有系数都归零的阈值。",
+            "formula": "x^*=0 \\Longleftrightarrow \\|A^Tb\\|_\\infty\\le\\lambda",
+            "reason": "这个阈值也说明列缩放会影响惩罚含义，标准化数据时必须考虑参数解释。"
+          }
+        ],
+        "example": {
+          "problem": "取 \\(A=\\operatorname{diag}(1,2)\\)、\\(b=(3,0.4)\\)、λ=1，从 x⁰=(0,0) 用 t=1/4 做一步，并验证精确解。",
+          "steps": [
+            "L=4。初始梯度为 (−3,−0.8)，光滑步到 (0.75,0.2)，阈值 0.25，因此 \\(x^1=(0.5,0)\\)。",
+            "残差 \\(r^1=(2.5,0.4)\\)。原始值为 \\(F(x^1)=\\tfrac12(6.25+0.16)+0.5=3.705\\)。",
+            "\\(A^Tr^1=(2.5,0.8)\\)，M=2.5。缩放 α=0.4 得 \\(y=(1,0.16)\\)，满足 \\(A^Ty=(1,0.32)\\) 的无穷范数（infinity norm）为 1。",
+            "对偶值 \\(D(y)=3+0.064-\\tfrac12(1+0.0256)=2.5512\\)。故一步后的目标误差（objective gap）至多 \\(3.705-2.5512=1.1538\\)。",
+            "精确解 \\(x^*=(2,0)\\) 的残差为 (1,0.4)，转置乘积 (1,0.8) 满足：非零第一坐标等于 λ，零第二坐标绝对值小于 λ。",
+            "\\(F(x^*)=\\tfrac12(1+0.16)+2=2.58\\)，而 \\(D((1,0.4))=3+0.16-0.58=2.58\\)，零间隙（zero duality gap）认证最优。一步实际误差为 1.125，小于刚才的证书 1.1538。"
+          ],
+          "answer": "最优解 (2,0)，最优值 2.58。一次近端梯度（proximal gradient）就识别了零坐标；对偶间隙（duality gap）则独立量化了剩余优化误差。"
+        },
+        "pitfalls": [
+          "残差定义为 Ax−b 或 b−Ax 都可以，但对偶目标和 KKT 符号必须一致。",
+          "不能把任意残差直接当作对偶可行（dual feasibility）点；先检查 ‖Aᵀr‖∞。",
+          "目标中的平方误差若改为样本平均而 λ 不变，问题的正则强度已改变。",
+          "稀疏解的优化正确性与真实信号恢复正确性是不同保证。"
+        ],
+        "checks": [
+          {
+            "question": "本例 λ 至少多大时，零向量就是最优解？",
+            "answer": "\\(\\|A^Tb\\|_\\infty=\\|(3,0.8)\\|_\\infty=3\\)，所以 λ≥3。"
+          },
+          {
+            "question": "若 A 不满列秩，Lasso 仍一定有解吗？",
+            "answer": "当 λ>0 时有，因为 ℓ₁ 惩罚给出强制性（coercivity）；但唯一性不能仅由这一点推出。"
+          }
+        ],
+        "animation": "prox",
+        "source": {
+          "label": "文再文等，第 5.4.3 节 Lasso 对偶与第 8.1.3 节近似点梯度应用",
+          "url": "https://faculty.bicmr.pku.edu.cn/~wenzw/optbook/opt2.pdf"
+        }
+      }
+    ],
+    "takeaways": [
+      "近端算子（proximal operator）是一个精确定义的最优化问题，名称不意味着近似求解。",
+      "示性函数（indicator function）的近端（proximal）就是投影；ℓ₁ 的近端就是软阈值（soft thresholding）。",
+      "复合目标的最优性用零梯度映射（gradient mapping）或零次梯度（subgradient）检查，不能要求光滑（smooth）部分梯度（gradient）为零。",
+      "Lasso 更新与对偶证书只需 A、Aᵀ 乘法和逐坐标阈值，适合利用大规模结构。"
+    ]
+  }
+]

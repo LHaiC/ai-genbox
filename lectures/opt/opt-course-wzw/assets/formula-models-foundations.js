@@ -1,0 +1,83 @@
+/* Formula-linked finite examples. Pure geometry; no renderer or DOM dependencies.
+ * [a,b,z] means mathematical axes, never Three.js world coordinates. */
+(function(root){'use strict';
+const C={blue:'#225b9b',orange:'#af4d20',green:'#25735b',purple:'#7952a3',gray:'#657681'};
+const specs={
+'m1-l1':['模型与存在性',7,['可行点与全域比较','成本下界证书','严格约束的不可达极限','紧窗口中的子列','最小化序列','紧水平集','窗口外的成本界']],
+'m1-l2':['范数与内积',6,['非负平方与投影','柯西差额','三角形长度','同一向量的三种范数','矩阵作用于单位圆','单位球上的最陡方向']],
+'m1-l3':['梯度与展开',7,['直线路径','路径导数','二次变化的积分','线性项与精确余项','精确二阶展开','负梯度步长','二次模型无高阶误差']],
+'m1-l4':['最小二乘',8,['残差平方变化','变量空间梯度','Gram 方向曲率','零空间方向','法方程可解实例','法方程最优证书','全部最优解','两个主方向曲率']],
+'m2-l1':['凸集',7,['仿射线段','非负半空间','单纯形交集','仿射原像实例','圆盘中的弦','三个点的凸组合','圆周的中点反例']],
+'m2-l2':['凸函数与上方图',7,['上方图中的弦','图像端点恢复凸弦','范数的凸弦','平方弦间隙','下水平区间','受限有效域','三次函数反例']],
+'m2-l3':['一阶等价',7,['凸弦上界','割线斜率','割线趋向切线','同一切点支撑两端','加权抵消线性项','两个点的梯度单调','导数变化恢复下界']],
+'m2-l4':['二阶与强凸',8,['对称增量','方向二阶曲率','切平面差额','减去统一曲率','强凸二次下界','强凸弦间隙','严格凸但非强凸','最优值距离界']],
+'m2-l5':['保凸运算',8,['非负加权和','仿射复合','逐点最大值','单调凸复合','近似内层最优点','联合凸插值','精确消元脊线','最小值不保凸']],
+'m3-l1':['局部与全局最优',7,['可行线段','近处仍有改进','可行弦的增量','梯度垂直可行线','全局最优证书','无约束零梯度','边界非零梯度']],
+'m3-l2':['次梯度',8,['零斜率支撑','可微点唯一斜率','绝对值非零分支','零点右侧斜率限制','零点完整支撑区间','逐坐标切片','坐标支撑相加','边界次微分为空']],
+'m3-l3':['光滑加非光滑',7,['两个支撑斜率抵消','总目标全局下界','最优点沿线段比较','惩罚弦上界','损失梯度支撑惩罚','零坐标抵消区间','精确软阈值']],
+'m3-l4':['欧氏投影',8,['可行集与有界搜索','最近点取得','中点严格改善','外法向与可行方向','距离平方展开','勾股不等式','半空间法向校正','内外统一公式']],
+'m3-l5':['法锥与非扩张',8,['边界外法锥','内点法锥仅零','梯度与法向平衡','投影固定点','两组投影条件','牢固非扩张','距离不放大','投影梯度映射']]
+};
+const catalog=Object.fromEntries(Object.entries(specs).map(([id,s])=>[id,{title:s[0],proofCount:s[1],stages:s[2],parameter:{min:0,max:1,step:.01,value:.25,label:'实例参数 θ（0 到 1）'}}]));
+function sample(f,a,b,n=72){return Array.from({length:n+1},(_,i)=>f(a+(b-a)*i/n));}
+function model(id,i,f,domain,objective,axes){return {key:'formula-'+id,title:specs[id][2][i],objective,description:objective,domain,axisLabels:axes||['x₁','x₂','f(x)'],surfaces:f?[{name:'本步实例函数',f,color:C.blue,opacity:.6}]:[],paths:[],points:[],solids:[],planes:[],arrows:[],metrics:[],data:{},proofIndex:i,note:'这是当前公式的具体有限维实例；图像与有限采样不是全域定理的证明。请结合本步公式及假设阅读。',scaleNote:'坐标按标注的数学量绘制；旋转不改变公式，屏幕距离不代表数学距离。',axisMapping:'模型坐标 [第一坐标,第二坐标,高度]；引擎映射 [x,height,−y]。'};}
+function p(m,a,label,c='blue'){m.points.push({position:a,label,color:C[c]});}
+function line(m,ps,label,c='orange',dashed=false){m.paths.push({points:ps,label,color:C[c],dashed});}
+function arrow(m,a,b,label,c='purple'){m.arrows.push({from:a,to:b,label,color:C[c]});}
+function polygon(m,ps,label,c='green'){m.solids.push({vertices:ps,faces:ps.slice(2).map((_,i)=>[0,i+1,i+2]),label,color:C[c],opacity:.22});}
+function surface(m,f,name,c='orange'){m.surfaces.push({f,name,color:C[c],opacity:.3});}
+function graph(m,f,a,b,label,c='blue'){line(m,sample(x=>[x,0,f(x)],a,b),label,c);}
+function metric(m,label,value){m.metrics.push({label,value});}
+function disk(m,r=1,c=[0,0]){const rim=sample(t=>[c[0]+r*Math.cos(t),c[1]+r*Math.sin(t),0],0,2*Math.PI);polygon(m,rim,'闭圆盘');line(m,rim,'圆盘边界','green');}
+function get(id,proofIndex=0,parameter=.25){if(!specs[id])return null;const i=Math.max(0,Math.min(specs[id][1]-1,Math.floor(Number(proofIndex)||0))),t=Math.max(0,Math.min(1,Number.isFinite(Number(parameter))?Number(parameter):.25));let m,f;
+if(id==='m1-l1'){
+ f=(x,y)=>2*x+y;m=model(id,i,f,[[0,4],[0,6.2]],'原例：min 2x₁+x₂，x₁,x₂≥0，x₁+x₂≥3。');polygon(m,[[0,3,0],[3,0,0],[4,0,0],[4,5,0],[0,5,0]],'可行集的有限窗口');line(m,[[0,3,3],[3,0,6]],'活跃边界上的成本','green');p(m,[0,3,3],i===2?'不可行极限（严格版）':'x*=(0,3)','green');
+ if(i===2){const eps=.05+1.95*t;line(m,[[0,3,3],[0,5,5]],'严格版：仅 x₂>3 部分可行','orange',true);p(m,[0,3+eps,3+eps],'可行近似点');metric(m,'距下确界的成本差',eps);m.note+=' 本步改为严格约束 x₁+x₂>3，绿色极限点不是最优解。';}
+ else if(i>=3&&i<=4){const seq=[1,2,4,8,16,32].map(k=>[0,3+1/k,3+1/k]);line(m,seq,'最小化序列','purple');seq.forEach((a,j)=>p(m,a,'k='+[1,2,4,8,16,32][j]));m.note+=' 此实例序列收敛；一般存在性还需正文的紧性与连续性假设。';}
+ else {surface(m,()=>3,'成本全局下界 3','orange');if(i>=5)polygon(m,[[0,3,0],[3,0,0],[0,6,0]],'水平集 K：2x₁+x₂≤6（窗口外仍有顶点）');const a=[t*3,3-t*3];p(m,[...a,f(...a)],'边界检验点');metric(m,'f(x)−3',f(...a)-3);}
+}else if(id==='m1-l2'){
+ m=model(id,i,null,[[-5,7],[-5,6]],'原例 x=(3,−4)，A=diag(2,1)，g=(3,4)；长度与方向均在底面。',['第一分量','第二分量','辅助高度']);
+ if(i<3){const u=[3,-4],v=[2,0],a=-1+4*t,q=[u[0]-a*v[0],u[1]-a*v[1]];arrow(m,[0,0,0],[...u,0],'u=(3,−4)','blue');arrow(m,[0,0,0],[...v,0],'v=(2,0)','green');if(i===2){arrow(m,[...u,0],[5,-4,0],'平移后的 v','green');line(m,[[0,0,0],[5,-4,0]],'u+v','purple');metric(m,'‖u‖+‖v‖−‖u+v‖',7-Math.sqrt(41));}else{p(m,[a*2,0,0],'a v');line(m,[[...u,0],[a*2,0,0]],'u−a v','purple');metric(m,'‖u−a v‖²',q[0]**2+q[1]**2);metric(m,'最佳 a=(uᵀv)/‖v‖²',1.5);}}
+ else if(i===3){p(m,[3,-4,0],'x=(3,−4)');line(m,[[0,0,0],[3,0,0],[3,-4,0]],'ℓ₁ 路程 7');line(m,[[0,0,0],[3,-4,0]],'ℓ₂ 距离 5','blue');polygon(m,[[-4,-4,0],[4,-4,0],[4,4,0],[-4,4,0]],'ℓ∞ 球半径 4');m.metrics=[{label:'ℓ₁',value:7},{label:'ℓ₂',value:5},{label:'ℓ∞',value:4}];}
+ else {disk(m);const d=[Math.cos(2*Math.PI*t),Math.sin(2*Math.PI*t)];if(i===4){line(m,sample(a=>[2*Math.cos(a),Math.sin(a),0],0,2*Math.PI),'A 的单位圆像','orange');arrow(m,[0,0,0],[...d,0],'单位输入 d','blue');arrow(m,[0,0,0],[2*d[0],d[1],0],'Ad');metric(m,'‖Ad‖',Math.hypot(2*d[0],d[1]));}else{m.axisLabels=['方向分量 d₁','方向分量 d₂','方向导数 gᵀd'];surface(m,(x,y)=>3*x+4*y,'方向导数 gᵀd');p(m,[-.6,-.8,-5],'最陡单位方向');p(m,[...d,3*d[0]+4*d[1]],'检验方向');metric(m,'最小方向导数',-5);}}
+}else if(id==='m1-l3'){
+ f=(x,y)=>x*x+2*y*y;m=model(id,i,f,[[-1.5,2],[-3.5,2]],'原例 f=x₁²+2x₂²，x=(1,1)，g=(2,4)，h=−θg。');const h=[-2*t,-4*t],z=[1+h[0],1+h[1]],lin=3-20*t,rem=36*t*t;
+ p(m,[1,1,3],'起点 x');line(m,sample(s=>{const a=1+s*h[0],b=1+s*h[1];return[a,b,f(a,b)];},0,1),'φ(s)=f(x+sh)','purple');p(m,[...z,f(...z)],'x+h');if(i>=1){surface(m,(a,b)=>3+2*(a-1)+4*(b-1),'一阶切平面');arrow(m,[1,1,0],[...z,0],'h=−θg');}if(i>=2)line(m,[[...z,lin],[...z,f(...z)]],'积分余项 = 36θ²','green');m.data={t,h,linearChange:-20*t,remainder:rem,change:-20*t+rem};metric(m,'线性变化',-20*t);metric(m,'二阶余项',rem);metric(m,'目标变化',-20*t+rem);m.note+=' θ 是步长，路径参数 s∈[0,1]。二次实例积分余项精确；θ∈(0,5/9) 才严格下降。';
+}else if(id==='m1-l4'){
+ const rankDef=i===3||i===4||i===6;f=rankDef?(x,y)=>(x+y-2)**2/2:(x,y)=>(x-1)**2/2+2*(y-1)**2;m=model(id,i,f,[[-1,3],[-1,3]],rankDef?'原例 A=(1 1)，b=2；f=½(x₁+x₂−2)²。':'原例 A=diag(1,2)，b=(1,2)；f=½(x₁−1)²+2(x₂−1)²。');p(m,[1,1,0],'法方程解');const d=[Math.cos(2*Math.PI*t),Math.sin(2*Math.PI*t)],curv=rankDef?(d[0]+d[1])**2:d[0]**2+4*d[1]**2;
+ if(rankDef){line(m,[[-1,3,0],[3,-1,0]],'全部最优点 x₁+x₂=2','green');arrow(m,[1,1,0],[2,0,0],'ker A 方向 (1,−1)');m.note+=' 仅此秩亏实例有一整条最优直线；另一个满列秩原例唯一。';}
+ else{line(m,sample(s=>[1+s*d[0],1+s*d[1],f(1+s*d[0],1+s*d[1])],-1.5,1.5),'方向二次截面','purple');if(i<2){const x=[0,0],h=[1+t,1-t];p(m,[...x,f(...x)],'x');p(m,[...h,f(...h)],'x+h');arrow(m,[0,0,0],[-.25,-1,0],'¼∇f(x)，梯度=(−1,−4)');}if(i===7){metric(m,'λmin',1);metric(m,'λmax',4);}}
+ metric(m,'单位方向 dᵀAᵀAd',curv);m.data={rankDeficient:rankDef,d,curvature:curv};
+}else if(id==='m2-l1'){
+ m=model(id,i,null,[[-1.6,2],[-1.6,2]],'变量平面中的凸集；θ 是凸组合权重。',['x₁','x₂','辅助高度']);if(i<4){line(m,[[0,1,0],[1,0,0]],'C：非负且分量和为 1','green');p(m,[1,0,0],'x');p(m,[0,1,0],'y');p(m,[1-t,t,0],'(1−θ)x+θy','orange');if(i===1||i===2)polygon(m,[[0,0,0],[2,0,0],[2,2,0],[0,2,0]],'非负象限的窗口');if(i===3){line(m,[[0,1,1],[1,0,1]],'仿射映射 x↦x₁+x₂ 的值恒为 1','purple');m.note+=' 仿射原像实例取 A=(1 1)，D={1}，再与非负象限相交。';}metric(m,'分量和',1);}
+ else{if(i!==6)disk(m);else line(m,sample(a=>[Math.cos(a),Math.sin(a),0],0,2*Math.PI),'仅圆周 D：‖x‖=1','green');line(m,[[-1,0,0],[1,0,0]],'两端点的弦');p(m,[-1+2*t,0,0],i===6?'内点通常不在圆周':'圆盘内的混合点');if(i===5){polygon(m,[[1,0,0],[-.5,.8,0],[-.5,-.8,0]],'三个点的凸包');p(m,[0,0,0],'等权重重心');}if(i===6){p(m,[0,0,0],'中点不属于 D','purple');m.note+=' 圆周不是圆盘；反例只需一对端点。';}}
+}else if(id==='m2-l2'){
+ const cubic=i===6,norm=i===2,restricted=i===5;f=cubic?x=>x**3:norm?x=>Math.abs(x):x=>x*x;const lo=cubic?-2:restricted?0:norm?-1.3:-.5,hi=cubic?.2:restricted?1:2.3;m=model(id,i,(x,y)=>f(x),[[lo,hi],[-.25,.25]],cubic?'反例 f(x)=x³：下水平集是区间，但函数非凸。':restricted?'F(x)=x²+δ[0,1](x)；只绘有限有效域 [0,1]。':norm?'一维范数 f(x)=|x|。':'原例 f(x)=x²，端点 0、2，θ=1/4 时 gap=3/4。',['x','展示厚度（非变量）','f(x)']);let a=cubic?-2:norm?-1:0,b=cubic?0:restricted?1:norm?1:2,z=(1-t)*a+t*b,ch=(1-t)*f(a)+t*f(b);graph(m,f,lo,hi,'函数图像');line(m,[[a,0,f(a)],[b,0,f(b)]],'端点弦','orange');p(m,[z,0,f(z)],'混合点函数值');line(m,[[z,0,f(z)],[z,0,ch]],'弦 − 函数','purple');if(i===0){line(m,[[a,0,f(a)+1],[b,0,f(b)+1]],'上方图内更高的弦','green');}if(i===4){line(m,[[-.5,0,1],[1,0,1]],'水平线 α=1','green');line(m,[[-.5,0,0],[1,0,0]],'窗口内下水平集 x²≤1','green');}metric(m,'弦间隙',ch-f(z));m.data={a,b,t,z,gap:ch-f(z)};m.note+=' 第二轴仅给曲线可见厚度，不是额外优化变量；无穷值不画成有限高度。';
+}else if(id==='m2-l3'){
+ f=x=>x*x;m=model(id,i,(x,y)=>f(x),[[-2.3,2],[-.3,.3]],'原例 f(x)=x²，在 x=1 支撑，端点 y=−2；f(y)−(2y−1)=9。',['输入 u','展示厚度（非变量）','f(u)']);const a=1,b=-2,z=a+t*(b-a),s=Math.max(.01,t),sec=a+s*(b-a),slope=a+sec,anchor=i===3||i===4?z:a;
+ graph(m,f,-2.3,2,'f(u)=u²');surface(m,(u,v)=>2*anchor*u-anchor*anchor,'当前切线的薄片');p(m,[anchor,0,f(anchor)],'切点');line(m,[[a,0,1],[b,0,4]],'凸弦');if(i<3){line(m,[[a,0,1],[sec,0,f(sec)]],'缩短割线','purple');metric(m,'割线斜率',slope);metric(m,'起点导数',2);}else{[a,b].forEach(u=>line(m,[[u,0,2*anchor*u-anchor*anchor],[u,0,f(u)]],'支撑差额','green'));metric(m,'加权位移抵消',(1-t)*(a-z)+t*(b-z));}if(i>=5)metric(m,'(f′(y)−f′(x))(y−x)',18);m.data={a,b,z,t,anchor};
+}else if(id==='m2-l4'){
+ if(i===6){m=model(id,i,(x,y)=>x**4,[[-1.5,1.5],[-.3,.3]],'原例 g(x)=x⁴ 严格凸，但 g″(0)=0，不能全域 μ-强凸（μ>0）。',['x','展示厚度（非变量）','g(x)']);graph(m,x=>x**4,-1.5,1.5,'x⁴');p(m,[0,0,0],'零曲率点');metric(m,'g″(0)',0);m.note+=' 唯一性不蕴含存在；另一个原例 eˣ 的下确界 0 不取得。有限窗口不能证明其全域曲率下界不存在。';}
+ else{f=(x,y)=>.5*x*x+2*y*y;m=model(id,i,f,[[-2,2],[-2,2]],'原例 f=½x₁²+2x₂²，H=diag(1,4)，μ=1。');const d=[Math.cos(2*Math.PI*t),Math.sin(2*Math.PI*t)],curv=d[0]**2+4*d[1]**2;if(i<3){line(m,sample(s=>[s*d[0],s*d[1],f(s*d[0],s*d[1])],-1.5,1.5),'方向截面','purple');p(m,[...d,f(...d)],'x+d');p(m,[-d[0],-d[1],f(...d)],'x−d');metric(m,'对称增量 = dᵀHd',curv);}else if(i===3){surface(m,(x,y)=>1.5*y*y,'q=f−½‖x‖²','green');m.note+=' q 在 x₁ 方向平坦但仍凸。';}else{surface(m,(x,y)=>(x*x+y*y)/2,'μ=1 的二次下界','orange');const a=[1,-1],b=[-1,1],z=a.map((v,j)=>(1-t)*v+t*b[j]);p(m,[...z,f(...z)],'混合点');if(i===5)line(m,[[...a,f(...a)],[...b,f(...b)]],'强凸弦','green');if(i===7){p(m,[0,0,0],'x*');metric(m,'‖x−x*‖',Math.hypot(...z));metric(m,'sqrt(2 gap / μ)',Math.sqrt(2*f(...z)));}}m.data={mu:1,d,curvature:curv};}
+}else if(id==='m2-l5'){
+ if(i>=4&&i<=6){f=(x,y)=>(x-y)**2+y*y;m=model(id,i,f,[[-2,2],[-2,2]],'原例 F(x,y)=(x−y)²+y²；y*=x/2，v(x)=x²/2。',['保留变量 x','消元变量 y','F(x,y)']);line(m,sample(x=>[x,x/2,x*x/2],-2,2),'精确内层最优脊线','green');const e=i===6?0:t,x=-1+2*t,y=x/2+e;p(m,[x,y,f(x,y)],'内层近似点');line(m,sample(v=>[x,v,f(x,v)],-2,2),'固定 x 的内层问题','purple');metric(m,'F−v=2(y−x/2)²',2*e*e);if(i===5)line(m,[[-1,-.5+e,f(-1,-.5+e)],[1,.5+e,f(1,.5+e)]],'同步插值两变量');m.data={x,y,epsilon:2*e*e};}
+ else{f=i===0?(x,y)=>.5*(x-1)**2+t*Math.abs(x):i===1?(x,y)=>(2*x-1)**2:i===2?(x,y)=>Math.max((x-1)**2,(x+1)**2):i===3?(x,y)=>Math.exp(x*x):(x,y)=>Math.min((x-1)**2,(x+1)**2);m=model(id,i,f,[[-1.6,1.6],[-.25,.25]],['实例：½(x−1)²+θ|x|，θ≥0。','实例：凸平方函数与仿射 2x−1 复合。','实例：max{(x−1)²,(x+1)²}。','实例：exp(x²)，外函数凸且单调递增。','','','','反例：q=min{(x−1)²,(x+1)²}，q(±1)=0，q(0)=1。'][i],['x','展示厚度（非变量）','函数值']);graph(m,x=>f(x,0),-1.6,1.6,'运算后的函数');if(i===2||i===7){surface(m,(x,y)=>(x-1)**2,'第一个凸函数','orange');surface(m,(x,y)=>(x+1)**2,'第二个凸函数','purple');}if(i===7){line(m,[[-1,0,0],[1,0,0]],'端点弦');p(m,[0,0,1],'中点违反凸性');}}
+}else if(id==='m3-l1'){
+ if(i===6){f=x=>x*x;m=model(id,i,(x,y)=>f(x),[[1,3],[-.25,.25]],'正文边界例：min x²，x≥1；x*=1，f′(1)=2。',['x≥1','展示厚度（非变量）','f(x)']);surface(m,(x,y)=>1+2*(x-1),'边界支撑线');p(m,[1,0,1],'边界最优');metric(m,'f′(1)(y−1)，y=1+2θ',4*t);}
+ else{f=(x,y)=>(x*x+y*y)/2;m=model(id,i,f,[[-1,3],[-1,3]],i===5?'全空间对照：min ½‖x‖²，唯一最优原点且梯度为零。':'原例 min ½‖x‖²，约束 x₁+x₂=2；x*=(1,1)。');if(i===5)p(m,[0,0,0],'全空间最优');else{line(m,sample(a=>[1+a,1-a,1+a*a],-2,2),'可行线上的目标','green');p(m,[1,1,1],'约束最优');const a=2*t,y=[1+a,1-a];p(m,[...y,f(...y)],'可行比较点');arrow(m,[1,1,0],[2,2,0],'非零梯度 (1,1)');if(i<2){p(m,[2,0,2],'假设候选 x̄=(2,0)');p(m,[2-t,t,f(2-t,t)],'通向更优点的近处点');metric(m,'相对候选的改进',f(2-t,t)-2);m.note+=' 反证机制用非最优候选 (2,0) 演示，不声称真最优点 (1,1) 还有更优点。';}else{metric(m,'∇f(x*)ᵀ(y−x*)',0);metric(m,'f(y)−f(x*)',a*a);}}}
+}else if(id==='m3-l2'){
+ if(i===7){m=model(id,i,(x,y)=>-Math.sqrt(x),[[0,2],[-.25,.25]],'正文反例 f(x)=−√x，x≥0；原点不存在有限支撑斜率。',['y≥0','展示厚度（非变量）','f(y)']);const y=.001+.999*t,g=-1/Math.sqrt(y);graph(m,x=>-Math.sqrt(x),0,2,'−√y');line(m,[[0,0,0],[y,0,-Math.sqrt(y)]],'割线斜率界');metric(m,'任何候选 g 必须 ≤ 此值',g);m.note+=' 滑块只采样 y≥0.001；数学上让 y→0⁺，斜率上界趋于−∞。有限采样本身不能证明次微分为空。';}
+ else if(i>=5){f=(x,y)=>2+Math.abs(x)+Math.abs(y);m=model(id,i,f,[[-2,2],[-4,1]],'原例 ‖(2,x₂,x₃)‖₁=2+|x₂|+|x₃|；切点 (x₂,x₃)=(0,−3)。',['x₂（x₁固定为2）','x₃','三维向量的 ℓ₁ 范数']);const s=2*t-1;surface(m,(x,y)=>2+s*x-y,'g=(1,s,−1) 的支撑限制');p(m,[0,-3,5],'原例 (2,0,−3)');metric(m,'允许的 g₂',s);m.note+=' 这里只画 x₁=2 截面，不把三维变量完整图像误称为二维；原点的次微分是三维立方体 [−1,1]³。';}
+ else{f=x=>Math.abs(x);m=model(id,i,(x,y)=>f(x),[[-2,2],[-.25,.25]],'绝对值 f(a)=|a|；零点允许支撑斜率 g∈[−1,1]。',['a','展示厚度（非变量）','|a|']);const a=i===1?1:i===2?-1:0,g=i===1?1:i===2?-1:i===0?0:2*t-1;surface(m,(x,y)=>Math.abs(a)+g*(x-a),'支撑线的薄片');p(m,[a,0,Math.abs(a)],'支撑点');metric(m,'支撑斜率 g',g);if(i===3)line(m,[[0,0,0],[2,0,2]],'正侧限制 g≤1','purple');if(i===4)line(m,[[-2,0,2],[0,0,0]],'负侧限制 g≥−1','purple');}
+}else if(id==='m3-l3'){
+ const b=t<.5?.6:2,star=Math.max(b-1,0),loss=x=>(x-b)**2/2;f=x=>loss(x)+Math.abs(x);m=model(id,i,(x,y)=>f(x),[[-1,3],[-.3,.3]],'原例 F(x)=½(x−b)²+|x|；θ<½ 选 b=0.6，否则选 b=2。',['x','展示厚度（非变量）','代价']);p(m,[star,0,f(star)],'精确最优 x*');const g=star-b;if(i===0||i===4){surface(m,(x,y)=>loss(x),'光滑损失','orange');surface(m,(x,y)=>Math.abs(x),'绝对值惩罚','purple');graph(m,x=>loss(star)+g*(x-star),-1,3,'损失支撑','orange');graph(m,x=>Math.abs(star)-g*(x-star),-1,3,'惩罚支撑','purple');}else surface(m,()=>f(star),'抵消后的常数下界','green');if(i===2||i===3){const y=2.5,z=(1-t)*star+t*y;line(m,[[star,0,Math.abs(star)],[y,0,Math.abs(y)]],'惩罚弦上界','purple');p(m,[z,0,f(z)],'沿线段的总目标');}metric(m,'b',b);metric(m,'x*',star);metric(m,'损失梯度',g);metric(m,'抵消次梯度',-g);m.data={b,star,gradient:g,subgradient:-g};
+}else if(id==='m3-l4'){
+ const u=i===7?[3-4*t,2-4*t]:[3,2],violation=Math.max(u[0]+u[1]-1,0),q=[u[0]-violation/2,u[1]-violation/2],y=[-2*t,0];f=(x,z)=>((x-u[0])**2+(z-u[1])**2)/2;m=model(id,i,f,[[-3,4],[-3,4]],'原例 ΠC(3,2)=(1,0)，C={x₁+x₂≤1}；末步参数移动输入 u。');polygon(m,[[-3,-3,0],[4,-3,0],[-3,4,0]],'可行半空间窗口');line(m,[[-3,4,0],[4,-3,0]],'边界','green');p(m,[...u,0],'输入 u','orange');p(m,[...q,0],'投影 p','green');p(m,[...q,f(...q)],'最小距离目标');line(m,[[...u,0],[...q,0]],'u−p','purple');if(i===0){m.surfaces[0].domain=m.domain;m.domain=[[-3,7],[-3,6]];line(m,sample(a=>[u[0]+Math.hypot(...u)*Math.cos(a),u[1]+Math.hypot(...u)*Math.sin(a),0],0,2*Math.PI),'以可行 x₀=0 确定搜索半径','gray');}if(i===2){const r=[0,1],mid=q.map((v,j)=>(v+r[j])/2);p(m,[...r,f(...r)],'另一可行点 q');p(m,[...mid,f(...mid)],'中点距离');metric(m,'中点平方距离改进',((q[0]-r[0])**2+(q[1]-r[1])**2)/4);}if(i>=3&&i<=5){p(m,[...y,0],'可行检验 y');line(m,[[...q,0],[...y,0]],'可行方向','green');metric(m,'(u−p)ᵀ(y−p)',(u[0]-q[0])*(y[0]-q[0])+(u[1]-q[1])*(y[1]-q[1]));metric(m,'勾股差额',2*f(...y)-2*f(...q)-(y[0]-q[0])**2-(y[1]-q[1])**2);}metric(m,'投影距离',Math.sqrt(2*f(...q)));m.data={u,p:q,y,violation};
+}else if(id==='m3-l5'){
+ f=x=>(x+1)**2/2;m=model(id,i,(x,y)=>f(x),[[-2.5,3],[-.25,.25]],'原例 C=[0,∞)，f(x)=½(x+1)²，x*=0；投影为 max(u,0)。',['一维坐标','展示厚度（非变量）','f(x)']);m.surfaces[0].domain=[[0,3],[-.25,.25]];p(m,[0,0,.5],'约束最优点');line(m,[[0,0,0],[3,0,0]],'可行射线的窗口','green');if(i<4){arrow(m,[0,0,0],[-2,0,0],'N_C(0) 的负射线','purple');if(i===1){p(m,[1,0,0],'内点');m.note+=' 内点 1 的法锥只有零；紫色射线仍专指边界 0。';}if(i>=2)arrow(m,[0,0,0],[1,0,0],'∇f(0)=1','blue');if(i===3){p(m,[-.5,0,0],'x−½∇f(x)=−½');arrow(m,[-.5,0,0],[0,0,0],'投影回 0','orange');}}
+ else if(i<7){p(m,[-2,0,0],'u=−2','orange');p(m,[3,0,0],'v=3','orange');line(m,[[-2,0,.3],[3,0,.3]],'输入距离 5','orange');line(m,[[0,0,.6],[3,0,.6]],'投影距离 3','green');metric(m,'‖p−q‖²',9);metric(m,'(u−v)(p−q)',15);m.note+=' 两条距离线的高度仅用于分开标注，不代表目标值。';}
+ else{const x=2*t,step=.5,v=x-step*(x+1),proj=Math.max(v,0);p(m,[x,0,f(x)],'当前 x');p(m,[v,0,0],'梯度子步');p(m,[proj,0,f(proj)],'投影后');metric(m,'Gₜ(x)',(x-proj)/step);m.data={x,t:step,v,projection:proj,mapping:(x-proj)/step};}
+}
+m.description=m.objective+' '+m.note;m.data={...m.data,parameter:t,lessonId:id,proofIndex:i};return m;}
+const api={get,catalog,version:'1.0.0'};if(typeof module==='object'&&module.exports)module.exports=api;else root.FormulaModelsFoundations=api;
+})(typeof window!=='undefined'?window:globalThis);

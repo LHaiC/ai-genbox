@@ -1,0 +1,25 @@
+/* Worked examples read as figures within the lesson, not separate workbenches. */
+.lesson-experiment{container-type:inline-size;margin:24px 0;padding:0;border:0;border-radius:0;background:transparent;color:#233e40;min-width:0;font-size:18px;line-height:1.7}
+.lesson-experiment *{box-sizing:border-box}.lx-kicker{display:none}
+.lesson-experiment h3{font-size:18px;font-weight:650;line-height:1.5;margin:0 0 10px}
+.lx-controls{display:flex;flex-wrap:wrap;align-items:center;gap:7px 12px;margin:10px 0 14px}
+.lx-controls button,.lx-controls select{font:inherit;font-size:15px;line-height:1.4;max-width:100%;border:1px solid #b8cec8;border-radius:3px;background:transparent;color:#233e40;padding:5px 9px}
+.lx-controls button{cursor:pointer;font-weight:500}.lx-controls button:disabled{opacity:.5;cursor:default}
+.lx-controls label{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:15px;min-width:0}.lx-controls output{font-size:15px;font-weight:550}
+.lx-controls button:focus-visible,.lx-controls select:focus-visible,.lesson-experiment summary:focus-visible{outline:2px solid #176b60;outline-offset:3px}
+.lx-model,.lx-formula{font-size:18px;line-height:1.7;overflow-wrap:break-word;margin:10px 0}
+.lx-model{display:flex;flex-wrap:wrap;gap:4px 24px}.lx-math-line{display:block;max-width:100%;overflow-x:auto;padding:3px 0}.lx-math-line .katex{font-size:1em}
+.lx-plots{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;margin:12px 0}
+.lx-plot{background:transparent;border:0;border-radius:0;padding:0;min-width:0;overflow:hidden}
+.lx-plot h4{font-size:16px;font-weight:550;line-height:1.5;margin:0 0 4px;color:#355e56}
+.lx-plot svg{display:block;width:100%;min-width:0;max-width:460px;margin:0 auto;height:auto}.lx-plot svg text{font-family:inherit;font-size:20px;fill:#35514f}
+.lx-caption{font-size:15px;line-height:1.6;color:#58706b;margin:10px 0}
+.lx-values,.lx-extra-values{display:flex;flex-wrap:wrap;gap:8px 24px;margin:12px 0}
+.lx-values>div,.lx-extra-values>div{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;min-width:0;max-width:100%;padding:0;border:0}
+.lx-values dt,.lx-extra-values dt{font-size:16px;color:#56706a;margin:0;line-height:1.5}.lx-values dd,.lx-extra-values dd{font-variant-numeric:tabular-nums;font-size:18px;margin:0;overflow-wrap:break-word;line-height:1.5}
+.lx-status{font-size:18px;line-height:1.7;background:transparent;border-radius:0;padding:0;margin:12px 0 0}
+.lx-certificate{padding:0;background:transparent;border-radius:0;margin-top:14px}.lx-certificate strong{display:block;font-size:18px;line-height:1.6;margin-top:12px}
+.lx-bar{display:grid;grid-template-columns:42px minmax(0,1fr) 90px;gap:8px;align-items:center;margin:10px 0;font-size:15px}.lx-bar i{display:block;height:10px;min-width:1px;border-radius:2px}.lx-bar b{font-variant-numeric:tabular-nums;font-size:15px;text-align:right;overflow-wrap:break-word}
+.lx-content>details,.lx-content .ct-model-notes{padding:0;margin:12px 0}.lx-content>details>summary,.lx-content .ct-model-notes summary{font-size:15px;cursor:pointer;line-height:1.5;color:#56706a}
+.lx-content .ct-model-notes p{font-size:18px;line-height:1.7}.lx-content .lx-algebra-details .lx-formula{margin:8px 0}
+@container(min-width:660px){.lx-plots{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px}}
