@@ -596,9 +596,10 @@ document.addEventListener('keydown',e=>{
  if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='s'){e.preventDefault();exportHTML();return;}
  if(dialogs.some(d=>d.open))return;
  if(e.key==='Escape'&&document.body.classList.contains('editing')){editing(false);return;}
- if(e.target.isContentEditable||e.target.matches('input,select,textarea'))return;
+ const t=e.target instanceof Element?e.target:document.body;
+ if(t.isContentEditable||t.matches('input,select,textarea'))return;
  if(e.altKey||e.ctrlKey||e.metaKey)return;
- if(e.target.closest('button')&&[' ','Enter'].includes(e.key))return;
+ if(t.closest('button')&&[' ','Enter'].includes(e.key))return;
  const k=e.key.toLowerCase();
  if(['arrowright','pagedown',' '].includes(k)){e.preventDefault();go(current+1)}
  else if(['arrowleft','pageup'].includes(k)){e.preventDefault();go(current-1)}
